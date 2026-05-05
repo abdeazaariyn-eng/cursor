@@ -1,9 +1,10 @@
 from __future__ import annotations
 
+import json
 from functools import lru_cache
-from typing import List
+from typing import Any, List
 
-from pydantic import field_validator
+from pydantic import Field, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -24,7 +25,9 @@ class Settings(BaseSettings):
     DATABASE_URL: str = "postgresql+asyncpg://mahdbaby:mahdbaby%40@localhost:5432/mahdbaby"
     RUN_MIGRATIONS_ON_START: bool = True
 
-    CORS_ORIGINS: List[str] = ["http://localhost:3000"]
+    # Stored as raw string to avoid pydantic_settings JSON pre-parsing issues
+    _cors_origins_raw: str = Field(default="http://localhost:3000", alias="CORS_ORIGINS")
+    CORS_ORIGINS_STR: str = Field(default="http://localhost:3000", alias="CORS_ORIGINS")
 
     GOOGLE_SHEETS_WEBHOOK_URL: str = ""
     GOOGLE_SHEETS_WEBHOOK_SECRET: str = ""
@@ -58,14 +61,27 @@ class Settings(BaseSettings):
             return v
         return str(v)
 
-    @field_validator("CORS_ORIGINS", mode="before")
+    @field_validator("CORS_ORIGINS_STR", mode="before")
     @classmethod
-    def parse_cors_origins(cls, v: object) -> List[str]:
-        if isinstance(v, str):
-            return [origin.strip() for origin in v.split(",") if origin.strip()]
+    def parse_cors_origins_str(cls, v: Any) -> str:
         if isinstance(v, list):
+            return ",".join(v)
+        if isinstance(v, str):
             return v
-        return []
+        return "http://localhost:3000"
+
+    @property
+    def CORS_ORIGINS(self) -> List[str]:
+        raw = self.CORS_ORIGINS_STR or "http://localhost:3000"
+        raw = raw.strip()
+        if not raw:
+            return ["http://localhost:3000"]
+        if raw.startswith("["):
+            try:
+                return json.loads(raw)
+            except Exception:
+                pass
+        return [o.strip() for o in raw.split(",") if o.strip()]
 
     @property
     def is_production(self) -> bool:
