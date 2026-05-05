@@ -1,11 +1,31 @@
 from __future__ import annotations
 
 import json
+import os
 from functools import lru_cache
 from typing import Any, List
 
 from pydantic import Field, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+
+def _parse_cors_origins(raw: Any) -> List[str]:
+    """Robustly parse CORS_ORIGINS from any common format."""
+    if raw is None:
+        return ["http://localhost:3000"]
+    if isinstance(raw, list):
+        return [str(o).strip() for o in raw if str(o).strip()]
+    s = str(raw).strip()
+    if not s:
+        return ["http://localhost:3000"]
+    if s.startswith("["):
+        try:
+            parsed = json.loads(s)
+            if isinstance(parsed, list):
+                return [str(o).strip() for o in parsed if str(o).strip()]
+        except Exception:
+            pass
+    return [o.strip() for o in s.split(",") if o.strip()]
 
 
 class Settings(BaseSettings):
@@ -25,9 +45,9 @@ class Settings(BaseSettings):
     DATABASE_URL: str = "postgresql+asyncpg://mahdbaby:mahdbaby%40@localhost:5432/mahdbaby"
     RUN_MIGRATIONS_ON_START: bool = True
 
-    # Stored as raw string to avoid pydantic_settings JSON pre-parsing issues
-    _cors_origins_raw: str = Field(default="http://localhost:3000", alias="CORS_ORIGINS")
-    CORS_ORIGINS_STR: str = Field(default="http://localhost:3000", alias="CORS_ORIGINS")
+    # IMPORTANT: read CORS_ORIGINS as a plain string to bypass
+    # pydantic_settings' default JSON pre-parsing for List[str]
+    CORS_ORIGINS_RAW: str = Field(default="http://localhost:3000", alias="CORS_ORIGINS")
 
     GOOGLE_SHEETS_WEBHOOK_URL: str = ""
     GOOGLE_SHEETS_WEBHOOK_SECRET: str = ""
@@ -61,27 +81,9 @@ class Settings(BaseSettings):
             return v
         return str(v)
 
-    @field_validator("CORS_ORIGINS_STR", mode="before")
-    @classmethod
-    def parse_cors_origins_str(cls, v: Any) -> str:
-        if isinstance(v, list):
-            return ",".join(v)
-        if isinstance(v, str):
-            return v
-        return "http://localhost:3000"
-
     @property
     def CORS_ORIGINS(self) -> List[str]:
-        raw = self.CORS_ORIGINS_STR or "http://localhost:3000"
-        raw = raw.strip()
-        if not raw:
-            return ["http://localhost:3000"]
-        if raw.startswith("["):
-            try:
-                return json.loads(raw)
-            except Exception:
-                pass
-        return [o.strip() for o in raw.split(",") if o.strip()]
+        return _parse_cors_origins(self.CORS_ORIGINS_RAW)
 
     @property
     def is_production(self) -> bool:
