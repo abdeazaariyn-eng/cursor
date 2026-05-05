@@ -1,0 +1,9 @@
+<svg width="800" height="800" viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="800" fill="#F7EDE8"/>
+  <circle cx="400" cy="320" r="160" fill="#D4A898" opacity="0.4"/>
+  <circle cx="400" cy="300" r="120" fill="#B97863" opacity="0.6"/>
+  <path d="M320 300 Q400 200 480 300 Q480 380 400 420 Q320 380 320 300Z" fill="#B97863"/>
+  <rect x="340" y="380" width="120" height="60" rx="30" fill="#9E6554"/>
+  <text x="400" y="560" text-anchor="middle" font-family="Arial" font-size="28" fill="#7B5E57" font-weight="bold">BF'9 'D-E'J)</text>
+  <text x="400" y="600" text-anchor="middle" font-family="Arial" font-size="18" fill="#B97863">EG/ (J(J</text>
+</svg>
