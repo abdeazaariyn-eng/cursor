@@ -153,11 +153,6 @@ async def create_order(
     await db.commit()
     await db.refresh(order)
 
-    result = await db.execute(
-        select(OrderItem).where(OrderItem.order_id == order.id)
-    )
-    order.items = list(result.scalars().all())
-
     return order
 
 
@@ -216,8 +211,9 @@ async def finalize_order(
     purchase_event_id: Optional[str],
     browser_event_sent: bool,
 ) -> Order:
+    from sqlalchemy.orm import selectinload
     result = await db.execute(
-        select(Order).where(Order.id == UUID(order_id))
+        select(Order).options(selectinload(Order.items)).where(Order.id == UUID(order_id))
     )
     order = result.scalar_one_or_none()
 
@@ -240,25 +236,15 @@ async def finalize_order(
     await db.commit()
     await db.refresh(order)
 
-    items_result = await db.execute(
-        select(OrderItem).where(OrderItem.order_id == order.id)
-    )
-    order.items = list(items_result.scalars().all())
-
     return order
 
 
 async def get_order(db: AsyncSession, order_id: str) -> Optional[Order]:
+    from sqlalchemy.orm import selectinload
     try:
         result = await db.execute(
-            select(Order).where(Order.id == UUID(order_id))
+            select(Order).options(selectinload(Order.items)).where(Order.id == UUID(order_id))
         )
-        order = result.scalar_one_or_none()
-        if order:
-            items_result = await db.execute(
-                select(OrderItem).where(OrderItem.order_id == order.id)
-            )
-            order.items = list(items_result.scalars().all())
-        return order
+        return result.scalar_one_or_none()
     except Exception:
         return None

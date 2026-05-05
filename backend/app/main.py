@@ -7,6 +7,7 @@ from typing import Any, AsyncGenerator
 from fastapi import FastAPI, Request, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from fastapi.exceptions import RequestValidationError
 from pydantic import ValidationError
 
 from app.api.routes import health, orders, tracking
@@ -91,10 +92,25 @@ async def validation_exception_handler(request: Request, exc: ValidationError) -
         content={"error": {"code": "VALIDATION_ERROR", "message": message}},
     )
 
+@app.exception_handler(RequestValidationError)
+async def request_validation_exception_handler(request: Request, exc: RequestValidationError) -> JSONResponse:
+    first_error = exc.errors()[0] if exc.errors() else {}
+    message = str(first_error.get("msg", "بيانات غير صحيحة"))
+    return JSONResponse(
+        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        content={"error": {"code": "VALIDATION_ERROR", "message": message}},
+    )
+
 
 @app.exception_handler(Exception)
 async def generic_exception_handler(request: Request, exc: Exception) -> JSONResponse:
-    logger.error("unhandled_exception", error=str(exc), path=str(request.url))
+    import traceback
+    logger.error(
+        "unhandled_exception",
+        error=str(exc),
+        path=str(request.url),
+        traceback=traceback.format_exc(),
+    )
     return JSONResponse(
         status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
         content={"error": {"code": "SERVER_ERROR", "message": "حدث خطأ غير متوقع. حاولي مرة ثانية."}},

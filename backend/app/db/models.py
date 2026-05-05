@@ -10,13 +10,43 @@ from sqlalchemy import (
     DateTime,
     ForeignKey,
     Integer,
+    JSON,
     Numeric,
     String,
     Text,
     func,
 )
-from sqlalchemy.dialects.postgresql import JSONB, UUID
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
+from sqlalchemy.types import TypeDecorator, CHAR
+import uuid as _uuid
+
+
+class GUIDType(TypeDecorator):
+    """Platform-independent GUID type. Uses PostgreSQL's UUID or CHAR(36) for SQLite."""
+    impl = CHAR
+    cache_ok = True
+
+    def load_dialect_impl(self, dialect):
+        if dialect.name == "postgresql":
+            from sqlalchemy.dialects.postgresql import UUID
+            return dialect.type_descriptor(UUID(as_uuid=True))
+        return dialect.type_descriptor(CHAR(36))
+
+    def process_bind_param(self, value, dialect):
+        if value is None:
+            return None
+        if dialect.name == "postgresql":
+            return str(value)
+        if isinstance(value, _uuid.UUID):
+            return str(value)
+        return str(value)
+
+    def process_result_value(self, value, dialect):
+        if value is None:
+            return None
+        if not isinstance(value, _uuid.UUID):
+            return _uuid.UUID(str(value))
+        return value
 
 
 class Base(DeclarativeBase):
@@ -27,9 +57,9 @@ class Order(Base):
     __tablename__ = "orders"
 
     id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
+        GUIDType(),
         primary_key=True,
-        server_default=func.gen_random_uuid(),
+        default=_uuid.uuid4,
     )
     order_number: Mapped[str] = mapped_column(String(50), unique=True, nullable=False)
     customer_name: Mapped[str] = mapped_column(String(255), nullable=False)
@@ -90,12 +120,12 @@ class OrderItem(Base):
     __tablename__ = "order_items"
 
     id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
+        GUIDType(),
         primary_key=True,
-        server_default=func.gen_random_uuid(),
+        default=_uuid.uuid4,
     )
     order_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
+        GUIDType(),
         ForeignKey("orders.id", ondelete="CASCADE"),
         nullable=False,
     )
@@ -119,21 +149,21 @@ class TrackingEvent(Base):
     __tablename__ = "tracking_events"
 
     id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
+        GUIDType(),
         primary_key=True,
-        server_default=func.gen_random_uuid(),
+        default=_uuid.uuid4,
     )
     order_id: Mapped[Optional[uuid.UUID]] = mapped_column(
-        UUID(as_uuid=True),
+        GUIDType(),
         ForeignKey("orders.id", ondelete="SET NULL"),
         nullable=True,
     )
     event_name: Mapped[str] = mapped_column(String(100), nullable=False)
     event_id: Mapped[str] = mapped_column(String(100), nullable=False)
     platform: Mapped[str] = mapped_column(String(20), nullable=False)
-    payload: Mapped[Optional[dict]] = mapped_column(JSONB, nullable=True)
+    payload: Mapped[Optional[dict]] = mapped_column(JSON, nullable=True)
     status: Mapped[str] = mapped_column(String(20), nullable=False, default="pending")
-    response: Mapped[Optional[dict]] = mapped_column(JSONB, nullable=True)
+    response: Mapped[Optional[dict]] = mapped_column(JSON, nullable=True)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now(), nullable=False
     )

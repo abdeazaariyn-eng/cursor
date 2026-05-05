@@ -61,7 +61,7 @@ async def create_order(
             detail={"error": {"code": "INVALID_PHONE", "message": str(exc)}},
         ) from exc
 
-    cart_product_ids = [item.product_id for item in order.items]
+    cart_product_ids = [item.productId for item in payload.items]
     recommended_product_id = order_service.get_upsell_recommendation(cart_product_ids)
 
     recommended_upsell = None

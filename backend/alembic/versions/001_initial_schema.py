@@ -9,7 +9,8 @@ from typing import Sequence, Union
 
 from alembic import op
 import sqlalchemy as sa
-from sqlalchemy.dialects.postgresql import UUID, JSONB
+from sqlalchemy.engine.reflection import Inspector
+
 
 revision: str = '001'
 down_revision: Union[str, None] = None
@@ -17,12 +18,21 @@ branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 
 
+def _is_sqlite() -> bool:
+    bind = op.get_bind()
+    return bind.dialect.name == "sqlite"
+
+
 def upgrade() -> None:
-    op.execute('CREATE EXTENSION IF NOT EXISTS "pgcrypto"')
+    guid_type = sa.String(36) if _is_sqlite() else sa.dialects.postgresql.UUID(as_uuid=True) if not _is_sqlite() else sa.String(36)
+    json_type = sa.Text if _is_sqlite() else sa.JSON
+
+    if not _is_sqlite():
+        op.execute('CREATE EXTENSION IF NOT EXISTS "pgcrypto"')
 
     op.create_table(
         'orders',
-        sa.Column('id', UUID(as_uuid=True), server_default=sa.text('gen_random_uuid()'), primary_key=True, nullable=False),
+        sa.Column('id', sa.String(36), primary_key=True, nullable=False),
         sa.Column('order_number', sa.String(50), unique=True, nullable=False),
         sa.Column('customer_name', sa.String(255), nullable=False),
         sa.Column('phone_raw', sa.String(50), nullable=False),
@@ -54,8 +64,8 @@ def upgrade() -> None:
         sa.Column('event_id_lead', sa.String(100), nullable=True),
         sa.Column('sheet_sync_status', sa.String(20), nullable=False, server_default='pending'),
         sa.Column('sheet_sync_error', sa.Text, nullable=True),
-        sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
-        sa.Column('updated_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
+        sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('CURRENT_TIMESTAMP'), nullable=False),
+        sa.Column('updated_at', sa.DateTime(timezone=True), server_default=sa.text('CURRENT_TIMESTAMP'), nullable=False),
         sa.Column('submitted_at', sa.DateTime(timezone=True), nullable=True),
     )
 
@@ -66,8 +76,8 @@ def upgrade() -> None:
 
     op.create_table(
         'order_items',
-        sa.Column('id', UUID(as_uuid=True), server_default=sa.text('gen_random_uuid()'), primary_key=True, nullable=False),
-        sa.Column('order_id', UUID(as_uuid=True), sa.ForeignKey('orders.id', ondelete='CASCADE'), nullable=False),
+        sa.Column('id', sa.String(36), primary_key=True, nullable=False),
+        sa.Column('order_id', sa.String(36), sa.ForeignKey('orders.id', ondelete='CASCADE'), nullable=False),
         sa.Column('product_id', sa.String(100), nullable=False),
         sa.Column('product_slug', sa.String(200), nullable=False),
         sa.Column('product_name_ar', sa.String(500), nullable=False),
@@ -75,24 +85,24 @@ def upgrade() -> None:
         sa.Column('quantity', sa.Integer, nullable=False),
         sa.Column('price_kwd', sa.Numeric(10, 3), nullable=False),
         sa.Column('original_price_kwd', sa.Numeric(10, 3), nullable=True),
-        sa.Column('is_upsell', sa.Boolean, nullable=False, server_default='false'),
+        sa.Column('is_upsell', sa.Boolean, nullable=False, server_default='0'),
         sa.Column('sort_order', sa.Integer, nullable=False, server_default='0'),
-        sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
+        sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('CURRENT_TIMESTAMP'), nullable=False),
     )
 
     op.create_index('ix_order_items_order_id', 'order_items', ['order_id'])
 
     op.create_table(
         'tracking_events',
-        sa.Column('id', UUID(as_uuid=True), server_default=sa.text('gen_random_uuid()'), primary_key=True, nullable=False),
-        sa.Column('order_id', UUID(as_uuid=True), sa.ForeignKey('orders.id', ondelete='SET NULL'), nullable=True),
+        sa.Column('id', sa.String(36), primary_key=True, nullable=False),
+        sa.Column('order_id', sa.String(36), sa.ForeignKey('orders.id', ondelete='SET NULL'), nullable=True),
         sa.Column('event_name', sa.String(100), nullable=False),
         sa.Column('event_id', sa.String(100), nullable=False),
         sa.Column('platform', sa.String(20), nullable=False),
-        sa.Column('payload', JSONB, nullable=True),
+        sa.Column('payload', sa.Text, nullable=True),
         sa.Column('status', sa.String(20), nullable=False, server_default='pending'),
-        sa.Column('response', JSONB, nullable=True),
-        sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
+        sa.Column('response', sa.Text, nullable=True),
+        sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('CURRENT_TIMESTAMP'), nullable=False),
     )
 
     op.create_index('ix_tracking_events_order_id', 'tracking_events', ['order_id'])
