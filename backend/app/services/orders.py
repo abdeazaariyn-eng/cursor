@@ -23,16 +23,19 @@ PRODUCT_CATALOG: dict[str, dict[str, str]] = {
         "id": "baby_head_protection_mask",
         "slug": "baby-head-protection-mask",
         "name_ar": "قناع الحماية الناعم لرأس الأطفال",
+        "sku": "MAHD-BHP-001",
     },
     "portable_baby_bottle_warmer": {
         "id": "portable_baby_bottle_warmer",
         "slug": "portable-baby-bottle-warmer",
         "name_ar": "جهاز تدفئة زجاجات حليب الأطفال المحمول",
+        "sku": "MAHD-PBB-002",
     },
     "wearable_electric_breast_pump": {
         "id": "wearable_electric_breast_pump",
         "slug": "wearable-electric-breast-pump",
         "name_ar": "مضخة ثدي كهربائية جديدة قابلة للارتداء",
+        "sku": "MAHD-WEB-003",
     },
 }
 
@@ -66,11 +69,11 @@ async def generate_order_number(db: AsyncSession) -> str:
     today = datetime.now(tz=timezone.utc).strftime("%Y%m%d")
     result = await db.execute(
         select(func.count()).where(
-            Order.order_number.like(f"MB-{today}-%")
+            Order.order_number.like(f"mahd-{today}-%")
         )
     )
     count = result.scalar() or 0
-    return f"MB-{today}-{count + 1:04d}"
+    return f"mahd-{today}-{count + 1:04d}"
 
 
 async def create_order(

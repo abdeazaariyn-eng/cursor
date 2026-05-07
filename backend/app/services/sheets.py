@@ -2,22 +2,16 @@ from __future__ import annotations
 
 import asyncio
 from typing import Optional
+from datetime import datetime
 
 import httpx
 
 from app.core.config import settings
 from app.core.logging import get_logger
 from app.db.models import Order, OrderItem
+from app.services.orders import PRODUCT_CATALOG
 
 logger = get_logger(__name__)
-
-
-def _build_items_summary(items: list[OrderItem]) -> str:
-    parts = []
-    for item in items:
-        parts.append(f"{item.product_name_ar} x{item.quantity}")
-    return " + ".join(parts)
-
 
 async def send_order_to_sheets(
     order: Order,
@@ -28,42 +22,40 @@ async def send_order_to_sheets(
         logger.info("sheets_webhook_disabled", order_id=str(order.id))
         return False
 
-    items_summary = _build_items_summary(items)
+    product_names = []
+    skus = []
+    quantities = []
+    
+    for item in items:
+        product_names.append(item.product_name_ar)
+        sku = PRODUCT_CATALOG.get(item.product_id, {}).get("sku", "")
+        skus.append(sku)
+        quantities.append(str(item.quantity))
+
+    # Format date as DD/MM/YYYY
+    formatted_date = ""
+    if order.created_at:
+        formatted_date = order.created_at.strftime("%d/%m/%Y")
+
+    # Format phone (must start with 965 and strip others if possible, though phone_e164 handles this partially, we will just prepend 965 to digits if needed or use e164 stripped of +)
+    # The user asked for "9650501020304" etc.
+    phone = "".join(filter(str.isdigit, order.phone_raw))
+    if not phone.startswith("965"):
+        phone = "965" + phone
 
     payload = {
         "secret": settings.GOOGLE_SHEETS_WEBHOOK_SECRET,
-        "order": {
-            "order_number": order.order_number,
-            "created_at": order.created_at.isoformat() if order.created_at else "",
-            "customer_name": order.customer_name,
-            "phone_domestic": order.phone_domestic,
-            "phone_e164": order.phone_e164,
-            "items_summary": items_summary,
-            "subtotal_kwd": float(order.subtotal_kwd),
-            "discount_kwd": float(order.discount_kwd),
-            "total_kwd": float(order.total_kwd),
-            "status": order.status,
-            "upsell_status": order.upsell_status,
-            "landing_page": order.landing_page or "",
-            "utm_source": order.utm_source or "",
-            "utm_medium": order.utm_medium or "",
-            "utm_campaign": order.utm_campaign or "",
-            "utm_content": order.utm_content or "",
-            "utm_term": order.utm_term or "",
-            "notes": "",
-        },
-        "items": [
-            {
-                "order_number": order.order_number,
-                "product_id": item.product_id,
-                "product_name_ar": item.product_name_ar,
-                "offer_id": item.offer_id,
-                "quantity": item.quantity,
-                "price_kwd": float(item.price_kwd),
-                "is_upsell": item.is_upsell,
-            }
-            for item in items
-        ],
+        "date": formatted_date,
+        "orderid": order.order_number,
+        "country": "Kwt",
+        "name": order.customer_name,
+        "phone": phone,
+        "product": "/".join(product_names),
+        "sku": "/".join(skus),
+        "quantity": "/".join(quantities),
+        "total_price": float(order.total_kwd),
+        "currency": "KWD",
+        "status": ""
     }
 
     last_error: Optional[str] = None
