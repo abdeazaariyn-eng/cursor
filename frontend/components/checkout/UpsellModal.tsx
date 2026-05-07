@@ -111,7 +111,7 @@ export function UpsellModal() {
             aria-label="عرض خاص"
           >
             {/* Gold header */}
-            <div className="bg-[#D9A441] px-5 py-3 text-center">
+            <div className="bg-[#D4AF37] px-5 py-3 text-center">
               <p className="text-white font-bold text-sm">عرض خاص قبل ما نجهز طلبك</p>
             </div>
 
@@ -125,7 +125,7 @@ export function UpsellModal() {
                       cy="50"
                       r="45"
                       fill="none"
-                      stroke="#F7EDE8"
+                      stroke="#EBF2F5"
                       strokeWidth="8"
                     />
                     <circle
@@ -133,7 +133,7 @@ export function UpsellModal() {
                       cy="50"
                       r="45"
                       fill="none"
-                      stroke="#D9A441"
+                      stroke="#D4AF37"
                       strokeWidth="8"
                       strokeDasharray={circumference}
                       strokeDashoffset={strokeDashoffset}
@@ -142,28 +142,28 @@ export function UpsellModal() {
                     />
                   </svg>
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="font-bold text-[#2F2523] text-xl">{timeLeft}</span>
+                    <span className="font-bold text-[#142B3B] text-xl">{timeLeft}</span>
                   </div>
                 </div>
               </div>
 
               {/* Product */}
-              <div className="bg-[#F7EDE8] rounded-2xl p-4 mb-4 text-center">
+              <div className="bg-[#EBF2F5] rounded-2xl p-4 mb-4 text-center">
                 <div className="text-4xl mb-2">
                   {upsellProduct.productId === 'baby_head_protection_mask' ? '🛡️' :
                    upsellProduct.productId === 'portable_baby_bottle_warmer' ? '🍼' : '💝'}
                 </div>
-                <p className="font-bold text-[#2F2523] text-sm mb-1">
+                <p className="font-bold text-[#142B3B] text-sm mb-1">
                   {upsellProduct.productName}
                 </p>
-                <p className="text-[#7B5E57] text-xs leading-relaxed mb-3">
+                <p className="text-[#506A77] text-xs leading-relaxed mb-3">
                   أضيفيه مع نفس الطلب بسعر{' '}
-                  <span className="text-[#D9A441] font-bold">9 KWD فقط</span>.
+                  <span className="text-[#D4AF37] font-bold">9 KWD فقط</span>.
                   العرض يظهر مرة واحدة بعد تأكيد الطلب.
                 </p>
                 <div className="flex items-center justify-center gap-2">
-                  <span className="text-2xl font-bold text-[#B97863]">9 KWD</span>
-                  <span className="text-[#9A7D78] text-sm line-through">19 KWD</span>
+                  <span className="text-2xl font-bold text-[#4A8B9A]">9 KWD</span>
+                  <span className="text-[#6B8A99] text-sm line-through">19 KWD</span>
                 </div>
               </div>
 
@@ -173,7 +173,7 @@ export function UpsellModal() {
               </p>
 
               {/* إضافة خاصة label */}
-              <p className="text-xs text-center text-[#9A7D78] mb-3">
+              <p className="text-xs text-center text-[#6B8A99] mb-3">
                 إضافة خاصة بعد الطلب - 9 KWD
               </p>
 

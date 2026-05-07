@@ -12,15 +12,15 @@ export default function AboutPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-[#F7EDE8] py-16 md:py-24">
+      <section className="bg-[#EBF2F5] py-16 md:py-24">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
-          <div className="inline-flex items-center gap-2 bg-white border border-[#E7D4CC] rounded-full px-4 py-1.5 mb-5 font-bold text-sm text-[#2F2523] shadow-sm">
+          <div className="inline-flex items-center gap-2 bg-white border border-[#C9DADD] rounded-full px-4 py-1.5 mb-5 font-bold text-sm text-[#142B3B] shadow-sm">
             بوتيك مختار للأم والطفل
           </div>
-          <h1 className="text-3xl md:text-4xl font-extrabold text-[#2F2523] mb-5">
+          <h1 className="text-3xl md:text-4xl font-extrabold text-[#142B3B] mb-5">
             مهد بيبي — قائمة قصيرة، اختيار مدروس
           </h1>
-          <p className="text-[#7B5E57] text-lg leading-relaxed">
+          <p className="text-[#506A77] text-lg leading-relaxed">
             ما نبيع كل شي. نختار أساسيات الأم والطفل اللي تستاهل ثقتك، ونوصلها لكل دول الخليج
             بضمان كامل ودفع عند الاستلام.
           </p>
@@ -30,21 +30,21 @@ export default function AboutPage() {
       {/* Story */}
       <section className="py-16 md:py-20">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
-          <div className="prose prose-lg max-w-none text-[#2F2523]">
-            <h2 className="text-2xl font-bold text-[#2F2523] mb-5">قصة مهد بيبي</h2>
-            <p className="text-[#7B5E57] text-base leading-relaxed mb-4">
-              <span className="font-bold text-[#2F2523]">مهد</span> معناها المكان الآمن اللي يرتاح فيه الطفل.
+          <div className="prose prose-lg max-w-none text-[#142B3B]">
+            <h2 className="text-2xl font-bold text-[#142B3B] mb-5">قصة مهد بيبي</h2>
+            <p className="text-[#506A77] text-base leading-relaxed mb-4">
+              <span className="font-bold text-[#142B3B]">مهد</span> معناها المكان الآمن اللي يرتاح فيه الطفل.
               من هذا الإحساس بدأ مهد بيبي: متجر بوتيكي صغير لأمهات الخليج اللي يبون يقررون صح،
               من غير ما يضيعون ساعات يفحصون منتجات في أماكن ما يثقون فيها.
             </p>
-            <p className="text-[#7B5E57] text-base leading-relaxed mb-4">
+            <p className="text-[#506A77] text-base leading-relaxed mb-4">
               المنتج اللي يدخل المتجر يمر بثلاثة فلاتر: <span className="font-bold">الأمان</span>{' '}
               (مواد طبية ومطابقة لمعايير SFDA)،{' '}
               <span className="font-bold">الفائدة الحقيقية</span> (يحل مشكلة فعلية في يوم الأم)،{' '}
               و<span className="font-bold">الجودة</span> (مصانع معروفة، ما نبيع مقلدات).
               لو ما عدّى الفلاتر الثلاثة كلها، ما يدخل البوتيك.
             </p>
-            <p className="text-[#7B5E57] text-base leading-relaxed">
+            <p className="text-[#506A77] text-base leading-relaxed">
               نحن لسنا متجراً يبيع كل شي. نحن قائمة قصيرة، تثقين فيها لأنها مختارة من أم خليجية
               لأم خليجية مثلك.
             </p>
@@ -53,12 +53,12 @@ export default function AboutPage() {
       </section>
 
       {/* Values */}
-      <section className="bg-[#F7EDE8] py-16 md:py-20">
+      <section className="bg-[#EBF2F5] py-16 md:py-20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <h2 className="text-2xl md:text-3xl font-extrabold text-[#2F2523] text-center mb-3">
+          <h2 className="text-2xl md:text-3xl font-extrabold text-[#142B3B] text-center mb-3">
             قيم البوتيك
           </h2>
-          <p className="text-[#7B5E57] text-base text-center mb-10 max-w-xl mx-auto">
+          <p className="text-[#506A77] text-base text-center mb-10 max-w-xl mx-auto">
             هذي الأربع قيم هي اللي تحدد إيش يدخل مهد بيبي وإيش ما يدخل.
           </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -84,10 +84,10 @@ export default function AboutPage() {
                 desc: 'دفع عند الاستلام، تأكيد قبل الشحن، وضمان 30 يوم — بدون مفاجآت.',
               },
             ].map((item, i) => (
-              <div key={i} className="bg-white rounded-3xl p-6 text-center border border-[#F0E3DC] shadow-sm">
-                <div className="text-[#B97863] flex justify-center mb-4">{item.icon}</div>
-                <h3 className="font-bold text-[#2F2523] mb-2">{item.title}</h3>
-                <p className="text-[#7B5E57] text-sm leading-relaxed">{item.desc}</p>
+              <div key={i} className="bg-white rounded-3xl p-6 text-center border border-[#D6E4E8] shadow-sm">
+                <div className="text-[#4A8B9A] flex justify-center mb-4">{item.icon}</div>
+                <h3 className="font-bold text-[#142B3B] mb-2">{item.title}</h3>
+                <p className="text-[#506A77] text-sm leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -97,11 +97,11 @@ export default function AboutPage() {
       {/* Promise */}
       <section className="py-16 md:py-20">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 text-center">
-          <h2 className="text-2xl font-bold text-[#2F2523] mb-5">وعد البوتيك</h2>
-          <blockquote className="text-xl text-[#B97863] font-bold leading-relaxed mb-6 italic">
+          <h2 className="text-2xl font-bold text-[#142B3B] mb-5">وعد البوتيك</h2>
+          <blockquote className="text-xl text-[#4A8B9A] font-bold leading-relaxed mb-6 italic">
             "اختيار مدروس، أمان معتمد، وضمان كامل — لأن طفلك يستاهل قرار صح."
           </blockquote>
-          <p className="text-[#7B5E57] text-base leading-relaxed mb-8">
+          <p className="text-[#506A77] text-base leading-relaxed mb-8">
             ما نبيعك منتج فقط. نبيعك راحة بال إنه مفحوص، مضمون، وفيه دعم بعد الشراء.
           </p>
           <Link href="/products">
@@ -115,7 +115,7 @@ export default function AboutPage() {
       {/* Legal note */}
       <section className="py-8">
         <div className="max-w-2xl mx-auto px-4 sm:px-6">
-          <div className="bg-[#F7EDE8] rounded-2xl p-4 text-[#9A7D78] text-xs text-center leading-relaxed">
+          <div className="bg-[#EBF2F5] rounded-2xl p-4 text-[#6B8A99] text-xs text-center leading-relaxed">
             منتجاتنا مختارة للاستخدام اليومي وتريح الروتين. لا نقدم ادعاءات طبية أو سريرية.
             استخدمي المنتجات حسب التعليمات المرفقة وتحت إشرافك الكريم.
           </div>

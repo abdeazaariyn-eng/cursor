@@ -31,8 +31,8 @@ export function Header() {
       className={cn(
         'sticky top-0 z-50 transition-all duration-300',
         isScrolled
-          ? 'bg-white/90 backdrop-blur-md shadow-sm border-b border-[#F0E3DC]'
-          : 'bg-[#FFF9F5]'
+          ? 'bg-white/90 backdrop-blur-md shadow-sm border-b border-[#D6E4E8]'
+          : 'bg-[#F5F8FA]'
       )}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -46,7 +46,7 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-[#7B5E57] hover:text-[#B97863] font-medium transition-colors duration-200 text-sm"
+                className="text-[#506A77] hover:text-[#4A8B9A] font-medium transition-colors duration-200 text-sm"
               >
                 {link.label}
               </Link>
@@ -59,12 +59,12 @@ export function Header() {
             <button
               onClick={openCart}
               aria-label={`السلة ${itemCount > 0 ? `(${itemCount} منتج)` : ''}`}
-              className="relative p-2 text-[#7B5E57] hover:text-[#B97863] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#B97863] focus:ring-offset-2 rounded-full"
+              className="relative p-2 text-[#506A77] hover:text-[#4A8B9A] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#4A8B9A] focus:ring-offset-2 rounded-full"
             >
               <ShoppingCart className="w-6 h-6" />
               {itemCount > 0 && (
                 <span
-                  className="absolute -top-1 -start-1 bg-[#B97863] text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center"
+                  className="absolute -top-1 -start-1 bg-[#4A8B9A] text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center"
                   aria-hidden="true"
                 >
                   {itemCount > 9 ? '9+' : itemCount}
@@ -75,7 +75,7 @@ export function Header() {
             {/* Mobile Menu Toggle */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 text-[#7B5E57] hover:text-[#B97863] transition-colors focus:outline-none focus:ring-2 focus:ring-[#B97863] focus:ring-offset-2 rounded-full"
+              className="md:hidden p-2 text-[#506A77] hover:text-[#4A8B9A] transition-colors focus:outline-none focus:ring-2 focus:ring-[#4A8B9A] focus:ring-offset-2 rounded-full"
               aria-label={isMobileMenuOpen ? 'إغلاق القائمة' : 'فتح القائمة'}
               aria-expanded={isMobileMenuOpen}
             >
@@ -87,14 +87,14 @@ export function Header() {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-white border-t border-[#F0E3DC] shadow-lg">
+        <div className="md:hidden bg-white border-t border-[#D6E4E8] shadow-lg">
           <nav className="flex flex-col px-4 py-4 gap-1" aria-label="القائمة المحمولة">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-[#7B5E57] hover:text-[#B97863] hover:bg-[#F7EDE8] font-medium px-4 py-3 rounded-xl transition-colors duration-200 text-base"
+                className="text-[#506A77] hover:text-[#4A8B9A] hover:bg-[#EBF2F5] font-medium px-4 py-3 rounded-xl transition-colors duration-200 text-base"
               >
                 {link.label}
               </Link>

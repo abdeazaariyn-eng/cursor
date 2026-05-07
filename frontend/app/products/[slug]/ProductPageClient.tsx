@@ -79,19 +79,19 @@ export function ProductPageClient({ product }: Props) {
   return (
     <>
       {/* ─── Announcement Bar ─── */}
-      <div className="bg-[#2F2523] text-white text-center py-2.5 px-4 text-xs sm:text-sm font-bold">
-        🚚 توصيل لجميع المدن • 🛡️ ضمان استرجاع 30 يوم بدون أسئلة • <span className="text-[#D9A441]">الدفع عند الاستلام ✓</span>
+      <div className="bg-[#142B3B] text-white text-center py-2.5 px-4 text-xs sm:text-sm font-bold">
+        🚚 توصيل لجميع المدن • 🛡️ ضمان استرجاع 30 يوم بدون أسئلة • <span className="text-[#D4AF37]">الدفع عند الاستلام ✓</span>
       </div>
 
       {/* ─── Breadcrumb ─── */}
-      <div className="bg-[#FFF9F5] py-3 px-4 border-b border-[#F0E3DC]">
+      <div className="bg-[#F5F8FA] py-3 px-4 border-b border-[#D6E4E8]">
         <div className="max-w-6xl mx-auto">
-          <nav className="flex items-center gap-2 text-xs text-[#7B5E57] font-medium" aria-label="breadcrumb">
-            <Link href="/" className="hover:text-[#B97863] transition-colors">الرئيسية</Link>
+          <nav className="flex items-center gap-2 text-xs text-[#506A77] font-medium" aria-label="breadcrumb">
+            <Link href="/" className="hover:text-[#4A8B9A] transition-colors">الرئيسية</Link>
             <ChevronRight className="w-3 h-3 rotate-180" />
-            <Link href="/products" className="hover:text-[#B97863] transition-colors">المنتجات</Link>
+            <Link href="/products" className="hover:text-[#4A8B9A] transition-colors">المنتجات</Link>
             <ChevronRight className="w-3 h-3 rotate-180" />
-            <span className="text-[#B97863] font-bold">{product.shortName}</span>
+            <span className="text-[#4A8B9A] font-bold">{product.shortName}</span>
           </nav>
         </div>
       </div>
@@ -99,12 +99,12 @@ export function ProductPageClient({ product }: Props) {
       {/* ═══════════════════════════════════════════
           1. HERO BUY BOX — Image LEFT, Buy Box RIGHT
       ═══════════════════════════════════════════ */}
-      <section className="bg-gradient-to-b from-[#FFF9F5] to-white py-10 md:py-16">
+      <section className="bg-gradient-to-b from-[#F5F8FA] to-white py-10 md:py-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="grid lg:grid-cols-2 gap-12 items-start">
 
             {/* ── Image (Left / top on mobile) ── */}
-            <div className="relative aspect-[4/5] md:aspect-square rounded-[2.5rem] overflow-hidden bg-[#F7EDE8] shadow-2xl border-[6px] border-white group">
+            <div className="relative aspect-[4/5] md:aspect-square rounded-[2.5rem] overflow-hidden bg-[#EBF2F5] shadow-2xl border-[6px] border-white group">
               <Image
                 src={product.imagePlaceholder}
                 alt={product.arabicName}
@@ -145,38 +145,38 @@ export function ProductPageClient({ product }: Props) {
                 </div>
               </div>
 
-              <h1 className="text-3xl md:text-5xl font-black text-[#2F2523] leading-tight mb-4 tracking-tight">
+              <h1 className="text-3xl md:text-5xl font-black text-[#142B3B] leading-tight mb-4 tracking-tight">
                 {product.heroHeading}
               </h1>
-              <p className="text-[#7B5E57] text-lg md:text-xl leading-relaxed mb-6 font-medium">
+              <p className="text-[#506A77] text-lg md:text-xl leading-relaxed mb-6 font-medium">
                 {product.heroSubheading}
               </p>
 
               {/* Review summary */}
-              <div className="flex items-center gap-3 mb-6 pb-6 border-b border-[#F0E3DC]">
-                <div className="flex items-center bg-[#D9A441]/10 px-3 py-1.5 rounded-lg border border-[#D9A441]/20">
+              <div className="flex items-center gap-3 mb-6 pb-6 border-b border-[#D6E4E8]">
+                <div className="flex items-center bg-[#D4AF37]/10 px-3 py-1.5 rounded-lg border border-[#D4AF37]/20">
                   <StarRating rating={avgRating} size="md" />
-                  <span className="ml-2 mr-2 text-[#2F2523] font-bold text-sm">{avgRating.toFixed(1)}</span>
+                  <span className="ml-2 mr-2 text-[#142B3B] font-bold text-sm">{avgRating.toFixed(1)}</span>
                 </div>
-                <span className="text-[#7B5E57] font-medium text-sm underline decoration-[#F0E3DC] underline-offset-4">
+                <span className="text-[#506A77] font-medium text-sm underline decoration-[#D6E4E8] underline-offset-4">
                   {(product.reviews.length * 142).toLocaleString()} أم سعودية وثقت رأيها
                 </span>
               </div>
 
               {/* Emotional hook */}
-              <div className="bg-gradient-to-r from-[#F7EDE8]/60 to-transparent rounded-2xl p-5 mb-8 border-r-4 border-[#B97863]">
+              <div className="bg-gradient-to-r from-[#EBF2F5]/60 to-transparent rounded-2xl p-5 mb-8 border-r-4 border-[#4A8B9A]">
                 <div className="flex items-start gap-3">
-                  <HeartPulse className="w-6 h-6 text-[#B97863] flex-shrink-0 mt-1" />
-                  <p className="text-[#2F2523] text-base md:text-lg leading-relaxed font-bold">
+                  <HeartPulse className="w-6 h-6 text-[#4A8B9A] flex-shrink-0 mt-1" />
+                  <p className="text-[#142B3B] text-base md:text-lg leading-relaxed font-bold">
                     &ldquo;{product.emotionalHook}&rdquo;
                   </p>
                 </div>
               </div>
 
               {/* Offer selection */}
-              <div className="mb-8 bg-white p-5 rounded-3xl shadow-sm border border-[#F0E3DC]">
-                <p className="font-extrabold text-[#2F2523] mb-4 text-sm flex items-center gap-2">
-                  <Sparkles className="w-5 h-5 text-[#B97863]" />
+              <div className="mb-8 bg-white p-5 rounded-3xl shadow-sm border border-[#D6E4E8]">
+                <p className="font-extrabold text-[#142B3B] mb-4 text-sm flex items-center gap-2">
+                  <Sparkles className="w-5 h-5 text-[#4A8B9A]" />
                   اختاري العرض الأنسب (الكمية محدودة جداً):
                 </p>
                 <OfferSelector selectedOffer={selectedOffer} onChange={setSelectedOffer} />
@@ -208,13 +208,13 @@ export function ProductPageClient({ product }: Props) {
               {/* Micro trust row */}
               <div className="mt-6 grid grid-cols-3 gap-3">
                 {[
-                  { icon: <Award className="w-6 h-6 text-[#D9A441]" />, label: 'ضمان ذهبي', sub: '30 يوم' },
-                  { icon: <Truck className="w-6 h-6 text-[#B97863]" />, label: 'توصيل سريع', sub: 'لجميع المدن' },
+                  { icon: <Award className="w-6 h-6 text-[#D4AF37]" />, label: 'ضمان ذهبي', sub: '30 يوم' },
+                  { icon: <Truck className="w-6 h-6 text-[#4A8B9A]" />, label: 'توصيل سريع', sub: 'لجميع المدن' },
                   { icon: <Clock className="w-6 h-6 text-green-600" />, label: 'دفع آمن', sub: 'عند الاستلام' },
                 ].map((t, i) => (
-                  <div key={i} className="flex flex-col items-center justify-center text-center gap-2 p-3 bg-[#FFF9F5] rounded-xl border border-[#F0E3DC]">
+                  <div key={i} className="flex flex-col items-center justify-center text-center gap-2 p-3 bg-[#F5F8FA] rounded-xl border border-[#D6E4E8]">
                     {t.icon}
-                    <span className="text-xs font-bold text-[#2F2523] leading-tight">{t.label}<br/>{t.sub}</span>
+                    <span className="text-xs font-bold text-[#142B3B] leading-tight">{t.label}<br/>{t.sub}</span>
                   </div>
                 ))}
               </div>
@@ -226,48 +226,48 @@ export function ProductPageClient({ product }: Props) {
       {/* ═══════════════════════════════════════════
           2. PAIN & EMPATHY — Image LEFT, Text RIGHT
       ═══════════════════════════════════════════ */}
-      <section className="py-20 bg-white overflow-hidden border-t border-[#F0E3DC]">
+      <section className="py-20 bg-white overflow-hidden border-t border-[#D6E4E8]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             {/* Image Left */}
             <div className="relative order-2 md:order-1">
-              <div className="absolute inset-0 bg-[#B97863]/10 rounded-[3rem] rotate-6 scale-105 transform origin-center" />
-              <div className="relative aspect-square bg-[#F7EDE8] rounded-[2.5rem] flex flex-col items-center justify-center shadow-lg border border-white p-8 overflow-hidden">
+              <div className="absolute inset-0 bg-[#4A8B9A]/10 rounded-[3rem] rotate-6 scale-105 transform origin-center" />
+              <div className="relative aspect-square bg-[#EBF2F5] rounded-[2.5rem] flex flex-col items-center justify-center shadow-lg border border-white p-8 overflow-hidden">
                 <div className="text-7xl mb-4">🥺</div>
-                <p className="text-[#B97863] font-bold text-center">[صورة تعبيرية لأم مرهقة أو قلقة]</p>
-                <p className="text-sm text-[#7B5E57] mt-2 text-center">نحس بجهدك وتعبك</p>
+                <p className="text-[#4A8B9A] font-bold text-center">[صورة تعبيرية لأم مرهقة أو قلقة]</p>
+                <p className="text-sm text-[#506A77] mt-2 text-center">نحس بجهدك وتعبك</p>
               </div>
-              <div className="absolute -bottom-8 -right-4 bg-white p-5 rounded-2xl shadow-xl border border-[#F0E3DC] max-w-[200px] z-10">
-                <p className="text-sm font-bold text-[#2F2523] mb-1">&ldquo;{product.painHeading}&rdquo;</p>
+              <div className="absolute -bottom-8 -right-4 bg-white p-5 rounded-2xl shadow-xl border border-[#D6E4E8] max-w-[200px] z-10">
+                <p className="text-sm font-bold text-[#142B3B] mb-1">&ldquo;{product.painHeading}&rdquo;</p>
                 <div className="flex">
-                  {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-[#D9A441] fill-[#D9A441]" />)}
+                  {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-[#D4AF37] fill-[#D4AF37]" />)}
                 </div>
               </div>
             </div>
 
             {/* Text Right */}
             <div className="order-1 md:order-2">
-              <div className="inline-flex items-center gap-2 bg-[#B97863]/10 text-[#B97863] rounded-full px-4 py-1.5 mb-6 font-bold text-sm">
+              <div className="inline-flex items-center gap-2 bg-[#4A8B9A]/10 text-[#4A8B9A] rounded-full px-4 py-1.5 mb-6 font-bold text-sm">
                 <HeartPulse className="w-4 h-4" />
                 أنتِ مو لحالك
               </div>
-              <h2 className="text-3xl md:text-4xl font-extrabold text-[#2F2523] mb-6 leading-tight">
+              <h2 className="text-3xl md:text-4xl font-extrabold text-[#142B3B] mb-6 leading-tight">
                 نعرف الضغط اللي تعيشينه كل يوم، بين الدوام والزوارات والبيت.
               </h2>
-              <p className="text-[#7B5E57] text-lg md:text-xl mb-8 font-medium leading-relaxed">
+              <p className="text-[#506A77] text-lg md:text-xl mb-8 font-medium leading-relaxed">
                 أمومتك ما تعني إنك تنسين راحتك. كل لحظة قلق، كل سهرة، وكل مشوار متعب — صممنا{' '}
                 {product.shortName} عشان يشيل عنك هذا الحمل ويفك لك أزمة.
               </p>
-              <div className="bg-[#F7EDE8]/60 p-6 rounded-2xl border border-[#F0E3DC]">
-                <h3 className="font-bold text-[#2F2523] mb-4 flex items-center gap-2">
-                  <Sparkles className="w-5 h-5 text-[#B97863]" />
+              <div className="bg-[#EBF2F5]/60 p-6 rounded-2xl border border-[#D6E4E8]">
+                <h3 className="font-bold text-[#142B3B] mb-4 flex items-center gap-2">
+                  <Sparkles className="w-5 h-5 text-[#4A8B9A]" />
                   وش اللي بيتغير بيومك؟
                 </h3>
                 <ul className="space-y-4">
                   {product.benefits.map((benefit, i) => (
                     <li key={i} className="flex items-start gap-3">
                       <CheckCircle className="w-6 h-6 text-green-600 flex-shrink-0 mt-0.5" />
-                      <span className="text-[#2F2523] font-bold leading-relaxed">{benefit}</span>
+                      <span className="text-[#142B3B] font-bold leading-relaxed">{benefit}</span>
                     </li>
                   ))}
                 </ul>
@@ -289,10 +289,10 @@ export function ProductPageClient({ product }: Props) {
                 <Microscope className="w-4 h-4" />
                 مواد صُنعت بحب واختُبرت بدقة
               </div>
-              <h2 className="text-3xl md:text-4xl font-extrabold text-[#2F2523] mb-6 leading-tight">
+              <h2 className="text-3xl md:text-4xl font-extrabold text-[#142B3B] mb-6 leading-tight">
                 ما نساوم أبداً على جودة المواد اللي تلامس بشرة طفلك.
               </h2>
-              <p className="text-[#7B5E57] text-lg mb-8 font-medium leading-relaxed">
+              <p className="text-[#506A77] text-lg mb-8 font-medium leading-relaxed">
                 كل جزء في {product.shortName} مصنوع من مواد طبية فائقة الجودة، اختُبرت سريرياً لتكون آمنة تماماً وتمنع أي حساسية لطفلك الغالي.
               </p>
 
@@ -305,10 +305,10 @@ export function ProductPageClient({ product }: Props) {
                     bg: 'bg-green-50 border-green-100',
                   },
                   {
-                    icon: <Baby className="w-6 h-6 text-[#B97863]" />,
+                    icon: <Baby className="w-6 h-6 text-[#4A8B9A]" />,
                     title: 'سيليكون طبي / نسيج هايبوالرجينيك',
                     desc: 'مصمم خصيصاً لبشرة الرضيع الرقيقة. لا احمرار، لا تهيج، لا حساسية — مضمون.',
-                    bg: 'bg-[#FFF0EB] border-[#F0E3DC]',
+                    bg: 'bg-[#FFF0EB] border-[#D6E4E8]',
                   },
                   {
                     icon: <Microscope className="w-6 h-6 text-blue-700" />,
@@ -326,8 +326,8 @@ export function ProductPageClient({ product }: Props) {
                   <div key={i} className={`flex items-start gap-4 p-4 rounded-2xl border ${item.bg}`}>
                     <div className="bg-white p-2.5 rounded-xl shadow-sm flex-shrink-0">{item.icon}</div>
                     <div>
-                      <h4 className="font-bold text-[#2F2523] text-sm mb-1">{item.title}</h4>
-                      <p className="text-[#7B5E57] text-xs font-medium leading-relaxed">{item.desc}</p>
+                      <h4 className="font-bold text-[#142B3B] text-sm mb-1">{item.title}</h4>
+                      <p className="text-[#506A77] text-xs font-medium leading-relaxed">{item.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -342,7 +342,7 @@ export function ProductPageClient({ product }: Props) {
                 <p className="text-blue-800 font-bold text-center text-sm">
                   [صورة مقربة (Macro) للمادة أو النسيج الطبي]
                 </p>
-                <p className="text-xs text-[#7B5E57] mt-2 text-center">تفاصيل جودة المواد الطبية</p>
+                <p className="text-xs text-[#506A77] mt-2 text-center">تفاصيل جودة المواد الطبية</p>
                 <div className="mt-6 grid grid-cols-2 gap-3 w-full">
                   <div className="bg-green-50 rounded-xl p-3 text-center">
                     <p className="text-green-700 font-extrabold text-xl">100%</p>
@@ -362,14 +362,14 @@ export function ProductPageClient({ product }: Props) {
       {/* ═══════════════════════════════════════════
           4. SFDA AUTHORITY — Image LEFT, Text RIGHT
       ═══════════════════════════════════════════ */}
-      <section className="py-20 bg-[#2F2523] text-white overflow-hidden">
+      <section className="py-20 bg-[#142B3B] text-white overflow-hidden">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             {/* Image Left */}
             <div className="relative order-2 md:order-1">
               <div className="absolute inset-0 bg-white/5 rounded-[3rem] rotate-3 scale-105 transform origin-center" />
-              <div className="relative aspect-square bg-gradient-to-br from-[#3D2E2B] to-[#4A3835] rounded-[2.5rem] flex flex-col items-center justify-center shadow-2xl border border-[#5A4541] p-8 overflow-hidden">
-                <Shield className="w-20 h-20 text-[#D9A441] mb-5" />
+              <div className="relative aspect-square bg-gradient-to-br from-[#1A384D] to-[#214358] rounded-[2.5rem] flex flex-col items-center justify-center shadow-2xl border border-[#29536C] p-8 overflow-hidden">
+                <Shield className="w-20 h-20 text-[#D4AF37] mb-5" />
                 <p className="text-white/90 font-bold text-base text-center leading-snug">
                   [صورة شهادة اعتماد SFDA أو شهادة مطابقة الجودة الدولية]
                 </p>
@@ -380,7 +380,7 @@ export function ProductPageClient({ product }: Props) {
                 {/* Stats row */}
                 <div className="mt-5 grid grid-cols-2 gap-3 w-full">
                   <div className="bg-white/10 rounded-xl p-3 text-center border border-white/10">
-                    <p className="text-[#D9A441] font-extrabold text-lg">SFDA</p>
+                    <p className="text-[#D4AF37] font-extrabold text-lg">SFDA</p>
                     <p className="text-white/60 text-xs">معتمد رسمياً</p>
                   </div>
                   <div className="bg-white/10 rounded-xl p-3 text-center border border-white/10">
@@ -393,21 +393,21 @@ export function ProductPageClient({ product }: Props) {
 
             {/* Text Right */}
             <div className="order-1 md:order-2">
-              <div className="inline-flex items-center gap-2 bg-[#D9A441]/20 text-[#D9A441] rounded-full px-4 py-1.5 mb-6 font-bold text-sm border border-[#D9A441]/30">
+              <div className="inline-flex items-center gap-2 bg-[#D4AF37]/20 text-[#D4AF37] rounded-full px-4 py-1.5 mb-6 font-bold text-sm border border-[#D4AF37]/30">
                 <BadgeCheck className="w-4 h-4" />
                 السلطة الطبية والاعتماد
               </div>
               <h2 className="text-3xl md:text-4xl font-extrabold mb-6 leading-tight">
                 ليش دكاترة الأطفال والأمهات يثقون فينا؟
               </h2>
-              <p className="text-[#C9B0A8] text-lg mb-8 leading-relaxed font-medium">
+              <p className="text-[#8CA4B0] text-lg mb-8 leading-relaxed font-medium">
                 لأن الراحة مو بس شعور، الراحة هي أمان موثق بالأرقام والشهادات. منتجاتنا مو عشوائية، هي حصيلة أبحاث واختبارات صارمة عشان تاخذينها وأنتِ مغمضة.
               </p>
               <ul className="space-y-6">
                 {product.proofBlocks.map((proof, i) => (
                   <li key={i} className="flex items-start gap-4">
                     <div className="bg-white/10 p-3 rounded-2xl flex-shrink-0 mt-1 border border-white/5">
-                      <Star className="w-6 h-6 text-[#D9A441] fill-[#D9A441]" />
+                      <Star className="w-6 h-6 text-[#D4AF37] fill-[#D4AF37]" />
                     </div>
                     <span className="text-white text-lg leading-relaxed font-bold">{proof}</span>
                   </li>
@@ -419,7 +419,7 @@ export function ProductPageClient({ product }: Props) {
                   🏆 &quot;من أكثر المنتجات الموثوقة بين أمهات السعودية في 2026&quot;
                 </p>
                 <div className="flex justify-center mt-3">
-                  {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 text-[#D9A441] fill-[#D9A441]" />)}
+                  {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 text-[#D4AF37] fill-[#D4AF37]" />)}
                 </div>
               </div>
             </div>
@@ -430,16 +430,16 @@ export function ProductPageClient({ product }: Props) {
       {/* ═══════════════════════════════════════════
           5. BEFORE → AFTER TRANSFORMATION — Text LEFT, Image RIGHT
       ═══════════════════════════════════════════ */}
-      <section className="py-20 bg-[#FFF9F5] overflow-hidden border-b border-[#F0E3DC]">
+      <section className="py-20 bg-[#F5F8FA] overflow-hidden border-b border-[#D6E4E8]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             {/* Text Left */}
             <div>
-              <div className="inline-flex items-center gap-2 bg-[#B97863]/10 text-[#B97863] rounded-full px-4 py-1.5 mb-6 font-bold text-sm">
+              <div className="inline-flex items-center gap-2 bg-[#4A8B9A]/10 text-[#4A8B9A] rounded-full px-4 py-1.5 mb-6 font-bold text-sm">
                 <Zap className="w-4 h-4" />
                 التحول الحقيقي
               </div>
-              <h2 className="text-3xl md:text-4xl font-extrabold text-[#2F2523] mb-8 leading-tight">
+              <h2 className="text-3xl md:text-4xl font-extrabold text-[#142B3B] mb-8 leading-tight">
                 قبل {product.shortName}... وبعده.
               </h2>
 
@@ -499,18 +499,18 @@ export function ProductPageClient({ product }: Props) {
 
             {/* Image Right */}
             <div className="relative">
-              <div className="absolute inset-0 bg-[#B97863]/10 rounded-[3rem] rotate-6 scale-105 transform origin-center" />
-              <div className="relative aspect-square bg-white rounded-[2.5rem] flex flex-col items-center justify-center shadow-xl border border-[#F0E3DC] p-8 overflow-hidden">
+              <div className="absolute inset-0 bg-[#4A8B9A]/10 rounded-[3rem] rotate-6 scale-105 transform origin-center" />
+              <div className="relative aspect-square bg-white rounded-[2.5rem] flex flex-col items-center justify-center shadow-xl border border-[#D6E4E8] p-8 overflow-hidden">
                 <div className="text-7xl mb-4">✨</div>
-                <p className="text-[#B97863] font-bold text-center text-sm">
+                <p className="text-[#4A8B9A] font-bold text-center text-sm">
                   [صورة أم سعيدة ومرتاحة مع طفلها بعد الاستخدام]
                 </p>
-                <p className="text-xs text-[#7B5E57] mt-2 text-center">الطمأنينة لها شكل</p>
-                <div className="mt-6 bg-[#F7EDE8] rounded-2xl p-4 w-full text-center">
-                  <p className="text-[#2F2523] font-extrabold text-base">&ldquo;غيرت حياتي كلياً&rdquo;</p>
-                  <p className="text-[#7B5E57] text-xs mt-1">— أم ريم، الرياض</p>
+                <p className="text-xs text-[#506A77] mt-2 text-center">الطمأنينة لها شكل</p>
+                <div className="mt-6 bg-[#EBF2F5] rounded-2xl p-4 w-full text-center">
+                  <p className="text-[#142B3B] font-extrabold text-base">&ldquo;غيرت حياتي كلياً&rdquo;</p>
+                  <p className="text-[#506A77] text-xs mt-1">— أم ريم، الرياض</p>
                   <div className="flex justify-center mt-2">
-                    {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-[#D9A441] fill-[#D9A441]" />)}
+                    {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-[#D4AF37] fill-[#D4AF37]" />)}
                   </div>
                 </div>
               </div>
@@ -531,26 +531,26 @@ export function ProductPageClient({ product }: Props) {
                 <Clock className="w-4 h-4" />
                 يوفر وقتك وجهدك
               </div>
-              <h2 className="text-3xl md:text-4xl font-extrabold text-[#2F2523] mb-6 leading-tight">
+              <h2 className="text-3xl md:text-4xl font-extrabold text-[#142B3B] mb-6 leading-tight">
                 استخدام بديهي وسهل، بدون تعقيد ولا حوسة.
               </h2>
-              <p className="text-[#7B5E57] text-lg mb-8 font-medium leading-relaxed">
+              <p className="text-[#506A77] text-lg mb-8 font-medium leading-relaxed">
                 وقتك كأم ثمين جداً. صممنا هذا المنتج عشان يشتغل معاك من أول لحظة، بخطوات بسيطة وتكونين جاهزة.
               </p>
 
-              <div className="space-y-6 relative before:absolute before:inset-y-0 before:start-[1.1rem] before:w-0.5 before:bg-[#F0E3DC]">
+              <div className="space-y-6 relative before:absolute before:inset-y-0 before:start-[1.1rem] before:w-0.5 before:bg-[#D6E4E8]">
                 {[
                   { title: 'جهزي المنتج', desc: 'بدون تركيب معقد، جاهز للاستخدام الفوري من أول لحظة.' },
                   { title: 'استخدميه بسهولة', desc: 'تصميم مريح يندمج مع روتينك وروتين طفلك بسلاسة تامة.' },
                   { title: 'ارتاحي واستمتعي', desc: 'النتيجة الفورية اللي بتريح قلبك وتوفر طاقتك ووقتك.' },
                 ].map((step, i) => (
                   <div key={i} className="relative flex items-start gap-5">
-                    <div className="w-10 h-10 rounded-full bg-[#B97863] text-white flex items-center justify-center font-bold text-lg flex-shrink-0 relative z-10 shadow-md">
+                    <div className="w-10 h-10 rounded-full bg-[#4A8B9A] text-white flex items-center justify-center font-bold text-lg flex-shrink-0 relative z-10 shadow-md">
                       {i + 1}
                     </div>
                     <div className="pt-1.5">
-                      <h4 className="font-bold text-[#2F2523] text-lg mb-1">{step.title}</h4>
-                      <p className="text-[#7B5E57] font-medium text-base leading-relaxed">{step.desc}</p>
+                      <h4 className="font-bold text-[#142B3B] text-lg mb-1">{step.title}</h4>
+                      <p className="text-[#506A77] font-medium text-base leading-relaxed">{step.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -565,7 +565,7 @@ export function ProductPageClient({ product }: Props) {
                 <p className="text-green-800 font-bold text-center text-sm">
                   [صورة توضح سهولة الاستخدام في 3 خطوات]
                 </p>
-                <p className="text-xs text-[#7B5E57] mt-2 text-center">بدون تعقيد للدوام أو الزيارة</p>
+                <p className="text-xs text-[#506A77] mt-2 text-center">بدون تعقيد للدوام أو الزيارة</p>
               </div>
             </div>
           </div>
@@ -575,19 +575,19 @@ export function ProductPageClient({ product }: Props) {
       {/* ═══════════════════════════════════════════
           7. SOCIAL PROOF & REVIEWS
       ═══════════════════════════════════════════ */}
-      <section className="py-24 bg-gradient-to-b from-[#FFF9F5] to-[#F7EDE8]">
+      <section className="py-24 bg-gradient-to-b from-[#F5F8FA] to-[#EBF2F5]">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 bg-[#B97863]/10 text-[#B97863] rounded-full px-5 py-2 mb-6 font-extrabold text-sm border border-[#B97863]/20 shadow-sm">
+            <div className="inline-flex items-center gap-2 bg-[#4A8B9A]/10 text-[#4A8B9A] rounded-full px-5 py-2 mb-6 font-extrabold text-sm border border-[#4A8B9A]/20 shadow-sm">
               <Star className="w-5 h-5 fill-current" />
               أكثر من {(product.reviews.length * 142).toLocaleString()} قصة نجاح حقيقية
             </div>
-            <h2 className="text-3xl md:text-5xl font-black text-[#2F2523] mb-6 tracking-tight">
+            <h2 className="text-3xl md:text-5xl font-black text-[#142B3B] mb-6 tracking-tight">
               أمهات ارتاحوا قبلك،
               <br className="hidden md:block" />
               اسمعي تجاربهن الحقيقية.
             </h2>
-            <p className="text-[#7B5E57] text-xl font-medium max-w-2xl mx-auto">
+            <p className="text-[#506A77] text-xl font-medium max-w-2xl mx-auto">
               هذي مو مجرد تقييمات. هذي قصص حقيقية من أمهات كانوا يعانون من نفس مشاكلك، واليوم روتينهن صار أسهل وأسعد.
             </p>
           </div>
@@ -601,7 +601,7 @@ export function ProductPageClient({ product }: Props) {
           </div>
 
           {/* Aggregate stats */}
-          <div className="mt-12 bg-white rounded-3xl p-8 shadow-sm border border-[#F0E3DC]">
+          <div className="mt-12 bg-white rounded-3xl p-8 shadow-sm border border-[#D6E4E8]">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
               {[
                 { num: `${(product.reviews.length * 142).toLocaleString()}+`, label: 'أم استخدمته' },
@@ -610,8 +610,8 @@ export function ProductPageClient({ product }: Props) {
                 { num: '30 يوم', label: 'ضمان الاسترجاع' },
               ].map((stat, i) => (
                 <div key={i}>
-                  <p className="text-2xl md:text-3xl font-extrabold text-[#B97863] mb-1">{stat.num}</p>
-                  <p className="text-[#7B5E57] text-sm font-medium">{stat.label}</p>
+                  <p className="text-2xl md:text-3xl font-extrabold text-[#4A8B9A] mb-1">{stat.num}</p>
+                  <p className="text-[#506A77] text-sm font-medium">{stat.label}</p>
                 </div>
               ))}
             </div>
@@ -633,17 +633,17 @@ export function ProductPageClient({ product }: Props) {
       {/* ═══════════════════════════════════════════
           8. FAQ
       ═══════════════════════════════════════════ */}
-      <section className="py-24 bg-white border-t border-[#F0E3DC]">
+      <section className="py-24 bg-white border-t border-[#D6E4E8]">
         <div className="max-w-4xl mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-black text-[#2F2523] mb-4">
+            <h2 className="text-3xl md:text-4xl font-black text-[#142B3B] mb-4">
               كل الأسئلة اللي في بالك... جاوبناها
             </h2>
-            <p className="text-[#7B5E57] text-lg font-medium">
+            <p className="text-[#506A77] text-lg font-medium">
               عشان تطلبين وأنتِ متطمنة ومرتاحة 100%.
             </p>
           </div>
-          <div className="bg-white p-6 md:p-10 rounded-[2.5rem] border-2 border-[#F0E3DC] shadow-lg">
+          <div className="bg-white p-6 md:p-10 rounded-[2.5rem] border-2 border-[#D6E4E8] shadow-lg">
             <FaqSection faqs={product.faqs} />
           </div>
         </div>
@@ -652,17 +652,17 @@ export function ProductPageClient({ product }: Props) {
       {/* ═══════════════════════════════════════════
           9. DELIVERY & CONFIRMATION PROCESS
       ═══════════════════════════════════════════ */}
-      <section className="py-20 bg-[#FFF9F5] border-t border-[#F0E3DC]">
+      <section className="py-20 bg-[#F5F8FA] border-t border-[#D6E4E8]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-14">
-            <div className="inline-flex items-center gap-2 bg-[#B97863]/10 text-[#B97863] rounded-full px-4 py-1.5 mb-4 font-bold text-sm">
+            <div className="inline-flex items-center gap-2 bg-[#4A8B9A]/10 text-[#4A8B9A] rounded-full px-4 py-1.5 mb-4 font-bold text-sm">
               <Package className="w-4 h-4" />
               بعد ما تطلبين... وش يصير؟
             </div>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-[#2F2523] mb-4">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-[#142B3B] mb-4">
               عملية طلب شفافة 100% — بدون مفاجآت
             </h2>
-            <p className="text-[#7B5E57] text-lg font-medium max-w-2xl mx-auto">
+            <p className="text-[#506A77] text-lg font-medium max-w-2xl mx-auto">
               نؤمن بالوضوح التام. هذا بالضبط اللي يصير بعد ما تضغطين &quot;اطلبي الآن&quot;.
             </p>
           </div>
@@ -670,11 +670,11 @@ export function ProductPageClient({ product }: Props) {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
-                icon: <CheckCircle className="w-8 h-8 text-[#B97863]" />,
+                icon: <CheckCircle className="w-8 h-8 text-[#4A8B9A]" />,
                 step: '01',
                 title: 'مراجعة طلبك',
                 desc: 'بمجرد إتمام طلبك، نراجعه فوراً في نظامنا ونجهز ملفك.',
-                color: 'bg-[#FFF0EB] border-[#F0E3DC]',
+                color: 'bg-[#FFF0EB] border-[#D6E4E8]',
               },
               {
                 icon: <Phone className="w-8 h-8 text-blue-600" />,
@@ -691,7 +691,7 @@ export function ProductPageClient({ product }: Props) {
                 color: 'bg-emerald-50 border-emerald-100',
               },
               {
-                icon: <Truck className="w-8 h-8 text-[#D9A441]" />,
+                icon: <Truck className="w-8 h-8 text-[#D4AF37]" />,
                 step: '04',
                 title: 'استلام وادفع',
                 desc: 'يوصل لبيتك، تفحصينه، وتدفعين فقط عند الاستلام. ضمان 30 يوم.',
@@ -699,21 +699,21 @@ export function ProductPageClient({ product }: Props) {
               },
             ].map((item, i) => (
               <div key={i} className={`relative ${item.color} rounded-3xl p-6 border text-center hover:shadow-md hover:-translate-y-1 transition-all duration-300`}>
-                <div className="text-[#B97863]/15 font-extrabold text-5xl absolute top-3 right-4 leading-none">{item.step}</div>
+                <div className="text-[#4A8B9A]/15 font-extrabold text-5xl absolute top-3 right-4 leading-none">{item.step}</div>
                 <div className="relative z-10">
                   <div className="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center mx-auto mb-4">
                     {item.icon}
                   </div>
-                  <h4 className="font-bold text-[#2F2523] text-base mb-2">{item.title}</h4>
-                  <p className="text-[#7B5E57] text-sm font-medium leading-relaxed">{item.desc}</p>
+                  <h4 className="font-bold text-[#142B3B] text-base mb-2">{item.title}</h4>
+                  <p className="text-[#506A77] text-sm font-medium leading-relaxed">{item.desc}</p>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="mt-10 bg-white rounded-3xl p-6 border border-[#F0E3DC] shadow-sm flex flex-col sm:flex-row items-center gap-4 text-center sm:text-right">
-            <Heart className="w-10 h-10 text-[#B97863] flex-shrink-0" />
-            <p className="text-[#2F2523] font-bold text-base leading-relaxed">
+          <div className="mt-10 bg-white rounded-3xl p-6 border border-[#D6E4E8] shadow-sm flex flex-col sm:flex-row items-center gap-4 text-center sm:text-right">
+            <Heart className="w-10 h-10 text-[#4A8B9A] flex-shrink-0" />
+            <p className="text-[#142B3B] font-bold text-base leading-relaxed">
               راحة بالك الأهم. لذا الدفع عند الاستلام متاح دائماً — تدفعين بعد ما تشوفين المنتج وتتأكدين منه بنفسك.
             </p>
           </div>
@@ -724,13 +724,13 @@ export function ProductPageClient({ product }: Props) {
           10. CROSS SELLS
       ═══════════════════════════════════════════ */}
       {crossSells.length > 0 && (
-        <section className="py-20 bg-[#F7EDE8] border-t border-[#F0E3DC]">
+        <section className="py-20 bg-[#EBF2F5] border-t border-[#D6E4E8]">
           <div className="max-w-6xl mx-auto px-4">
             <div className="text-center mb-12">
-              <h2 className="text-2xl md:text-4xl font-black text-[#2F2523] mb-4">
+              <h2 className="text-2xl md:text-4xl font-black text-[#142B3B] mb-4">
                 أمهات ذكيات كملوا راحتهن مع هذي المنتجات
               </h2>
-              <p className="text-[#7B5E57] text-lg font-medium">منتجات تكمل روتينك وتزيد راحتك.</p>
+              <p className="text-[#506A77] text-lg font-medium">منتجات تكمل روتينك وتزيد راحتك.</p>
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
               {crossSells.map((p) => (
@@ -744,11 +744,11 @@ export function ProductPageClient({ product }: Props) {
       {/* ═══════════════════════════════════════════
           11. GUARANTEE STRIP (Pre-footer)
       ═══════════════════════════════════════════ */}
-      <section className="py-16 bg-[#2F2523] text-white text-center">
+      <section className="py-16 bg-[#142B3B] text-white text-center">
         <div className="max-w-4xl mx-auto px-4">
-          <Award className="w-16 h-16 text-[#D9A441] mx-auto mb-6" />
+          <Award className="w-16 h-16 text-[#D4AF37] mx-auto mb-6" />
           <h2 className="text-2xl md:text-3xl font-black mb-4">ضمان مهد بيبي الذهبي — 30 يوم كاملة</h2>
-          <p className="text-[#C9B0A8] text-lg font-medium leading-relaxed max-w-2xl mx-auto mb-8">
+          <p className="text-[#8CA4B0] text-lg font-medium leading-relaxed max-w-2xl mx-auto mb-8">
             نحن واثقين جداً من جودة منتجاتنا. إذا ما حسيتِ بفرق حقيقي خلال 30 يوم من الاستلام،{' '}
             <span className="text-white font-bold">نرد لك فلوسك كاملة بدون أي أسئلة معقدة.</span>
           </p>
@@ -775,14 +775,14 @@ export function ProductPageClient({ product }: Props) {
       ═══════════════════════════════════════════ */}
       <div
         className={cn(
-          'fixed bottom-0 inset-x-0 z-50 bg-white/95 backdrop-blur-md border-t border-[#F0E3DC] px-4 py-4 transition-transform duration-300 shadow-[0_-20px_40px_rgba(0,0,0,0.1)]',
+          'fixed bottom-0 inset-x-0 z-50 bg-white/95 backdrop-blur-md border-t border-[#D6E4E8] px-4 py-4 transition-transform duration-300 shadow-[0_-20px_40px_rgba(0,0,0,0.1)]',
           isSticky ? 'translate-y-0' : 'translate-y-full',
         )}
       >
         <div className="max-w-6xl mx-auto flex items-center gap-4">
           <div className="flex-1">
-            <p className="font-black text-[#2F2523] text-[15px] line-clamp-1">{product.shortName}</p>
-            <p className="text-[#B97863] text-sm font-black mt-1 flex items-center gap-1">
+            <p className="font-black text-[#142B3B] text-[15px] line-clamp-1">{product.shortName}</p>
+            <p className="text-[#4A8B9A] text-sm font-black mt-1 flex items-center gap-1">
               {formatKwd(OFFER_CONFIG[selectedOffer].priceKwd)}
               <span className="text-[10px] text-gray-400 font-medium line-through ms-1">
                 {formatKwd(OFFER_CONFIG[selectedOffer].originalPriceKwd ?? 0)}

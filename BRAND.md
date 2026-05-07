@@ -57,27 +57,27 @@ We carry a **small, carefully chosen line** of mom-and-baby essentials. Every it
 
 ## Brand Color
 
-### Signature Color — **Terracotta `#B97863`**
+### Signature Color — **Medical Teal `#4A8B9A`**
 
-A warm, earthy, maternal tone. It's distinctive (not the typical pastel pink/blue baby palette), it conveys natural materials and warmth, and it's already the soul of our visual identity. Every primary CTA and brand mark uses this color.
+A clean, calming, authoritative tone. It signals medical-grade safety and deep trust, while remaining gentle enough for a baby brand. Every primary CTA and brand mark uses this color.
 
 ### Supporting Palette
 
 | Role | Color | Hex | Usage |
 |---|---|---|---|
-| **Signature / Primary** | Terracotta | `#B97863` | CTAs, logo, highlights |
-| **Authority / Text** | Espresso | `#2F2523` | Headings, footer, deep anchors |
-| **Trust / Safety** | Sage | `#4F7F70` | SFDA badges, certifications, guarantees |
-| **Premium accent** | Honey Gold | `#D9A441` | Award/guarantee marks, ratings |
-| **Canvas** | Warm Ivory | `#FFF9F5` | Page background |
-| **Soft surface** | Blush Cream | `#F7EDE8` | Section backgrounds, cards |
-| **Body text** | Warm Brown | `#7B5E57` | Paragraph copy |
+| **Signature / Primary** | Medical Teal | `#4A8B9A` | CTAs, logo, highlights |
+| **Authority / Text** | Deep Navy | `#142B3B` | Headings, footer, deep anchors |
+| **Trust / Safety** | Deep Sage | `#3B8263` | SFDA badges, certifications, guarantees |
+| **Premium accent** | Honey Gold | `#D4AF37` | Award/guarantee marks, ratings |
+| **Canvas** | Cool Ivory | `#F5F8FA` | Page background |
+| **Soft surface** | Soft Blue | `#EBF2F5` | Section backgrounds, cards |
+| **Body text** | Slate Blue | `#506A77` | Paragraph copy |
 
 **Why this combination signals authority:**
-- Terracotta + Espresso = boutique, intentional, not childish
-- Sage on trust badges = medical/safety cue without screaming "hospital"
+- Teal + Navy = medical-grade trust, intentional, not childish
+- Sage on trust badges = safety cue without screaming "hospital"
 - Gold = premium without being flashy
-- Cream canvas = calm, never overwhelming
+- Cool canvas = calm, clean, hygienic
 
 ---
 

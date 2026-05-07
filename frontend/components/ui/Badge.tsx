@@ -14,11 +14,11 @@ export function Badge({
   className,
 }: BadgeProps) {
   const variants = {
-    primary: 'bg-[#B97863] text-white',
-    gold: 'bg-[#D9A441] text-white',
+    primary: 'bg-[#4A8B9A] text-white',
+    gold: 'bg-[#D4AF37] text-white',
     sage: 'bg-[#6F9E8E] text-white',
-    blush: 'bg-[#F7EDE8] text-[#7B5E57] border border-[#E7D4CC]',
-    outline: 'bg-transparent text-[#B97863] border border-[#B97863]',
+    blush: 'bg-[#EBF2F5] text-[#506A77] border border-[#C9DADD]',
+    outline: 'bg-transparent text-[#4A8B9A] border border-[#4A8B9A]',
   }
 
   const sizes = {

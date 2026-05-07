@@ -12,16 +12,16 @@ export default function ShippingPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-[#F7EDE8] py-16 md:py-20">
+      <section className="bg-[#EBF2F5] py-16 md:py-20">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
-          <div className="inline-flex items-center gap-2 bg-white border border-[#E7D4CC] rounded-full px-4 py-1.5 mb-5 font-bold text-sm text-[#2F2523] shadow-sm">
-            <Truck className="w-4 h-4 text-[#B97863]" />
+          <div className="inline-flex items-center gap-2 bg-white border border-[#C9DADD] rounded-full px-4 py-1.5 mb-5 font-bold text-sm text-[#142B3B] shadow-sm">
+            <Truck className="w-4 h-4 text-[#4A8B9A]" />
             الشحن والتوصيل
           </div>
-          <h1 className="text-3xl md:text-4xl font-extrabold text-[#2F2523] mb-4">
+          <h1 className="text-3xl md:text-4xl font-extrabold text-[#142B3B] mb-4">
             توصيل آمن، تأكيد قبل الشحن، ودفع بعد ما تستلمين
           </h1>
-          <p className="text-[#7B5E57] text-base md:text-lg leading-relaxed">
+          <p className="text-[#506A77] text-base md:text-lg leading-relaxed">
             نشحن لكل دول الخليج. كل طلب يتأكد بمكالمة قصيرة قبل ما يخرج من المستودع — عشان يوصلك
             صح من أول مرة.
           </p>
@@ -56,13 +56,13 @@ export default function ShippingPage() {
             ].map((item, i) => (
               <div
                 key={i}
-                className="bg-white border border-[#F0E3DC] rounded-3xl p-5 shadow-sm hover:shadow-md transition-all"
+                className="bg-white border border-[#D6E4E8] rounded-3xl p-5 shadow-sm hover:shadow-md transition-all"
               >
-                <div className="w-11 h-11 rounded-xl bg-[#B97863]/10 text-[#B97863] flex items-center justify-center mb-3">
+                <div className="w-11 h-11 rounded-xl bg-[#4A8B9A]/10 text-[#4A8B9A] flex items-center justify-center mb-3">
                   {item.icon}
                 </div>
-                <h3 className="font-bold text-[#2F2523] mb-1.5 text-base">{item.title}</h3>
-                <p className="text-[#7B5E57] text-sm leading-relaxed">{item.desc}</p>
+                <h3 className="font-bold text-[#142B3B] mb-1.5 text-base">{item.title}</h3>
+                <p className="text-[#506A77] text-sm leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -72,26 +72,26 @@ export default function ShippingPage() {
       {/* Details */}
       <section className="pb-16">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
-          <div className="flex flex-col gap-8 text-[#2F2523]">
+          <div className="flex flex-col gap-8 text-[#142B3B]">
             <div>
               <h2 className="text-xl font-bold mb-3">مناطق التوصيل ورسوم الشحن</h2>
-              <div className="overflow-hidden rounded-2xl border border-[#F0E3DC]">
+              <div className="overflow-hidden rounded-2xl border border-[#D6E4E8]">
                 <table className="w-full text-sm">
-                  <thead className="bg-[#F7EDE8] text-[#2F2523]">
+                  <thead className="bg-[#EBF2F5] text-[#142B3B]">
                     <tr>
                       <th className="text-right p-3 font-bold">الدولة</th>
                       <th className="text-right p-3 font-bold">مدة التوصيل</th>
                       <th className="text-right p-3 font-bold">رسوم الشحن</th>
                     </tr>
                   </thead>
-                  <tbody className="text-[#7B5E57]">
+                  <tbody className="text-[#506A77]">
                     {[
                       ['السعودية', '2–5 أيام عمل', 'مجاني للطلبات فوق 150 ر.س'],
                       ['الكويت', '3–6 أيام عمل', 'مجاني للطلبات فوق 15 د.ك'],
                       ['الإمارات', '3–6 أيام عمل', 'مجاني للطلبات فوق 150 د.إ'],
                       ['البحرين / قطر / عُمان', '4–7 أيام عمل', 'حسب المنطقة — يظهر عند الدفع'],
                     ].map((row, i) => (
-                      <tr key={i} className="border-t border-[#F0E3DC]">
+                      <tr key={i} className="border-t border-[#D6E4E8]">
                         {row.map((c, j) => (
                           <td key={j} className="p-3">{c}</td>
                         ))}
@@ -100,14 +100,14 @@ export default function ShippingPage() {
                   </tbody>
                 </table>
               </div>
-              <p className="text-[#9A7D78] text-xs mt-3">
+              <p className="text-[#6B8A99] text-xs mt-3">
                 * الأيام محسوبة بأيام العمل (الأحد–الخميس) من بعد تأكيد الطلب.
               </p>
             </div>
 
             <div>
               <h2 className="text-xl font-bold mb-3">كيف تتم رحلة طلبك؟</h2>
-              <ol className="flex flex-col gap-3 text-[#7B5E57]">
+              <ol className="flex flex-col gap-3 text-[#506A77]">
                 {[
                   'تطلبين عبر الموقع وتختارين الدفع عند الاستلام.',
                   'يتصل عليك فريقنا خلال 24 ساعة لتأكيد العنوان والتفاصيل.',
@@ -115,7 +115,7 @@ export default function ShippingPage() {
                   'تستلمين الطلب، تفحصينه، وبعدها تدفعين للمندوب.',
                 ].map((step, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <span className="bg-[#B97863] text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="bg-[#4A8B9A] text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                       {i + 1}
                     </span>
                     <span className="leading-relaxed">{step}</span>
@@ -126,7 +126,7 @@ export default function ShippingPage() {
 
             <div>
               <h2 className="text-xl font-bold mb-3">الدفع عند الاستلام</h2>
-              <p className="text-[#7B5E57] leading-relaxed">
+              <p className="text-[#506A77] leading-relaxed">
                 كل طلباتنا بالدفع عند الاستلام — بدون أي دفع مسبق أو إلكتروني.
                 المندوب يسلّمك الطلب، وأنتِ تتأكدين من المحتوى والتغليف قبل ما تدفعين.
                 هذي طريقتنا عشان تطلبين بدون أي قلق.
@@ -135,19 +135,19 @@ export default function ShippingPage() {
 
             <div>
               <h2 className="text-xl font-bold mb-3">تأخر الطلب أو ما وصل؟</h2>
-              <p className="text-[#7B5E57] leading-relaxed">
+              <p className="text-[#506A77] leading-relaxed">
                 إذا تأخر الطلب أكثر من المدة المتوقعة، تواصلي معنا مباشرة على واتساب
                 مع رقم الطلب، وفريقنا يتابع شركة الشحن نيابةً عنك ويرجع لك بحل خلال نفس اليوم.
               </p>
             </div>
 
-            <div className="bg-[#EAF1EE] border border-[#4F7F70]/20 rounded-2xl p-5 flex items-start gap-3">
-              <ShieldCheck className="w-6 h-6 text-[#4F7F70] flex-shrink-0 mt-0.5" />
-              <p className="text-[#2F2523] text-sm leading-relaxed">
+            <div className="bg-[#E8F0EC] border border-[#3B8263]/20 rounded-2xl p-5 flex items-start gap-3">
+              <ShieldCheck className="w-6 h-6 text-[#3B8263] flex-shrink-0 mt-0.5" />
+              <p className="text-[#142B3B] text-sm leading-relaxed">
                 <span className="font-bold">وعد مهد بيبي:</span>{' '}
                 لو وصل طلبك ناقص، تالف، أو مختلف عن المطلوب — نستبدله مجاناً أو نسترجع لك المبلغ كاملاً.
                 خلال 30 يوم من الاستلام، بدون أسئلة.{' '}
-                <Link href="/returns" className="text-[#B97863] underline font-bold">
+                <Link href="/returns" className="text-[#4A8B9A] underline font-bold">
                   تفاصيل سياسة الاستبدال
                 </Link>
               </p>

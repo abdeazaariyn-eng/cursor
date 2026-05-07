@@ -28,26 +28,26 @@ function ThankYouContent() {
           </div>
         </div>
 
-        <h1 className="text-2xl md:text-3xl font-bold text-[#2F2523] mb-3">
+        <h1 className="text-2xl md:text-3xl font-bold text-[#142B3B] mb-3">
           تم استلام طلبك بنجاح
         </h1>
 
-        <p className="text-[#7B5E57] text-base leading-relaxed mb-2">
+        <p className="text-[#506A77] text-base leading-relaxed mb-2">
           شكرا لاختيارك مهد بيبي. راح نتواصل معك على رقم الجوال لتأكيد الطلب قبل الشحن.
         </p>
 
         {orderId && (
-          <p className="text-[#9A7D78] text-sm mb-6">
-            رقم الطلب: <span className="font-mono font-bold text-[#B97863]">{orderId.slice(0, 8).toUpperCase()}</span>
+          <p className="text-[#6B8A99] text-sm mb-6">
+            رقم الطلب: <span className="font-mono font-bold text-[#4A8B9A]">{orderId.slice(0, 8).toUpperCase()}</span>
           </p>
         )}
 
         {/* Reminder */}
         <div className="bg-[#FFF9E6] border border-[#F5E0A0] rounded-2xl p-4 mb-8 flex items-start gap-3">
-          <Phone className="w-5 h-5 text-[#D9A441] flex-shrink-0 mt-0.5" />
+          <Phone className="w-5 h-5 text-[#D4AF37] flex-shrink-0 mt-0.5" />
           <div className="text-right">
-            <p className="font-semibold text-[#2F2523] text-sm mb-1">تذكير مهم</p>
-            <p className="text-[#7B5E57] text-sm leading-relaxed">
+            <p className="font-semibold text-[#142B3B] text-sm mb-1">تذكير مهم</p>
+            <p className="text-[#506A77] text-sm leading-relaxed">
               خليك قريبة من الجوال عشان نقدر نأكد الطلب بسرعة ونرسل لك طلبك في أقرب وقت.
             </p>
           </div>
@@ -64,21 +64,21 @@ function ThankYouContent() {
         </div>
 
         {/* Support */}
-        <p className="text-[#7B5E57] text-sm mb-6">
+        <p className="text-[#506A77] text-sm mb-6">
           إذا تحتاجين مساعدة تواصلي معنا:{' '}
           <a
             href="https://wa.me/966XXXXXXXXX"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[#B97863] font-medium underline"
+            className="text-[#4A8B9A] font-medium underline"
           >
             واتساب [أضيفي الرقم]
           </a>
         </p>
 
         {/* Soft cross-sell (no discount) */}
-        <div className="border-t border-[#F0E3DC] pt-6 mb-6">
-          <p className="text-[#7B5E57] text-sm mb-4">
+        <div className="border-t border-[#D6E4E8] pt-6 mb-6">
+          <p className="text-[#506A77] text-sm mb-4">
             بينما تنتظرين طلبك، اكتشفي منتجاتنا الأخرى:
           </p>
           <Link href="/products">
@@ -89,7 +89,7 @@ function ThankYouContent() {
           </Link>
         </div>
 
-        <Link href="/" className="text-[#B97863] text-sm underline">
+        <Link href="/" className="text-[#4A8B9A] text-sm underline">
           العودة للرئيسية
         </Link>
       </div>
@@ -102,8 +102,8 @@ export default function ThankYouPage() {
     <Suspense fallback={
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="w-10 h-10 border-4 border-[#B97863] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-[#7B5E57]">جاري التحميل...</p>
+          <div className="w-10 h-10 border-4 border-[#4A8B9A] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-[#506A77]">جاري التحميل...</p>
         </div>
       </div>
     }>

@@ -24,19 +24,19 @@ export default function ProductsPage() {
   return (
     <>
       {/* Collection Hero */}
-      <section className="bg-[#F7EDE8] py-12 md:py-16">
+      <section className="bg-[#EBF2F5] py-12 md:py-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
-          <h1 className="text-3xl md:text-4xl font-bold text-[#2F2523] mb-3">
+          <h1 className="text-3xl md:text-4xl font-bold text-[#142B3B] mb-3">
             منتجات مختارة للأم والطفل
           </h1>
-          <p className="text-[#7B5E57] text-base md:text-lg max-w-xl mx-auto">
+          <p className="text-[#506A77] text-base md:text-lg max-w-xl mx-auto">
             اختاري المنتج حسب المرحلة اللي تعيشينها الآن.
           </p>
         </div>
       </section>
 
       {/* Filters */}
-      <section className="py-6 border-b border-[#F0E3DC] bg-white sticky top-16 sm:top-20 z-30">
+      <section className="py-6 border-b border-[#D6E4E8] bg-white sticky top-16 sm:top-20 z-30">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide pb-1">
             {FILTERS.map((filter) => (
@@ -44,10 +44,10 @@ export default function ProductsPage() {
                 key={filter.value}
                 onClick={() => setActiveFilter(filter.value)}
                 className={cn(
-                  'flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#B97863] focus:ring-offset-2',
+                  'flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#4A8B9A] focus:ring-offset-2',
                   activeFilter === filter.value
-                    ? 'bg-[#B97863] text-white'
-                    : 'bg-[#F7EDE8] text-[#7B5E57] hover:bg-[#EDDED7]'
+                    ? 'bg-[#4A8B9A] text-white'
+                    : 'bg-[#EBF2F5] text-[#506A77] hover:bg-[#EDDED7]'
                 )}
               >
                 {filter.label}
@@ -62,7 +62,7 @@ export default function ProductsPage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           {filteredProducts.length === 0 ? (
             <div className="text-center py-16">
-              <p className="text-[#7B5E57] text-lg">لا توجد منتجات في هذا التصنيف.</p>
+              <p className="text-[#506A77] text-lg">لا توجد منتجات في هذا التصنيف.</p>
             </div>
           ) : (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -75,9 +75,9 @@ export default function ProductsPage() {
       </section>
 
       {/* Bundle Education */}
-      <section className="bg-[#F7EDE8] py-12 md:py-16">
+      <section className="bg-[#EBF2F5] py-12 md:py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <h2 className="text-2xl font-bold text-[#2F2523] text-center mb-8">
+          <h2 className="text-2xl font-bold text-[#142B3B] text-center mb-8">
             ليش تطلبين أكثر من قطعة؟
           </h2>
           <div className="grid md:grid-cols-3 gap-5">
@@ -107,19 +107,19 @@ export default function ProductsPage() {
                 className={cn(
                   'bg-white rounded-3xl p-5 text-center border',
                   item.highlight
-                    ? 'border-[#B97863] shadow-md'
-                    : 'border-[#F0E3DC] shadow-sm'
+                    ? 'border-[#4A8B9A] shadow-md'
+                    : 'border-[#D6E4E8] shadow-sm'
                 )}
               >
                 {item.highlight && (
-                  <span className="inline-block bg-[#B97863] text-white text-xs font-bold px-3 py-0.5 rounded-full mb-3">
+                  <span className="inline-block bg-[#4A8B9A] text-white text-xs font-bold px-3 py-0.5 rounded-full mb-3">
                     الأكثر اختياراً
                   </span>
                 )}
-                <div className="text-3xl font-bold text-[#B97863] mb-1">{item.qty}</div>
-                <p className="font-bold text-[#2F2523] mb-1">{item.label}</p>
-                <p className="text-xl font-bold text-[#B97863] mb-2">{item.price}</p>
-                <p className="text-[#7B5E57] text-sm">{item.reason}</p>
+                <div className="text-3xl font-bold text-[#4A8B9A] mb-1">{item.qty}</div>
+                <p className="font-bold text-[#142B3B] mb-1">{item.label}</p>
+                <p className="text-xl font-bold text-[#4A8B9A] mb-2">{item.price}</p>
+                <p className="text-[#506A77] text-sm">{item.reason}</p>
               </div>
             ))}
           </div>
@@ -129,7 +129,7 @@ export default function ProductsPage() {
       {/* Trust FAQ */}
       <section className="py-12 md:py-16">
         <div className="max-w-2xl mx-auto px-4 sm:px-6">
-          <h2 className="text-2xl font-bold text-[#2F2523] text-center mb-8">أسئلة شائعة</h2>
+          <h2 className="text-2xl font-bold text-[#142B3B] text-center mb-8">أسئلة شائعة</h2>
           <div className="flex flex-col gap-4">
             {[
               {
@@ -151,10 +151,10 @@ export default function ProductsPage() {
             ].map((faq, i) => (
               <div
                 key={i}
-                className="bg-white rounded-2xl border border-[#F0E3DC] p-5 shadow-sm"
+                className="bg-white rounded-2xl border border-[#D6E4E8] p-5 shadow-sm"
               >
-                <p className="font-bold text-[#2F2523] mb-2 text-sm">{faq.q}</p>
-                <p className="text-[#7B5E57] text-sm leading-relaxed">{faq.a}</p>
+                <p className="font-bold text-[#142B3B] mb-2 text-sm">{faq.q}</p>
+                <p className="text-[#506A77] text-sm leading-relaxed">{faq.a}</p>
               </div>
             ))}
           </div>

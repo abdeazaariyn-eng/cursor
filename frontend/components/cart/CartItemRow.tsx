@@ -23,30 +23,30 @@ export function CartItemRow({ item, className }: CartItemRowProps) {
   return (
     <div
       className={cn(
-        'flex items-center gap-3 bg-white rounded-2xl p-3 border border-[#F0E3DC]',
+        'flex items-center gap-3 bg-white rounded-2xl p-3 border border-[#D6E4E8]',
         className
       )}
     >
       {/* Image placeholder */}
-      <div className="w-14 h-14 bg-[#F7EDE8] rounded-xl flex-shrink-0 flex items-center justify-center text-2xl">
+      <div className="w-14 h-14 bg-[#EBF2F5] rounded-xl flex-shrink-0 flex items-center justify-center text-2xl">
         {item.productId === 'baby_head_protection_mask' ? '🛡️' :
          item.productId === 'portable_baby_bottle_warmer' ? '🍼' : '💝'}
       </div>
 
       {/* Info */}
       <div className="flex-1 min-w-0">
-        <p className="text-[#2F2523] font-semibold text-sm leading-snug line-clamp-2">
+        <p className="text-[#142B3B] font-semibold text-sm leading-snug line-clamp-2">
           {item.name}
         </p>
         <div className="flex items-center gap-2 mt-1">
-          <span className="text-[#7B5E57] text-xs">
+          <span className="text-[#506A77] text-xs">
             {OFFER_LABELS[item.offerId] || item.unitLabel}
           </span>
           {item.offerId === 'upsell_9kwd' && (
-            <span className="text-[#D9A441] text-xs font-medium">إضافة خاصة</span>
+            <span className="text-[#D4AF37] text-xs font-medium">إضافة خاصة</span>
           )}
         </div>
-        <p className="text-[#B97863] font-bold text-sm mt-0.5">
+        <p className="text-[#4A8B9A] font-bold text-sm mt-0.5">
           {formatKwd(item.priceKwd)}
         </p>
       </div>
@@ -54,7 +54,7 @@ export function CartItemRow({ item, className }: CartItemRowProps) {
       {/* Remove */}
       <button
         onClick={() => removeItem(item.productId, item.offerId)}
-        className="p-1.5 text-[#C9B0A8] hover:text-[#B42318] hover:bg-[#FFF0F0] rounded-lg transition-colors flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-[#B42318]"
+        className="p-1.5 text-[#8CA4B0] hover:text-[#B42318] hover:bg-[#FFF0F0] rounded-lg transition-colors flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-[#B42318]"
         aria-label={`حذف ${item.name}`}
       >
         <Trash2 className="w-4 h-4" />

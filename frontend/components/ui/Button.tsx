@@ -26,13 +26,13 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const base =
-      'inline-flex items-center justify-center font-semibold rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#B97863] focus:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed select-none'
+      'inline-flex items-center justify-center font-semibold rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#4A8B9A] focus:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed select-none'
 
     const variants = {
-      primary: 'bg-[#B97863] text-white hover:bg-[#A3674F] active:bg-[#8F5840]',
+      primary: 'bg-[#4A8B9A] text-white hover:bg-[#366A77] active:bg-[#8F5840]',
       secondary:
-        'bg-[#F7EDE8] text-[#7B5E57] border border-[#E7D4CC] hover:bg-[#EDDED7] active:bg-[#E5D1C8]',
-      ghost: 'bg-transparent text-[#7B5E57] hover:bg-[#F7EDE8]',
+        'bg-[#EBF2F5] text-[#506A77] border border-[#C9DADD] hover:bg-[#EDDED7] active:bg-[#E5D1C8]',
+      ghost: 'bg-transparent text-[#506A77] hover:bg-[#EBF2F5]',
     }
 
     const sizes = {

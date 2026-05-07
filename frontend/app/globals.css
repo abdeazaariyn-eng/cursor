@@ -4,12 +4,12 @@
 
 @layer base {
   :root {
-    --color-primary: #B97863;
-    --color-blush: #F7EDE8;
-    --color-ivory: #FFF9F5;
-    --color-brown: #7B5E57;
-    --color-deep: #2F2523;
-    --color-gold: #D9A441;
+    --color-primary: #4A8B9A;
+    --color-blush: #EBF2F5;
+    --color-ivory: #F5F8FA;
+    --color-brown: #506A77;
+    --color-deep: #142B3B;
+    --color-gold: #D4AF37;
     --color-sage: #6F9E8E;
   }
 
@@ -20,8 +20,8 @@
 
   body {
     font-family: var(--font-arabic), 'IBM Plex Sans Arabic', Arial, sans-serif;
-    background-color: #FFF9F5;
-    color: #2F2523;
+    background-color: #F5F8FA;
+    color: #142B3B;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -47,11 +47,11 @@
   }
 
   .section-heading {
-    @apply text-2xl md:text-3xl font-bold text-[#2F2523];
+    @apply text-2xl md:text-3xl font-bold text-[#142B3B];
   }
 
   .section-subheading {
-    @apply text-[#7B5E57] text-base md:text-lg leading-relaxed;
+    @apply text-[#506A77] text-base md:text-lg leading-relaxed;
   }
 
   .section-padding {
@@ -63,7 +63,7 @@
   }
 
   .input-field {
-    @apply w-full border border-[#E7D4CC] rounded-2xl px-4 py-3 text-[#2F2523] placeholder:text-[#C9B0A8] focus:outline-none focus:border-[#B97863] focus:ring-2 focus:ring-[#B97863]/20 transition-colors bg-white text-base;
+    @apply w-full border border-[#C9DADD] rounded-2xl px-4 py-3 text-[#142B3B] placeholder:text-[#8CA4B0] focus:outline-none focus:border-[#4A8B9A] focus:ring-2 focus:ring-[#4A8B9A]/20 transition-colors bg-white text-base;
   }
 
   .input-error {

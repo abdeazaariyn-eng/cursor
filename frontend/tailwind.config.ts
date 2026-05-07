@@ -1,14 +1,14 @@
 import type { Config } from 'tailwindcss'
 
 const COLORS = {
-  primary: '#B97863',
-  primaryDark: '#A3674F',
-  primaryLight: '#C9917F',
-  blush: '#F7EDE8',
-  ivory: '#FFF9F5',
-  brown: '#7B5E57',
-  deep: '#2F2523',
-  gold: '#D9A441',
+  primary: '#4A8B9A',
+  primaryDark: '#366A77',
+  primaryLight: '#78AAB7',
+  blush: '#EBF2F5',
+  ivory: '#F5F8FA',
+  brown: '#506A77',
+  deep: '#142B3B',
+  gold: '#D4AF37',
   sage: '#6F9E8E',
   error: '#B42318',
   success: '#267A4A',
@@ -37,7 +37,7 @@ const config: Config = {
         },
         gold: COLORS.gold,
         sage: COLORS.sage,
-        border: '#E7D4CC',
+        border: '#C9DADD',
         error: COLORS.error,
         success: COLORS.success,
         // Brand namespace aliases (used by new components)

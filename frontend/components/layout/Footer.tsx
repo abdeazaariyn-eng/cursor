@@ -18,37 +18,37 @@ const SUPPORT_LINKS = [
 
 export function Footer() {
   return (
-    <footer className="bg-[#2F2523] text-white mt-16">
+    <footer className="bg-[#142B3B] text-white mt-16">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="md:col-span-1">
             <div className="mb-4">
               <div className="flex items-center gap-2.5 mb-3">
-                <div className="w-10 h-10 rounded-full bg-[#B97863] flex items-center justify-center text-white font-bold text-xl flex-shrink-0">
+                <div className="w-10 h-10 rounded-full bg-[#4A8B9A] flex items-center justify-center text-white font-bold text-xl flex-shrink-0">
                   M
                 </div>
                 <div>
                   <div className="font-bold text-lg text-white">مهد بيبي</div>
-                  <div className="text-xs text-[#C9B0A8]">mahdbaby</div>
+                  <div className="text-xs text-[#8CA4B0]">mahdbaby</div>
                 </div>
               </div>
             </div>
-            <p className="text-[#C9B0A8] text-sm leading-relaxed mb-4">
+            <p className="text-[#8CA4B0] text-sm leading-relaxed mb-4">
               بوتيك مختار لأمهات الخليج. اختيار مدروس، أمان معتمد، وضمان كامل — لأن طفلك يستاهل قرار صح.
             </p>
             {/* Trust Badges */}
             <div className="flex flex-col gap-2">
-              <div className="flex items-center gap-2 text-[#C9B0A8] text-sm">
-                <ShieldCheck className="w-4 h-4 text-[#B97863]" />
+              <div className="flex items-center gap-2 text-[#8CA4B0] text-sm">
+                <ShieldCheck className="w-4 h-4 text-[#4A8B9A]" />
                 <span>مطابق لمعايير SFDA</span>
               </div>
-              <div className="flex items-center gap-2 text-[#C9B0A8] text-sm">
-                <Package className="w-4 h-4 text-[#B97863]" />
+              <div className="flex items-center gap-2 text-[#8CA4B0] text-sm">
+                <Package className="w-4 h-4 text-[#4A8B9A]" />
                 <span>دفع عند الاستلام</span>
               </div>
-              <div className="flex items-center gap-2 text-[#C9B0A8] text-sm">
-                <Headphones className="w-4 h-4 text-[#B97863]" />
+              <div className="flex items-center gap-2 text-[#8CA4B0] text-sm">
+                <Headphones className="w-4 h-4 text-[#4A8B9A]" />
                 <span>دعم عربي + ضمان 30 يوم</span>
               </div>
             </div>
@@ -63,7 +63,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-[#C9B0A8] hover:text-[#B97863] text-sm transition-colors duration-200"
+                    className="text-[#8CA4B0] hover:text-[#4A8B9A] text-sm transition-colors duration-200"
                   >
                     {link.label}
                   </Link>
@@ -80,14 +80,14 @@ export function Footer() {
                 href="https://wa.me/966XXXXXXXXX"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-[#C9B0A8] hover:text-[#B97863] text-sm transition-colors duration-200"
+                className="flex items-center gap-2 text-[#8CA4B0] hover:text-[#4A8B9A] text-sm transition-colors duration-200"
               >
                 <span>📱</span>
                 <span>واتساب [أضيفي الرقم]</span>
               </a>
               <a
                 href="mailto:support@mahdbaby.shop"
-                className="flex items-center gap-2 text-[#C9B0A8] hover:text-[#B97863] text-sm transition-colors duration-200"
+                className="flex items-center gap-2 text-[#8CA4B0] hover:text-[#4A8B9A] text-sm transition-colors duration-200"
               >
                 <span>✉️</span>
                 <span>support@mahdbaby.shop</span>
@@ -100,7 +100,7 @@ export function Footer() {
                 <a
                   key={social}
                   href="#"
-                  className="bg-[#3D2E2B] hover:bg-[#B97863] text-[#C9B0A8] hover:text-white text-xs px-3 py-1.5 rounded-full transition-all duration-200"
+                  className="bg-[#1A384D] hover:bg-[#4A8B9A] text-[#8CA4B0] hover:text-white text-xs px-3 py-1.5 rounded-full transition-all duration-200"
                   aria-label={social}
                 >
                   {social}

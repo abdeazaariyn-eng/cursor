@@ -132,37 +132,37 @@ export function CheckoutModal() {
               aria-label="تأكيد الطلب"
             >
               {/* Header */}
-              <div className="flex items-center justify-between p-5 border-b border-[#F0E3DC]">
+              <div className="flex items-center justify-between p-5 border-b border-[#D6E4E8]">
                 <div>
-                  <h2 className="font-bold text-[#2F2523] text-xl">تأكيد الطلب</h2>
+                  <h2 className="font-bold text-[#142B3B] text-xl">تأكيد الطلب</h2>
                   <div className="flex items-center gap-1 mt-1">
                     <StarRating rating={5} size="sm" />
-                    <span className="text-xs text-[#9A7D78]">+1,200 أم واثقة</span>
+                    <span className="text-xs text-[#6B8A99]">+1,200 أم واثقة</span>
                   </div>
                 </div>
                 <button
                   onClick={handleClose}
-                  className="p-2 hover:bg-[#F7EDE8] rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#B97863]"
+                  className="p-2 hover:bg-[#EBF2F5] rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#4A8B9A]"
                   aria-label="إغلاق"
                 >
-                  <X className="w-5 h-5 text-[#7B5E57]" />
+                  <X className="w-5 h-5 text-[#506A77]" />
                 </button>
               </div>
 
               <div className="p-5">
                 {/* Order Summary */}
-                <div className="bg-[#F7EDE8] rounded-2xl p-4 mb-5">
-                  <h3 className="text-sm font-semibold text-[#7B5E57] mb-2">ملخص طلبك</h3>
+                <div className="bg-[#EBF2F5] rounded-2xl p-4 mb-5">
+                  <h3 className="text-sm font-semibold text-[#506A77] mb-2">ملخص طلبك</h3>
                   <div className="flex flex-col gap-1.5">
                     {items.map((item, i) => (
                       <div key={i} className="flex items-center justify-between text-sm">
-                        <span className="text-[#2F2523] font-medium">{item.name}</span>
-                        <span className="text-[#B97863] font-bold">{formatKwd(item.priceKwd)}</span>
+                        <span className="text-[#142B3B] font-medium">{item.name}</span>
+                        <span className="text-[#4A8B9A] font-bold">{formatKwd(item.priceKwd)}</span>
                       </div>
                     ))}
-                    <div className="border-t border-[#E7D4CC] mt-2 pt-2 flex items-center justify-between">
-                      <span className="font-bold text-[#2F2523]">الإجمالي</span>
-                      <span className="font-bold text-[#B97863] text-lg">{formatKwd(total)}</span>
+                    <div className="border-t border-[#C9DADD] mt-2 pt-2 flex items-center justify-between">
+                      <span className="font-bold text-[#142B3B]">الإجمالي</span>
+                      <span className="font-bold text-[#4A8B9A] text-lg">{formatKwd(total)}</span>
                     </div>
                   </div>
                 </div>
@@ -179,7 +179,7 @@ export function CheckoutModal() {
                   <div>
                     <label
                       htmlFor="checkout-name"
-                      className="block text-sm font-semibold text-[#2F2523] mb-1.5"
+                      className="block text-sm font-semibold text-[#142B3B] mb-1.5"
                     >
                       الاسم <span aria-hidden="true" className="text-[#B42318]">*</span>
                     </label>
@@ -188,10 +188,10 @@ export function CheckoutModal() {
                       type="text"
                       autoComplete="name"
                       placeholder="اسمك الكريم"
-                      className={`w-full border rounded-xl px-4 py-3 text-[#2F2523] placeholder:text-[#C9B0A8] focus:outline-none focus:ring-1 transition-colors text-base ${
+                      className={`w-full border rounded-xl px-4 py-3 text-[#142B3B] placeholder:text-[#8CA4B0] focus:outline-none focus:ring-1 transition-colors text-base ${
                         errors.name
                           ? 'border-[#B42318] focus:border-[#B42318] focus:ring-[#B42318]'
-                          : 'border-[#D4BEB7] focus:border-[#B97863] focus:ring-[#B97863]'
+                          : 'border-[#D4BEB7] focus:border-[#4A8B9A] focus:ring-[#4A8B9A]'
                       }`}
                       {...register('name')}
                     />
@@ -206,7 +206,7 @@ export function CheckoutModal() {
                   <div>
                     <label
                       htmlFor="checkout-phone"
-                      className="block text-sm font-semibold text-[#2F2523] mb-1.5"
+                      className="block text-sm font-semibold text-[#142B3B] mb-1.5"
                     >
                       رقم الجوال <span aria-hidden="true" className="text-[#B42318]">*</span>
                     </label>
@@ -217,10 +217,10 @@ export function CheckoutModal() {
                       autoComplete="tel"
                       placeholder="05XXXXXXXX"
                       dir="ltr"
-                      className={`w-full border rounded-xl px-4 py-3 text-[#2F2523] placeholder:text-[#C9B0A8] focus:outline-none focus:ring-1 transition-colors text-base text-right ${
+                      className={`w-full border rounded-xl px-4 py-3 text-[#142B3B] placeholder:text-[#8CA4B0] focus:outline-none focus:ring-1 transition-colors text-base text-right ${
                         errors.phone
                           ? 'border-[#B42318] focus:border-[#B42318] focus:ring-[#B42318]'
-                          : 'border-[#D4BEB7] focus:border-[#B97863] focus:ring-[#B97863]'
+                          : 'border-[#D4BEB7] focus:border-[#4A8B9A] focus:ring-[#4A8B9A]'
                       }`}
                       {...register('phone')}
                     />
@@ -250,14 +250,14 @@ export function CheckoutModal() {
                   </Button>
 
                   {/* Microcopy */}
-                  <p className="text-xs text-[#9A7D78] text-center leading-relaxed">
+                  <p className="text-xs text-[#6B8A99] text-center leading-relaxed">
                     الدفع عند الاستلام، وراح نتواصل معك لتأكيد الطلب قبل الشحن.
                   </p>
 
                   {/* Privacy */}
-                  <p className="text-xs text-[#9A7D78] text-center">
+                  <p className="text-xs text-[#6B8A99] text-center">
                     بمتابعة الطلب، أنتِ توافقين على{' '}
-                    <a href="/privacy" className="text-[#B97863] underline" target="_blank">
+                    <a href="/privacy" className="text-[#4A8B9A] underline" target="_blank">
                       سياسة الخصوصية
                     </a>
                   </p>

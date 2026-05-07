@@ -33,10 +33,10 @@ export function TrustBadges({
         {badges.map((badge, i) => (
           <div
             key={i}
-            className="flex items-center gap-2 bg-[#F7EDE8] rounded-xl px-3 py-2"
+            className="flex items-center gap-2 bg-[#EBF2F5] rounded-xl px-3 py-2"
           >
-            <span className="text-[#B97863] flex-shrink-0">{badge.icon}</span>
-            <span className="text-sm font-medium text-[#7B5E57]">{badge.label}</span>
+            <span className="text-[#4A8B9A] flex-shrink-0">{badge.icon}</span>
+            <span className="text-sm font-medium text-[#506A77]">{badge.label}</span>
           </div>
         ))}
       </div>
@@ -51,8 +51,8 @@ export function TrustBadges({
       )}
     >
       {badges.map((badge, i) => (
-        <div key={i} className="flex items-center gap-1.5 text-[#7B5E57]">
-          <span className="text-[#B97863]">{badge.icon}</span>
+        <div key={i} className="flex items-center gap-1.5 text-[#506A77]">
+          <span className="text-[#4A8B9A]">{badge.icon}</span>
           <span className="text-sm font-medium whitespace-nowrap">{badge.label}</span>
         </div>
       ))}

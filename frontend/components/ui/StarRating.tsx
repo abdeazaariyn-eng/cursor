@@ -30,7 +30,7 @@ export function StarRating({
           key={i}
           className={cn(
             sizes[size],
-            i < rating ? 'text-[#D9A441]' : 'text-[#E0D0C8]'
+            i < rating ? 'text-[#D4AF37]' : 'text-[#E0D0C8]'
           )}
           fill="currentColor"
           viewBox="0 0 20 20"

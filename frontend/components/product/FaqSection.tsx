@@ -22,24 +22,24 @@ export function FaqSection({ faqs, className }: FaqSectionProps) {
       {faqs.map((faq, i) => (
         <div
           key={i}
-          className="border border-[#E7D4CC] rounded-2xl overflow-hidden"
+          className="border border-[#C9DADD] rounded-2xl overflow-hidden"
         >
           <button
             onClick={() => setOpenIndex(openIndex === i ? null : i)}
-            className="w-full flex items-center justify-between p-4 text-right hover:bg-[#F7EDE8] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#B97863]"
+            className="w-full flex items-center justify-between p-4 text-right hover:bg-[#EBF2F5] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#4A8B9A]"
             aria-expanded={openIndex === i}
           >
-            <span className="font-semibold text-[#2F2523] text-sm">{faq.q}</span>
+            <span className="font-semibold text-[#142B3B] text-sm">{faq.q}</span>
             <ChevronDown
               className={cn(
-                'w-4 h-4 text-[#B97863] flex-shrink-0 ms-3 transition-transform duration-200',
+                'w-4 h-4 text-[#4A8B9A] flex-shrink-0 ms-3 transition-transform duration-200',
                 openIndex === i && 'rotate-180'
               )}
               aria-hidden="true"
             />
           </button>
           {openIndex === i && (
-            <div className="px-4 pb-4 text-[#7B5E57] text-sm leading-relaxed">
+            <div className="px-4 pb-4 text-[#506A77] text-sm leading-relaxed">
               {faq.a}
             </div>
           )}

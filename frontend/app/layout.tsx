@@ -41,7 +41,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ar" dir="rtl" className={ibmPlexArabic.variable}>
-      <body className="bg-[#FFF9F5] text-[#2F2523] font-arabic antialiased">
+      <body className="bg-[#F5F8FA] text-[#142B3B] font-arabic antialiased">
         <PixelScripts />
         <Header />
         <main className="min-h-screen">{children}</main>

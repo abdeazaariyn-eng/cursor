@@ -53,42 +53,42 @@ export default function HomePage() {
   return (
     <>
       {/* ─── Announcement Bar ─── */}
-      <div className="bg-[#2F2523] text-white text-center py-2.5 px-4 text-xs sm:text-sm font-medium tracking-wide">
-        <span className="text-[#D9A441] font-bold">بوتيك مختار</span>
+      <div className="bg-[#142B3B] text-white text-center py-2.5 px-4 text-xs sm:text-sm font-medium tracking-wide">
+        <span className="text-[#D4AF37] font-bold">بوتيك مختار</span>
         <span className="mx-2 opacity-50">·</span>
         مطابق لمعايير SFDA
         <span className="mx-2 opacity-50">·</span>
         دفع عند الاستلام
         <span className="mx-2 opacity-50">·</span>
-        <span className="text-[#D9A441] font-bold">ضمان 30 يوم</span>
+        <span className="text-[#D4AF37] font-bold">ضمان 30 يوم</span>
       </div>
 
       {/* ─── HERO ─── */}
-      <section className="bg-gradient-to-b from-[#F7EDE8] to-[#FFF9F5] py-16 md:py-24 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-72 h-72 bg-[#B97863]/8 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#D9A441]/6 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+      <section className="bg-gradient-to-b from-[#EBF2F5] to-[#F5F8FA] py-16 md:py-24 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-72 h-72 bg-[#4A8B9A]/8 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#D4AF37]/6 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Copy */}
             <div className="order-2 md:order-1 text-center md:text-right">
-              <div className="inline-flex items-center gap-2 bg-white border border-[#E7D4CC] rounded-full px-4 py-1.5 mb-6 shadow-sm">
-                <Star className="w-4 h-4 text-[#D9A441] fill-[#D9A441]" />
-                <span className="text-[#2F2523] text-sm font-bold">
-                  بوتيك موثوق لأكثر من <span className="text-[#B97863]">1,500+</span> أم خليجية
+              <div className="inline-flex items-center gap-2 bg-white border border-[#C9DADD] rounded-full px-4 py-1.5 mb-6 shadow-sm">
+                <Star className="w-4 h-4 text-[#D4AF37] fill-[#D4AF37]" />
+                <span className="text-[#142B3B] text-sm font-bold">
+                  بوتيك موثوق لأكثر من <span className="text-[#4A8B9A]">1,500+</span> أم خليجية
                 </span>
               </div>
 
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#2F2523] leading-tight mb-6">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#142B3B] leading-tight mb-6">
                 اختيار مدروس{' '}
-                <span className="text-[#B97863]">لأمومة أهدأ.</span>
+                <span className="text-[#4A8B9A]">لأمومة أهدأ.</span>
                 <br />
                 كل منتج فحصناه قبل ما يوصلك.
               </h1>
 
-              <p className="text-[#7B5E57] text-base sm:text-lg leading-relaxed mb-8 max-w-xl font-medium">
+              <p className="text-[#506A77] text-base sm:text-lg leading-relaxed mb-8 max-w-xl font-medium">
                 مهد بيبي بوتيك صغير ومختار — مو متجر يبيع كل شي. نختار لك أساسيات الأم والطفل اللي
-                <span className="font-bold text-[#B97863]"> مطابقة لمعايير SFDA</span>،
+                <span className="font-bold text-[#4A8B9A]"> مطابقة لمعايير SFDA</span>،
                 مصنوعة من مواد طبية، ومضمونة بضمان ذهبي 30 يوم.
               </p>
 
@@ -103,23 +103,23 @@ export default function HomePage() {
                     <ArrowLeft className="w-5 h-5 me-2" />
                   </Button>
                 </Link>
-                <div className="flex items-center gap-2 text-[#2F2523] font-bold text-sm bg-white px-4 py-3 rounded-xl border border-[#F0E3DC] shadow-sm">
-                  <Award className="w-5 h-5 text-[#D9A441]" />
+                <div className="flex items-center gap-2 text-[#142B3B] font-bold text-sm bg-white px-4 py-3 rounded-xl border border-[#D6E4E8] shadow-sm">
+                  <Award className="w-5 h-5 text-[#D4AF37]" />
                   <span>ضمان ذهبي 30 يوم</span>
                 </div>
               </div>
 
-              <div className="flex items-center gap-5 justify-center md:justify-start text-[#7B5E57] text-sm font-medium flex-wrap">
+              <div className="flex items-center gap-5 justify-center md:justify-start text-[#506A77] text-sm font-medium flex-wrap">
                 <div className="flex items-center gap-1.5">
-                  <CheckCircle className="w-4 h-4 text-[#4F7F70]" />
+                  <CheckCircle className="w-4 h-4 text-[#3B8263]" />
                   <span>مطابق لمعايير SFDA</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <CheckCircle className="w-4 h-4 text-[#4F7F70]" />
+                  <CheckCircle className="w-4 h-4 text-[#3B8263]" />
                   <span>دفع عند الاستلام</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <CheckCircle className="w-4 h-4 text-[#4F7F70]" />
+                  <CheckCircle className="w-4 h-4 text-[#3B8263]" />
                   <span>تأكيد قبل الشحن</span>
                 </div>
               </div>
@@ -127,15 +127,15 @@ export default function HomePage() {
 
             {/* Hero Image */}
             <div className="order-1 md:order-2 flex items-center justify-center relative">
-              <div className="absolute inset-0 bg-[#B97863]/10 rounded-[3rem] rotate-3 scale-105 transform origin-center" />
-              <div className="w-full max-w-md aspect-square bg-white rounded-3xl flex items-center justify-center shadow-2xl relative z-10 border border-[#F0E3DC] overflow-hidden">
+              <div className="absolute inset-0 bg-[#4A8B9A]/10 rounded-[3rem] rotate-3 scale-105 transform origin-center" />
+              <div className="w-full max-w-md aspect-square bg-white rounded-3xl flex items-center justify-center shadow-2xl relative z-10 border border-[#D6E4E8] overflow-hidden">
                 <div className="text-center p-8">
                   <div className="text-8xl mb-4">👶🤍</div>
-                  <p className="text-[#B97863] text-sm font-bold">[صورة تعبيرية لأم وطفلها]</p>
-                  <p className="text-[#7B5E57] text-xs mt-2">هدوء الأم، أمان الطفل</p>
-                  <div className="mt-6 bg-[#EAF1EE] rounded-2xl px-4 py-3 inline-flex items-center gap-2 border border-[#4F7F70]/20">
-                    <Shield className="w-5 h-5 text-[#4F7F70]" />
-                    <span className="text-[#2F2523] text-xs font-bold">مطابق لمعايير SFDA</span>
+                  <p className="text-[#4A8B9A] text-sm font-bold">[صورة تعبيرية لأم وطفلها]</p>
+                  <p className="text-[#506A77] text-xs mt-2">هدوء الأم، أمان الطفل</p>
+                  <div className="mt-6 bg-[#E8F0EC] rounded-2xl px-4 py-3 inline-flex items-center gap-2 border border-[#3B8263]/20">
+                    <Shield className="w-5 h-5 text-[#3B8263]" />
+                    <span className="text-[#142B3B] text-xs font-bold">مطابق لمعايير SFDA</span>
                   </div>
                 </div>
               </div>
@@ -145,19 +145,19 @@ export default function HomePage() {
       </section>
 
       {/* ─── PROOF STRIP ─── */}
-      <section className="bg-white py-5 border-y border-[#F0E3DC] shadow-sm">
+      <section className="bg-white py-5 border-y border-[#D6E4E8] shadow-sm">
         <div className="max-w-5xl mx-auto px-4">
           <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-center">
             {[
-              { icon: <div className="flex">{[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-[#D9A441] fill-[#D9A441]" />)}</div>, label: 'تقييم 4.9 من 1,500+ أم' },
-              { icon: <Shield className="w-5 h-5 text-[#4F7F70]" />, label: 'مطابق لمعايير SFDA' },
-              { icon: <Microscope className="w-5 h-5 text-[#4F7F70]" />, label: 'مواد طبية معتمدة' },
-              { icon: <Award className="w-5 h-5 text-[#D9A441]" />, label: 'ضمان ذهبي 30 يوم' },
-              { icon: <Package className="w-5 h-5 text-[#B97863]" />, label: 'دفع عند الاستلام' },
+              { icon: <div className="flex">{[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-[#D4AF37] fill-[#D4AF37]" />)}</div>, label: 'تقييم 4.9 من 1,500+ أم' },
+              { icon: <Shield className="w-5 h-5 text-[#3B8263]" />, label: 'مطابق لمعايير SFDA' },
+              { icon: <Microscope className="w-5 h-5 text-[#3B8263]" />, label: 'مواد طبية معتمدة' },
+              { icon: <Award className="w-5 h-5 text-[#D4AF37]" />, label: 'ضمان ذهبي 30 يوم' },
+              { icon: <Package className="w-5 h-5 text-[#4A8B9A]" />, label: 'دفع عند الاستلام' },
             ].map((item, i) => (
               <div key={i} className="flex items-center gap-2">
-                <span className="text-[#B97863]">{item.icon}</span>
-                <span className="text-[#2F2523] font-bold text-sm">{item.label}</span>
+                <span className="text-[#4A8B9A]">{item.icon}</span>
+                <span className="text-[#142B3B] font-bold text-sm">{item.label}</span>
               </div>
             ))}
           </div>
@@ -165,36 +165,36 @@ export default function HomePage() {
       </section>
 
       {/* ─── PAIN / AGITATION ZIGZAG ─── */}
-      <section className="py-20 bg-[#FFF9F5] overflow-hidden">
+      <section className="py-20 bg-[#F5F8FA] overflow-hidden">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             {/* Image Left */}
             <div className="relative order-2 md:order-1">
-              <div className="absolute inset-0 bg-[#B97863]/10 rounded-[3rem] rotate-6 scale-105 transform origin-center" />
-              <div className="relative aspect-square bg-[#F7EDE8] rounded-[2.5rem] flex flex-col items-center justify-center shadow-lg border border-white/80 p-8 overflow-hidden">
+              <div className="absolute inset-0 bg-[#4A8B9A]/10 rounded-[3rem] rotate-6 scale-105 transform origin-center" />
+              <div className="relative aspect-square bg-[#EBF2F5] rounded-[2.5rem] flex flex-col items-center justify-center shadow-lg border border-white/80 p-8 overflow-hidden">
                 <div className="text-7xl mb-4 text-center">🤍</div>
-                <p className="text-[#B97863] font-bold text-center">[صورة تعبيرية لأم هادئة مع طفلها]</p>
-                <p className="text-sm text-[#7B5E57] mt-2 text-center">منتجات مختارة بعناية لراحتك</p>
+                <p className="text-[#4A8B9A] font-bold text-center">[صورة تعبيرية لأم هادئة مع طفلها]</p>
+                <p className="text-sm text-[#506A77] mt-2 text-center">منتجات مختارة بعناية لراحتك</p>
               </div>
               {/* Floating quote */}
-              <div className="absolute -bottom-6 -right-4 bg-white p-4 rounded-2xl shadow-xl border border-[#F0E3DC] max-w-[220px] z-10">
-                <p className="text-xs font-bold text-[#2F2523] mb-1">"حسيت إنهم فحصوها بدالي"</p>
+              <div className="absolute -bottom-6 -right-4 bg-white p-4 rounded-2xl shadow-xl border border-[#D6E4E8] max-w-[220px] z-10">
+                <p className="text-xs font-bold text-[#142B3B] mb-1">"حسيت إنهم فحصوها بدالي"</p>
                 <div className="flex">
-                  {[...Array(5)].map((_, i) => <Star key={i} className="w-3 h-3 text-[#D9A441] fill-[#D9A441]" />)}
+                  {[...Array(5)].map((_, i) => <Star key={i} className="w-3 h-3 text-[#D4AF37] fill-[#D4AF37]" />)}
                 </div>
               </div>
             </div>
 
             {/* Text Right */}
             <div className="order-1 md:order-2">
-              <div className="inline-flex items-center gap-2 bg-[#B97863]/10 text-[#B97863] rounded-full px-4 py-1.5 mb-6 font-bold text-sm">
+              <div className="inline-flex items-center gap-2 bg-[#4A8B9A]/10 text-[#4A8B9A] rounded-full px-4 py-1.5 mb-6 font-bold text-sm">
                 <HeartPulse className="w-4 h-4" />
                 لأنك تستاهلين قرار صح
               </div>
-              <h2 className="text-3xl md:text-4xl font-extrabold text-[#2F2523] mb-6 leading-tight">
+              <h2 className="text-3xl md:text-4xl font-extrabold text-[#142B3B] mb-6 leading-tight">
                 ما عندك وقت تفحصين كل منتج، ونحن سوينا الشغل عنك.
               </h2>
-              <p className="text-[#7B5E57] text-lg mb-8 font-medium leading-relaxed">
+              <p className="text-[#506A77] text-lg mb-8 font-medium leading-relaxed">
                 المشكلة مو في كثرة المنتجات، المشكلة في كثرة الخيارات الغلط. مهد بيبي بوتيك مختار — كل قطعة تدخل المتجر تمر بثلاثة فلاتر صارمة قبل ما توصل لك.
               </p>
               <div className="space-y-4">
@@ -205,19 +205,19 @@ export default function HomePage() {
                   { t: 'تجربة مدروسة قبل الإطلاق', d: 'كل منتج نجربه بأنفسنا قبل ما ندخله المتجر.' },
                   { t: 'دعم بعد الشراء', d: 'فريق عربي يرد عليك، وضمان 30 يوم بدون أسئلة.' },
                 ].map((item, i) => (
-                  <div key={i} className="flex items-start gap-3 bg-white p-4 rounded-xl border border-[#F0E3DC] shadow-sm">
-                    <div className="w-6 h-6 rounded-full bg-[#B97863]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <span className="text-[#B97863] text-xs font-bold">{i + 1}</span>
+                  <div key={i} className="flex items-start gap-3 bg-white p-4 rounded-xl border border-[#D6E4E8] shadow-sm">
+                    <div className="w-6 h-6 rounded-full bg-[#4A8B9A]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <span className="text-[#4A8B9A] text-xs font-bold">{i + 1}</span>
                     </div>
                     <div>
-                      <span className="text-[#2F2523] font-bold text-sm leading-relaxed">{item.t}</span>
-                      <span className="text-[#7B5E57] font-medium text-sm leading-relaxed"> — {item.d}</span>
+                      <span className="text-[#142B3B] font-bold text-sm leading-relaxed">{item.t}</span>
+                      <span className="text-[#506A77] font-medium text-sm leading-relaxed"> — {item.d}</span>
                     </div>
                   </div>
                 ))}
               </div>
-              <div className="mt-8 bg-gradient-to-r from-[#B97863]/10 to-transparent p-5 rounded-2xl border-r-4 border-[#B97863]">
-                <p className="text-[#2F2523] font-bold text-base leading-relaxed">
+              <div className="mt-8 bg-gradient-to-r from-[#4A8B9A]/10 to-transparent p-5 rounded-2xl border-r-4 border-[#4A8B9A]">
+                <p className="text-[#142B3B] font-bold text-base leading-relaxed">
                   مهد بيبي = اختيار مدروس، أمان معتمد، وضمان كامل. لأن طفلك يستاهل قرار صح.
                 </p>
               </div>
@@ -230,14 +230,14 @@ export default function HomePage() {
       <section className="py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-14">
-            <div className="inline-flex items-center gap-2 bg-[#D9A441]/10 text-[#2F2523] rounded-full px-4 py-1.5 mb-4 font-bold text-sm border border-[#D9A441]/20">
-              <Sparkles className="w-4 h-4 text-[#D9A441]" />
+            <div className="inline-flex items-center gap-2 bg-[#D4AF37]/10 text-[#142B3B] rounded-full px-4 py-1.5 mb-4 font-bold text-sm border border-[#D4AF37]/20">
+              <Sparkles className="w-4 h-4 text-[#D4AF37]" />
               البوتيك المختار
             </div>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-[#2F2523] mb-4">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-[#142B3B] mb-4">
               قائمة قصيرة، كل قطعة فيها مدروسة
             </h2>
-            <p className="text-[#7B5E57] text-lg font-medium max-w-xl mx-auto">
+            <p className="text-[#506A77] text-lg font-medium max-w-xl mx-auto">
               مو متجر يبيع كل شي. منتجات قليلة، مختارة، ومضمونة — لأن كثرة الخيارات تتعب أكثر مما تساعد.
             </p>
           </div>
@@ -260,11 +260,11 @@ export default function HomePage() {
                 <Microscope className="w-4 h-4" />
                 علم وليس مجرد وعود
               </div>
-              <h2 className="text-3xl md:text-4xl font-extrabold text-[#2F2523] mb-6 leading-tight">
+              <h2 className="text-3xl md:text-4xl font-extrabold text-[#142B3B] mb-6 leading-tight">
                 منتجاتنا مو مجرد شكل حلو...
                 <span className="block text-blue-700 mt-1">هي علم مدروس عشان طفلك.</span>
               </h2>
-              <p className="text-[#7B5E57] text-lg mb-10 font-medium leading-relaxed">
+              <p className="text-[#506A77] text-lg mb-10 font-medium leading-relaxed">
                 كل مادة تختارها لطفلك تدخل جسمه، تلامس بشرته، وتأثر في صحته. لذا ما نساوم في اختيارنا للمواد أبداً.
               </p>
 
@@ -277,7 +277,7 @@ export default function HomePage() {
                     bg: 'bg-green-50',
                   },
                   {
-                    icon: <Baby className="w-7 h-7 text-[#B97863]" />,
+                    icon: <Baby className="w-7 h-7 text-[#4A8B9A]" />,
                     title: 'نعومة طبية مضادة للتحسس',
                     desc: 'سيليكون طبي معتمد ونسيج هايبوالرجينيك لا يسبب أي احمرار لبشرة الرضيع الرقيقة.',
                     bg: 'bg-[#FFF0EB]',
@@ -297,8 +297,8 @@ export default function HomePage() {
                 ].map((item, i) => (
                   <div key={i} className={`${item.bg} p-5 rounded-2xl border border-white shadow-sm`}>
                     <div className="mb-3">{item.icon}</div>
-                    <h4 className="font-bold text-[#2F2523] mb-2 text-sm">{item.title}</h4>
-                    <p className="text-xs text-[#7B5E57] font-medium leading-relaxed">{item.desc}</p>
+                    <h4 className="font-bold text-[#142B3B] mb-2 text-sm">{item.title}</h4>
+                    <p className="text-xs text-[#506A77] font-medium leading-relaxed">{item.desc}</p>
                   </div>
                 ))}
               </div>
@@ -312,7 +312,7 @@ export default function HomePage() {
                 <p className="text-blue-800 font-bold text-center text-sm">
                   [صورة مقربة (Macro) توضح جودة المادة الطبية أو النسيج]
                 </p>
-                <p className="text-xs text-[#7B5E57] mt-2 text-center">تفاصيل المواد الطبية المعتمدة</p>
+                <p className="text-xs text-[#506A77] mt-2 text-center">تفاصيل المواد الطبية المعتمدة</p>
                 <div className="mt-6 grid grid-cols-2 gap-3 w-full">
                   <div className="bg-green-50 rounded-xl p-3 text-center">
                     <p className="text-green-700 font-extrabold text-lg">12+</p>
@@ -330,7 +330,7 @@ export default function HomePage() {
       </section>
 
       {/* ─── SFDA AUTHORITY ZIGZAG ─── */}
-      <section className="py-20 bg-[#2F2523] relative overflow-hidden">
+      <section className="py-20 bg-[#142B3B] relative overflow-hidden">
         <div className="absolute inset-0 opacity-5">
           <div className="absolute top-10 right-10 w-64 h-64 border border-white/20 rounded-full" />
           <div className="absolute bottom-10 left-10 w-96 h-96 border border-white/10 rounded-full" />
@@ -340,14 +340,14 @@ export default function HomePage() {
             {/* Image Left */}
             <div className="relative order-2 md:order-1">
               <div className="absolute inset-0 bg-white/5 rounded-[3rem] rotate-3 scale-105 transform origin-center" />
-              <div className="relative aspect-square bg-gradient-to-br from-[#3D2E2B] to-[#4A3835] rounded-[2.5rem] flex flex-col items-center justify-center shadow-2xl border border-[#5A4541] p-8 overflow-hidden">
-                <Shield className="w-20 h-20 text-[#D9A441] mb-5" />
+              <div className="relative aspect-square bg-gradient-to-br from-[#1A384D] to-[#214358] rounded-[2.5rem] flex flex-col items-center justify-center shadow-2xl border border-[#29536C] p-8 overflow-hidden">
+                <Shield className="w-20 h-20 text-[#D4AF37] mb-5" />
                 <p className="text-white/90 font-bold text-base text-center leading-snug mb-6">
                   [صورة شهادة اعتماد SFDA وشهادات الجودة الدولية]
                 </p>
                 <div className="grid grid-cols-2 gap-3 w-full">
                   <div className="bg-white/10 rounded-xl p-3 text-center border border-white/10">
-                    <p className="text-[#D9A441] font-extrabold text-lg">SFDA</p>
+                    <p className="text-[#D4AF37] font-extrabold text-lg">SFDA</p>
                     <p className="text-white/60 text-xs">مطابق ومعتمد</p>
                   </div>
                   <div className="bg-white/10 rounded-xl p-3 text-center border border-white/10">
@@ -357,26 +357,26 @@ export default function HomePage() {
                 </div>
               </div>
               {/* Floating badge */}
-              <div className="absolute -bottom-6 -left-4 bg-white rounded-2xl p-4 shadow-xl flex items-center gap-3 border border-[#F0E3DC] z-10">
-                <Award className="w-10 h-10 text-[#D9A441]" />
+              <div className="absolute -bottom-6 -left-4 bg-white rounded-2xl p-4 shadow-xl flex items-center gap-3 border border-[#D6E4E8] z-10">
+                <Award className="w-10 h-10 text-[#D4AF37]" />
                 <div>
-                  <p className="text-[#2F2523] font-bold text-sm">ضمان 30 يوم</p>
-                  <p className="text-[#7B5E57] text-xs">استرجاع بدون أسئلة</p>
+                  <p className="text-[#142B3B] font-bold text-sm">ضمان 30 يوم</p>
+                  <p className="text-[#506A77] text-xs">استرجاع بدون أسئلة</p>
                 </div>
               </div>
             </div>
 
             {/* Text Right */}
             <div className="order-1 md:order-2">
-              <div className="inline-flex items-center gap-2 bg-[#D9A441]/20 text-[#D9A441] rounded-full px-4 py-1.5 mb-6 font-bold text-sm border border-[#D9A441]/30">
+              <div className="inline-flex items-center gap-2 bg-[#D4AF37]/20 text-[#D4AF37] rounded-full px-4 py-1.5 mb-6 font-bold text-sm border border-[#D4AF37]/30">
                 <BadgeCheck className="w-4 h-4" />
                 المعيار الذهبي للأمان
               </div>
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
                 لأن طفلك أغلى ما تملكين،{' '}
-                <span className="text-[#D9A441]">ما نساوم على الأمان أبداً.</span>
+                <span className="text-[#D4AF37]">ما نساوم على الأمان أبداً.</span>
               </h2>
-              <p className="text-[#C9B0A8] text-lg mb-10 leading-relaxed font-medium">
+              <p className="text-[#8CA4B0] text-lg mb-10 leading-relaxed font-medium">
                 كل منتج في مهد بيبي يمر باختبارات صارمة قبل ما يوصل لبيتك. مو كلام فاضي، هي شهادات موثقة وأرقام حقيقية.
               </p>
 
@@ -393,7 +393,7 @@ export default function HomePage() {
                     desc: 'خالية تماماً من المواد البلاستيكية الضارة. مختبرة سريرياً لبشرة الأطفال الحساسة.',
                   },
                   {
-                    icon: <CheckCircle className="w-6 h-6 text-[#D9A441]" />,
+                    icon: <CheckCircle className="w-6 h-6 text-[#D4AF37]" />,
                     title: 'اجتاز أكثر من 12 اختبار جودة',
                     desc: 'اختبارات صلابة، سلامة المواد، مقاومة الحرارة، والتحسس الجلدي — كلها نجح فيها.',
                   },
@@ -404,7 +404,7 @@ export default function HomePage() {
                     </div>
                     <div>
                       <h4 className="text-white font-bold text-base">{item.title}</h4>
-                      <p className="text-[#9A7D78] text-sm mt-1 leading-relaxed">{item.desc}</p>
+                      <p className="text-[#6B8A99] text-sm mt-1 leading-relaxed">{item.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -415,17 +415,17 @@ export default function HomePage() {
       </section>
 
       {/* ─── SOCIAL PROOF / REVIEWS ─── */}
-      <section className="py-20 bg-[#F7EDE8]">
+      <section className="py-20 bg-[#EBF2F5]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-14">
-            <div className="inline-flex items-center gap-2 bg-[#B97863]/10 text-[#B97863] rounded-full px-5 py-2 mb-6 font-extrabold text-sm border border-[#B97863]/20">
+            <div className="inline-flex items-center gap-2 bg-[#4A8B9A]/10 text-[#4A8B9A] rounded-full px-5 py-2 mb-6 font-extrabold text-sm border border-[#4A8B9A]/20">
               <Star className="w-4 h-4 fill-current" />
               أكثر من 1,500 قصة نجاح حقيقية
             </div>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-[#2F2523] mb-4">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-[#142B3B] mb-4">
               أمهات ارتاحوا قبلك
             </h2>
-            <p className="text-[#7B5E57] text-lg font-medium max-w-xl mx-auto">
+            <p className="text-[#506A77] text-lg font-medium max-w-xl mx-auto">
               قصص حقيقية من أمهات جربوا الفرق بأنفسهن.
             </p>
           </div>
@@ -439,7 +439,7 @@ export default function HomePage() {
           </div>
 
           {/* Aggregate stats */}
-          <div className="mt-12 bg-white rounded-3xl p-8 shadow-sm border border-[#F0E3DC]">
+          <div className="mt-12 bg-white rounded-3xl p-8 shadow-sm border border-[#D6E4E8]">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
               {[
                 { num: '1,500+', label: 'أم سعيدة' },
@@ -448,8 +448,8 @@ export default function HomePage() {
                 { num: '30 يوم', label: 'ضمان الاسترجاع' },
               ].map((stat, i) => (
                 <div key={i}>
-                  <p className="text-2xl md:text-3xl font-extrabold text-[#B97863] mb-1">{stat.num}</p>
-                  <p className="text-[#7B5E57] text-sm font-medium">{stat.label}</p>
+                  <p className="text-2xl md:text-3xl font-extrabold text-[#4A8B9A] mb-1">{stat.num}</p>
+                  <p className="text-[#506A77] text-sm font-medium">{stat.label}</p>
                 </div>
               ))}
             </div>
@@ -458,17 +458,17 @@ export default function HomePage() {
       </section>
 
       {/* ─── 30-DAY GUARANTEE ─── */}
-      <section className="py-20 bg-white border-y border-[#F0E3DC]">
+      <section className="py-20 bg-white border-y border-[#D6E4E8]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             {/* Visual */}
             <div className="flex justify-center">
               <div className="relative">
-                <div className="w-56 h-56 rounded-full bg-gradient-to-br from-[#D9A441]/20 to-[#B97863]/10 flex items-center justify-center border-4 border-[#D9A441]/30 shadow-2xl">
+                <div className="w-56 h-56 rounded-full bg-gradient-to-br from-[#D4AF37]/20 to-[#4A8B9A]/10 flex items-center justify-center border-4 border-[#D4AF37]/30 shadow-2xl">
                   <div className="text-center">
-                    <Award className="w-16 h-16 text-[#D9A441] mx-auto mb-2" />
-                    <p className="text-[#2F2523] font-extrabold text-2xl">30</p>
-                    <p className="text-[#7B5E57] font-bold text-sm">يوم ضمان</p>
+                    <Award className="w-16 h-16 text-[#D4AF37] mx-auto mb-2" />
+                    <p className="text-[#142B3B] font-extrabold text-2xl">30</p>
+                    <p className="text-[#506A77] font-bold text-sm">يوم ضمان</p>
                   </div>
                 </div>
                 <div className="absolute -top-4 -right-4 bg-[#4CAF50] text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
@@ -479,17 +479,17 @@ export default function HomePage() {
 
             {/* Text */}
             <div>
-              <div className="inline-flex items-center gap-2 bg-[#D9A441]/10 text-[#2F2523] rounded-full px-4 py-1.5 mb-6 font-bold text-sm border border-[#D9A441]/20">
-                <ShieldCheck className="w-4 h-4 text-[#D9A441]" />
+              <div className="inline-flex items-center gap-2 bg-[#D4AF37]/10 text-[#142B3B] rounded-full px-4 py-1.5 mb-6 font-bold text-sm border border-[#D4AF37]/20">
+                <ShieldCheck className="w-4 h-4 text-[#D4AF37]" />
                 الضمان الذهبي لمهد بيبي
               </div>
-              <h2 className="text-3xl md:text-4xl font-extrabold text-[#2F2523] mb-6 leading-tight">
+              <h2 className="text-3xl md:text-4xl font-extrabold text-[#142B3B] mb-6 leading-tight">
                 جربي بدون أي مخاطرة.{' '}
-                <span className="text-[#B97863]">مضمونة 30 يوم كاملة.</span>
+                <span className="text-[#4A8B9A]">مضمونة 30 يوم كاملة.</span>
               </h2>
-              <p className="text-[#7B5E57] text-lg font-medium leading-relaxed mb-8">
+              <p className="text-[#506A77] text-lg font-medium leading-relaxed mb-8">
                 نحن واثقون جداً من جودة منتجاتنا. إذا ما حسيتِ بفرق حقيقي خلال 30 يوم من الاستلام،{' '}
-                <span className="font-bold text-[#B97863]">نرد لك فلوسك كاملة بدون أي أسئلة.</span>
+                <span className="font-bold text-[#4A8B9A]">نرد لك فلوسك كاملة بدون أي أسئلة.</span>
               </p>
               <ul className="space-y-4">
                 {[
@@ -500,7 +500,7 @@ export default function HomePage() {
                 ].map((item, i) => (
                   <li key={i} className="flex items-center gap-3">
                     <CheckCircle className="w-5 h-5 text-[#4CAF50] flex-shrink-0" />
-                    <span className="text-[#2F2523] font-medium">{item}</span>
+                    <span className="text-[#142B3B] font-medium">{item}</span>
                   </li>
                 ))}
               </ul>
@@ -510,17 +510,17 @@ export default function HomePage() {
       </section>
 
       {/* ─── HOW TO ORDER ─── */}
-      <section className="py-20 bg-[#FFF9F5]">
+      <section className="py-20 bg-[#F5F8FA]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-14">
             <div className="inline-flex items-center gap-2 bg-green-100 text-green-800 rounded-full px-4 py-1.5 mb-4 font-bold text-sm">
               <Clock className="w-4 h-4" />
               سهلة وسريعة في دقيقتين
             </div>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-[#2F2523] mb-4">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-[#142B3B] mb-4">
               كيف تطلبين؟ 4 خطوات بسيطة
             </h2>
-            <p className="text-[#7B5E57] text-lg font-medium">
+            <p className="text-[#506A77] text-lg font-medium">
               بدون تعقيد، بدون دفع مسبق، ضمان كامل.
             </p>
           </div>
@@ -532,14 +532,14 @@ export default function HomePage() {
               { num: '03', icon: <Activity className="w-7 h-7" />, title: 'تأكيد الطلب', desc: 'نتصل عليك خلال 24 ساعة لتأكيد الطلب قبل الشحن.' },
               { num: '04', icon: <Truck className="w-7 h-7" />, title: 'استلمي وادفعي', desc: 'يوصل لبيتك ✓ تفحصيه ✓ تدفعين عند الاستلام فقط.' },
             ].map((step, i) => (
-              <div key={i} className="relative bg-white rounded-3xl p-6 shadow-sm border border-[#F0E3DC] text-center hover:shadow-md hover:-translate-y-1 transition-all duration-300">
-                <div className="text-[#B97863]/20 font-extrabold text-6xl absolute top-3 right-4 leading-none">{step.num}</div>
+              <div key={i} className="relative bg-white rounded-3xl p-6 shadow-sm border border-[#D6E4E8] text-center hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+                <div className="text-[#4A8B9A]/20 font-extrabold text-6xl absolute top-3 right-4 leading-none">{step.num}</div>
                 <div className="relative z-10">
-                  <div className="w-14 h-14 rounded-2xl bg-[#B97863]/10 flex items-center justify-center mx-auto mb-4 text-[#B97863]">
+                  <div className="w-14 h-14 rounded-2xl bg-[#4A8B9A]/10 flex items-center justify-center mx-auto mb-4 text-[#4A8B9A]">
                     {step.icon}
                   </div>
-                  <h4 className="font-bold text-[#2F2523] text-base mb-2">{step.title}</h4>
-                  <p className="text-[#7B5E57] text-sm font-medium leading-relaxed">{step.desc}</p>
+                  <h4 className="font-bold text-[#142B3B] text-base mb-2">{step.title}</h4>
+                  <p className="text-[#506A77] text-sm font-medium leading-relaxed">{step.desc}</p>
                 </div>
               </div>
             ))}
@@ -548,16 +548,16 @@ export default function HomePage() {
       </section>
 
       {/* ─── FINAL URGENCY CTA ─── */}
-      <section className="bg-gradient-to-br from-[#2F2523] to-[#3D2E2B] py-20">
+      <section className="bg-gradient-to-br from-[#142B3B] to-[#1A384D] py-20">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
-          <div className="inline-flex items-center gap-2 bg-[#D9A441]/15 text-[#D9A441] rounded-full px-4 py-1.5 mb-6 font-bold text-sm border border-[#D9A441]/30">
-            <span className="w-2 h-2 rounded-full bg-[#D9A441]" />
+          <div className="inline-flex items-center gap-2 bg-[#D4AF37]/15 text-[#D4AF37] rounded-full px-4 py-1.5 mb-6 font-bold text-sm border border-[#D4AF37]/30">
+            <span className="w-2 h-2 rounded-full bg-[#D4AF37]" />
             طلبات اليوم تُشحن غداً
           </div>
           <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-6 leading-tight">
-            ابدئي بقطعة وحدة. <span className="text-[#D9A441]">المخاطر علينا.</span>
+            ابدئي بقطعة وحدة. <span className="text-[#D4AF37]">المخاطر علينا.</span>
           </h2>
-          <p className="text-[#C9B0A8] text-lg md:text-xl mb-10 font-medium leading-relaxed">
+          <p className="text-[#8CA4B0] text-lg md:text-xl mb-10 font-medium leading-relaxed">
             ادفعي عند الاستلام، جربي 30 يوم كاملة، وإذا ما عجبك — نسترجع الفلوس بدون أسئلة.
             هذا وعد البوتيك.
           </p>
@@ -571,17 +571,17 @@ export default function HomePage() {
               <ArrowLeft className="w-5 h-5 me-2" />
             </Button>
           </Link>
-          <div className="mt-8 flex items-center justify-center gap-6 text-[#C9B0A8] text-sm font-medium flex-wrap">
+          <div className="mt-8 flex items-center justify-center gap-6 text-[#8CA4B0] text-sm font-medium flex-wrap">
             <div className="flex items-center gap-1.5">
-              <Shield className="w-4 h-4 text-[#D9A441]" />
+              <Shield className="w-4 h-4 text-[#D4AF37]" />
               <span>مطابق لمعايير SFDA</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <Award className="w-4 h-4 text-[#D9A441]" />
+              <Award className="w-4 h-4 text-[#D4AF37]" />
               <span>ضمان 30 يوم</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <Package className="w-4 h-4 text-[#D9A441]" />
+              <Package className="w-4 h-4 text-[#D4AF37]" />
               <span>دفع عند الاستلام</span>
             </div>
           </div>

@@ -19,19 +19,19 @@ export function ProductCard({ product, className, onAddToCart }: ProductCardProp
   return (
     <div
       className={cn(
-        'bg-white rounded-3xl border border-[#F0E3DC] overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col',
+        'bg-white rounded-3xl border border-[#D6E4E8] overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col',
         className
       )}
     >
       {/* Image */}
-      <Link href={`/products/${product.slug}`} className="block relative aspect-[4/3] bg-[#F7EDE8] overflow-hidden">
+      <Link href={`/products/${product.slug}`} className="block relative aspect-[4/3] bg-[#EBF2F5] overflow-hidden">
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center p-8">
             <div className="text-5xl mb-3">
               {product.id === 'baby_head_protection_mask' ? '🛡️' :
                product.id === 'portable_baby_bottle_warmer' ? '🍼' : '💝'}
             </div>
-            <p className="text-[#C9B0A8] text-xs">صورة توضيحية</p>
+            <p className="text-[#8CA4B0] text-xs">صورة توضيحية</p>
           </div>
         </div>
         {/* Badge overlay */}
@@ -51,26 +51,26 @@ export function ProductCard({ product, className, onAddToCart }: ProductCardProp
 
         {/* Heading */}
         <Link href={`/products/${product.slug}`}>
-          <h3 className="font-bold text-[#2F2523] text-base leading-snug mb-1.5 hover:text-[#B97863] transition-colors">
+          <h3 className="font-bold text-[#142B3B] text-base leading-snug mb-1.5 hover:text-[#4A8B9A] transition-colors">
             {product.cardHeading}
           </h3>
         </Link>
 
-        <p className="text-[#7B5E57] text-sm leading-relaxed mb-3 flex-1">
+        <p className="text-[#506A77] text-sm leading-relaxed mb-3 flex-1">
           {product.cardSubheading}
         </p>
 
         {/* Rating */}
         <div className="flex items-center gap-2 mb-3">
           <StarRating rating={5} size="sm" />
-          <span className="text-xs text-[#9A7D78]">(+50 تقييم)</span>
+          <span className="text-xs text-[#6B8A99]">(+50 تقييم)</span>
         </div>
 
         {/* Price */}
         <div className="flex items-baseline gap-1.5 mb-4">
-          <span className="text-xs text-[#7B5E57]">من</span>
-          <span className="text-xl font-bold text-[#B97863]">19</span>
-          <span className="text-sm font-medium text-[#7B5E57]">KWD</span>
+          <span className="text-xs text-[#506A77]">من</span>
+          <span className="text-xl font-bold text-[#4A8B9A]">19</span>
+          <span className="text-sm font-medium text-[#506A77]">KWD</span>
         </div>
 
         {/* CTA */}

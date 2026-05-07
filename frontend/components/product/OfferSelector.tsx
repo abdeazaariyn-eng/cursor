@@ -31,10 +31,10 @@ export function OfferSelector({
             aria-checked={isSelected}
             onClick={() => onChange(offerId)}
             className={cn(
-              'w-full flex items-center justify-between rounded-2xl border-2 p-4 text-right transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#B97863] focus:ring-offset-2',
+              'w-full flex items-center justify-between rounded-2xl border-2 p-4 text-right transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#4A8B9A] focus:ring-offset-2',
               isSelected
-                ? 'border-[#B97863] bg-[#F7EDE8] shadow-sm'
-                : 'border-[#E7D4CC] bg-white hover:border-[#C9917F]'
+                ? 'border-[#4A8B9A] bg-[#EBF2F5] shadow-sm'
+                : 'border-[#C9DADD] bg-white hover:border-[#78AAB7]'
             )}
           >
             <div className="flex items-center gap-3">
@@ -42,7 +42,7 @@ export function OfferSelector({
               <div
                 className={cn(
                   'w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-colors',
-                  isSelected ? 'border-[#B97863] bg-[#B97863]' : 'border-[#D4BEB7]'
+                  isSelected ? 'border-[#4A8B9A] bg-[#4A8B9A]' : 'border-[#D4BEB7]'
                 )}
               >
                 {isSelected && <Check className="w-3 h-3 text-white" strokeWidth={3} />}
@@ -54,18 +54,18 @@ export function OfferSelector({
                   <span
                     className={cn(
                       'font-bold text-base',
-                      isSelected ? 'text-[#B97863]' : 'text-[#2F2523]'
+                      isSelected ? 'text-[#4A8B9A]' : 'text-[#142B3B]'
                     )}
                   >
                     {offer.label}
                   </span>
                   {offer.recommended && (
-                    <span className="bg-[#D9A441] text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                    <span className="bg-[#D4AF37] text-white text-xs font-bold px-2 py-0.5 rounded-full">
                       أفضل قيمة
                     </span>
                   )}
                 </div>
-                <div className="text-sm text-[#7B5E57] mt-0.5">{offer.description}</div>
+                <div className="text-sm text-[#506A77] mt-0.5">{offer.description}</div>
               </div>
             </div>
 
@@ -74,7 +74,7 @@ export function OfferSelector({
               <div
                 className={cn(
                   'font-bold text-lg',
-                  isSelected ? 'text-[#B97863]' : 'text-[#2F2523]'
+                  isSelected ? 'text-[#4A8B9A]' : 'text-[#142B3B]'
                 )}
               >
                 {formatKwd(offer.priceKwd)}
@@ -85,7 +85,7 @@ export function OfferSelector({
                 </div>
               )}
               {offer.originalPriceKwd && offer.originalPriceKwd > offer.priceKwd && (
-                <div className="text-[#9A7D78] text-xs line-through">
+                <div className="text-[#6B8A99] text-xs line-through">
                   {formatKwd(offer.originalPriceKwd ?? 0)}
                 </div>
               )}

@@ -72,26 +72,26 @@ export function CartDrawer() {
             animate={{ x: 0 }}
             exit={{ x: '-100%' }}
             transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-            className="fixed inset-y-0 start-0 w-full max-w-sm bg-[#FFF9F5] z-50 flex flex-col shadow-2xl"
+            className="fixed inset-y-0 start-0 w-full max-w-sm bg-[#F5F8FA] z-50 flex flex-col shadow-2xl"
             role="dialog"
             aria-modal="true"
             aria-label="سلة المشتريات"
           >
             {/* Header */}
-            <div className="flex items-center justify-between p-4 border-b border-[#F0E3DC] bg-white">
+            <div className="flex items-center justify-between p-4 border-b border-[#D6E4E8] bg-white">
               <div>
-                <h2 className="font-bold text-[#2F2523] text-lg">طلبك جاهز تقريبا</h2>
-                <p className="text-xs text-[#7B5E57] mt-0.5 flex items-center gap-1">
+                <h2 className="font-bold text-[#142B3B] text-lg">طلبك جاهز تقريبا</h2>
+                <p className="text-xs text-[#506A77] mt-0.5 flex items-center gap-1">
                   <Package className="w-3 h-3" />
                   دفع عند الاستلام، وتأكيد قبل الشحن.
                 </p>
               </div>
               <button
                 onClick={closeCart}
-                className="p-2 hover:bg-[#F7EDE8] rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#B97863]"
+                className="p-2 hover:bg-[#EBF2F5] rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#4A8B9A]"
                 aria-label="إغلاق السلة"
               >
-                <X className="w-5 h-5 text-[#7B5E57]" />
+                <X className="w-5 h-5 text-[#506A77]" />
               </button>
             </div>
 
@@ -100,8 +100,8 @@ export function CartDrawer() {
               {items.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full text-center p-8">
                   <ShoppingCart className="w-12 h-12 text-[#D4BEB7] mb-4" />
-                  <p className="text-[#7B5E57] font-medium mb-2">سلتك فارغة</p>
-                  <p className="text-[#9A7D78] text-sm">اختاري منتجاً لتبدأ طلبك</p>
+                  <p className="text-[#506A77] font-medium mb-2">سلتك فارغة</p>
+                  <p className="text-[#6B8A99] text-sm">اختاري منتجاً لتبدأ طلبك</p>
                 </div>
               ) : (
                 <div className="p-4 flex flex-col gap-4">
@@ -123,7 +123,7 @@ export function CartDrawer() {
                   {/* Cross-sells */}
                   {crossSells.length > 0 && (
                     <div>
-                      <p className="text-sm font-semibold text-[#2F2523] mb-2">
+                      <p className="text-sm font-semibold text-[#142B3B] mb-2">
                         أمهات كثير يضيفون معها
                       </p>
                       <div className="flex flex-col gap-2">
@@ -135,7 +135,7 @@ export function CartDrawer() {
                   )}
 
                   {/* Scarcity */}
-                  <p className="text-xs text-[#9A7D78] text-center bg-[#F7EDE8] rounded-xl px-4 py-2">
+                  <p className="text-xs text-[#6B8A99] text-center bg-[#EBF2F5] rounded-xl px-4 py-2">
                     العروض محدودة حسب الكمية المتوفرة هذا الأسبوع.
                   </p>
                 </div>
@@ -144,10 +144,10 @@ export function CartDrawer() {
 
             {/* Footer CTA */}
             {items.length > 0 && (
-              <div className="p-4 border-t border-[#F0E3DC] bg-white">
+              <div className="p-4 border-t border-[#D6E4E8] bg-white">
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-[#7B5E57] font-medium">الإجمالي</span>
-                  <span className="text-[#2F2523] font-bold text-xl">{formatKwd(total)}</span>
+                  <span className="text-[#506A77] font-medium">الإجمالي</span>
+                  <span className="text-[#142B3B] font-bold text-xl">{formatKwd(total)}</span>
                 </div>
                 <Button
                   onClick={handleCheckout}

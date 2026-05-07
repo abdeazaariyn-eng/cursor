@@ -20,7 +20,7 @@ export function Logo({ className, size = 'md', href = '/' }: LogoProps) {
     <div className={cn('flex items-center gap-2.5', className)}>
       <div
         className={cn(
-          'flex items-center justify-center rounded-full bg-[#B97863] text-white font-bold flex-shrink-0',
+          'flex items-center justify-center rounded-full bg-[#4A8B9A] text-white font-bold flex-shrink-0',
           s.circle
         )}
         aria-hidden="true"
@@ -28,8 +28,8 @@ export function Logo({ className, size = 'md', href = '/' }: LogoProps) {
         M
       </div>
       <div className="flex flex-col leading-none">
-        <span className={cn('font-bold text-[#2F2523]', s.arabic)}>مهد بيبي</span>
-        <span className={cn('text-[#7B5E57] font-medium mt-0.5', s.english)}>
+        <span className={cn('font-bold text-[#142B3B]', s.arabic)}>مهد بيبي</span>
+        <span className={cn('text-[#506A77] font-medium mt-0.5', s.english)}>
           mahdbaby
         </span>
       </div>
@@ -38,7 +38,7 @@ export function Logo({ className, size = 'md', href = '/' }: LogoProps) {
 
   if (href) {
     return (
-      <Link href={href} className="focus:outline-none focus:ring-2 focus:ring-[#B97863] focus:ring-offset-2 rounded-lg">
+      <Link href={href} className="focus:outline-none focus:ring-2 focus:ring-[#4A8B9A] focus:ring-offset-2 rounded-lg">
         {content}
       </Link>
     )
