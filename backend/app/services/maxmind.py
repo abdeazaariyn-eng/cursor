@@ -35,8 +35,8 @@ async def check_ip_allowed(ip: Optional[str], phone: str) -> bool:
         return True
 
     try:
-        # We can use GeoIP2 City or Insights API. City API path is /geoip/v2.1/city/{ip}
-        url = f"https://geoip.maxmind.com/geoip/v2.1/city/{ip}"
+        # Use GeoIP2 Country API instead of City to avoid PERMISSION_REQUIRED for accounts without City access
+        url = f"https://geoip.maxmind.com/geoip/v2.1/country/{ip}"
         auth = httpx.BasicAuth(settings.MAXMIND_ACCOUNT_ID, settings.MAXMIND_LICENSE_KEY)
         
         async with httpx.AsyncClient() as client:
