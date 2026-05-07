@@ -103,7 +103,7 @@ class Settings(BaseSettings):
 
     @property
     def sheets_enabled(self) -> bool:
-        return bool(self.GOOGLE_SHEETS_WEBHOOK_URL) and bool(self.GOOGLE_SHEETS_WEBHOOK_SECRET)
+        return bool(self.GOOGLE_SHEETS_WEBHOOK_URL)
 
 
 @lru_cache

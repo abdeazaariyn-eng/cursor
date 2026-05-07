@@ -27,9 +27,7 @@ class GUIDType(TypeDecorator):
     cache_ok = True
 
     def load_dialect_impl(self, dialect):
-        if dialect.name == "postgresql":
-            from sqlalchemy.dialects.postgresql import UUID
-            return dialect.type_descriptor(UUID(as_uuid=True))
+        # We always use CHAR(36) because the alembic migration hardcoded String(36)
         return dialect.type_descriptor(CHAR(36))
 
     def process_bind_param(self, value, dialect):
