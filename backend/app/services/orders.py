@@ -86,6 +86,8 @@ async def create_order(
 
     subtotal = Decimal("0")
     for item in request.items:
+        if item.offerId not in PRICE_RULES:
+            raise ValueError(f"عرض السعر غير صحيح: {item.offerId}")
         price_rule = PRICE_RULES[item.offerId]
         subtotal += Decimal(str(price_rule["price_kwd"]))
 
@@ -134,6 +136,10 @@ async def create_order(
     await db.flush()
 
     for i, item_in in enumerate(request.items):
+        if item_in.productId not in PRODUCT_CATALOG:
+            raise ValueError(f"المنتج غير موجود: {item_in.productId}")
+        if item_in.offerId not in PRICE_RULES:
+            raise ValueError(f"عرض السعر غير صحيح: {item_in.offerId}")
         product = PRODUCT_CATALOG[item_in.productId]
         price_rule = PRICE_RULES[item_in.offerId]
         item = OrderItem(

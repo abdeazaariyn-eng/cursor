@@ -12,6 +12,26 @@ class ApiError extends Error {
   }
 }
 
+/**
+ * Probe the API with a no-cors request to distinguish a CORS misconfiguration
+ * (server is reachable but headers are wrong) from a genuine network outage
+ * (server is completely unreachable).  A no-cors fetch is never blocked by the
+ * browser's CORS policy, so it succeeds with an opaque response whenever the
+ * server can be reached at all.
+ */
+async function _classifyFetchError(): Promise<'cors_misconfigured' | 'offline'> {
+  const controller = new AbortController()
+  const timer = setTimeout(() => controller.abort(), 3000)
+  try {
+    await fetch(`${API_BASE}/health`, { mode: 'no-cors', signal: controller.signal })
+    return 'cors_misconfigured'
+  } catch {
+    return 'offline'
+  } finally {
+    clearTimeout(timer)
+  }
+}
+
 async function apiFetch<T>(
   path: string,
   init?: RequestInit
@@ -29,13 +49,24 @@ async function apiFetch<T>(
       },
     })
 
-    const data = await res.json()
+    // Parse JSON separately so a non-JSON body (e.g. an nginx error page)
+    // is reported with the real HTTP status code rather than a fake NETWORK_ERROR.
+    let data: unknown
+    try {
+      data = await res.json()
+    } catch {
+      throw new ApiError(
+        'SERVER_ERROR',
+        `خطأ في الخادم (${res.status})، حاولي مرة ثانية`,
+        res.status,
+      )
+    }
 
     if (!res.ok) {
       const errorData = data as { error?: { code?: string; message?: string } }
       throw new ApiError(
-        errorData.error?.code || 'UNKNOWN_ERROR',
-        errorData.error?.message || 'حدث خطأ غير متوقع',
+        errorData?.error?.code || 'UNKNOWN_ERROR',
+        errorData?.error?.message || 'حدث خطأ غير متوقع',
         res.status
       )
     }
@@ -45,6 +76,15 @@ async function apiFetch<T>(
     if (err instanceof ApiError) throw err
     if ((err as Error).name === 'AbortError') {
       throw new ApiError('TIMEOUT', 'انتهت مهلة الاتصال، حاولي مرة ثانية')
+    }
+    // Distinguish CORS misconfiguration from a real network outage so the user
+    // (and support team) sees an actionable message instead of the generic one.
+    const errorType = await _classifyFetchError()
+    if (errorType === 'cors_misconfigured') {
+      throw new ApiError(
+        'CORS_ERROR',
+        'يتعذر الوصول إلى الخادم بسبب إعدادات غير صحيحة. يرجى المحاولة لاحقاً أو التواصل مع الدعم.',
+      )
     }
     throw new ApiError('NETWORK_ERROR', 'تعذر الاتصال بالخادم، تأكدي من الاتصال بالإنترنت')
   } finally {
