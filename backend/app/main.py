@@ -113,7 +113,7 @@ async def generic_exception_handler(request: Request, exc: Exception) -> JSONRes
     )
     return JSONResponse(
         status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-        content={"error": {"code": "SERVER_ERROR", "message": "حدث خطأ غير متوقع. حاولي مرة ثانية."}},
+        content={"error": {"code": "SERVER_ERROR", "message": f"حدث خطأ: {str(exc)}"}},
     )
 
 
