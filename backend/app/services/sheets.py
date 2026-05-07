@@ -44,7 +44,6 @@ async def send_order_to_sheets(
         phone = "965" + phone
 
     payload = {
-        "secret": settings.GOOGLE_SHEETS_WEBHOOK_SECRET,
         "date": formatted_date,
         "orderid": order.order_number,
         "country": "Kwt",

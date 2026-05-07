@@ -6,9 +6,8 @@
  * 2. Add column headers: date, ordered, country, name, phone, product, sku, quantité, total price, currency, status
  * 3. Extensions > Apps Script
  * 4. Paste this script
- * 5. Set Script Property: WEBHOOK_SECRET
- * 6. Deploy as Web App (Execute as: Me, Access: Anyone)
- * 7. Copy Web App URL to backend env GOOGLE_SHEETS_WEBHOOK_URL
+ * 5. Deploy as Web App (Execute as: Me, Access: Anyone)
+ * 6. Copy Web App URL to backend env GOOGLE_SHEETS_WEBHOOK_URL
  */
 
 const SHEET_NAME_ORDERS = 'Orders';
@@ -23,12 +22,6 @@ function doPost(e) {
 
   try {
     const payload = JSON.parse(e.postData.contents);
-
-    // Validate secret
-    const secret = PropertiesService.getScriptProperties().getProperty('WEBHOOK_SECRET');
-    if (!secret || payload.secret !== secret) {
-      return jsonResponse({ success: false, error: 'Unauthorized' }, 401);
-    }
 
     const ss = SpreadsheetApp.getActiveSpreadsheet();
 
@@ -70,7 +63,6 @@ function jsonResponse(data, statusCode) {
  */
 function testWebhook() {
   const testPayload = {
-    secret: PropertiesService.getScriptProperties().getProperty('WEBHOOK_SECRET'),
     date: '08/05/2026',
     orderid: 'mahd-20260508-0001',
     country: 'Kwt',
