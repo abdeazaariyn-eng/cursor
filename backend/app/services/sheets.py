@@ -58,7 +58,7 @@ async def send_order_to_sheets(
     }
 
     last_error: Optional[str] = None
-    async with httpx.AsyncClient(timeout=10.0) as client:
+    async with httpx.AsyncClient(timeout=10.0, follow_redirects=True) as client:
         for attempt in range(retries + 1):
             try:
                 response = await client.post(
