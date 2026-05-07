@@ -11,9 +11,9 @@ import { Button } from '@/components/ui/Button'
 import { PRODUCTS } from '@/data/products'
 
 export const metadata: Metadata = {
-  title: 'مهد بيبي | منتجات مختارة للأمهات في الكويت والسعودية',
+  title: 'مهد بيبي | بوتيك مختار لأمهات الخليج — مطابق لمعايير SFDA',
   description:
-    'مهد بيبي — منتجات مختارة بعناية للأم والطفل. مواد طبية معتمدة، مطابقة لمعايير SFDA، دفع عند الاستلام وضمان ذهبي 30 يوم.',
+    'مهد بيبي — بوتيك مختار للأم والطفل في السعودية والكويت ودول الخليج. كل منتج مدروس، مطابق لمعايير SFDA، مع ضمان ذهبي 30 يوم ودفع عند الاستلام.',
 }
 
 const GLOBAL_REVIEWS = [
@@ -53,8 +53,14 @@ export default function HomePage() {
   return (
     <>
       {/* ─── Announcement Bar ─── */}
-      <div className="bg-[#2F2523] text-white text-center py-2.5 px-4 text-xs sm:text-sm font-bold">
-        🚚 توصيل لجميع المدن • 🛡️ ضمان استرجاع 30 يوم بدون أسئلة • <span className="text-[#D9A441]">الدفع عند الاستلام ✓</span>
+      <div className="bg-[#2F2523] text-white text-center py-2.5 px-4 text-xs sm:text-sm font-medium tracking-wide">
+        <span className="text-[#D9A441] font-bold">بوتيك مختار</span>
+        <span className="mx-2 opacity-50">·</span>
+        مطابق لمعايير SFDA
+        <span className="mx-2 opacity-50">·</span>
+        دفع عند الاستلام
+        <span className="mx-2 opacity-50">·</span>
+        <span className="text-[#D9A441] font-bold">ضمان 30 يوم</span>
       </div>
 
       {/* ─── HERO ─── */}
@@ -66,24 +72,24 @@ export default function HomePage() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Copy */}
             <div className="order-2 md:order-1 text-center md:text-right">
-              <div className="inline-flex items-center gap-2 bg-[#B97863]/10 border border-[#B97863]/30 rounded-full px-4 py-1.5 mb-6 shadow-sm">
+              <div className="inline-flex items-center gap-2 bg-white border border-[#E7D4CC] rounded-full px-4 py-1.5 mb-6 shadow-sm">
                 <Star className="w-4 h-4 text-[#D9A441] fill-[#D9A441]" />
-                <span className="text-[#7B5E57] text-sm font-bold">
-                  الخيار الأول لأكثر من <span className="text-[#B97863]">1,500+</span> أم
+                <span className="text-[#2F2523] text-sm font-bold">
+                  بوتيك موثوق لأكثر من <span className="text-[#B97863]">1,500+</span> أم خليجية
                 </span>
               </div>
 
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#2F2523] leading-tight mb-6">
-                استرجعي وقتك وراحتك،{' '}
-                <span className="text-[#B97863]">يا أمنا العظيمة</span>
+                اختيار مدروس{' '}
+                <span className="text-[#B97863]">لأمومة أهدأ.</span>
                 <br />
-                منتجات تشيل عنك ثقل كل يوم.
+                كل منتج فحصناه قبل ما يوصلك.
               </h1>
 
               <p className="text-[#7B5E57] text-base sm:text-lg leading-relaxed mb-8 max-w-xl font-medium">
-                بين الدوام، الزوارات، والخوف المستمر على طفلك... طاقتك ما تكفي. وفرنا لك منتجات{' '}
-                <span className="font-bold text-[#B97863]">مثبتة علمياً ومعتمدة</span> عشان
-                تطمنين على طفلك وترتاحين أنتِ.
+                مهد بيبي بوتيك صغير ومختار — مو متجر يبيع كل شي. نختار لك أساسيات الأم والطفل اللي
+                <span className="font-bold text-[#B97863]"> مطابقة لمعايير SFDA</span>،
+                مصنوعة من مواد طبية، ومضمونة بضمان ذهبي 30 يوم.
               </p>
 
               <div className="flex flex-col sm:flex-row items-center gap-4 justify-center md:justify-start mb-8">
@@ -93,7 +99,7 @@ export default function HomePage() {
                     size="lg"
                     className="shadow-xl hover:shadow-2xl transition-all transform hover:-translate-y-1 w-full sm:w-auto"
                   >
-                    تصفحي المنتجات الآن
+                    تصفحي البوتيك
                     <ArrowLeft className="w-5 h-5 me-2" />
                   </Button>
                 </Link>
@@ -105,15 +111,15 @@ export default function HomePage() {
 
               <div className="flex items-center gap-5 justify-center md:justify-start text-[#7B5E57] text-sm font-medium flex-wrap">
                 <div className="flex items-center gap-1.5">
-                  <CheckCircle className="w-4 h-4 text-[#4CAF50]" />
-                  <span>SFDA معتمدة</span>
+                  <CheckCircle className="w-4 h-4 text-[#4F7F70]" />
+                  <span>مطابق لمعايير SFDA</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <CheckCircle className="w-4 h-4 text-[#4CAF50]" />
+                  <CheckCircle className="w-4 h-4 text-[#4F7F70]" />
                   <span>دفع عند الاستلام</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <CheckCircle className="w-4 h-4 text-[#4CAF50]" />
+                  <CheckCircle className="w-4 h-4 text-[#4F7F70]" />
                   <span>تأكيد قبل الشحن</span>
                 </div>
               </div>
@@ -125,12 +131,11 @@ export default function HomePage() {
               <div className="w-full max-w-md aspect-square bg-white rounded-3xl flex items-center justify-center shadow-2xl relative z-10 border border-[#F0E3DC] overflow-hidden">
                 <div className="text-center p-8">
                   <div className="text-8xl mb-4">👶🤍</div>
-                  <p className="text-[#B97863] text-sm font-bold">[صورة تعبيرية جذابة لأم وطفلها]</p>
-                  <p className="text-[#7B5E57] text-xs mt-2">تعكس راحة الأم وسعادة طفلها</p>
-                  {/* Floating trust badge */}
-                  <div className="mt-6 bg-[#F7EDE8] rounded-2xl px-4 py-3 inline-flex items-center gap-2">
-                    <Shield className="w-5 h-5 text-[#2E8B57]" />
-                    <span className="text-[#2F2523] text-xs font-bold">معتمد SFDA ✓</span>
+                  <p className="text-[#B97863] text-sm font-bold">[صورة تعبيرية لأم وطفلها]</p>
+                  <p className="text-[#7B5E57] text-xs mt-2">هدوء الأم، أمان الطفل</p>
+                  <div className="mt-6 bg-[#EAF1EE] rounded-2xl px-4 py-3 inline-flex items-center gap-2 border border-[#4F7F70]/20">
+                    <Shield className="w-5 h-5 text-[#4F7F70]" />
+                    <span className="text-[#2F2523] text-xs font-bold">مطابق لمعايير SFDA</span>
                   </div>
                 </div>
               </div>
@@ -144,10 +149,10 @@ export default function HomePage() {
         <div className="max-w-5xl mx-auto px-4">
           <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-center">
             {[
-              { icon: <div className="flex">{[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-[#D9A441] fill-[#D9A441]" />)}</div>, label: 'موثوق من 1,500+ أم' },
-              { icon: <Shield className="w-5 h-5 text-[#2E8B57]" />, label: 'مطابق لمواصفات SFDA' },
-              { icon: <Microscope className="w-5 h-5 text-[#1A5F7A]" />, label: 'مواد مختبرة علمياً' },
-              { icon: <Award className="w-5 h-5 text-[#D9A441]" />, label: 'ضمان 30 يوم' },
+              { icon: <div className="flex">{[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-[#D9A441] fill-[#D9A441]" />)}</div>, label: 'تقييم 4.9 من 1,500+ أم' },
+              { icon: <Shield className="w-5 h-5 text-[#4F7F70]" />, label: 'مطابق لمعايير SFDA' },
+              { icon: <Microscope className="w-5 h-5 text-[#4F7F70]" />, label: 'مواد طبية معتمدة' },
+              { icon: <Award className="w-5 h-5 text-[#D9A441]" />, label: 'ضمان ذهبي 30 يوم' },
               { icon: <Package className="w-5 h-5 text-[#B97863]" />, label: 'دفع عند الاستلام' },
             ].map((item, i) => (
               <div key={i} className="flex items-center gap-2">
@@ -167,13 +172,13 @@ export default function HomePage() {
             <div className="relative order-2 md:order-1">
               <div className="absolute inset-0 bg-[#B97863]/10 rounded-[3rem] rotate-6 scale-105 transform origin-center" />
               <div className="relative aspect-square bg-[#F7EDE8] rounded-[2.5rem] flex flex-col items-center justify-center shadow-lg border border-white/80 p-8 overflow-hidden">
-                <div className="text-7xl mb-4 text-center">🥺</div>
-                <p className="text-[#B97863] font-bold text-center">[صورة تعبيرية لأم مرهقة]</p>
-                <p className="text-sm text-[#7B5E57] mt-2 text-center">نحس بجهدك وتعبك كل يوم</p>
+                <div className="text-7xl mb-4 text-center">🤍</div>
+                <p className="text-[#B97863] font-bold text-center">[صورة تعبيرية لأم هادئة مع طفلها]</p>
+                <p className="text-sm text-[#7B5E57] mt-2 text-center">منتجات مختارة بعناية لراحتك</p>
               </div>
               {/* Floating quote */}
-              <div className="absolute -bottom-6 -right-4 bg-white p-4 rounded-2xl shadow-xl border border-[#F0E3DC] max-w-[200px] z-10">
-                <p className="text-xs font-bold text-[#2F2523] mb-1">"أتعب بس ما أقدر أوقف"</p>
+              <div className="absolute -bottom-6 -right-4 bg-white p-4 rounded-2xl shadow-xl border border-[#F0E3DC] max-w-[220px] z-10">
+                <p className="text-xs font-bold text-[#2F2523] mb-1">"حسيت إنهم فحصوها بدالي"</p>
                 <div className="flex">
                   {[...Array(5)].map((_, i) => <Star key={i} className="w-3 h-3 text-[#D9A441] fill-[#D9A441]" />)}
                 </div>
@@ -184,33 +189,36 @@ export default function HomePage() {
             <div className="order-1 md:order-2">
               <div className="inline-flex items-center gap-2 bg-[#B97863]/10 text-[#B97863] rounded-full px-4 py-1.5 mb-6 font-bold text-sm">
                 <HeartPulse className="w-4 h-4" />
-                أنتِ مو لحالك
+                لأنك تستاهلين قرار صح
               </div>
               <h2 className="text-3xl md:text-4xl font-extrabold text-[#2F2523] mb-6 leading-tight">
-                هل تحسين بإنك ما تقدرين تلحقين على كل شيء؟
+                ما عندك وقت تفحصين كل منتج، ونحن سوينا الشغل عنك.
               </h2>
               <p className="text-[#7B5E57] text-lg mb-8 font-medium leading-relaxed">
-                ما فيه أم ما مرت بهذا الإحساس. والحل مو إنك تتعبين أكثر، الحل إنك تختارين المنتجات الصح اللي تشيل عنك ضغط يومك.
+                المشكلة مو في كثرة المنتجات، المشكلة في كثرة الخيارات الغلط. مهد بيبي بوتيك مختار — كل قطعة تدخل المتجر تمر بثلاثة فلاتر صارمة قبل ما توصل لك.
               </p>
               <div className="space-y-4">
                 {[
-                  'القلق المستمر على سلامة طفلك في كل لحظة',
-                  'الإرهاق من السهر والدوام وضغوط الحياة',
-                  'صعوبة الخروج مع الطفل بدون توتر وانزعاج',
-                  'الخوف من المنتجات المقلدة أو الخطرة على الطفل',
-                  'الإحساس إنك تبذلين كل شيء لكن ما يكفي',
-                ].map((pain, i) => (
+                  { t: 'الأمان أولاً', d: 'مواد طبية، خالية من BPA، ومطابقة لمعايير SFDA.' },
+                  { t: 'فائدة حقيقية في اليوم', d: 'منتجات تحل مشكلة فعلية، مو مجرد إكسسوار حلو.' },
+                  { t: 'جودة تستاهل سعرها', d: 'نختار المصانع المعروفة، ونرفض المقلدات والرخيص.' },
+                  { t: 'تجربة مدروسة قبل الإطلاق', d: 'كل منتج نجربه بأنفسنا قبل ما ندخله المتجر.' },
+                  { t: 'دعم بعد الشراء', d: 'فريق عربي يرد عليك، وضمان 30 يوم بدون أسئلة.' },
+                ].map((item, i) => (
                   <div key={i} className="flex items-start gap-3 bg-white p-4 rounded-xl border border-[#F0E3DC] shadow-sm">
                     <div className="w-6 h-6 rounded-full bg-[#B97863]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
                       <span className="text-[#B97863] text-xs font-bold">{i + 1}</span>
                     </div>
-                    <span className="text-[#2F2523] font-medium text-sm leading-relaxed">{pain}</span>
+                    <div>
+                      <span className="text-[#2F2523] font-bold text-sm leading-relaxed">{item.t}</span>
+                      <span className="text-[#7B5E57] font-medium text-sm leading-relaxed"> — {item.d}</span>
+                    </div>
                   </div>
                 ))}
               </div>
               <div className="mt-8 bg-gradient-to-r from-[#B97863]/10 to-transparent p-5 rounded-2xl border-r-4 border-[#B97863]">
                 <p className="text-[#2F2523] font-bold text-base leading-relaxed">
-                  مهد بيبي موجود عشان يعطيك الحل الصح، المعتمد، والمضمون. عشان تطمنين وتقدرين ترتاحين.
+                  مهد بيبي = اختيار مدروس، أمان معتمد، وضمان كامل. لأن طفلك يستاهل قرار صح.
                 </p>
               </div>
             </div>
@@ -224,13 +232,13 @@ export default function HomePage() {
           <div className="text-center mb-14">
             <div className="inline-flex items-center gap-2 bg-[#D9A441]/10 text-[#2F2523] rounded-full px-4 py-1.5 mb-4 font-bold text-sm border border-[#D9A441]/20">
               <Sparkles className="w-4 h-4 text-[#D9A441]" />
-              منتجات مختارة بعناية
+              البوتيك المختار
             </div>
             <h2 className="text-3xl md:text-4xl font-extrabold text-[#2F2523] mb-4">
-              اختاري اللي يريح قلبك ويخفف يومك
+              قائمة قصيرة، كل قطعة فيها مدروسة
             </h2>
             <p className="text-[#7B5E57] text-lg font-medium max-w-xl mx-auto">
-              حلول عملية مبتكرة، مصممة خصيصاً للأم ولطفلها.
+              مو متجر يبيع كل شي. منتجات قليلة، مختارة، ومضمونة — لأن كثرة الخيارات تتعب أكثر مما تساعد.
             </p>
           </div>
 
@@ -542,16 +550,16 @@ export default function HomePage() {
       {/* ─── FINAL URGENCY CTA ─── */}
       <section className="bg-gradient-to-br from-[#2F2523] to-[#3D2E2B] py-20">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
-          <div className="inline-flex items-center gap-2 bg-red-500/20 text-red-300 rounded-full px-4 py-1.5 mb-6 font-bold text-sm border border-red-400/20">
-            <span className="w-2 h-2 rounded-full bg-red-400 animate-pulse" />
-            الكميات محدودة جداً — طلبات اليوم تُشحن غداً
+          <div className="inline-flex items-center gap-2 bg-[#D9A441]/15 text-[#D9A441] rounded-full px-4 py-1.5 mb-6 font-bold text-sm border border-[#D9A441]/30">
+            <span className="w-2 h-2 rounded-full bg-[#D9A441]" />
+            طلبات اليوم تُشحن غداً
           </div>
           <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-6 leading-tight">
-            لا تأجلين راحتك وراحة طفلك
+            ابدئي بقطعة وحدة. <span className="text-[#D9A441]">المخاطر علينا.</span>
           </h2>
           <p className="text-[#C9B0A8] text-lg md:text-xl mb-10 font-medium leading-relaxed">
-            اطلبي الآن وادفعي عند الاستلام. نتواصل معك لتأكيد الطلب خلال 24 ساعة،{' '}
-            ومضمون بضماننا الذهبي لمدة 30 يوم كاملة.
+            ادفعي عند الاستلام، جربي 30 يوم كاملة، وإذا ما عجبك — نسترجع الفلوس بدون أسئلة.
+            هذا وعد البوتيك.
           </p>
           <Link href="/products">
             <Button
@@ -559,14 +567,14 @@ export default function HomePage() {
               size="lg"
               className="w-full sm:w-auto px-12 py-4 text-lg shadow-2xl hover:-translate-y-1 transition-all duration-300 font-black"
             >
-              اطلبي الآن — الدفع عند الاستلام
+              تصفحي البوتيك — دفع عند الاستلام
               <ArrowLeft className="w-5 h-5 me-2" />
             </Button>
           </Link>
           <div className="mt-8 flex items-center justify-center gap-6 text-[#C9B0A8] text-sm font-medium flex-wrap">
             <div className="flex items-center gap-1.5">
               <Shield className="w-4 h-4 text-[#D9A441]" />
-              <span>SFDA معتمد</span>
+              <span>مطابق لمعايير SFDA</span>
             </div>
             <div className="flex items-center gap-1.5">
               <Award className="w-4 h-4 text-[#D9A441]" />

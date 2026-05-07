@@ -11,9 +11,13 @@ export default function ContactPage() {
     <>
       <section className="bg-[#F7EDE8] py-16">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
-          <h1 className="text-3xl font-bold text-[#2F2523] mb-4">تواصل معنا</h1>
-          <p className="text-[#7B5E57] text-base leading-relaxed">
-            فريقنا موجود لمساعدتك. تواصلي معنا بالطريقة اللي تناسبك.
+          <div className="inline-flex items-center gap-2 bg-white border border-[#E7D4CC] rounded-full px-4 py-1.5 mb-5 font-bold text-sm text-[#2F2523] shadow-sm">
+            دعم عربي حقيقي
+          </div>
+          <h1 className="text-3xl md:text-4xl font-extrabold text-[#2F2523] mb-4">تواصلي معنا</h1>
+          <p className="text-[#7B5E57] text-base md:text-lg leading-relaxed">
+            فريق مهد بيبي يرد عليك بنفسه — مو روبوت، ولا رد جاهز. اسألي عن أي منتج، أي طلب،
+            أو أي تفصيلة قبل ما تشترين.
           </p>
         </div>
       </section>

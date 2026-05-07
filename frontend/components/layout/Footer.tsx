@@ -35,21 +35,21 @@ export function Footer() {
               </div>
             </div>
             <p className="text-[#C9B0A8] text-sm leading-relaxed mb-4">
-              منتجات مختارة للأم والطفل، تخفف عليك تفاصيل اليوم وتخليك تطمنين أكثر.
+              بوتيك مختار لأمهات الخليج. اختيار مدروس، أمان معتمد، وضمان كامل — لأن طفلك يستاهل قرار صح.
             </p>
             {/* Trust Badges */}
             <div className="flex flex-col gap-2">
+              <div className="flex items-center gap-2 text-[#C9B0A8] text-sm">
+                <ShieldCheck className="w-4 h-4 text-[#B97863]" />
+                <span>مطابق لمعايير SFDA</span>
+              </div>
               <div className="flex items-center gap-2 text-[#C9B0A8] text-sm">
                 <Package className="w-4 h-4 text-[#B97863]" />
                 <span>دفع عند الاستلام</span>
               </div>
               <div className="flex items-center gap-2 text-[#C9B0A8] text-sm">
                 <Headphones className="w-4 h-4 text-[#B97863]" />
-                <span>دعم عربي</span>
-              </div>
-              <div className="flex items-center gap-2 text-[#C9B0A8] text-sm">
-                <ShieldCheck className="w-4 h-4 text-[#B97863]" />
-                <span>تأكيد قبل الشحن</span>
+                <span>دعم عربي + ضمان 30 يوم</span>
               </div>
             </div>
           </div>

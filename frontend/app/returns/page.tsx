@@ -9,21 +9,29 @@ export default function ReturnsPage() {
   return (
     <section className="py-16">
       <div className="max-w-3xl mx-auto px-4 sm:px-6">
-        <h1 className="text-3xl font-bold text-[#2F2523] mb-8">سياسة الاستبدال والإرجاع</h1>
+        <h1 className="text-3xl md:text-4xl font-extrabold text-[#2F2523] mb-3">
+          الضمان الذهبي — 30 يوم بدون أسئلة
+        </h1>
+        <p className="text-[#7B5E57] text-base md:text-lg leading-relaxed mb-8">
+          نحن واثقون من البوتيك. لو ما عجبك المنتج لأي سبب خلال 30 يوم من الاستلام،
+          نسترجع لك المبلغ كامل أو نستبدله — بدون استجواب وبدون شروط مجحفة.
+        </p>
 
         <div className="flex flex-col gap-8 text-[#2F2523]">
-          <div className="bg-[#F7EDE8] rounded-2xl p-5">
-            <p className="text-[#7B5E57] text-base leading-relaxed">
-              رضاك يهمنا. إذا واجهتِ أي مشكلة مع طلبك، تواصلي معنا وراح نحل الأمر.
+          <div className="bg-[#EAF1EE] border border-[#4F7F70]/20 rounded-2xl p-5">
+            <p className="text-[#2F2523] text-base leading-relaxed">
+              <span className="font-bold">وعد البوتيك:</span> إذا وصل الطلب تالف، ناقص، أو مختلف عن المطلوب —
+              نتحمل المسؤولية كاملة ونحل الأمر خلال 24 ساعة.
             </p>
           </div>
 
           <div>
-            <h2 className="text-xl font-bold mb-3">شروط الاستبدال</h2>
+            <h2 className="text-xl font-bold mb-3">شروط الضمان الذهبي</h2>
             <ul className="text-[#7B5E57] leading-relaxed flex flex-col gap-2">
-              <li>• المنتج لم يُستخدم وفي حالته الأصلية.</li>
-              <li>• التواصل يكون خلال 7 أيام من استلام الطلب.</li>
-              <li>• يجب التواصل معنا أولاً قبل إعادة أي منتج.</li>
+              <li>• فترة الضمان 30 يوم كاملة من تاريخ الاستلام.</li>
+              <li>• المنتج بحالته الأصلية مع علبته الأصلية.</li>
+              <li>• التواصل معنا أولاً عبر واتساب لترتيب الاستبدال أو الإرجاع.</li>
+              <li>• لا نسأل عن السبب — لو غيّرتي رأيك، نقبله.</li>
             </ul>
           </div>
 
@@ -51,9 +59,6 @@ export default function ReturnsPage() {
             </Link>
           </div>
 
-          <p className="text-[#9A7D78] text-sm">
-            [هذه السياسة توضيحية — يرجى تحديثها بسياستك الفعلية قبل الإطلاق]
-          </p>
         </div>
       </div>
     </section>

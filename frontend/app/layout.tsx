@@ -17,15 +17,16 @@ const ibmPlexArabic = IBM_Plex_Sans_Arabic({
 
 export const metadata: Metadata = {
   title: {
-    default: 'مهد بيبي | منتجات مختارة للأم والطفل',
+    default: 'مهد بيبي | بوتيك مختار للأم والطفل في الخليج',
     template: '%s | مهد بيبي',
   },
   description:
-    'منتجات مختارة للأم والطفل، تخفف عليك تفاصيل اليوم وتخليك تطمنين أكثر. دفع عند الاستلام، دعم عربي.',
+    'بوتيك مختار للأم والطفل في الخليج. كل منتج مدروس، مطابق لمعايير SFDA، مع ضمان ذهبي 30 يوم ودفع عند الاستلام.',
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://mahdbaby.shop'),
   openGraph: {
-    title: 'مهد بيبي',
-    description: 'منتجات مختارة للأم والطفل، تخفف عليك تفاصيل اليوم وتخليك تطمنين أكثر.',
+    title: 'مهد بيبي — بوتيك مختار للأم والطفل',
+    description:
+      'اختيار مدروس، أمان معتمد، وضمان كامل — لأن طفلك يستاهل قرار صح.',
     locale: 'ar_SA',
     type: 'website',
     siteName: 'مهد بيبي',
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'مهد بيبي',
-    description: 'منتجات مختارة للأم والطفل',
+    description: 'بوتيك مختار للأم والطفل في الخليج — مطابق لمعايير SFDA.',
   },
 }
 
