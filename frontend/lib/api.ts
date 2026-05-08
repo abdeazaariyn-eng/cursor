@@ -192,6 +192,11 @@ export const api = {
 
   getOrder: (orderId: string) =>
     apiFetch<GetOrderResponse>(`/orders/${orderId}`),
+  trackEvent: (body: { eventName: string; eventId?: string; platform?: string }) =>
+    apiFetch<any>('/tracking/event', {
+      method: 'POST',
+      body: JSON.stringify(body),
+    }),
 }
 
 export { ApiError }

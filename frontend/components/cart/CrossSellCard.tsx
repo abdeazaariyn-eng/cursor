@@ -31,7 +31,7 @@ export function CrossSellCard({ product }: CrossSellCardProps) {
       unitLabel: 'قطعة واحدة',
       priceKwd: offer.priceKwd,
       originalPriceKwd: offer.originalPriceKwd,
-      image: product.imagePlaceholder,
+      image: product.image,
     })
 
     fireAddToCart({
@@ -45,9 +45,8 @@ export function CrossSellCard({ product }: CrossSellCardProps) {
   return (
     <div className="flex items-center gap-3 bg-[#EBF2F5] rounded-xl p-3 border border-[#C9DADD]">
       {/* Image */}
-      <div className="w-12 h-12 bg-white rounded-lg flex-shrink-0 flex items-center justify-center text-xl">
-        {product.id === 'baby_head_protection_mask' ? '🛡️' :
-         product.id === 'portable_baby_bottle_warmer' ? '🍼' : '💝'}
+      <div className="relative w-12 h-12 bg-white rounded-lg flex-shrink-0 flex items-center justify-center overflow-hidden">
+        <img src={product.image} alt={product.shortName} className="w-full h-full object-cover" />
       </div>
 
       {/* Info */}

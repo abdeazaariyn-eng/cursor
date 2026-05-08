@@ -120,3 +120,5 @@ async def generic_exception_handler(request: Request, exc: Exception) -> JSONRes
 app.include_router(health.router)
 app.include_router(orders.router)
 app.include_router(tracking.router)
+from app.api.routes import admin
+app.include_router(admin.router)

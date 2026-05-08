@@ -1,0 +1,25 @@
+{
+  "status": 200,
+  "server": "cloudflare",
+  "x-powered-by": "Next.js",
+  "x-vercel-id": "",
+  "via": "",
+  "all_headers": {
+    "date": "Wed, 06 May 2026 15:54:24 GMT",
+    "content-type": "text/html; charset=utf-8",
+    "transfer-encoding": "chunked",
+    "connection": "keep-alive",
+    "cache-control": "s-maxage=31536000, stale-while-revalidate",
+    "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=j%2BA5GhpBNnRvyuMXwE4CxbowY7pBB%2FCugvQpGoUgmDOtAvZ8uXr81xNKblj2aw98VaEl1Etl5ehRG1wb%2FUuoVGOZHSZvpOWNbR65bnYgo8L9xHkF0Jpri7RcJD%2BQ39yN\"}]}",
+    "server-timing": "cfCacheStatus;desc=\"DYNAMIC\", cfEdge;dur=10,cfOrigin;dur=145",
+    "vary": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Accept-Encoding",
+    "x-nextjs-cache": "HIT",
+    "x-powered-by": "Next.js",
+    "cf-cache-status": "DYNAMIC",
+    "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+    "content-encoding": "gzip",
+    "server": "cloudflare",
+    "cf-ray": "9f7929ccf80a038a-MAD",
+    "alt-svc": "h3=\":443\"; ma=86400"
+  }
+}

@@ -29,14 +29,14 @@ function doPost(e) {
     const ordersSheet = ss.getSheetByName(SHEET_NAME_ORDERS) || ss.getSheets()[0];
     if (ordersSheet && payload.orderid) {
       ordersSheet.appendRow([
-        payload.date || '',
+        payload.date ? "'" + payload.date : '',
         payload.orderid || '',
         payload.country || 'Kwt',
         payload.name || '',
-        payload.phone || '',
+        payload.phone ? "'" + payload.phone : '',
         payload.product || '',
-        payload.sku || '',
-        payload.quantity || '',
+        payload.sku ? "'" + payload.sku : '',
+        payload.quantity ? "'" + payload.quantity : '',
         payload.total_price || 0,
         payload.currency || 'KWD',
         payload.status || ''

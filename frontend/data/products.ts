@@ -27,7 +27,7 @@ export interface Product {
   reviews: Review[]
   faqs: Faq[]
   crossSellPriority: string[]
-  imagePlaceholder: string
+  image: string
   filterTags: string[]
 }
 
@@ -97,7 +97,7 @@ export const PRODUCTS: Product[] = [
       },
     ],
     crossSellPriority: ['portable_baby_bottle_warmer', 'wearable_electric_breast_pump'],
-    imagePlaceholder: '/images/placeholders/head-protection.svg',
+    image: '/images/products/head-protection.webp',
   },
   {
     id: 'portable_baby_bottle_warmer',
@@ -164,7 +164,7 @@ export const PRODUCTS: Product[] = [
       },
     ],
     crossSellPriority: ['baby_head_protection_mask', 'wearable_electric_breast_pump'],
-    imagePlaceholder: '/images/placeholders/bottle-warmer.svg',
+    image: '/images/products/bottle-warmer.webp',
   },
   {
     id: 'wearable_electric_breast_pump',
@@ -231,7 +231,7 @@ export const PRODUCTS: Product[] = [
       },
     ],
     crossSellPriority: ['portable_baby_bottle_warmer', 'baby_head_protection_mask'],
-    imagePlaceholder: '/images/placeholders/breast-pump.svg',
+    image: '/images/products/breast-pump.webp',
   },
 ]
 

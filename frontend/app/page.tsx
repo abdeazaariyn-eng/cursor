@@ -129,14 +129,10 @@ export default function HomePage() {
             <div className="order-1 md:order-2 flex items-center justify-center relative">
               <div className="absolute inset-0 bg-[#4A8B9A]/10 rounded-[3rem] rotate-3 scale-105 transform origin-center" />
               <div className="w-full max-w-md aspect-square bg-white rounded-3xl flex items-center justify-center shadow-2xl relative z-10 border border-[#D6E4E8] overflow-hidden">
-                <div className="text-center p-8">
-                  <div className="text-8xl mb-4">👶🤍</div>
-                  <p className="text-[#4A8B9A] text-sm font-bold">[صورة تعبيرية لأم وطفلها]</p>
-                  <p className="text-[#506A77] text-xs mt-2">هدوء الأم، أمان الطفل</p>
-                  <div className="mt-6 bg-[#E8F0EC] rounded-2xl px-4 py-3 inline-flex items-center gap-2 border border-[#3B8263]/20">
-                    <Shield className="w-5 h-5 text-[#3B8263]" />
-                    <span className="text-[#142B3B] text-xs font-bold">مطابق لمعايير SFDA</span>
-                  </div>
+                <img src="/images/home/hero.webp" alt="أم هادئة مع طفلها" className="w-full h-full object-cover" />
+                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-[#E8F0EC]/90 backdrop-blur-md rounded-2xl px-4 py-3 inline-flex items-center gap-2 border border-[#3B8263]/20 shadow-lg whitespace-nowrap">
+                  <Shield className="w-5 h-5 text-[#3B8263]" />
+                  <span className="text-[#142B3B] text-xs font-bold">مطابق لمعايير SFDA</span>
                 </div>
               </div>
             </div>
@@ -164,17 +160,39 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ─── PRODUCT HIGHLIGHTS ─── */}
+      <section className="py-20 bg-[#F5F8FA]">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-14">
+            <div className="inline-flex items-center gap-2 bg-[#D4AF37]/10 text-[#142B3B] rounded-full px-4 py-1.5 mb-4 font-bold text-sm border border-[#D4AF37]/20">
+              <Sparkles className="w-4 h-4 text-[#D4AF37]" />
+              البوتيك المختار
+            </div>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-[#142B3B] mb-4">
+              قائمة قصيرة، كل قطعة فيها مدروسة
+            </h2>
+            <p className="text-[#506A77] text-lg font-medium max-w-xl mx-auto">
+              مو متجر يبيع كل شي. منتجات قليلة، مختارة، ومضمونة — لأن كثرة الخيارات تتعب أكثر مما تساعد.
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {PRODUCTS.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ─── PAIN / AGITATION ZIGZAG ─── */}
-      <section className="py-20 bg-[#F5F8FA] overflow-hidden">
+      <section className="py-20 bg-white overflow-hidden">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="grid md:grid-cols-2 gap-16 items-center">
-            {/* Image Left */}
-            <div className="relative order-2 md:order-1">
-              <div className="absolute inset-0 bg-[#4A8B9A]/10 rounded-[3rem] rotate-6 scale-105 transform origin-center" />
-              <div className="relative aspect-square bg-[#EBF2F5] rounded-[2.5rem] flex flex-col items-center justify-center shadow-lg border border-white/80 p-8 overflow-hidden">
-                <div className="text-7xl mb-4 text-center">🤍</div>
-                <p className="text-[#4A8B9A] font-bold text-center">[صورة تعبيرية لأم هادئة مع طفلها]</p>
-                <p className="text-sm text-[#506A77] mt-2 text-center">منتجات مختارة بعناية لراحتك</p>
+            {/* Image Right */}
+            <div className="relative order-2 md:order-2">
+              <div className="absolute inset-0 bg-[#4A8B9A]/10 rounded-[3rem] rotate-3 scale-105 transform origin-center" />
+              <div className="relative aspect-square rounded-[2.5rem] shadow-lg border border-white/80 overflow-hidden z-10">
+                <img src="/images/home/mother-baby.webp" alt="أم هادئة مع طفلها" className="w-full h-full object-cover" />
               </div>
               {/* Floating quote */}
               <div className="absolute -bottom-6 -right-4 bg-white p-4 rounded-2xl shadow-xl border border-[#D6E4E8] max-w-[220px] z-10">
@@ -222,30 +240,6 @@ export default function HomePage() {
                 </p>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── PRODUCT HIGHLIGHTS ─── */}
-      <section className="py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-14">
-            <div className="inline-flex items-center gap-2 bg-[#D4AF37]/10 text-[#142B3B] rounded-full px-4 py-1.5 mb-4 font-bold text-sm border border-[#D4AF37]/20">
-              <Sparkles className="w-4 h-4 text-[#D4AF37]" />
-              البوتيك المختار
-            </div>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-[#142B3B] mb-4">
-              قائمة قصيرة، كل قطعة فيها مدروسة
-            </h2>
-            <p className="text-[#506A77] text-lg font-medium max-w-xl mx-auto">
-              مو متجر يبيع كل شي. منتجات قليلة، مختارة، ومضمونة — لأن كثرة الخيارات تتعب أكثر مما تساعد.
-            </p>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {PRODUCTS.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
           </div>
         </div>
       </section>
@@ -307,22 +301,8 @@ export default function HomePage() {
             {/* Image Right */}
             <div className="relative">
               <div className="absolute inset-0 bg-blue-100/60 rounded-[3rem] -rotate-6 scale-105 transform origin-center" />
-              <div className="relative aspect-square bg-white rounded-[2.5rem] flex flex-col items-center justify-center shadow-xl border border-blue-100 p-8 overflow-hidden">
-                <div className="text-8xl mb-4">🔬</div>
-                <p className="text-blue-800 font-bold text-center text-sm">
-                  [صورة مقربة (Macro) توضح جودة المادة الطبية أو النسيج]
-                </p>
-                <p className="text-xs text-[#506A77] mt-2 text-center">تفاصيل المواد الطبية المعتمدة</p>
-                <div className="mt-6 grid grid-cols-2 gap-3 w-full">
-                  <div className="bg-green-50 rounded-xl p-3 text-center">
-                    <p className="text-green-700 font-extrabold text-lg">12+</p>
-                    <p className="text-green-600 text-xs font-medium">اختبار جودة</p>
-                  </div>
-                  <div className="bg-blue-50 rounded-xl p-3 text-center">
-                    <p className="text-blue-700 font-extrabold text-lg">100%</p>
-                    <p className="text-blue-600 text-xs font-medium">BPA-Free</p>
-                  </div>
-                </div>
+              <div className="relative aspect-square rounded-[2.5rem] shadow-xl border border-blue-100 overflow-hidden z-10">
+                <img src="/images/home/quality-fabric.webp" alt="جودة المادة الطبية" className="w-full h-full object-cover" />
               </div>
             </div>
           </div>
@@ -340,21 +320,8 @@ export default function HomePage() {
             {/* Image Left */}
             <div className="relative order-2 md:order-1">
               <div className="absolute inset-0 bg-white/5 rounded-[3rem] rotate-3 scale-105 transform origin-center" />
-              <div className="relative aspect-square bg-gradient-to-br from-[#1A384D] to-[#214358] rounded-[2.5rem] flex flex-col items-center justify-center shadow-2xl border border-[#29536C] p-8 overflow-hidden">
-                <Shield className="w-20 h-20 text-[#D4AF37] mb-5" />
-                <p className="text-white/90 font-bold text-base text-center leading-snug mb-6">
-                  [صورة شهادة اعتماد SFDA وشهادات الجودة الدولية]
-                </p>
-                <div className="grid grid-cols-2 gap-3 w-full">
-                  <div className="bg-white/10 rounded-xl p-3 text-center border border-white/10">
-                    <p className="text-[#D4AF37] font-extrabold text-lg">SFDA</p>
-                    <p className="text-white/60 text-xs">مطابق ومعتمد</p>
-                  </div>
-                  <div className="bg-white/10 rounded-xl p-3 text-center border border-white/10">
-                    <p className="text-green-400 font-extrabold text-lg">12+</p>
-                    <p className="text-white/60 text-xs">اختبار نجاح</p>
-                  </div>
-                </div>
+              <div className="relative aspect-square rounded-[2.5rem] shadow-2xl border border-[#29536C] overflow-hidden z-10">
+                <img src="/images/home/sfda-guarantee.webp" alt="شهادات الضمان والجودة" className="w-full h-full object-cover" />
               </div>
               {/* Floating badge */}
               <div className="absolute -bottom-6 -left-4 bg-white rounded-2xl p-4 shadow-xl flex items-center gap-3 border border-[#D6E4E8] z-10">
@@ -462,7 +429,7 @@ export default function HomePage() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             {/* Visual */}
-            <div className="flex justify-center">
+            <div className="flex justify-center order-2 md:order-1">
               <div className="relative">
                 <div className="w-56 h-56 rounded-full bg-gradient-to-br from-[#D4AF37]/20 to-[#4A8B9A]/10 flex items-center justify-center border-4 border-[#D4AF37]/30 shadow-2xl">
                   <div className="text-center">
@@ -478,7 +445,7 @@ export default function HomePage() {
             </div>
 
             {/* Text */}
-            <div>
+            <div className="order-1 md:order-2">
               <div className="inline-flex items-center gap-2 bg-[#D4AF37]/10 text-[#142B3B] rounded-full px-4 py-1.5 mb-6 font-bold text-sm border border-[#D4AF37]/20">
                 <ShieldCheck className="w-4 h-4 text-[#D4AF37]" />
                 الضمان الذهبي لمهد بيبي

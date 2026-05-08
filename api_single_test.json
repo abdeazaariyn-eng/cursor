@@ -1,0 +1,9 @@
+{
+  "status": 500,
+  "body": {
+    "error": {
+      "code": "SERVER_ERROR",
+      "message": "حدث خطأ غير متوقع. حاولي مرة ثانية."
+    }
+  }
+}

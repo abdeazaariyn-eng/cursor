@@ -3,6 +3,7 @@ import { IBM_Plex_Sans_Arabic } from 'next/font/google'
 import './globals.css'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
+import { TrustStrip } from '@/components/layout/TrustStrip'
 import { CartDrawer } from '@/components/cart/CartDrawer'
 import { CheckoutModal } from '@/components/checkout/CheckoutModal'
 import { UpsellModal } from '@/components/checkout/UpsellModal'
@@ -23,6 +24,18 @@ export const metadata: Metadata = {
   description:
     'بوتيك مختار للأم والطفل في الخليج. كل منتج مدروس، مطابق لمعايير SFDA، مع ضمان ذهبي 30 يوم ودفع عند الاستلام.',
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://mahdbaby.shop'),
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-48x48.png', sizes: '48x48', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
+  manifest: '/site.webmanifest',
   openGraph: {
     title: 'مهد بيبي — بوتيك مختار للأم والطفل',
     description:
@@ -45,6 +58,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <PixelScripts />
         <Header />
         <main className="min-h-screen">{children}</main>
+        <TrustStrip />
         <Footer />
         <CartDrawer />
         <CheckoutModal />

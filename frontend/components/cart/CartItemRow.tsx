@@ -27,10 +27,9 @@ export function CartItemRow({ item, className }: CartItemRowProps) {
         className
       )}
     >
-      {/* Image placeholder */}
-      <div className="w-14 h-14 bg-[#EBF2F5] rounded-xl flex-shrink-0 flex items-center justify-center text-2xl">
-        {item.productId === 'baby_head_protection_mask' ? '🛡️' :
-         item.productId === 'portable_baby_bottle_warmer' ? '🍼' : '💝'}
+      {/* Image */}
+      <div className="relative w-14 h-14 bg-[#EBF2F5] rounded-xl flex-shrink-0 flex items-center justify-center overflow-hidden">
+        <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
       </div>
 
       {/* Info */}

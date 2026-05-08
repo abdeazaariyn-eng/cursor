@@ -25,15 +25,12 @@ export function ProductCard({ product, className, onAddToCart }: ProductCardProp
     >
       {/* Image */}
       <Link href={`/products/${product.slug}`} className="block relative aspect-[4/3] bg-[#EBF2F5] overflow-hidden">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center p-8">
-            <div className="text-5xl mb-3">
-              {product.id === 'baby_head_protection_mask' ? '🛡️' :
-               product.id === 'portable_baby_bottle_warmer' ? '🍼' : '💝'}
-            </div>
-            <p className="text-[#8CA4B0] text-xs">صورة توضيحية</p>
-          </div>
-        </div>
+        <Image 
+          src={product.image}
+          alt={product.shortName}
+          fill
+          className="object-cover"
+        />
         {/* Badge overlay */}
         <div className="absolute top-3 end-3">
           <Badge variant="primary">{product.badge}</Badge>

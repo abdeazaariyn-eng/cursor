@@ -1,0 +1,21 @@
+{
+  "status": 500,
+  "body": {
+    "error": {
+      "code": "SERVER_ERROR",
+      "message": "حدث خطأ غير متوقع. حاولي مرة ثانية."
+    }
+  },
+  "headers": {
+    "date": "Wed, 06 May 2026 15:49:50 GMT",
+    "content-type": "application/json",
+    "content-length": "108",
+    "connection": "keep-alive",
+    "server": "cloudflare",
+    "cf-cache-status": "DYNAMIC",
+    "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+    "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=%2FqVUUa9l9icIRyoelIkJiMX%2BdGOG0Ov7iGhUk7GpjIWKwiWY9DRN40MlMhjHD53LeSiJZmOBnCoCY4qQHn7MdocAQShpYpR6qUnVL22m4VppNGMjQFi6SsBiKfyrde6SRsdYig%3D%3D\"}]}",
+    "cf-ray": "9f79231ebde8e3b8-LIS",
+    "alt-svc": "h3=\":443\"; ma=86400"
+  }
+}

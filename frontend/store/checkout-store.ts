@@ -4,6 +4,7 @@ export interface UpsellProductData {
   productId: string
   productName: string
   priceKwd: number
+  image: string
 }
 
 interface CheckoutStore {

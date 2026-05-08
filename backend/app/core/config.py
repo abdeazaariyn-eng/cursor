@@ -69,6 +69,10 @@ class Settings(BaseSettings):
     MAXMIND_LICENSE_KEY: str = ""
     ALLOWED_COUNTRY: str = "KW"
     WHITELISTED_PHONE: str = "0501020304"
+    
+    ADMIN_USERNAME: str = "admin"
+    ADMIN_PASSWORD: str = "mahdbaby123"
+    PROXYCHECK_API_KEY: str = ""
 
     @field_validator("DATABASE_URL", mode="before")
     @classmethod

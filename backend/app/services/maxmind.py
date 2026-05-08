@@ -65,6 +65,22 @@ async def check_ip_allowed(ip: Optional[str], phone: str) -> bool:
                 logger.warning("maxmind_rejected_suspicious", ip=ip, traits=traits)
                 return False
                 
+            # Additional platform check (ProxyCheck)
+            if settings.PROXYCHECK_API_KEY:
+                proxycheck_url = f"https://proxycheck.io/v2/{ip}?key={settings.PROXYCHECK_API_KEY}&vpn=1"
+                try:
+                    async with httpx.AsyncClient() as client_pc:
+                        pc_response = await client_pc.get(proxycheck_url, timeout=5.0)
+                        if pc_response.status_code == 200:
+                            pc_data = pc_response.json()
+                            if pc_data.get("status") == "ok":
+                                ip_data = pc_data.get(ip, {})
+                                if ip_data.get("proxy") == "yes":
+                                    logger.warning("proxycheck_rejected_vpn", ip=ip)
+                                    return False
+                except Exception as e:
+                    logger.error("proxycheck_api_exception", error=str(e))
+                
             return True
             
     except Exception as e:

@@ -90,6 +90,7 @@ export function CheckoutModal() {
               productId: upsellProductData.id,
               productName: upsellProductData.arabicName,
               priceKwd: 9,
+              image: upsellProductData.image,
             }
           : null
       )

@@ -1,6 +1,8 @@
 'use client'
 
 import Script from 'next/script'
+import { useEffect } from 'react'
+import { api } from '@/lib/api'
 
 const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID
 const TIKTOK_PIXEL_ID = process.env.NEXT_PUBLIC_TIKTOK_PIXEL_ID
@@ -8,6 +10,14 @@ const SNAP_PIXEL_ID = process.env.NEXT_PUBLIC_SNAP_PIXEL_ID
 const ENABLE_PIXELS = process.env.NEXT_PUBLIC_ENABLE_PIXELS === 'true'
 
 export function PixelScripts() {
+  useEffect(() => {
+    // Track click/visit in our backend
+    if (!sessionStorage.getItem('visit_tracked')) {
+      api.trackEvent({ eventName: 'click', platform: 'web' }).catch(() => {})
+      sessionStorage.setItem('visit_tracked', 'true')
+    }
+  }, [])
+
   if (!ENABLE_PIXELS) return null
 
   return (

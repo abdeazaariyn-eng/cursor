@@ -61,7 +61,7 @@ export function ProductPageClient({ product }: Props) {
       unitLabel: priceData.label,
       priceKwd: priceData.priceKwd,
       originalPriceKwd: priceData.originalPriceKwd,
-      image: product.imagePlaceholder,
+      image: product.image,
     })
     fireAddToCart({
       value: priceData.priceKwd,
@@ -106,7 +106,7 @@ export function ProductPageClient({ product }: Props) {
             {/* ── Image (Left / top on mobile) ── */}
             <div className="relative aspect-[4/5] md:aspect-square rounded-[2.5rem] overflow-hidden bg-[#EBF2F5] shadow-2xl border-[6px] border-white group">
               <Image
-                src={product.imagePlaceholder}
+                src={product.image}
                 alt={product.arabicName}
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"

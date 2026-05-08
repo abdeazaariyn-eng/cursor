@@ -1,0 +1,16 @@
+{
+  "status": 500,
+  "cors_origin": "MISSING",
+  "all_headers": {
+    "date": "Wed, 06 May 2026 15:50:45 GMT",
+    "content-type": "application/json",
+    "content-length": "108",
+    "connection": "keep-alive",
+    "server": "cloudflare",
+    "cf-cache-status": "DYNAMIC",
+    "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+    "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=VEVausYD%2BsI9CJ%2F%2BWq%2FLKu5S8m0yajgvST8CV0cEer1X%2F8VeYngguwTXUkLv8gUVjnczOa2FodMqCLHp87yYdQHNUFcPLbnCHKshLA84sOSCoAlEfBMZHy2rByFw%2FvmJYA%2FQ4g%3D%3D\"}]}",
+    "cf-ray": "9f792473a950c906-MAD",
+    "alt-svc": "h3=\":443\"; ma=86400"
+  }
+}

@@ -149,9 +149,8 @@ export function UpsellModal() {
 
               {/* Product */}
               <div className="bg-[#EBF2F5] rounded-2xl p-4 mb-4 text-center">
-                <div className="text-4xl mb-2">
-                  {upsellProduct.productId === 'baby_head_protection_mask' ? '🛡️' :
-                   upsellProduct.productId === 'portable_baby_bottle_warmer' ? '🍼' : '💝'}
+                <div className="relative w-24 h-24 mx-auto mb-3 rounded-xl overflow-hidden bg-white">
+                  <img src={upsellProduct.image} alt={upsellProduct.productName} className="w-full h-full object-cover" />
                 </div>
                 <p className="font-bold text-[#142B3B] text-sm mb-1">
                   {upsellProduct.productName}
