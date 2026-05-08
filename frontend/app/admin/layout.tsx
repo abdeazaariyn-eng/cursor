@@ -1,5 +1,4 @@
 import { Metadata } from 'next'
-import { Toaster } from 'react-hot-toast' // If we use it, or just simple UI
 
 export const metadata: Metadata = {
   title: 'Admin Dashboard | Mahdbaby',
