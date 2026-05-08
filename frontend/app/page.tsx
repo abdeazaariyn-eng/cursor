@@ -54,13 +54,13 @@ export default function HomePage() {
     <>
       {/* ─── Announcement Bar ─── */}
       <div className="bg-[#142B3B] text-white text-center py-2.5 px-4 text-xs sm:text-sm font-medium tracking-wide">
-        <span className="text-[#D4AF37] font-bold">بوتيك مختار</span>
+        <span className="text-[#D4AF37] font-bold">جودة مضمونة وأمان لطفلك</span>
         <span className="mx-2 opacity-50">·</span>
-        مطابق لمعايير SFDA
+        الدفع عند الاستلام
         <span className="mx-2 opacity-50">·</span>
-        دفع عند الاستلام
+        توصيل سريع
         <span className="mx-2 opacity-50">·</span>
-        <span className="text-[#D4AF37] font-bold">ضمان 30 يوم</span>
+        <span className="text-[#D4AF37] font-bold">ضمان استرجاع</span>
       </div>
 
       {/* ─── HERO ─── */}
