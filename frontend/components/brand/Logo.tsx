@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
+import Image from 'next/image'
 
 interface LogoProps {
   className?: string
@@ -9,23 +10,23 @@ interface LogoProps {
 
 export function Logo({ className, size = 'md', href = '/' }: LogoProps) {
   const sizes = {
-    sm: { circle: 'w-8 h-8 text-base', arabic: 'text-lg', english: 'text-xs' },
-    md: { circle: 'w-10 h-10 text-xl', arabic: 'text-xl', english: 'text-xs' },
-    lg: { circle: 'w-12 h-12 text-2xl', arabic: 'text-2xl', english: 'text-sm' },
+    sm: { img: 32, arabic: 'text-lg', english: 'text-xs' },
+    md: { img: 48, arabic: 'text-xl', english: 'text-xs' },
+    lg: { img: 64, arabic: 'text-2xl', english: 'text-sm' },
   }
 
   const s = sizes[size]
 
   const content = (
     <div className={cn('flex items-center gap-2.5', className)}>
-      <div
-        className={cn(
-          'flex items-center justify-center rounded-full bg-[#4A8B9A] text-white font-bold flex-shrink-0',
-          s.circle
-        )}
-        aria-hidden="true"
-      >
-        M
+      <div className="relative flex-shrink-0" style={{ width: s.img, height: s.img }}>
+        <Image
+          src="/logo.png"
+          alt="Mahdbaby Logo"
+          fill
+          className="object-contain"
+          priority
+        />
       </div>
       <div className="flex flex-col leading-none">
         <span className={cn('font-bold text-[#142B3B]', s.arabic)}>مهد بيبي</span>
