@@ -79,8 +79,10 @@ export function ProductPageClient({ product }: Props) {
   return (
     <>
       {/* ─── Announcement Bar ─── */}
-      <div className="bg-[#142B3B] text-white text-center py-2.5 px-4 text-xs sm:text-sm font-bold">
-        🚚 توصيل لجميع المدن • 🛡️ ضمان استرجاع 30 يوم بدون أسئلة • <span className="text-[#D4AF37]">الدفع عند الاستلام ✓</span>
+      <div dir="rtl" className="bg-[#142B3B] text-white text-center py-2.5 px-4 text-xs sm:text-sm font-bold leading-relaxed">
+        <span className="block sm:inline">🚚 توصيل لجميع المدن • 🛡️ ضمان استرجاع 30 يوم بدون أسئلة</span>
+        <span className="hidden sm:inline"> • </span>
+        <span className="block sm:inline text-[#D4AF37]">الدفع عند الاستلام ✓</span>
       </div>
 
       {/* ─── Breadcrumb ─── */}
