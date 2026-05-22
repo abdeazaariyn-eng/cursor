@@ -10,6 +10,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.config import settings
 from app.core.logging import get_logger
 from app.db.session import get_db
+from app.utils.phone import mask_phone_for_display
 from app.schemas.orders import (
     CreateOrderRequest,
     CreateOrderResponse,
@@ -171,6 +172,7 @@ async def get_order(
         status=order.status,
         totalKwd=float(order.total_kwd),
         customerName=order.customer_name,
+        customerPhoneMasked=mask_phone_for_display(order.phone_e164),
         items=[
             OrderItemOut(
                 productId=item.product_id,

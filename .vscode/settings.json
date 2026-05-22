@@ -1,0 +1,8 @@
+{
+  // Workspace placeholders for MCP API keys
+  "mcp.context7.apiKey": "",
+  "mcp.exa.apiKey": "",
+  // Enable/disable flags for local testing
+  "mcp.context7.enabled": false,
+  "mcp.exa.enabled": false
+}

@@ -136,6 +136,7 @@ class GetOrderResponse(BaseModel):
     status: str
     totalKwd: float
     customerName: str
+    customerPhoneMasked: str
     items: list[OrderItemOut]
     createdAt: str
 

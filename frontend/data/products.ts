@@ -27,6 +27,11 @@ export interface Product {
   reviews: Review[]
   faqs: Faq[]
   crossSellPriority: string[]
+  payoffTimeline: {
+    day1: string
+    week1: string
+    week2: string
+  }
   image: string
   filterTags: string[]
 }
@@ -97,6 +102,11 @@ export const PRODUCTS: Product[] = [
       },
     ],
     crossSellPriority: ['portable_baby_bottle_warmer', 'wearable_electric_breast_pump'],
+    payoffTimeline: {
+      day1: 'تلبسينه وحسي براحة البال فوراً — لما تشوفينه يتحرك، أنتِ هادية 💫',
+      week1: 'طفلك ما عاد يصدم راسه، ونومك انت أحسن بشوي 😌',
+      week2: 'صار جزء من النظام اليومي، وتشوفين الفرق كل يوم ✨',
+    },
     image: '/images/products/head-protection.webp',
   },
   {
@@ -164,6 +174,11 @@ export const PRODUCTS: Product[] = [
       },
     ],
     crossSellPriority: ['baby_head_protection_mask', 'wearable_electric_breast_pump'],
+    payoffTimeline: {
+      day1: 'تستخدمينها وتشعرين براحة الحركة حتى وأنتِ تتحركين 💫',
+      week1: 'الحليب دافي وروتينك أسهل، والطفل سعيان 😌',
+      week2: 'ما عاد تفكرين فيها — صارت جزء طبيعي من يومك ✨',
+    },
     image: '/images/products/bottle-warmer.webp',
   },
   {
@@ -231,6 +246,11 @@ export const PRODUCTS: Product[] = [
       },
     ],
     crossSellPriority: ['portable_baby_bottle_warmer', 'baby_head_protection_mask'],
+    payoffTimeline: {
+      day1: 'لما تستخدميها أول مرة، الفرق واضح — أسهل وأسرع 💫',
+      week1: 'روتينك صار أكتر مرونة وأنتِ أكتر ارتياح 😌',
+      week2: 'ما تتخيلين نفسكم بدونها — تغيرت طريقتك في كل شيء ✨',
+    },
     image: '/images/products/breast-pump.webp',
   },
 ]
