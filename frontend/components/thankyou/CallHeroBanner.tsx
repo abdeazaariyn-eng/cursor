@@ -1,6 +1,6 @@
 'use client'
 
-import { Phone } from 'lucide-react'
+import { Phone, PhoneIncoming, Clock, Save } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { downloadVCard } from '@/lib/vcard'
 import { getCallTimingMessage } from '@/lib/order-display'
@@ -14,71 +14,82 @@ export function CallHeroBanner({ createdAt, customerPhoneMasked }: CallHeroBanne
   const callTiming = getCallTimingMessage(createdAt)
 
   const handleSaveNumber = () => {
-    // Extract full number for vcard (with +965 prefix)
     const fullNumber = customerPhoneMasked.replace(/•/g, '0')
     downloadVCard(fullNumber)
   }
 
   return (
-    <div
-      className={`rounded-2xl p-6 mb-6 border-2 ${
-        callTiming.urgent
-          ? 'bg-gradient-to-br from-[#FFF8E1] to-[#FFFAF0] border-[#FFD54F] shadow-[0_0_20px_rgba(255,213,79,0.2)]'
-          : 'bg-gradient-to-br from-[#F3E8FF] to-[#FAF5FF] border-[#CE93D8] shadow-[0_0_20px_rgba(206,147,216,0.1)]'
-      }`}
-    >
-      <div className="flex items-start gap-4">
-        {/* Animated Phone Icon */}
-        <div
-          className={`w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 ${
-            callTiming.urgent ? 'bg-[#FFF3C4] animate-pulse' : 'bg-[#EDE7F6] animate-bounce'
-          }`}
-        >
-          <Phone className={`w-6 h-6 ${callTiming.urgent ? 'text-[#F57F17]' : 'text-[#7B1FA2]'}`} />
-        </div>
-
-        {/* Content */}
-        <div className="flex-1 text-right">
-          {/* Main heading */}
-          <h2 className="font-bold text-[#142B3B] text-lg mb-2">{callTiming.heading}</h2>
-
-          {/* Description */}
-          <p className="text-[#506A77] text-sm leading-relaxed mb-3">{callTiming.description}</p>
-
-          {/* Phone number highlight */}
-          <div className="bg-white/80 rounded-xl p-3 mb-3 border border-black/5 backdrop-blur-sm">
-            <p className="text-[#142B3B] text-sm font-semibold mb-1">📱 نتصل على:</p>
-            <p className="text-[#4A8B9A] font-mono text-sm font-bold">{customerPhoneMasked}</p>
-            <p className="text-[#6B8A99] text-xs mt-1">
-              المكالمة قد تأتي من رقم غريب — لا تتجاهليها 🙏
+    <div className="mb-6">
+      {/* Main Banner */}
+      <div
+        className={`relative rounded-2xl overflow-hidden border-2 ${
+          callTiming.urgent
+            ? 'bg-gradient-to-br from-[#FFF8E1] via-[#FFFAF0] to-[#FFF3C4] border-[#FFD54F] shadow-lg shadow-[#FFD54F]/20'
+            : 'bg-gradient-to-br from-[#EDE7F6] via-[#F3E8FF] to-[#FAF5FF] border-[#CE93D8] shadow-lg shadow-[#CE93D8]/10'
+        }`}
+      >
+        {/* Urgency Ribbon */}
+        {callTiming.urgent && (
+          <div className="bg-[#F57F17] text-white text-center py-1.5 px-4">
+            <p className="text-xs font-bold animate-pulse">
+              ⏱️ فريقنا يتصل فيك الحين — خلال أقل من ١٠ دقائق!
             </p>
           </div>
+        )}
 
-          {/* Countdown (only when urgent) */}
-          {callTiming.urgent && callTiming.etaMinutes && (
-            <div className="mb-3 inline-block bg-[#F57F17]/10 text-[#F57F17] px-3 py-1 rounded-full text-xs font-semibold">
-              ⏱️ متوقع خلال ~{callTiming.etaMinutes} دقائق
+        <div className="p-5">
+          {/* Icon + Heading */}
+          <div className="flex items-center gap-3 mb-4">
+            <div
+              className={`w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0 ${
+                callTiming.urgent
+                  ? 'bg-[#F57F17] shadow-lg shadow-[#F57F17]/30'
+                  : 'bg-[#7B1FA2] shadow-lg shadow-[#7B1FA2]/20'
+              }`}
+            >
+              <PhoneIncoming className="w-7 h-7 text-white" />
             </div>
-          )}
-
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-2">
-            <Button
-              onClick={handleSaveNumber}
-              variant="outline"
-              className="flex-1 border-2 border-[#4A8B9A] text-[#4A8B9A] hover:bg-[#4A8B9A]/5 text-sm font-semibold"
-            >
-              💾 احفظي الرقم
-            </Button>
-            <a
-              href={`https://wa.me/${customerPhoneMasked.replace(/\D/g, '')}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex-1 flex items-center justify-center gap-2 bg-[#25D366] text-white rounded-lg hover:bg-[#1eaa54] transition-colors text-sm font-semibold px-4 py-2"
-            >
-              💬 تواصلي واتساب
-            </a>
+            <div className="flex-1">
+              <h2 className="font-bold text-[#142B3B] text-lg leading-tight">{callTiming.heading}</h2>
+              <p className="text-[#506A77] text-sm mt-1">{callTiming.description}</p>
+            </div>
           </div>
+
+          {/* Unknown Number Warning - THE MOST CRITICAL ELEMENT */}
+          <div className="bg-white rounded-xl p-4 mb-4 border-2 border-dashed border-[#F57F17]/40">
+            <div className="flex items-start gap-3">
+              <div className="w-10 h-10 rounded-full bg-[#FFF3C4] flex items-center justify-center flex-shrink-0">
+                <Phone className="w-5 h-5 text-[#F57F17]" />
+              </div>
+              <div className="flex-1">
+                <p className="text-[#142B3B] font-bold text-sm mb-1">
+                  ⚠️ مهم: ردي على المكالمة حتى لو الرقم غريب!
+                </p>
+                <p className="text-[#6B8A99] text-xs leading-relaxed">
+                  فريقنا يتصل من رقم قد لا تعرفينه — لا تتجاهليها لأنها مكالمة تأكيد طلبك فقط.
+                </p>
+                <p className="text-[#506A77] text-xs font-semibold mt-2 flex items-center gap-1">
+                  <span>📱</span>
+                  <span>نتصل على:</span>
+                  <span className="font-mono text-[#4A8B9A]" dir="ltr">{customerPhoneMasked}</span>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* CTA: Save Number */}
+          <Button
+            onClick={handleSaveNumber}
+            className="w-full bg-[#142B3B] hover:bg-[#1a3a4d] text-white text-sm font-bold py-3 rounded-xl flex items-center justify-center gap-2"
+          >
+            <Save className="w-4 h-4" />
+            احفظي رقمنا عندك — عشان تعرفين إنها من عندنا
+          </Button>
+
+          {/* Micro-reassurance */}
+          <p className="text-[#6B8A99] text-xs text-center mt-3">
+            المكالمة سريعة — أقل من ٣٠ ثانية فقط لتأكيد عنوانك ✓
+          </p>
         </div>
       </div>
     </div>

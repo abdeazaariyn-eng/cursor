@@ -35,26 +35,41 @@ export function getCallTimingMessage(
   const isWeekend = dayOfWeek === 5 || dayOfWeek === 6
 
   if (isWorkingHours && isToday && !isWeekend) {
-    // Calculate rough ETA (5-10 minutes from now)
     return {
-      heading: 'راح نتصل فيك خلال أقل من 10 دقائق! 📞',
-      description: 'فريقنا يتواصل معك خلال أقل من 10 دقائق لتأكيد طلبك والعنوان.',
+      heading: 'راح نتصل فيك خلال أقل من ١٠ دقائق! 📞',
+      description: 'فريقنا يتواصل معك الحين لتأكيد طلبك والعنوان — ردي على المكالمة حتى لو الرقم غريب!',
       urgent: true,
       etaMinutes: 7,
     }
   }
 
-  if (hour >= 21 || isWeekend) {
+  if (hour >= 21) {
     return {
-      heading: 'راح نتواصل معك بكرة الصبح 🌅',
-      description: 'طلبك مسجل! فريقنا يتصل فيك أول شيء الصبح (من الساعة 9) لتأكيد العنوان والشحن.',
+      heading: 'طلبك مسجل — نتصل فيك الصبح الباكر! 🌅',
+      description: 'فريقنا يتصل فيك أول شيء الصبح (الساعة ٩) لتأكيد العنوان والشحن. ردي على المكالمة حتى لو الرقم غريب!',
+      urgent: false,
+    }
+  }
+
+  if (hour < 9) {
+    return {
+      heading: 'طلبك مسجل — نتصل فيك الصبح! 🌅',
+      description: 'فريقنا يتصل فيك من الساعة ٩ صباحاً لتأكيد طلبك. ردي على المكالمة حتى لو الرقم غريب!',
+      urgent: false,
+    }
+  }
+
+  if (isWeekend) {
+    return {
+      heading: 'طلبك مسجل — نتصل فيك أول يوم عمل! 🌅',
+      description: 'فريقنا يتصل فيك أول يوم عمل لتأكيد العنوان والشحن. ردي على المكالمة حتى لو الرقم غريب!',
       urgent: false,
     }
   }
 
   return {
-    heading: 'راح نتواصل معك الصبح 🌅',
-    description: 'طلبك مسجل! فريقنا يتصل فيك من الساعة 9 صباحاً لتأكيد العنوان والشحن.',
+    heading: 'راح نتواصل معك قريب! 📞',
+    description: 'فريقنا يتصل فيك لتأكيد العنوان والشحن. ردي على المكالمة حتى لو الرقم غريب!',
     urgent: false,
   }
 }
