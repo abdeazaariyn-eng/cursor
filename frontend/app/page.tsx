@@ -53,14 +53,10 @@ export default function HomePage() {
   return (
     <>
       {/* ─── Announcement Bar ─── */}
-      <div className="bg-[#142B3B] text-white text-center py-2.5 px-4 text-xs sm:text-sm font-medium tracking-wide">
-        <span className="text-[#D4AF37] font-bold">جودة مضمونة وأمان لطفلك</span>
-        <span className="mx-2 opacity-50">·</span>
-        الدفع عند الاستلام
-        <span className="mx-2 opacity-50">·</span>
-        توصيل سريع
-        <span className="mx-2 opacity-50">·</span>
-        <span className="text-[#D4AF37] font-bold">ضمان استرجاع</span>
+      <div dir="rtl" className="bg-[#142B3B] text-white text-center py-2.5 px-4 text-xs sm:text-sm font-bold leading-relaxed">
+        <span className="block sm:inline">🚚 توصيل لجميع المدن • 🛡️ ضمان استرجاع 30 يوم بدون أسئلة</span>
+        <span className="hidden sm:inline"> • </span>
+        <span className="block sm:inline text-[#D4AF37]">الدفع عند الاستلام ✓</span>
       </div>
 
       {/* ─── HERO ─── */}
