@@ -12,22 +12,18 @@ export function ReviewCard({ name, text, stars = 5, className }: ReviewCardProps
   return (
     <div
       className={cn(
-        'bg-white rounded-2xl p-6 border border-[#E8EEF1] flex flex-col',
+        'bg-white rounded-2xl border border-[#D6E4E8] p-5 shadow-sm',
         className
       )}
     >
-      <StarRating rating={stars} size="sm" className="mb-4" />
-      <p className="text-[#142B3B] text-sm leading-relaxed flex-1 mb-5">
-        &ldquo;{text}&rdquo;
-      </p>
-      <div className="flex items-center gap-3 pt-4 border-t border-[#F0F4F6]">
-        <div className="w-8 h-8 rounded-full bg-[#EBF2F5] flex items-center justify-center text-[#4A8B9A] font-semibold text-xs flex-shrink-0">
+      <StarRating rating={stars} size="sm" className="mb-3" />
+      <p className="text-[#142B3B] text-sm leading-relaxed mb-4">"{text}"</p>
+      <div className="flex items-center gap-2">
+        <div className="w-8 h-8 rounded-full bg-[#EBF2F5] flex items-center justify-center text-[#4A8B9A] font-bold text-sm flex-shrink-0">
           {name.charAt(0)}
         </div>
-        <div>
-          <span className="text-[#142B3B] text-sm font-semibold block">{name}</span>
-          <span className="text-[#8CA4B0] text-xs">مشترية موثقة</span>
-        </div>
+        <span className="text-[#506A77] text-sm font-medium">{name}</span>
+        <span className="text-[#6B8A99] text-xs me-auto">✓ مشترية موثقة</span>
       </div>
     </div>
   )
