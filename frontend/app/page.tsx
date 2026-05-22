@@ -79,11 +79,11 @@ export default function HomePage() {
                 </span>
               </div>
 
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#142B3B] leading-tight mb-6">
-                اختيار مدروس{' '}
-                <span className="text-[#4A8B9A]">لأمومة أهدأ.</span>
-                <br />
-                كل منتج فحصناه قبل ما يوصلك.
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#142B3B] leading-tight md:leading-snug lg:leading-normal mb-6 whitespace-normal break-words">
+                <span className="block">
+                  اختيار مدروس <span className="text-[#4A8B9A]">لأمومة أهدأ.</span>
+                </span>
+                <span className="block mt-2">كل منتج فحصناه قبل ما يوصلك.</span>
               </h1>
 
               <p className="text-[#506A77] text-base sm:text-lg leading-relaxed mb-8 max-w-xl font-medium">
