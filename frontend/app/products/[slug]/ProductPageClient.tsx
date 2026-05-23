@@ -200,15 +200,24 @@ export function ProductPageClient({ product }: Props) {
                           key={color.id}
                           onClick={() => setSelectedColor(color.id)}
                           className={cn(
-                            "w-12 h-12 rounded-full border-4 transition-all duration-200 shadow-sm",
+                            "relative w-14 h-14 rounded-full border-2 transition-all duration-200 shadow-sm overflow-hidden flex items-center justify-center",
                             selectedColor === color.id 
-                              ? "border-[#4A8B9A] scale-110 shadow-md" 
-                              : "border-transparent hover:scale-105"
+                              ? "border-[#4A8B9A] ring-2 ring-[#4A8B9A] ring-offset-2 scale-110 shadow-md" 
+                              : "border-[#D6E4E8] hover:scale-105 hover:border-[#4A8B9A]/50"
                           )}
                           style={{ backgroundColor: color.hex }}
                           title={color.label}
                           aria-label={`اختر اللون ${color.label}`}
-                        />
+                        >
+                          {color.image && (
+                            <Image 
+                              src={color.image} 
+                              alt={color.label} 
+                              fill 
+                              className="object-cover opacity-90"
+                            />
+                          )}
+                        </button>
                       ))}
                     </div>
                   </div>

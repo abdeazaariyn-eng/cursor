@@ -75,8 +75,8 @@ export const PRODUCTS: Product[] = [
       'مناسب للاستخدام تحت إشراف الأم داخل المنزل.',
     ],
     colors: [
-      { id: 'gray-forest', label: 'رمادي غابة', hex: '#E2E8F0', image: '/images/products/head-protection.webp' },
-      { id: 'pink-forest', label: 'وردي غابة', hex: '#FED7E2', image: '/images/products/head-protection-pink.webp' }
+      { id: 'gray-forest', label: 'رمادي (شكل الغابة)', hex: '#C2C9D1', image: '/images/products/head-protection-gray.png' },
+      { id: 'pink-forest', label: 'وردي (شكل الغابة)', hex: '#FFB6C1', image: '/images/products/head-protection-pink.png' }
     ],
     reviews: [
       {
