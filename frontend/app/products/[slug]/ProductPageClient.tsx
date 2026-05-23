@@ -27,6 +27,7 @@ interface Props {
 
 export function ProductPageClient({ product }: Props) {
   const [selectedOffer, setSelectedOffer] = useState<OfferId>('two_pieces')
+  const [selectedColor, setSelectedColor] = useState<string>(product.colors?.[0]?.id || '')
   const [added, setAdded] = useState(false)
   const [isSticky, setIsSticky] = useState(false)
   const { addItem, openCart } = useCartStore()
@@ -35,6 +36,10 @@ export function ProductPageClient({ product }: Props) {
   const avgRating =
     product.reviews.reduce((s, r) => s + r.stars, 0) / product.reviews.length || 4.9
   const offer = OFFER_CONFIG[selectedOffer]
+
+  // Use color specific image if available
+  const activeColorObj = product.colors?.find(c => c.id === selectedColor)
+  const displayImage = activeColorObj?.image || product.image
 
   useEffect(() => {
     const handleScroll = () => {
@@ -52,16 +57,21 @@ export function ProductPageClient({ product }: Props) {
 
   const handleAddToCart = () => {
     const priceData = OFFER_CONFIG[selectedOffer]
+    // Add color info to name if applicable
+    const finalName = activeColorObj 
+      ? `${product.shortName} (${activeColorObj.label})` 
+      : product.shortName
+
     addItem({
       productId: product.id,
       slug: product.slug,
-      name: product.shortName,
+      name: finalName,
       offerId: selectedOffer,
       quantity: priceData.quantity,
       unitLabel: priceData.label,
       priceKwd: priceData.priceKwd,
       originalPriceKwd: priceData.originalPriceKwd,
-      image: product.image,
+      image: displayImage || product.image,
     })
     fireAddToCart({
       value: priceData.priceKwd,
@@ -108,7 +118,7 @@ export function ProductPageClient({ product }: Props) {
             {/* ── Image (Left / top on mobile) ── */}
             <div className="relative aspect-[4/5] md:aspect-square rounded-[2.5rem] overflow-hidden bg-[#EBF2F5] shadow-2xl border-[6px] border-white group">
               <Image
-                src={product.image}
+                src={displayImage}
                 alt={product.arabicName}
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -177,6 +187,33 @@ export function ProductPageClient({ product }: Props) {
 
               {/* Offer selection */}
               <div className="mb-8 bg-white p-5 rounded-3xl shadow-sm border border-[#D6E4E8]">
+                
+                {/* Color Selection (if available) */}
+                {product.colors && product.colors.length > 0 && (
+                  <div className="mb-6 pb-6 border-b border-[#E8F0F3]">
+                    <p className="font-extrabold text-[#142B3B] mb-3 text-sm">
+                      اختاري اللون: <span className="font-bold text-[#4A8B9A]">{activeColorObj?.label}</span>
+                    </p>
+                    <div className="flex gap-3">
+                      {product.colors.map(color => (
+                        <button
+                          key={color.id}
+                          onClick={() => setSelectedColor(color.id)}
+                          className={cn(
+                            "w-12 h-12 rounded-full border-4 transition-all duration-200 shadow-sm",
+                            selectedColor === color.id 
+                              ? "border-[#4A8B9A] scale-110 shadow-md" 
+                              : "border-transparent hover:scale-105"
+                          )}
+                          style={{ backgroundColor: color.hex }}
+                          title={color.label}
+                          aria-label={`اختر اللون ${color.label}`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )}
+
                 <p className="font-extrabold text-[#142B3B] mb-4 text-sm flex items-center gap-2">
                   <Sparkles className="w-5 h-5 text-[#4A8B9A]" />
                   اختاري العرض الأنسب (الكمية محدودة جداً):

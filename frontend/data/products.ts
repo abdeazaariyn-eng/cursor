@@ -9,6 +9,13 @@ export interface Faq {
   a: string
 }
 
+export interface ProductColor {
+  id: string
+  label: string
+  hex: string
+  image?: string
+}
+
 export interface Product {
   id: string
   slug: string
@@ -24,6 +31,7 @@ export interface Product {
   badges: string[]
   benefits: string[]
   proofBlocks: string[]
+  colors?: ProductColor[]
   reviews: Review[]
   faqs: Faq[]
   crossSellPriority: string[]
@@ -65,6 +73,10 @@ export const PRODUCTS: Product[] = [
       'مختار لمرحلة الحركة الأولى عند الأطفال.',
       'يركز على النعومة والراحة لأن الطفل يرفض أي شيء مزعج.',
       'مناسب للاستخدام تحت إشراف الأم داخل المنزل.',
+    ],
+    colors: [
+      { id: 'gray-forest', label: 'رمادي غابة', hex: '#E2E8F0', image: '/images/products/head-protection.webp' },
+      { id: 'pink-forest', label: 'وردي غابة', hex: '#FED7E2', image: '/images/products/head-protection-pink.webp' }
     ],
     reviews: [
       {
