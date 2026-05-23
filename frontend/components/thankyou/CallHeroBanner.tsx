@@ -1,8 +1,6 @@
 'use client'
 
-import { Phone, PhoneIncoming, Clock, Save } from 'lucide-react'
-import { Button } from '@/components/ui/Button'
-import { downloadVCard } from '@/lib/vcard'
+import { Phone, PhoneIncoming, Clock } from 'lucide-react'
 import { getCallTimingMessage } from '@/lib/order-display'
 
 interface CallHeroBannerProps {
@@ -12,11 +10,6 @@ interface CallHeroBannerProps {
 
 export function CallHeroBanner({ createdAt, customerPhoneMasked }: CallHeroBannerProps) {
   const callTiming = getCallTimingMessage(createdAt)
-
-  const handleSaveNumber = () => {
-    const fullNumber = customerPhoneMasked.replace(/•/g, '0')
-    downloadVCard(fullNumber)
-  }
 
   return (
     <div className="mb-6">
@@ -56,7 +49,7 @@ export function CallHeroBanner({ createdAt, customerPhoneMasked }: CallHeroBanne
           </div>
 
           {/* Unknown Number Warning - THE MOST CRITICAL ELEMENT */}
-          <div className="bg-white rounded-xl p-4 mb-4 border-2 border-dashed border-[#F57F17]/40">
+          <div className="bg-white rounded-xl p-4 border-2 border-dashed border-[#F57F17]/40">
             <div className="flex items-start gap-3">
               <div className="w-10 h-10 rounded-full bg-[#FFF3C4] flex items-center justify-center flex-shrink-0">
                 <Phone className="w-5 h-5 text-[#F57F17]" />
@@ -66,28 +59,21 @@ export function CallHeroBanner({ createdAt, customerPhoneMasked }: CallHeroBanne
                   ⚠️ مهم: ردي على المكالمة حتى لو الرقم غريب!
                 </p>
                 <p className="text-[#6B8A99] text-xs leading-relaxed">
-                  فريقنا يتصل من رقم قد لا تعرفينه — لا تتجاهليها لأنها مكالمة تأكيد طلبك فقط.
+                  فريقنا يتصل من عدة أرقام قد لا تعرفينها — لا تتجاهليها لأنها مكالمة تأكيد طلبك فقط.
                 </p>
-                <p className="text-[#506A77] text-xs font-semibold mt-2 flex items-center gap-1">
-                  <span>📱</span>
-                  <span>نتصل على:</span>
-                  <span className="font-mono text-[#4A8B9A]" dir="ltr">{customerPhoneMasked}</span>
-                </p>
+                <div className="bg-[#F8FBFC] border border-[#E8F0F3] rounded-lg p-2 mt-3">
+                  <p className="text-[#506A77] text-xs font-semibold flex items-center gap-1">
+                    <span>📱</span>
+                    <span>سنتصل على رقمك:</span>
+                    <span className="font-mono text-[#4A8B9A] font-bold" dir="ltr">{customerPhoneMasked}</span>
+                  </p>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* CTA: Save Number */}
-          <Button
-            onClick={handleSaveNumber}
-            className="w-full bg-[#142B3B] hover:bg-[#1a3a4d] text-white text-sm font-bold py-3 rounded-xl flex items-center justify-center gap-2"
-          >
-            <Save className="w-4 h-4" />
-            احفظي رقمنا عندك — عشان تعرفين إنها من عندنا
-          </Button>
-
           {/* Micro-reassurance */}
-          <p className="text-[#6B8A99] text-xs text-center mt-3">
+          <p className="text-[#6B8A99] text-xs text-center mt-4">
             المكالمة سريعة — أقل من ٣٠ ثانية فقط لتأكيد عنوانك ✓
           </p>
         </div>
