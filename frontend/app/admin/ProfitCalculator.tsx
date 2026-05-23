@@ -1,230 +1,293 @@
 'use client'
 
 import { useState } from 'react'
-import { Calculator, DollarSign, TrendingUp, AlertCircle, Percent, Target } from 'lucide-react'
 
 interface ProfitCalculatorProps {
   metricsAovKwd: number
 }
 
 export function ProfitCalculator({ metricsAovKwd }: ProfitCalculatorProps) {
-  const [leads, setLeads] = useState<number>(1000)
+  // Inputs matching the image layout
+  const [aovKwd, setAovKwd] = useState<number>(metricsAovKwd > 0 ? metricsAovKwd : 15.0)
+  const [exchangeRate, setExchangeRate] = useState<number>(3.28)
+  const [unitSellingPriceKwd, setUnitSellingPriceKwd] = useState<number>(10)
+  const [productCostUsd, setProductCostUsd] = useState<number>(5)
   const [cpl, setCpl] = useState<number>(5.0)
   const [confirmationRate, setConfirmationRate] = useState<number>(60)
   const [deliveryRate, setDeliveryRate] = useState<number>(65)
-  const [productCost, setProductCost] = useState<number>(10)
-  const [avgItemsPerOrder, setAvgItemsPerOrder] = useState<number>(1.2)
-  const [exchangeRate, setExchangeRate] = useState<number>(3.28)
+  const [leadsAtScale, setLeadsAtScale] = useState<number>(1000)
 
-  // Use the actual AOV from metrics if available, otherwise fallback to a default KWD value (e.g. 15 KWD)
-  const aovKwd = metricsAovKwd > 0 ? metricsAovKwd : 15.0
-  const aovUsd = aovKwd * exchangeRate
-  
+  // Derived Values
   const cr = confirmationRate / 100
   const dr = deliveryRate / 100
   
-  // Fixed Costs
-  const confirmationCallCost = 1.7
+  const aovUsd = aovKwd * exchangeRate
+  const avgPiecesPerOrder = unitSellingPriceKwd > 0 ? aovKwd / unitSellingPriceKwd : 1
+
+  // Fixed Costs from user
+  const confirmationFee = 1.70
   const deliveryFee = 6.99
   const returnFee = 5.99
+  const fulfillmentFee = 0.00
 
-  // --- Break-even Calculations ---
-  const cogsPerOrder = productCost * avgItemsPerOrder
-  // Non-Ad Cost per Delivered Order:
-  // For 1 delivered order, we need (1 / DR) confirmed orders.
-  // Confirmed orders cost = (1 / DR) * 1.7
-  // Returned orders = (1 / DR) - 1
-  // Return cost = Returned orders * 5.99
-  const nonAdCostPerDelivered = cogsPerOrder + deliveryFee + (confirmationCallCost / (dr || 0.01)) + (returnFee * (1 - (dr || 0.01)) / (dr || 0.01))
-  
-  const breakEvenCpa = Math.max(0, aovUsd - nonAdCostPerDelivered)
-  // 1 Lead results in (CR * DR) Delivered Orders
+  // Per Delivered Order Economics
+  const cogsPerOrder = productCostUsd * avgPiecesPerOrder
+  const confirmationCostPerDelivered = dr > 0 ? confirmationFee / dr : 0
+  const returnCostPerDelivered = dr > 0 ? ((1 - dr) / dr) * returnFee : 0
+  const fulfillmentCostPerDelivered = dr > 0 ? fulfillmentFee / dr : 0
+
+  const totalExAdsCostPerDelivered = cogsPerOrder + deliveryFee + confirmationCostPerDelivered + returnCostPerDelivered + fulfillmentCostPerDelivered
+  const netPerDeliveredExAds = aovUsd - totalExAdsCostPerDelivered
+
+  // Break-even
+  const breakEvenCpa = Math.max(0, netPerDeliveredExAds)
   const breakEvenCpl = breakEvenCpa * cr * dr
+  const currentProfitPerLead = (breakEvenCpl - cpl)
 
-  // --- Funnel & Profit (Scaling) ---
-  const totalAdSpend = leads * cpl
-  const confirmedOrders = leads * cr
-  const totalConfirmationCost = confirmedOrders * confirmationCallCost
-  
+  // Profit at Scale
+  const confirmedOrders = leadsAtScale * cr
   const deliveredOrders = confirmedOrders * dr
-  const totalDeliveryCost = deliveredOrders * deliveryFee
-  
   const returnedOrders = confirmedOrders - deliveredOrders
-  const totalReturnCost = returnedOrders * returnFee
-  
+
+  const totalRevenue = deliveredOrders * aovUsd
+  const totalAdSpend = leadsAtScale * cpl
   const totalCogs = deliveredOrders * cogsPerOrder
-  
-  const grossRevenue = deliveredOrders * aovUsd
-  const totalCosts = totalAdSpend + totalConfirmationCost + totalDeliveryCost + totalReturnCost + totalCogs
-  
-  const netProfit = grossRevenue - totalCosts
+  const totalDeliveryCost = deliveredOrders * deliveryFee
+  const totalConfirmationCost = confirmedOrders * confirmationFee
+  const totalReturnCost = returnedOrders * returnFee
+  const totalFulfillmentCost = confirmedOrders * fulfillmentFee
+
+  const totalCosts = totalAdSpend + totalCogs + totalDeliveryCost + totalConfirmationCost + totalReturnCost + totalFulfillmentCost
+  const netProfit = totalRevenue - totalCosts
   const roi = totalAdSpend > 0 ? (netProfit / totalAdSpend) * 100 : 0
-  const profitMargin = grossRevenue > 0 ? (netProfit / grossRevenue) * 100 : 0
+  const margin = totalRevenue > 0 ? (netProfit / totalRevenue) * 100 : 0
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold text-[#142B3B] flex items-center gap-2">
-          <Calculator className="w-6 h-6 text-[#4A8B9A]" />
-          حاسبة الربح والتوسع
-        </h2>
-        <div className="bg-[#EFF7F3] px-4 py-2 rounded-lg border border-[#C5E0D3] text-sm">
-          <span className="text-[#506A77]">متوسط قيمة الطلب الفعلي: </span>
-          <span className="font-bold text-[#267A4A]">{aovKwd.toFixed(3)} د.ك</span>
-          <span className="text-[#6B8A99] mr-2">({aovUsd.toFixed(2)}$)</span>
+    <div className="bg-[#FAF9F6] p-6 -mx-4 sm:mx-0 rounded-2xl min-h-screen text-[#2D3748]" dir="ltr">
+      
+      {/* 1. Inputs & Assumptions */}
+      <div className="bg-white rounded-3xl p-6 shadow-sm border border-[#E2E8F0] mb-6">
+        <h2 className="text-xl font-bold mb-6 text-[#1A202C]">Inputs & Assumptions</h2>
+        
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+          {/* Row 1 */}
+          <div>
+            <label className="block text-sm font-bold text-[#1A202C] mb-1">AOV (KWD)</label>
+            <p className="text-xs text-[#718096] mb-2">Live dashboard: {metricsAovKwd.toFixed(3)} KWD</p>
+            <input 
+              type="number" step="0.1" 
+              value={aovKwd} onChange={e => setAovKwd(Number(e.target.value))} 
+              className="w-full border border-[#E2E8F0] rounded-xl p-3 font-semibold text-[#1A202C] focus:ring-2 focus:ring-[#2C7A51] outline-none" 
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-bold text-[#1A202C] mb-1">KWD → USD Rate</label>
+            <p className="text-xs text-[#718096] mb-2">Default: 1 KWD = 3.28 USD</p>
+            <input 
+              type="number" step="0.01" 
+              value={exchangeRate} onChange={e => setExchangeRate(Number(e.target.value))} 
+              className="w-full border border-[#E2E8F0] rounded-xl p-3 font-semibold text-[#1A202C] focus:ring-2 focus:ring-[#2C7A51] outline-none" 
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-bold text-[#1A202C] mb-1">Unit Selling Price (KWD)</label>
+            <p className="text-xs text-[#718096] mb-2">→ Avg {avgPiecesPerOrder.toFixed(2)} pieces / order</p>
+            <input 
+              type="number" step="0.1" 
+              value={unitSellingPriceKwd} onChange={e => setUnitSellingPriceKwd(Number(e.target.value))} 
+              className="w-full border border-[#E2E8F0] rounded-xl p-3 font-semibold text-[#1A202C] focus:ring-2 focus:ring-[#2C7A51] outline-none" 
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-bold text-[#1A202C] mb-1">Product Cost / Unit (USD)</label>
+            <p className="text-xs text-[#718096] mb-2">Your COGS per unit</p>
+            <input 
+              type="number" step="0.1" 
+              value={productCostUsd} onChange={e => setProductCostUsd(Number(e.target.value))} 
+              className="w-full border border-[#E2E8F0] rounded-xl p-3 font-semibold text-[#1A202C] focus:ring-2 focus:ring-[#2C7A51] outline-none" 
+            />
+          </div>
+
+          {/* Row 2 */}
+          <div>
+            <label className="block text-sm font-bold text-[#1A202C] mb-1">Cost per Lead (USD)</label>
+            <p className="text-xs text-[#718096] mb-2">CPL from your ad campaigns</p>
+            <input 
+              type="number" step="0.1" 
+              value={cpl} onChange={e => setCpl(Number(e.target.value))} 
+              className="w-full border border-[#E2E8F0] rounded-xl p-3 font-semibold text-[#1A202C] focus:ring-2 focus:ring-[#2C7A51] outline-none" 
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-bold text-[#1A202C] mb-1">Confirmation Rate (%)</label>
+            <p className="text-xs text-[#718096] mb-2">% of leads that confirm</p>
+            <input 
+              type="number" 
+              value={confirmationRate} onChange={e => setConfirmationRate(Number(e.target.value))} 
+              className="w-full border border-[#E2E8F0] rounded-xl p-3 font-semibold text-[#1A202C] focus:ring-2 focus:ring-[#2C7A51] outline-none" 
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-bold text-[#1A202C] mb-1">Delivery Rate (%)</label>
+            <p className="text-xs text-[#718096] mb-2">% of confirmed delivered</p>
+            <input 
+              type="number" 
+              value={deliveryRate} onChange={e => setDeliveryRate(Number(e.target.value))} 
+              className="w-full border border-[#E2E8F0] rounded-xl p-3 font-semibold text-[#1A202C] focus:ring-2 focus:ring-[#2C7A51] outline-none" 
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-bold text-[#1A202C] mb-1">Leads at Scale</label>
+            <p className="text-xs text-[#718096] mb-2">Number of leads for projection</p>
+            <input 
+              type="number" 
+              value={leadsAtScale} onChange={e => setLeadsAtScale(Number(e.target.value))} 
+              className="w-full border border-[#E2E8F0] rounded-xl p-3 font-semibold text-[#1A202C] focus:ring-2 focus:ring-[#2C7A51] outline-none" 
+            />
+          </div>
+        </div>
+
+        {/* Badges */}
+        <div className="flex flex-wrap gap-4 border-t border-[#E2E8F0] pt-6">
+          <div className="bg-[#1B4D3E] text-white px-4 py-2 rounded-xl flex items-center gap-2">
+            <span className="text-sm font-semibold opacity-90">AOV (USD)</span>
+            <span className="text-xl font-bold">${aovUsd.toFixed(2)}</span>
+          </div>
+          <div className="bg-[#F5F2EA] text-[#1A202C] px-4 py-2 rounded-xl flex items-center gap-2 border border-[#E2E8F0]">
+            <span className="text-sm font-semibold opacity-80">Avg Pieces / Order</span>
+            <span className="text-xl font-bold">{avgPiecesPerOrder.toFixed(2)}</span>
+          </div>
+          <div className="bg-[#E6F4EA] text-[#2C7A51] px-4 py-2 rounded-xl flex items-center gap-2 border border-[#C6E5D1]">
+            <span className="text-sm font-semibold opacity-90">Net / Delivered (ex-ads)</span>
+            <span className="text-xl font-bold">{netPerDeliveredExAds >= 0 ? '+' : ''}${netPerDeliveredExAds.toFixed(2)}</span>
+          </div>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        {/* --- Inputs Section --- */}
-        <div className="lg:col-span-4 bg-white p-5 rounded-2xl border border-[#D6E4E8] shadow-sm space-y-4">
-          <h3 className="font-bold text-[#142B3B] border-b border-[#E8F0F3] pb-3 mb-4">المتغيرات (Inputs)</h3>
+      {/* 2. YOUR COD COST STRUCTURE */}
+      <div className="bg-white rounded-3xl p-6 shadow-sm border border-[#E2E8F0] mb-6">
+        <h3 className="text-xs font-bold text-[#718096] tracking-wider uppercase mb-4">Your COD Cost Structure</h3>
+        <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+          <div className="bg-[#F5F2EA] p-4 rounded-2xl">
+            <p className="text-xs font-bold text-[#4A5568] mb-1">Per Confirmed Lead</p>
+            <p className="text-2xl font-bold text-[#2C7A51] mb-1">${confirmationFee.toFixed(2)}</p>
+            <p className="text-xs text-[#718096]">Confirmation fee</p>
+          </div>
+          <div className="bg-[#F5F2EA] p-4 rounded-2xl">
+            <p className="text-xs font-bold text-[#4A5568] mb-1">Per Delivered Order</p>
+            <p className="text-2xl font-bold text-[#2C7A51] mb-1">${deliveryFee.toFixed(2)}</p>
+            <p className="text-xs text-[#718096]">Delivery fee</p>
+          </div>
+          <div className="bg-[#F5F2EA] p-4 rounded-2xl">
+            <p className="text-xs font-bold text-[#4A5568] mb-1">Per Returned Order</p>
+            <p className="text-2xl font-bold text-[#2C7A51] mb-1">${returnFee.toFixed(2)}</p>
+            <p className="text-xs text-[#718096]">Return fee</p>
+          </div>
+          <div className="bg-[#F5F2EA] p-4 rounded-2xl">
+            <p className="text-xs font-bold text-[#4A5568] mb-1">Per Fulfilled Order</p>
+            <p className="text-2xl font-bold text-[#2C7A51] mb-1">${fulfillmentFee.toFixed(2)}</p>
+            <p className="text-xs text-[#718096]">Leaves warehouse</p>
+          </div>
+        </div>
+      </div>
+
+      {/* 3. Bottom Sections */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        
+        {/* Section 1 - Breakeven */}
+        <div className="bg-white rounded-3xl p-6 shadow-sm border border-[#E2E8F0]">
+          <h2 className="text-xl font-bold text-[#1A202C] mb-2">Section 1 — Breakeven Thresholds</h2>
+          <p className="text-sm text-[#718096] mb-6">At your current AOV and cost structure, what are the minimum metrics you need to not lose money?</p>
           
-          <div>
-            <label className="block text-xs font-bold text-[#506A77] mb-1">عدد العملاء المحتملين (Leads)</label>
-            <input type="number" value={leads} onChange={e => setLeads(Number(e.target.value))} className="w-full border border-[#D6E4E8] rounded-lg p-2.5 text-sm outline-none focus:border-[#4A8B9A] focus:ring-1 focus:ring-[#4A8B9A]" dir="ltr" />
-          </div>
-          
-          <div>
-            <label className="block text-xs font-bold text-[#506A77] mb-1">تكلفة العميل المحتمل ($ CPL)</label>
-            <input type="number" step="0.1" value={cpl} onChange={e => setCpl(Number(e.target.value))} className="w-full border border-[#D6E4E8] rounded-lg p-2.5 text-sm outline-none focus:border-[#4A8B9A]" dir="ltr" />
-          </div>
-
-          <div>
-            <label className="block text-xs font-bold text-[#506A77] mb-1">معدل التأكيد (%)</label>
-            <input type="number" value={confirmationRate} onChange={e => setConfirmationRate(Number(e.target.value))} className="w-full border border-[#D6E4E8] rounded-lg p-2.5 text-sm outline-none focus:border-[#4A8B9A]" dir="ltr" />
+          <div className={`rounded-2xl p-6 border ${currentProfitPerLead >= 0 ? 'bg-[#E6F4EA] border-[#C6E5D1]' : 'bg-[#FEEBC8] border-[#FEB2B2]'} mb-6`}>
+            <p className="text-xs font-bold uppercase tracking-wider text-[#2D3748] mb-1">Current Profit Per Lead</p>
+            <p className={`text-4xl font-extrabold ${currentProfitPerLead >= 0 ? 'text-[#2C7A51]' : 'text-[#C53030]'}`}>
+              {currentProfitPerLead >= 0 ? '+' : ''}${currentProfitPerLead.toFixed(2)}
+            </p>
+            <p className="text-sm mt-2 font-medium opacity-80">
+              {currentProfitPerLead >= 0 ? 'Above breakeven at current rates' : 'Below breakeven at current rates'}
+            </p>
           </div>
 
-          <div>
-            <label className="block text-xs font-bold text-[#506A77] mb-1">معدل التسليم (%)</label>
-            <input type="number" value={deliveryRate} onChange={e => setDeliveryRate(Number(e.target.value))} className="w-full border border-[#D6E4E8] rounded-lg p-2.5 text-sm outline-none focus:border-[#4A8B9A]" dir="ltr" />
-          </div>
-
-          <div className="pt-4 border-t border-[#E8F0F3]">
-            <label className="block text-xs font-bold text-[#506A77] mb-1">تكلفة المنتج للقطعة ($)</label>
-            <input type="number" step="0.5" value={productCost} onChange={e => setProductCost(Number(e.target.value))} className="w-full border border-[#D6E4E8] rounded-lg p-2.5 text-sm outline-none focus:border-[#4A8B9A]" dir="ltr" />
-          </div>
-
-          <div>
-            <label className="block text-xs font-bold text-[#506A77] mb-1">متوسط عدد القطع في الطلب (Avg Items)</label>
-            <input type="number" step="0.1" value={avgItemsPerOrder} onChange={e => setAvgItemsPerOrder(Number(e.target.value))} className="w-full border border-[#D6E4E8] rounded-lg p-2.5 text-sm outline-none focus:border-[#4A8B9A]" dir="ltr" />
-            <p className="text-[10px] text-[#6B8A99] mt-1">مهم لحساب التكلفة الفعلية بناءً على متوسط قيمة الطلب (AOV).</p>
-          </div>
-
-          <div className="pt-4 border-t border-[#E8F0F3]">
-            <label className="block text-xs font-bold text-[#506A77] mb-1">سعر الصرف (دينار كويتي = دولار)</label>
-            <input type="number" step="0.01" value={exchangeRate} onChange={e => setExchangeRate(Number(e.target.value))} className="w-full border border-[#D6E4E8] rounded-lg p-2.5 text-sm outline-none focus:border-[#4A8B9A]" dir="ltr" />
+          <div className="space-y-4">
+            <div className="flex justify-between items-center py-3 border-b border-[#E2E8F0]">
+              <span className="text-sm font-semibold text-[#4A5568]">Max CPA (Per Delivered)</span>
+              <span className="font-bold text-[#1A202C]">${breakEvenCpa.toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between items-center py-3 border-b border-[#E2E8F0]">
+              <span className="text-sm font-semibold text-[#4A5568]">Max CPL (Per Lead)</span>
+              <span className="font-bold text-[#1A202C]">${breakEvenCpl.toFixed(2)}</span>
+            </div>
           </div>
         </div>
 
-        {/* --- Results Section --- */}
-        <div className="lg:col-span-8 flex flex-col gap-6">
+        {/* Section 2 - Profit at Scale */}
+        <div className="bg-white rounded-3xl p-6 shadow-sm border border-[#E2E8F0]">
+          <h2 className="text-xl font-bold text-[#1A202C] mb-2">Section 2 — Profit at Scale</h2>
+          <p className="text-sm text-[#718096] mb-6">Full P&L projection for <span className="font-bold">{leadsAtScale.toLocaleString()}</span> leads.</p>
           
-          {/* Section 1: Break-even */}
-          <div className="bg-gradient-to-br from-[#142B3B] to-[#1A384D] rounded-2xl p-6 text-white shadow-md relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-32 h-32 bg-white/5 rounded-full -translate-x-10 -translate-y-10 blur-2xl"></div>
-            <h3 className="font-bold text-lg mb-6 flex items-center gap-2">
-              <Target className="w-5 h-5 text-[#D4AF37]" />
-              نقطة التعادل (Break-even)
-            </h3>
+          <div className="grid grid-cols-3 gap-4 mb-6">
+            <div className="bg-[#F5F2EA] rounded-xl p-3 text-center">
+              <p className="text-xs font-bold text-[#718096] mb-1">Leads</p>
+              <p className="font-bold text-[#1A202C] text-lg">{leadsAtScale.toLocaleString()}</p>
+            </div>
+            <div className="bg-[#F5F2EA] rounded-xl p-3 text-center">
+              <p className="text-xs font-bold text-[#718096] mb-1">Confirmed</p>
+              <p className="font-bold text-[#1A202C] text-lg">{Math.round(confirmedOrders).toLocaleString()}</p>
+            </div>
+            <div className="bg-[#F5F2EA] rounded-xl p-3 text-center">
+              <p className="text-xs font-bold text-[#718096] mb-1">Delivered</p>
+              <p className="font-bold text-[#1A202C] text-lg">{Math.round(deliveredOrders).toLocaleString()}</p>
+            </div>
+          </div>
+
+          <div className="space-y-3 text-sm">
+            <div className="flex justify-between items-center py-2">
+              <span className="font-bold text-[#2C7A51]">Revenue</span>
+              <span className="font-bold text-[#2C7A51]">${Math.round(totalRevenue).toLocaleString()}</span>
+            </div>
+            <div className="flex justify-between items-center py-1">
+              <span className="text-[#718096]">Ad Spend</span>
+              <span className="font-semibold text-[#1A202C]">${Math.round(totalAdSpend).toLocaleString()}</span>
+            </div>
+            <div className="flex justify-between items-center py-1">
+              <span className="text-[#718096]">Product COGS</span>
+              <span className="font-semibold text-[#1A202C]">${Math.round(totalCogs).toLocaleString()}</span>
+            </div>
+            <div className="flex justify-between items-center py-1">
+              <span className="text-[#718096]">Delivery Fees</span>
+              <span className="font-semibold text-[#1A202C]">${Math.round(totalDeliveryCost).toLocaleString()}</span>
+            </div>
+            <div className="flex justify-between items-center py-1">
+              <span className="text-[#718096]">Confirmation Fees</span>
+              <span className="font-semibold text-[#1A202C]">${Math.round(totalConfirmationCost).toLocaleString()}</span>
+            </div>
+            <div className="flex justify-between items-center py-1">
+              <span className="text-[#718096]">Return Fees</span>
+              <span className="font-semibold text-[#1A202C]">${Math.round(totalReturnCost).toLocaleString()}</span>
+            </div>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="bg-white/10 p-4 rounded-xl backdrop-blur-sm border border-white/10">
-                <p className="text-sm text-[#8BB8C9] mb-1">أقصى تكلفة مسموحة للطلب الناجح (Break-even CPA)</p>
-                <div className="text-3xl font-extrabold text-[#D4AF37]">${breakEvenCpa.toFixed(2)}</div>
-                <p className="text-xs text-white/60 mt-2">إذا زادت تكلفة الإعلانات للطلب الناجح عن هذا الرقم، ستبدأ بالخسارة.</p>
+            <div className="border-t border-[#E2E8F0] pt-3 mt-2">
+              <div className="flex justify-between items-center">
+                <span className="font-bold text-[#1A202C] text-base">Net Profit</span>
+                <span className={`font-extrabold text-xl ${netProfit >= 0 ? 'text-[#2C7A51]' : 'text-[#C53030]'}`}>
+                  {netProfit >= 0 ? '+' : ''}${Math.round(netProfit).toLocaleString()}
+                </span>
               </div>
-              
-              <div className="bg-white/10 p-4 rounded-xl backdrop-blur-sm border border-white/10">
-                <p className="text-sm text-[#8BB8C9] mb-1">أقصى تكلفة مسموحة للعميل المحتمل (Break-even CPL)</p>
-                <div className="text-3xl font-extrabold text-[#D4AF37]">${breakEvenCpl.toFixed(2)}</div>
-                <p className="text-xs text-white/60 mt-2">التكلفة المستهدفة في الإعلانات لكل Lead لعدم الخسارة.</p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4 mt-4 pt-4 border-t border-[#E2E8F0]">
+              <div>
+                <p className="text-xs font-bold text-[#718096] uppercase tracking-wider mb-1">ROI</p>
+                <p className={`font-bold text-lg ${roi >= 0 ? 'text-[#2C7A51]' : 'text-[#C53030]'}`}>{roi.toFixed(1)}%</p>
+              </div>
+              <div className="text-right">
+                <p className="text-xs font-bold text-[#718096] uppercase tracking-wider mb-1">Margin</p>
+                <p className={`font-bold text-lg ${margin >= 0 ? 'text-[#2C7A51]' : 'text-[#C53030]'}`}>{margin.toFixed(1)}%</p>
               </div>
             </div>
           </div>
 
-          {/* Section 2: Profit Projection */}
-          <div className="bg-white rounded-2xl border border-[#D6E4E8] shadow-sm overflow-hidden">
-            <div className="bg-[#F8FBFC] p-4 border-b border-[#E8F0F3]">
-              <h3 className="font-bold text-[#142B3B] flex items-center gap-2">
-                <TrendingUp className="w-5 h-5 text-[#267A4A]" />
-                حساب الربح بعد التوسع (Profit Projection)
-              </h3>
-            </div>
-            
-            <div className="p-6">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                <div className="p-4 bg-[#F5F8FA] rounded-xl border border-[#E8F0F3] text-center">
-                  <p className="text-xs text-[#506A77] font-bold mb-1">الطلبات المؤكدة</p>
-                  <p className="text-xl font-bold text-[#142B3B]">{Math.round(confirmedOrders)}</p>
-                </div>
-                <div className="p-4 bg-[#F5F8FA] rounded-xl border border-[#E8F0F3] text-center">
-                  <p className="text-xs text-[#506A77] font-bold mb-1">الطلبات المستلمة</p>
-                  <p className="text-xl font-bold text-[#267A4A]">{Math.round(deliveredOrders)}</p>
-                </div>
-                <div className="p-4 bg-[#F5F8FA] rounded-xl border border-[#E8F0F3] text-center">
-                  <p className="text-xs text-[#506A77] font-bold mb-1">الطلبات المرتجعة</p>
-                  <p className="text-xl font-bold text-[#E91E63]">{Math.round(returnedOrders)}</p>
-                </div>
-                <div className="p-4 bg-[#F5F8FA] rounded-xl border border-[#E8F0F3] text-center">
-                  <p className="text-xs text-[#506A77] font-bold mb-1">الإيرادات (Gross)</p>
-                  <p className="text-xl font-bold text-[#142B3B]">${Math.round(grossRevenue).toLocaleString()}</p>
-                </div>
-              </div>
-
-              <div className="border-t border-[#E8F0F3] pt-6 mb-6">
-                <h4 className="text-sm font-bold text-[#142B3B] mb-4">ملخص التكاليف:</h4>
-                <div className="space-y-3">
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="text-[#506A77]">تكلفة الإعلانات (Ad Spend):</span>
-                    <span className="font-semibold text-[#E91E63]">${Math.round(totalAdSpend).toLocaleString()}</span>
-                  </div>
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="text-[#506A77]">تكلفة تأكيد الطلبات (Call Center):</span>
-                    <span className="font-semibold text-[#E91E63]">${Math.round(totalConfirmationCost).toLocaleString()}</span>
-                  </div>
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="text-[#506A77]">تكلفة الشحن والتسليم:</span>
-                    <span className="font-semibold text-[#E91E63]">${Math.round(totalDeliveryCost).toLocaleString()}</span>
-                  </div>
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="text-[#506A77]">تكلفة المرتجعات:</span>
-                    <span className="font-semibold text-[#E91E63]">${Math.round(totalReturnCost).toLocaleString()}</span>
-                  </div>
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="text-[#506A77]">تكلفة المنتجات (COGS):</span>
-                    <span className="font-semibold text-[#E91E63]">${Math.round(totalCogs).toLocaleString()}</span>
-                  </div>
-                  <div className="flex justify-between items-center pt-2 border-t border-[#E8F0F3]">
-                    <span className="font-bold text-[#142B3B]">إجمالي التكاليف:</span>
-                    <span className="font-bold text-[#E91E63]">${Math.round(totalCosts).toLocaleString()}</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div className={`p-4 rounded-xl border ${netProfit >= 0 ? 'bg-[#EFF7F3] border-[#C5E0D3]' : 'bg-[#FCE4EC] border-[#F8BBD0]'}`}>
-                  <p className="text-sm text-[#506A77] font-bold mb-1">صافي الربح (Net Profit)</p>
-                  <p className={`text-2xl font-extrabold ${netProfit >= 0 ? 'text-[#267A4A]' : 'text-[#E91E63]'}`}>
-                    ${Math.round(netProfit).toLocaleString()}
-                  </p>
-                </div>
-                <div className={`p-4 rounded-xl border ${roi >= 0 ? 'bg-[#EFF7F3] border-[#C5E0D3]' : 'bg-[#FCE4EC] border-[#F8BBD0]'}`}>
-                  <p className="text-sm text-[#506A77] font-bold mb-1">العائد على الإعلانات (ROI)</p>
-                  <p className={`text-2xl font-extrabold ${roi >= 0 ? 'text-[#267A4A]' : 'text-[#E91E63]'}`}>
-                    {roi.toFixed(1)}%
-                  </p>
-                </div>
-                <div className={`p-4 rounded-xl border ${profitMargin >= 0 ? 'bg-[#EFF7F3] border-[#C5E0D3]' : 'bg-[#FCE4EC] border-[#F8BBD0]'}`}>
-                  <p className="text-sm text-[#506A77] font-bold mb-1">هامش الربح (Margin)</p>
-                  <p className={`text-2xl font-extrabold ${profitMargin >= 0 ? 'text-[#267A4A]' : 'text-[#E91E63]'}`}>
-                    {profitMargin.toFixed(1)}%
-                  </p>
-                </div>
-              </div>
-              
-            </div>
-          </div>
         </div>
       </div>
     </div>
