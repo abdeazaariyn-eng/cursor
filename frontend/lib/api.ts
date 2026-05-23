@@ -161,6 +161,7 @@ export interface GetOrderResponse {
   status: string
   totalKwd: number
   customerName: string
+  customerPhoneMasked: string
   items: Array<{
     productNameAr: string
     offerId: string
