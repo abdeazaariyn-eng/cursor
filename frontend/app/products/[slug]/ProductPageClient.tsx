@@ -66,6 +66,7 @@ export function ProductPageClient({ product }: Props) {
       productId: product.id,
       slug: product.slug,
       name: finalName,
+      color: activeColorObj?.label,
       offerId: selectedOffer,
       quantity: priceData.quantity,
       unitLabel: priceData.label,

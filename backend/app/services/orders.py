@@ -145,11 +145,17 @@ async def create_order(
             raise ValueError(f"عرض السعر غير صحيح: {item_in.offerId}")
         product = PRODUCT_CATALOG[item_in.productId]
         price_rule = PRICE_RULES[item_in.offerId]
+        
+        final_name = item_in.variantName if item_in.variantName else product["name_ar"]
+        
+        logger.info(f"Creating item: variantName={item_in.variantName}, color={item_in.color}")
+        
         item = OrderItem(
             order_id=order.id,
             product_id=item_in.productId,
             product_slug=product["slug"],
-            product_name_ar=product["name_ar"],
+            product_name_ar=final_name,
+            product_color=item_in.color,
             offer_id=item_in.offerId,
             quantity=int(price_rule["quantity"]),
             price_kwd=Decimal(str(price_rule["price_kwd"])),

@@ -100,6 +100,8 @@ export interface CreateOrderPayload {
   items: Array<{
     productId: string
     offerId: string
+    variantName?: string
+    color?: string
   }>
   attribution: {
     landingPage?: string

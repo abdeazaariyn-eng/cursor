@@ -35,6 +35,8 @@ class CustomerIn(BaseModel):
 class OrderItemIn(BaseModel):
     productId: str
     offerId: str
+    variantName: Optional[str] = Field(None, max_length=255)
+    color: Optional[str] = Field(None, max_length=255)
 
     @field_validator("productId")
     @classmethod

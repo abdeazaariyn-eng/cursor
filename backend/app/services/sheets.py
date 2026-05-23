@@ -25,9 +25,11 @@ async def send_order_to_sheets(
     product_names = []
     skus = []
     quantities = []
+    colors = []
     
     for item in items:
         product_names.append(item.product_name_ar)
+        colors.append(item.product_color or "")
         sku = PRODUCT_CATALOG.get(item.product_id, {}).get("sku", "")
         skus.append(sku)
         quantities.append(str(item.quantity))
@@ -54,7 +56,8 @@ async def send_order_to_sheets(
         "quantity": "/".join(quantities),
         "total_price": float(order.total_kwd),
         "currency": "KWD",
-        "status": ""
+        "status": "",
+        "color": "/".join(colors)
     }
 
     last_error: Optional[str] = None

@@ -5,6 +5,7 @@ export interface CartItem {
   productId: string
   slug: string
   name: string
+  color?: string
   offerId: 'one_piece' | 'two_pieces' | 'three_pieces' | 'upsell_9kwd'
   quantity: number
   unitLabel: string

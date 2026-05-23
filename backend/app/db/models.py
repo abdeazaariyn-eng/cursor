@@ -130,6 +130,7 @@ class OrderItem(Base):
     product_id: Mapped[str] = mapped_column(String(100), nullable=False)
     product_slug: Mapped[str] = mapped_column(String(200), nullable=False)
     product_name_ar: Mapped[str] = mapped_column(String(500), nullable=False)
+    product_color: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
     offer_id: Mapped[str] = mapped_column(String(50), nullable=False)
     quantity: Mapped[int] = mapped_column(Integer, nullable=False)
     price_kwd: Mapped[Decimal] = mapped_column(Numeric(10, 3), nullable=False)

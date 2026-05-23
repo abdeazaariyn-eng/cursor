@@ -59,6 +59,8 @@ export function CheckoutModal() {
         items: items.map((item) => ({
           productId: item.productId,
           offerId: item.offerId,
+          variantName: item.name,
+          color: item.color,
         })),
         attribution: {
           landingPage: attribution.landingPage,
