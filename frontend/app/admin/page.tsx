@@ -1,7 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Activity, MousePointerClick, ShoppingCart, TrendingUp, Search, Eye, X } from 'lucide-react'
+import { Activity, MousePointerClick, ShoppingCart, TrendingUp, Search, Eye, X, Calculator } from 'lucide-react'
+import { ProfitCalculator } from './ProfitCalculator'
 
 // Add auth token to a simple API client here
 function useAdminAuth() {
@@ -22,7 +23,7 @@ export default function AdminDashboard() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   
-  const [activeTab, setActiveTab] = useState<'metrics'|'orders'>('metrics')
+  const [activeTab, setActiveTab] = useState<'metrics'|'orders'|'profit'>('metrics')
   const [metrics, setMetrics] = useState({ orders: 0, revenue: 0, clicks: 0, conversion_rate: 0 })
   const [orders, setOrders] = useState<any[]>([])
   const [selectedOrder, setSelectedOrder] = useState<any>(null)
@@ -119,18 +120,24 @@ export default function AdminDashboard() {
   return (
     <div>
       <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div className="flex bg-white rounded-xl shadow-sm border border-[#D6E4E8] overflow-hidden">
+        <div className="flex bg-white rounded-xl shadow-sm border border-[#D6E4E8] overflow-hidden overflow-x-auto">
           <button 
             onClick={() => setActiveTab('metrics')}
-            className={`px-6 py-3 font-bold text-sm transition-colors ${activeTab === 'metrics' ? 'bg-[#142B3B] text-white' : 'text-[#506A77] hover:bg-gray-50'}`}
+            className={`px-6 py-3 font-bold text-sm whitespace-nowrap transition-colors ${activeTab === 'metrics' ? 'bg-[#142B3B] text-white' : 'text-[#506A77] hover:bg-gray-50'}`}
           >
             الإحصائيات
           </button>
           <button 
             onClick={() => setActiveTab('orders')}
-            className={`px-6 py-3 font-bold text-sm transition-colors ${activeTab === 'orders' ? 'bg-[#142B3B] text-white' : 'text-[#506A77] hover:bg-gray-50'}`}
+            className={`px-6 py-3 font-bold text-sm whitespace-nowrap transition-colors ${activeTab === 'orders' ? 'bg-[#142B3B] text-white' : 'text-[#506A77] hover:bg-gray-50'}`}
           >
             الطلبات
+          </button>
+          <button 
+            onClick={() => setActiveTab('profit')}
+            className={`px-6 py-3 font-bold text-sm whitespace-nowrap transition-colors ${activeTab === 'profit' ? 'bg-[#142B3B] text-white' : 'text-[#506A77] hover:bg-gray-50'}`}
+          >
+            حاسبة الربح
           </button>
         </div>
         
@@ -228,6 +235,10 @@ export default function AdminDashboard() {
             </table>
           </div>
         </div>
+      )}
+
+      {activeTab === 'profit' && !loading && (
+        <ProfitCalculator metricsAovKwd={metrics.orders > 0 ? metrics.revenue / metrics.orders : 0} />
       )}
 
       {/* Order Preview Modal */}
