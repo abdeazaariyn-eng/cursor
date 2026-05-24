@@ -1,11 +1,13 @@
 from __future__ import annotations
 
+import time
 import uuid
 from contextlib import asynccontextmanager
 from typing import Any, AsyncGenerator
 
 from fastapi import FastAPI, Request, status
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
 from pydantic import ValidationError
@@ -64,6 +66,8 @@ app = FastAPI(
     redoc_url="/redoc" if not settings.is_production else None,
 )
 
+app.add_middleware(GZipMiddleware, minimum_size=500)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.CORS_ORIGINS,
@@ -72,6 +76,24 @@ app.add_middleware(
     allow_headers=["*"],
     max_age=86400,
 )
+
+
+_cache: dict[str, tuple[float, Any]] = {}
+CACHE_TTL = 30  # seconds
+
+@app.middleware("http")
+async def cache_middleware(request: Request, call_next: Any) -> Any:
+    if request.method == "GET" and not request.url.path.startswith("/admin"):
+        cache_key = str(request.url)
+        now = time.time()
+        cached = _cache.get(cache_key)
+        if cached and (now - cached[0]) < CACHE_TTL:
+            return cached[1]
+        response = await call_next(request)
+        if response.status_code == 200:
+            _cache[cache_key] = (now, response)
+        return response
+    return await call_next(request)
 
 
 @app.middleware("http")

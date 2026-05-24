@@ -1,32 +1,52 @@
-// Next.js Performance Config
-// Add to next.config.js or create it
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Required by Dockerfile that copies .next/standalone
   output: 'standalone',
 
-  // Image optimization
   images: {
     unoptimized: true,
   },
-  
-  // Compression
+
   compress: true,
-  
-  // Minification
   swcMinify: true,
-  
-  // Output analysis
   productionBrowserSourceMaps: false,
-  
-  // Optimize packages
+
   experimental: {
     optimizePackageImports: [
       'lucide-react',
       'framer-motion',
     ],
   },
+
+  headers: async () => [
+    {
+      source: '/:path*',
+      headers: [
+        { key: 'X-DNS-Prefetch-Control', value: 'on' },
+        { key: 'X-Content-Type-Options', value: 'nosniff' },
+        { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
+      ],
+    },
+    {
+      source: '/(.*)\\.(js|css|woff2?|png|jpg|jpeg|webp|svg|ico)',
+      headers: [
+        { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+      ],
+    },
+    {
+      source: '/',
+      headers: [
+        { key: 'Cache-Control', value: 'public, s-maxage=60, stale-while-revalidate=300' },
+      ],
+    },
+    {
+      source: '/products/:path*',
+      headers: [
+        { key: 'Cache-Control', value: 'public, s-maxage=60, stale-while-revalidate=300' },
+      ],
+    },
+  ],
+
+  poweredByHeader: false,
 }
 
 module.exports = nextConfig
