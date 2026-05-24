@@ -22,6 +22,13 @@ async def check_ip_allowed(ip: Optional[str], phone: str) -> bool:
     if settings.WHITELISTED_PHONE and cleaned_phone.endswith(settings.WHITELISTED_PHONE):
         return True
 
+    # Allow specific IPs configured in environment (comma-separated)
+    try:
+        if settings.whitelisted_ips and ip and ip in settings.whitelisted_ips:
+            return True
+    except Exception:
+        pass
+
     # If no IP, we might reject or allow. Let's reject to be safe, or allow? 
     # Usually if we can't get IP we might allow it, but let's be strict or let's allow if local
     if not ip or ip in ("127.0.0.1", "::1", "localhost"):

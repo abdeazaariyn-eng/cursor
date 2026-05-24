@@ -69,6 +69,7 @@ class Settings(BaseSettings):
     MAXMIND_LICENSE_KEY: str = ""
     ALLOWED_COUNTRY: str = "KW"
     WHITELISTED_PHONE: str = "0501020304"
+    WHITELISTED_IPS: str = ""  # comma-separated allowlisted IP addresses
     
     ADMIN_USERNAME: str = "admin"
     ADMIN_PASSWORD: str = "mahdbaby123"
@@ -108,6 +109,11 @@ class Settings(BaseSettings):
     @property
     def sheets_enabled(self) -> bool:
         return bool(self.GOOGLE_SHEETS_WEBHOOK_URL)
+
+    @property
+    def whitelisted_ips(self) -> List[str]:
+        raw = self.WHITELISTED_IPS or ""
+        return [ip.strip() for ip in raw.split(",") if ip.strip()]
 
 
 @lru_cache
