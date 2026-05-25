@@ -9,6 +9,10 @@ const WHITELIST_IPS = new Set(
   (process.env.WHITELIST_IPS || '').split(',').map(ip => ip.trim()).filter(Boolean)
 )
 
+const BLOCKED_IPS = new Set(
+  (process.env.BLOCKED_IPS || '').split(',').map(ip => ip.trim()).filter(Boolean)
+)
+
 const BLOCKED_PATH = '/blocked'
 
 export function middleware(request: NextRequest) {
@@ -30,6 +34,19 @@ export function middleware(request: NextRequest) {
     request.ip ||
     ''
 
+  // If we don't have an IP, block (strict geo restriction)
+  if (!ip) {
+    const blockedUrl = request.nextUrl.clone()
+    blockedUrl.pathname = BLOCKED_PATH
+    return NextResponse.rewrite(blockedUrl)
+  }
+
+  if (BLOCKED_IPS.has(ip)) {
+    const blockedUrl = request.nextUrl.clone()
+    blockedUrl.pathname = BLOCKED_PATH
+    return NextResponse.rewrite(blockedUrl)
+  }
+
   if (WHITELIST_IPS.has(ip)) {
     return NextResponse.next()
   }
@@ -42,7 +59,8 @@ export function middleware(request: NextRequest) {
     ''
   ).toUpperCase()
 
-  if (!country || ALLOWED_COUNTRIES.has(country)) {
+  // Require a country and ensure it's in the allowlist (strict)
+  if (country && ALLOWED_COUNTRIES.has(country)) {
     return NextResponse.next()
   }
 

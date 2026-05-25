@@ -19,6 +19,7 @@ async def check_ip_allowed(ip: Optional[str], phone: str) -> bool:
       - IP is not suspicious (if we can detect it, MaxMind minFraud or City Insights gives some traits)
     """
     cleaned_phone = re.sub(r"[\s\-().+]", "", phone.strip())
+
     # Block specific IPs configured in environment (comma-separated)
     try:
         if settings.blocked_ips and ip and ip in settings.blocked_ips:
@@ -27,28 +28,17 @@ async def check_ip_allowed(ip: Optional[str], phone: str) -> bool:
     except Exception:
         pass
 
-    if settings.WHITELISTED_PHONE and cleaned_phone.endswith(settings.WHITELISTED_PHONE):
-        return True
-
-    # Allow specific IPs configured in environment (comma-separated)
-    try:
-        if settings.whitelisted_ips and ip and ip in settings.whitelisted_ips:
-            return True
-    except Exception:
-        pass
-
-    # If no IP, we might reject or allow. Let's reject to be safe, or allow? 
-    # Usually if we can't get IP we might allow it, but let's be strict or let's allow if local
+    # If no IP or local IP, block in production (strict policy)
     if not ip or ip in ("127.0.0.1", "::1", "localhost"):
         if settings.is_production:
-            # Maybe return False in production if no IP? But let's let it slide if no IP to avoid blocking valid traffic that somehow lost IP
-            pass
+            logger.warning("no_ip_blocked_in_prod", ip=ip)
+            return False
         return True
 
+    # Require MaxMind to be configured for geo-enforcement; block if missing
     if not settings.MAXMIND_ACCOUNT_ID or not settings.MAXMIND_LICENSE_KEY:
-        # If not configured, allow
-        return True
-
+        logger.warning("maxmind_not_configured_blocking", ip=ip)
+        return False
     try:
         # Use GeoLite2 Country API endpoint to support free tier accounts
         url = f"https://geolite.info/geoip/v2.1/country/{ip}"
@@ -59,8 +49,8 @@ async def check_ip_allowed(ip: Optional[str], phone: str) -> bool:
             
             if response.status_code != 200:
                 logger.error("maxmind_api_error", status=response.status_code, body=response.text)
-                # If MaxMind fails, fallback to allow to not block sales
-                return True
+                # Strict: block if MaxMind API fails
+                return False
                 
             data = response.json()
             
@@ -95,9 +85,9 @@ async def check_ip_allowed(ip: Optional[str], phone: str) -> bool:
                                     return False
                 except Exception as e:
                     logger.error("proxycheck_api_exception", error=str(e))
-                
-            return True
-            
-    except Exception as e:
-        logger.error("maxmind_api_exception", error=str(e))
-        return True
+
+                return True
+
+            except Exception as e:
+            logger.error("maxmind_api_exception", error=str(e))
+            return False
