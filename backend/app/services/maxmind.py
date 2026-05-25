@@ -19,6 +19,14 @@ async def check_ip_allowed(ip: Optional[str], phone: str) -> bool:
       - IP is not suspicious (if we can detect it, MaxMind minFraud or City Insights gives some traits)
     """
     cleaned_phone = re.sub(r"[\s\-().+]", "", phone.strip())
+    # Block specific IPs configured in environment (comma-separated)
+    try:
+        if settings.blocked_ips and ip and ip in settings.blocked_ips:
+            logger.warning("blocked_ip", ip=ip)
+            return False
+    except Exception:
+        pass
+
     if settings.WHITELISTED_PHONE and cleaned_phone.endswith(settings.WHITELISTED_PHONE):
         return True
 

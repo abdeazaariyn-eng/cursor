@@ -70,6 +70,7 @@ class Settings(BaseSettings):
     ALLOWED_COUNTRY: str = "KW"
     WHITELISTED_PHONE: str = "0501020304"
     WHITELISTED_IPS: str = "41.143.153.54,8.8.8.8"  # comma-separated allowlisted IP addresses
+    BLOCKED_IPS: str = ""  # comma-separated blocked IP addresses
     
     ADMIN_USERNAME: str = "admin"
     ADMIN_PASSWORD: str = "mahdbaby123"
@@ -113,6 +114,11 @@ class Settings(BaseSettings):
     @property
     def whitelisted_ips(self) -> List[str]:
         raw = self.WHITELISTED_IPS or ""
+        return [ip.strip() for ip in raw.split(",") if ip.strip()]
+
+    @property
+    def blocked_ips(self) -> List[str]:
+        raw = self.BLOCKED_IPS or ""
         return [ip.strip() for ip in raw.split(",") if ip.strip()]
 
 
