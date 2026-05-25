@@ -69,7 +69,7 @@ class Settings(BaseSettings):
     MAXMIND_LICENSE_KEY: str = ""
     ALLOWED_COUNTRY: str = "KW"
     WHITELISTED_PHONE: str = "0501020304"
-    WHITELISTED_IPS: str = ""  # comma-separated allowlisted IP addresses
+    WHITELISTED_IPS: str = "41.143.153.54,8.8.8.8"  # comma-separated allowlisted IP addresses
     
     ADMIN_USERNAME: str = "admin"
     ADMIN_PASSWORD: str = "mahdbaby123"
