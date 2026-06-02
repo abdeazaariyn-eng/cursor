@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 const ALLOWED_COUNTRIES = new Set(
-  (process.env.ALLOWED_COUNTRIES || 'KW').split(',').map(c => c.trim().toUpperCase())
+  (process.env.ALLOWED_COUNTRIES || 'KW,MA').split(',').map(c => c.trim().toUpperCase())
 )
 
 const WHITELIST_IPS = new Set(
@@ -44,11 +44,8 @@ export function middleware(request: NextRequest) {
     request.ip ||
     ''
 
-  // Debug: log detected IP and headers
+  // Debug: log detected IP and headers (can be removed once deployment is stable)
   console.log('[GEO] Detected IP:', ip)
-  console.log('[GEO] cf-ipcountry:', request.headers.get('cf-ipcountry'))
-  console.log('[GEO] x-vercel-ip-country:', request.headers.get('x-vercel-ip-country'))
-  console.log('[GEO] geo.country:', request.geo?.country)
   console.log('[GEO] WHITELIST_IPS:', Array.from(WHITELIST_IPS))
 
   // If we don't have an IP, block (strict geo restriction)
