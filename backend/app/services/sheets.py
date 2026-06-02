@@ -33,6 +33,7 @@ async def send_order_to_sheets(
         sku = PRODUCT_CATALOG.get(item.product_id, {}).get("sku", "")
         skus.append(sku)
         quantities.append(str(item.quantity))
+        logger.info("sheet_item_debug", product_id=item.product_id, product_color=item.product_color, color_or_empty=item.product_color or "")
 
     # Format date as DD/MM/YYYY
     formatted_date = ""
