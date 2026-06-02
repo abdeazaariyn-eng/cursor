@@ -28,11 +28,8 @@ async def send_order_to_sheets(
     colors = []
     
     for item in items:
-        # Product name with color appended if available
-        product_name = item.product_name_ar
-        if item.product_color:
-            product_name = f"{product_name} ({item.product_color})"
-        product_names.append(product_name)
+        # Keep product name as-is (without color appended)
+        product_names.append(item.product_name_ar)
         
         # Extract simple color name (remove parenthetical description)
         # E.g., "رمادي (شكل الغابة)" → "رمادي"
