@@ -44,6 +44,13 @@ export function middleware(request: NextRequest) {
     request.ip ||
     ''
 
+  // Debug: log detected IP and headers
+  console.log('[GEO] Detected IP:', ip)
+  console.log('[GEO] cf-ipcountry:', request.headers.get('cf-ipcountry'))
+  console.log('[GEO] x-vercel-ip-country:', request.headers.get('x-vercel-ip-country'))
+  console.log('[GEO] geo.country:', request.geo?.country)
+  console.log('[GEO] WHITELIST_IPS:', Array.from(WHITELIST_IPS))
+
   // If we don't have an IP, block (strict geo restriction)
   if (!ip) {
     const blockedUrl = request.nextUrl.clone()
@@ -58,6 +65,7 @@ export function middleware(request: NextRequest) {
   }
 
   if (WHITELIST_IPS.has(ip)) {
+    console.log('[GEO] ✓ IP whitelisted, allowing')
     return NextResponse.next()
   }
 
@@ -69,11 +77,15 @@ export function middleware(request: NextRequest) {
     ''
   ).toUpperCase()
 
+  console.log('[GEO] Country detected:', country)
+
   // Require a country and ensure it's in the allowlist (strict)
   if (country && ALLOWED_COUNTRIES.has(country)) {
+    console.log('[GEO] ✓ Country allowed, allowing')
     return NextResponse.next()
   }
 
+  console.log('[GEO] ✗ Blocking: IP not whitelisted and country not allowed')
   const blockedUrl = request.nextUrl.clone()
   blockedUrl.pathname = BLOCKED_PATH
   return NextResponse.rewrite(blockedUrl)
