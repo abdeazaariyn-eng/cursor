@@ -15,6 +15,10 @@ const BLOCKED_IPS = new Set(
 
 const BLOCKED_PATH = '/blocked'
 
+// In development we want to bypass strict geo checks so localhost/127.0.0.1 works
+const IS_DEV = process.env.NODE_ENV !== 'production'
+const DEV_BYPASS_HOSTS = new Set(['localhost', '127.0.0.1', '::1'])
+
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
@@ -25,6 +29,12 @@ export function middleware(request: NextRequest) {
     pathname.startsWith('/favicon') ||
     pathname.match(/\.(ico|png|jpg|jpeg|svg|webp|gif|css|js|woff2?)$/)
   ) {
+    return NextResponse.next()
+  }
+
+  // Allow all requests in development (local testing) or from common dev hosts
+  const hostHeader = request.headers.get('host')?.split(':')[0]?.toLowerCase() || ''
+  if (IS_DEV || DEV_BYPASS_HOSTS.has(hostHeader)) {
     return NextResponse.next()
   }
 
