@@ -28,12 +28,23 @@ async def send_order_to_sheets(
     colors = []
     
     for item in items:
-        product_names.append(item.product_name_ar)
-        colors.append(item.product_color or "")
+        # Product name with color appended if available
+        product_name = item.product_name_ar
+        if item.product_color:
+            product_name = f"{product_name} ({item.product_color})"
+        product_names.append(product_name)
+        
+        # Extract simple color name (remove parenthetical description)
+        # E.g., "رمادي (شكل الغابة)" → "رمادي"
+        color_display = ""
+        if item.product_color:
+            color_display = item.product_color.split("(")[0].strip()
+        colors.append(color_display)
+        
         sku = PRODUCT_CATALOG.get(item.product_id, {}).get("sku", "")
         skus.append(sku)
         quantities.append(str(item.quantity))
-        logger.info("sheet_item_debug", product_id=item.product_id, product_color=item.product_color, color_or_empty=item.product_color or "")
+        logger.info("sheet_item_debug", product_id=item.product_id, product_color=item.product_color, color_display=color_display)
 
     # Format date as DD/MM/YYYY
     formatted_date = ""
