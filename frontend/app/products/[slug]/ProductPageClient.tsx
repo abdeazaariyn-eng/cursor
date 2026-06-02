@@ -57,15 +57,11 @@ export function ProductPageClient({ product }: Props) {
 
   const handleAddToCart = () => {
     const priceData = OFFER_CONFIG[selectedOffer]
-    // Add color info to name if applicable
-    const finalName = activeColorObj 
-      ? `${product.shortName} (${activeColorObj.label})` 
-      : product.shortName
 
     addItem({
       productId: product.id,
       slug: product.slug,
-      name: finalName,
+      name: product.shortName,
       color: activeColorObj?.label,
       offerId: selectedOffer,
       quantity: priceData.quantity,
