@@ -255,7 +255,7 @@ export function ProductPageClient({ product }: Props) {
                 {[
                   { icon: <Award className="w-6 h-6 text-[#D4AF37]" />, label: 'ضمان ذهبي', sub: '30 يوم' },
                   { icon: <Truck className="w-6 h-6 text-[#4A8B9A]" />, label: 'توصيل سريع', sub: 'لجميع المدن' },
-                  { icon: <Clock className="w-6 h-6 text-green-600" />, label: 'دفع آمن', sub: 'عند الاستلام' },
+                  { icon: <Package className="w-6 h-6 text-green-600" />, label: 'دفع آمن', sub: 'عند الاستلام' },
                 ].map((t, i) => (
                   <div key={i} className="flex flex-col items-center justify-center text-center gap-2 p-3 bg-[#F5F8FA] rounded-xl border border-[#D6E4E8]">
                     {t.icon}
@@ -569,49 +569,34 @@ export function ProductPageClient({ product }: Props) {
       ═══════════════════════════════════════════ */}
       <section className="py-20 bg-white overflow-hidden">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
-            {/* Text Left */}
-            <div>
-              <div className="inline-flex items-center gap-2 bg-green-100 text-green-800 rounded-full px-4 py-1.5 mb-6 font-bold text-sm">
-                <Clock className="w-4 h-4" />
-                يوفر وقتك وجهدك
-              </div>
-              <h2 className="text-3xl md:text-4xl font-extrabold text-[#142B3B] mb-6 leading-tight">
-                استخدام بديهي وسهل، بدون تعقيد ولا حوسة.
-              </h2>
-              <p className="text-[#506A77] text-lg mb-8 font-medium leading-relaxed">
-                وقتك كأم ثمين جداً. صممنا هذا المنتج عشان يشتغل معاك من أول لحظة، بخطوات بسيطة وتكونين جاهزة.
-              </p>
-
-              <div className="space-y-6 relative before:absolute before:inset-y-0 before:start-[1.1rem] before:w-0.5 before:bg-[#D6E4E8]">
-                {[
-                  { title: 'جهزي المنتج', desc: 'بدون تركيب معقد، جاهز للاستخدام الفوري من أول لحظة.' },
-                  { title: 'استخدميه بسهولة', desc: 'تصميم مريح يندمج مع روتينك وروتين طفلك بسلاسة تامة.' },
-                  { title: 'ارتاحي واستمتعي', desc: 'النتيجة الفورية اللي بتريح قلبك وتوفر طاقتك ووقتك.' },
-                ].map((step, i) => (
-                  <div key={i} className="relative flex items-start gap-5">
-                    <div className="w-10 h-10 rounded-full bg-[#4A8B9A] text-white flex items-center justify-center font-bold text-lg flex-shrink-0 relative z-10 shadow-md">
-                      {i + 1}
-                    </div>
-                    <div className="pt-1.5">
-                      <h4 className="font-bold text-[#142B3B] text-lg mb-1">{step.title}</h4>
-                      <p className="text-[#506A77] font-medium text-base leading-relaxed">{step.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
+          <div className="max-w-3xl mx-auto">
+            <div className="inline-flex items-center gap-2 bg-green-100 text-green-800 rounded-full px-4 py-1.5 mb-6 font-bold text-sm">
+              <Clock className="w-4 h-4" />
+              يوفر وقتك وجهدك
             </div>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-[#142B3B] mb-6 leading-tight">
+              استخدام بديهي وسهل، بدون تعقيد ولا حوسة.
+            </h2>
+            <p className="text-[#506A77] text-lg mb-8 font-medium leading-relaxed">
+              وقتك كأم ثمين جداً. صممنا هذا المنتج عشان يشتغل معاك من أول لحظة، بخطوات بسيطة وتكونين جاهزة.
+            </p>
 
-            {/* Image Right */}
-            <div className="relative">
-              <div className="absolute inset-0 bg-green-50 rounded-[3rem] rotate-6 scale-105 transform origin-center" />
-              <div className="relative aspect-square bg-white rounded-[2.5rem] flex flex-col items-center justify-center shadow-xl border border-green-100 p-8 overflow-hidden">
-                <div className="text-7xl mb-4">📱</div>
-                <p className="text-green-800 font-bold text-center text-sm">
-                  [صورة توضح سهولة الاستخدام في 3 خطوات]
-                </p>
-                <p className="text-xs text-[#506A77] mt-2 text-center">بدون تعقيد للدوام أو الزيارة</p>
-              </div>
+            <div className="space-y-6 relative before:absolute before:inset-y-0 before:start-[1.1rem] before:w-0.5 before:bg-[#D6E4E8]">
+              {[
+                { title: 'جهزي المنتج', desc: 'بدون تركيب معقد، جاهز للاستخدام الفوري من أول لحظة.' },
+                { title: 'استخدميه بسهولة', desc: 'تصميم مريح يندمج مع روتينك وروتين طفلك بسلاسة تامة.' },
+                { title: 'ارتاحي واستمتعي', desc: 'النتيجة الفورية اللي بتريح قلبك وتوفر طاقتك ووقتك.' },
+              ].map((step, i) => (
+                <div key={i} className="relative flex items-start gap-5">
+                  <div className="w-10 h-10 rounded-full bg-[#4A8B9A] text-white flex items-center justify-center font-bold text-lg flex-shrink-0 relative z-10 shadow-md">
+                    {i + 1}
+                  </div>
+                  <div className="pt-1.5">
+                    <h4 className="font-bold text-[#142B3B] text-lg mb-1">{step.title}</h4>
+                    <p className="text-[#506A77] font-medium text-base leading-relaxed">{step.desc}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
