@@ -65,10 +65,10 @@ export default function HomePage() {
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#D4AF37]/6 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
-          <div className="flex flex-col items-center gap-6 sm:gap-8">
-            <div className="flex items-center justify-center relative mx-auto w-full max-w-[390px] sm:max-w-md">
-              <div className="absolute inset-0 bg-[#4A8B9A]/10 rounded-[2.5rem] rotate-3 scale-105 transform origin-center" />
-              <div className="w-full max-w-[390px] sm:max-w-md aspect-[1.12] sm:aspect-square bg-white rounded-[2rem] sm:rounded-[2.5rem] flex items-center justify-center shadow-2xl relative z-10 border border-[#D6E4E8] overflow-hidden">
+          <div className="flex flex-col items-center gap-5 sm:gap-8">
+            <div className="flex items-center justify-center relative mx-auto w-full max-w-[calc(100vw-2rem)] sm:max-w-md">
+              <div className="absolute inset-0 bg-[#4A8B9A]/10 rounded-[2.25rem] rotate-3 scale-105 transform origin-center" />
+              <div className="w-full max-w-[calc(100vw-2rem)] sm:max-w-md aspect-square bg-white rounded-[1.75rem] sm:rounded-[2.5rem] flex items-center justify-center shadow-2xl relative z-10 border border-[#D6E4E8] overflow-hidden">
                 <img src="/images/home/hero.webp" alt="أم هادئة مع طفلها" className="w-full h-full object-cover" />
                 <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 bg-[#F7FBFC]/95 backdrop-blur-md rounded-2xl px-4 py-2.5 inline-flex items-center gap-2 border border-[#D6E4E8] shadow-lg whitespace-nowrap">
                   <Shield className="w-4 h-4 sm:w-5 sm:h-5 text-[#3B8263]" />
@@ -84,21 +84,21 @@ export default function HomePage() {
                 </span>
               </div>
 
-            <div className="max-w-3xl mx-auto text-center">
-              <h1 className="text-[2rem] leading-[1.15] sm:text-4xl lg:text-5xl font-extrabold text-[#142B3B] mb-5 sm:mb-6 whitespace-normal break-words">
+            <div className="max-w-[28rem] mx-auto text-center">
+              <h1 className="text-[2.1rem] leading-[1.18] sm:text-4xl lg:text-5xl font-extrabold text-[#142B3B] mb-4 sm:mb-6 whitespace-normal break-words">
                 <span className="block">
                   اختيار مدروس <span className="text-[#4A8B9A]">لأمومة أهدأ.</span>
                 </span>
                 <span className="block mt-2">كل منتج فحصناه قبل ما يوصلك.</span>
               </h1>
 
-              <p className="text-[#506A77] text-[15px] sm:text-lg leading-8 mb-7 max-w-xl mx-auto font-medium">
+              <p className="text-[#506A77] text-[15px] sm:text-lg leading-8 mb-6 sm:mb-7 max-w-xl mx-auto font-medium">
                 مهد بيبي بوتيك صغير ومختار — مو متجر يبيع كل شي. نختار لك أساسيات الأم والطفل اللي
                 <span className="font-bold text-[#4A8B9A]"> مطابقة لمعايير SFDA</span>،
                 مصنوعة من مواد طبية، ومضمونة بضمان ذهبي 30 يوم.
               </p>
 
-              <div className="flex flex-col sm:flex-row items-center gap-4 justify-center mb-8">
+              <div className="hidden sm:flex flex-col sm:flex-row items-center gap-4 justify-center mb-8">
                 <Link href="/products">
                   <Button
                     variant="primary"
@@ -115,7 +115,7 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-5 justify-center text-[#506A77] text-sm font-medium flex-wrap">
+              <div className="hidden sm:flex items-center gap-5 justify-center text-[#506A77] text-sm font-medium flex-wrap">
                 <div className="flex items-center gap-1.5">
                   <CheckCircle className="w-4 h-4 text-[#3B8263]" />
                   <span>مطابق لمعايير SFDA</span>
