@@ -106,7 +106,14 @@ export default function HomePage() {
                     variant="primary"
                     size="lg"
                     className="shadow-xl hover:shadow-2xl transition-all transform hover:-translate-y-1 w-full sm:w-auto"
-                  </div>
+                  >
+                    تصفح المنتجات
+                  </Button>
+                </Link>
+              </div>
+
+              <div className="flex flex-col gap-1.5">
+                <div className="flex items-center gap-1.5">
                   <CheckCircle className="w-4 h-4 text-[#3B8263]" />
                   <span>مطابق لمعايير SFDA</span>
                 </div>
@@ -120,8 +127,8 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-<<<<<<< HEAD
 
+            {/* Hero Image - Mobile First */}
             <div className="order-1 md:order-2 flex items-center justify-center relative mx-auto w-full max-w-md">
               <div className="absolute inset-0 bg-[#4A8B9A]/10 rounded-[3rem] rotate-3 scale-105 transform origin-center" />
               <div className="w-full max-w-md aspect-square bg-white rounded-3xl flex items-center justify-center shadow-2xl relative z-10 border border-[#D6E4E8] overflow-hidden">
@@ -132,8 +139,6 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-=======
->>>>>>> d5efdcc (move hero image above text for better mobile layout)
           </div>
         </div>
       </section>
