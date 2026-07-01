@@ -127,18 +127,6 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-
-            {/* Hero Image - Mobile First */}
-            <div className="order-1 md:order-2 flex items-center justify-center relative mx-auto w-full max-w-md">
-              <div className="absolute inset-0 bg-[#4A8B9A]/10 rounded-[3rem] rotate-3 scale-105 transform origin-center" />
-              <div className="w-full max-w-md aspect-square bg-white rounded-3xl flex items-center justify-center shadow-2xl relative z-10 border border-[#D6E4E8] overflow-hidden">
-                <img src="/images/home/hero.webp" alt="أم هادئة مع طفلها" className="w-full h-full object-cover" />
-                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-[#E8F0EC]/90 backdrop-blur-md rounded-2xl px-4 py-3 inline-flex items-center gap-2 border border-[#3B8263]/20 shadow-lg whitespace-nowrap">
-                  <Shield className="w-5 h-5 text-[#3B8263]" />
-                  <span className="text-[#142B3B] text-xs font-bold">مطابق لمعايير SFDA</span>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
