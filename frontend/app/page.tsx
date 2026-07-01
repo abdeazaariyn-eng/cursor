@@ -111,21 +111,6 @@ export default function HomePage() {
                   </Button>
                 </Link>
               </div>
-
-              <div className="flex flex-col gap-1.5">
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle className="w-4 h-4 text-[#3B8263]" />
-                  <span>مطابق لمعايير SFDA</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle className="w-4 h-4 text-[#3B8263]" />
-                  <span>دفع عند الاستلام</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle className="w-4 h-4 text-[#3B8263]" />
-                  <span>تأكيد قبل الشحن</span>
-                </div>
-              </div>
             </div>
           </div>
         </div>
