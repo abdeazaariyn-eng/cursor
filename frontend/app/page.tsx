@@ -77,14 +77,13 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="inline-flex items-center gap-2 bg-white border border-[#C9DADD] rounded-full px-4 py-1.5 shadow-sm mx-auto">
+            <div className="max-w-[28rem] mx-auto text-center">
+              <div className="inline-flex items-center gap-2 bg-white border border-[#C9DADD] rounded-full px-4 py-1.5 shadow-sm mx-auto mb-4">
                 <Star className="w-4 h-4 text-[#D4AF37] fill-[#D4AF37]" />
                 <span className="text-[#142B3B] text-sm font-bold">
                   بوتيك موثوق لأكثر من <span className="text-[#4A8B9A]">1,500+</span> أم خليجية
                 </span>
               </div>
-
-            <div className="max-w-[28rem] mx-auto text-center">
               <h1 className="text-[2.1rem] leading-[1.18] sm:text-4xl lg:text-5xl font-extrabold text-[#142B3B] mb-4 sm:mb-6 whitespace-normal break-words">
                 <span className="block">
                   اختيار مدروس <span className="text-[#4A8B9A]">لأمومة أهدأ.</span>
