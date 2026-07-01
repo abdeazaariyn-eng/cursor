@@ -65,56 +65,69 @@ export default function HomePage() {
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#D4AF37]/6 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
-          <div className="max-w-3xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 bg-white border border-[#C9DADD] rounded-full px-4 py-1.5 mb-6 shadow-sm">
-              <Star className="w-4 h-4 text-[#D4AF37] fill-[#D4AF37]" />
-              <span className="text-[#142B3B] text-sm font-bold">
-                بوتيك موثوق لأكثر من <span className="text-[#4A8B9A]">1,500+</span> أم خليجية
-              </span>
-            </div>
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div className="max-w-3xl mx-auto lg:mx-0 text-center lg:text-right">
+              <div className="inline-flex items-center gap-2 bg-white border border-[#C9DADD] rounded-full px-4 py-1.5 mb-6 shadow-sm">
+                <Star className="w-4 h-4 text-[#D4AF37] fill-[#D4AF37]" />
+                <span className="text-[#142B3B] text-sm font-bold">
+                  بوتيك موثوق لأكثر من <span className="text-[#4A8B9A]">1,500+</span> أم خليجية
+                </span>
+              </div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#142B3B] leading-tight md:leading-snug lg:leading-normal mb-6 whitespace-normal break-words">
-              <span className="block">
-                اختيار مدروس <span className="text-[#4A8B9A]">لأمومة أهدأ.</span>
-              </span>
-              <span className="block mt-2">كل منتج فحصناه قبل ما يوصلك.</span>
-            </h1>
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#142B3B] leading-tight md:leading-snug lg:leading-normal mb-6 whitespace-normal break-words">
+                <span className="block">
+                  اختيار مدروس <span className="text-[#4A8B9A]">لأمومة أهدأ.</span>
+                </span>
+                <span className="block mt-2">كل منتج فحصناه قبل ما يوصلك.</span>
+              </h1>
 
-            <p className="text-[#506A77] text-base sm:text-lg leading-relaxed mb-8 max-w-xl mx-auto font-medium">
-              مهد بيبي بوتيك صغير ومختار — مو متجر يبيع كل شي. نختار لك أساسيات الأم والطفل اللي
-              <span className="font-bold text-[#4A8B9A]"> مطابقة لمعايير SFDA</span>،
-              مصنوعة من مواد طبية، ومضمونة بضمان ذهبي 30 يوم.
-            </p>
+              <p className="text-[#506A77] text-base sm:text-lg leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0 font-medium">
+                مهد بيبي بوتيك صغير ومختار — مو متجر يبيع كل شي. نختار لك أساسيات الأم والطفل اللي
+                <span className="font-bold text-[#4A8B9A]"> مطابقة لمعايير SFDA</span>،
+                مصنوعة من مواد طبية، ومضمونة بضمان ذهبي 30 يوم.
+              </p>
 
-            <div className="flex flex-col sm:flex-row items-center gap-4 justify-center mb-8">
-              <Link href="/products">
-                <Button
-                  variant="primary"
-                  size="lg"
-                  className="shadow-xl hover:shadow-2xl transition-all transform hover:-translate-y-1 w-full sm:w-auto"
-                >
-                  تصفحي البوتيك
-                  <ArrowLeft className="w-5 h-5 me-2" />
-                </Button>
-              </Link>
-              <div className="flex items-center gap-2 text-[#142B3B] font-bold text-sm bg-white px-4 py-3 rounded-xl border border-[#D6E4E8] shadow-sm">
-                <Award className="w-5 h-5 text-[#D4AF37]" />
-                <span>ضمان ذهبي 30 يوم</span>
+              <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start mb-8">
+                <Link href="/products">
+                  <Button
+                    variant="primary"
+                    size="lg"
+                    className="shadow-xl hover:shadow-2xl transition-all transform hover:-translate-y-1 w-full sm:w-auto"
+                  >
+                    تصفحي البوتيك
+                    <ArrowLeft className="w-5 h-5 me-2" />
+                  </Button>
+                </Link>
+                <div className="flex items-center gap-2 text-[#142B3B] font-bold text-sm bg-white px-4 py-3 rounded-xl border border-[#D6E4E8] shadow-sm">
+                  <Award className="w-5 h-5 text-[#D4AF37]" />
+                  <span>ضمان ذهبي 30 يوم</span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-5 justify-center lg:justify-start text-[#506A77] text-sm font-medium flex-wrap">
+                <div className="flex items-center gap-1.5">
+                  <CheckCircle className="w-4 h-4 text-[#3B8263]" />
+                  <span>مطابق لمعايير SFDA</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <CheckCircle className="w-4 h-4 text-[#3B8263]" />
+                  <span>دفع عند الاستلام</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <CheckCircle className="w-4 h-4 text-[#3B8263]" />
+                  <span>تأكيد قبل الشحن</span>
+                </div>
               </div>
             </div>
 
-            <div className="flex items-center gap-5 justify-center text-[#506A77] text-sm font-medium flex-wrap">
-              <div className="flex items-center gap-1.5">
-                <CheckCircle className="w-4 h-4 text-[#3B8263]" />
-                <span>مطابق لمعايير SFDA</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <CheckCircle className="w-4 h-4 text-[#3B8263]" />
-                <span>دفع عند الاستلام</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <CheckCircle className="w-4 h-4 text-[#3B8263]" />
-                <span>تأكيد قبل الشحن</span>
+            <div className="order-1 md:order-2 flex items-center justify-center relative mx-auto w-full max-w-md">
+              <div className="absolute inset-0 bg-[#4A8B9A]/10 rounded-[3rem] rotate-3 scale-105 transform origin-center" />
+              <div className="w-full max-w-md aspect-square bg-white rounded-3xl flex items-center justify-center shadow-2xl relative z-10 border border-[#D6E4E8] overflow-hidden">
+                <img src="/images/home/hero.webp" alt="أم هادئة مع طفلها" className="w-full h-full object-cover" />
+                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-[#E8F0EC]/90 backdrop-blur-md rounded-2xl px-4 py-3 inline-flex items-center gap-2 border border-[#3B8263]/20 shadow-lg whitespace-nowrap">
+                  <Shield className="w-5 h-5 text-[#3B8263]" />
+                  <span className="text-[#142B3B] text-xs font-bold">مطابق لمعايير SFDA</span>
+                </div>
               </div>
             </div>
           </div>
