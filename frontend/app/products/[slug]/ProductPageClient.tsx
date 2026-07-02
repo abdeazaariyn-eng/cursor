@@ -278,9 +278,9 @@ export function ProductPageClient({ product }: Props) {
             <div className="relative order-2 md:order-1">
               <div className="absolute inset-0 bg-[#4A8B9A]/10 rounded-[3rem] rotate-6 scale-105 transform origin-center" />
               <div className="relative aspect-square bg-[#EBF2F5] rounded-[2.5rem] shadow-lg border border-white overflow-hidden">
-                {product.sectionImages?.pain ? (
+                {activeSectionImages?.pain ? (
                   <Image
-                    src={activeSectionImages.pain!}
+                    src={activeSectionImages?.pain ?? ''}
                     alt={`مشهد يوضح التحدي اليومي مع ${product.shortName}`}
                     fill
                     className="object-cover"
@@ -395,9 +395,9 @@ export function ProductPageClient({ product }: Props) {
             <div className="relative">
               <div className="absolute inset-0 bg-blue-100/50 rounded-[3rem] -rotate-6 scale-105 transform origin-center" />
               <div className="relative aspect-square bg-white rounded-[2.5rem] shadow-xl border border-blue-50 overflow-hidden">
-                {product.sectionImages?.materials ? (
+                {activeSectionImages?.materials ? (
                   <Image
-                    src={activeSectionImages.materials!}
+                    src={activeSectionImages?.materials ?? ''}
                     alt={`تفاصيل المواد والجودة لمنتج ${product.shortName}`}
                     fill
                     className="object-cover"
@@ -438,9 +438,9 @@ export function ProductPageClient({ product }: Props) {
             <div className="relative order-2 md:order-1">
               <div className="absolute inset-0 bg-white/5 rounded-[3rem] rotate-3 scale-105 transform origin-center" />
               <div className="relative aspect-square bg-gradient-to-br from-[#1A384D] to-[#214358] rounded-[2.5rem] shadow-2xl border border-[#29536C] overflow-hidden">
-                {product.sectionImages?.authority ? (
+                {activeSectionImages?.authority ? (
                   <Image
-                    src={activeSectionImages.authority!}
+                    src={activeSectionImages?.authority ?? ''}
                     alt={`مشهد الثقة وفحص الجودة لمنتج ${product.shortName}`}
                     fill
                     className="object-cover"
@@ -581,9 +581,9 @@ export function ProductPageClient({ product }: Props) {
             <div className="relative">
               <div className="absolute inset-0 bg-[#4A8B9A]/10 rounded-[3rem] rotate-6 scale-105 transform origin-center" />
               <div className="relative aspect-square bg-white rounded-[2.5rem] shadow-xl border border-[#D6E4E8] overflow-hidden">
-                {product.sectionImages?.beforeAfter ? (
+                {activeSectionImages?.beforeAfter ? (
                   <Image
-                    src={activeSectionImages.beforeAfter!}
+                    src={activeSectionImages?.beforeAfter ?? ''}
                     alt={`قبل وبعد استخدام ${product.shortName}`}
                     fill
                     className="object-cover"
