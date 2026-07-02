@@ -16,6 +16,8 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product, className, onAddToCart }: ProductCardProps) {
+  const cardImage = product.cardImage || product.image
+
   return (
     <div
       className={cn(
@@ -26,7 +28,7 @@ export function ProductCard({ product, className, onAddToCart }: ProductCardProp
       {/* Image */}
       <Link href={`/products/${product.slug}`} className="block relative aspect-[4/3] bg-[#EBF2F5] overflow-hidden">
         <Image 
-          src={product.image}
+          src={cardImage}
           alt={product.shortName}
           fill
           className="object-cover"

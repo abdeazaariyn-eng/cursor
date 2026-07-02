@@ -14,6 +14,16 @@ export interface ProductColor {
   label: string
   hex: string
   image?: string
+  cardImage?: string
+  sectionImages?: ProductSectionImages
+}
+
+export interface ProductSectionImages {
+  hero?: string
+  pain?: string
+  materials?: string
+  authority?: string
+  beforeAfter?: string
 }
 
 export interface Product {
@@ -41,6 +51,8 @@ export interface Product {
     week2: string
   }
   image: string
+  cardImage?: string
+  sectionImages?: ProductSectionImages
   filterTags: string[]
 }
 
@@ -75,8 +87,26 @@ export const PRODUCTS: Product[] = [
       'مناسب للاستخدام تحت إشراف الأم داخل المنزل.',
     ],
     colors: [
-      { id: 'gray-forest', label: 'رمادي', hex: '#C2C9D1', image: '/images/products/head-protection-gray.png' },
-      { id: 'pink-forest', label: 'وردي', hex: '#FFB6C1', image: '/images/products/head-protection-pink.png' }
+      {
+        id: 'gray-forest',
+        label: 'رمادي',
+        hex: '#C2C9D1',
+        image: '/images/products/head-protection-gray.png',
+        cardImage: '/images/products/head-protection/card.png',
+        sectionImages: {
+          hero: '/images/products/head-protection/hero.png',
+          pain: '/images/products/head-protection/pain-empathy.png',
+          materials: '/images/products/head-protection/materials-science.png',
+          authority: '/images/products/head-protection/authority-trust.png',
+          beforeAfter: '/images/products/head-protection/before-after.png',
+        },
+      },
+      {
+        id: 'pink-forest',
+        label: 'وردي',
+        hex: '#FFB6C1',
+        image: '/images/products/head-protection-pink.png',
+      }
     ],
     reviews: [
       {
@@ -120,6 +150,14 @@ export const PRODUCTS: Product[] = [
       week2: 'صار جزء من النظام اليومي، وتشوفين الفرق كل يوم ✨',
     },
     image: '/images/products/head-protection.webp',
+    cardImage: '/images/products/head-protection/card.png',
+    sectionImages: {
+      hero: '/images/products/head-protection/hero.png',
+      pain: '/images/products/head-protection/pain-empathy.png',
+      materials: '/images/products/head-protection/materials-science.png',
+      authority: '/images/products/head-protection/authority-trust.png',
+      beforeAfter: '/images/products/head-protection/before-after.png',
+    },
   },
   {
     id: 'portable_baby_bottle_warmer',

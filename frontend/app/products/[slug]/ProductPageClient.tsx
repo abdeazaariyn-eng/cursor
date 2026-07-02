@@ -37,9 +37,9 @@ export function ProductPageClient({ product }: Props) {
     product.reviews.reduce((s, r) => s + r.stars, 0) / product.reviews.length || 4.9
   const offer = OFFER_CONFIG[selectedOffer]
 
-  // Use color specific image if available
   const activeColorObj = product.colors?.find(c => c.id === selectedColor)
-  const displayImage = activeColorObj?.image || product.image
+  const activeSectionImages = activeColorObj?.sectionImages || product.sectionImages
+  const displayImage = activeSectionImages?.hero || activeColorObj?.image || product.image
 
   useEffect(() => {
     const handleScroll = () => {
@@ -277,10 +277,22 @@ export function ProductPageClient({ product }: Props) {
             {/* Image Left */}
             <div className="relative order-2 md:order-1">
               <div className="absolute inset-0 bg-[#4A8B9A]/10 rounded-[3rem] rotate-6 scale-105 transform origin-center" />
-              <div className="relative aspect-square bg-[#EBF2F5] rounded-[2.5rem] flex flex-col items-center justify-center shadow-lg border border-white p-8 overflow-hidden">
-                <div className="text-7xl mb-4">🥺</div>
-                <p className="text-[#4A8B9A] font-bold text-center">[صورة تعبيرية لأم مرهقة أو قلقة]</p>
-                <p className="text-sm text-[#506A77] mt-2 text-center">نحس بجهدك وتعبك</p>
+              <div className="relative aspect-square bg-[#EBF2F5] rounded-[2.5rem] shadow-lg border border-white overflow-hidden">
+                {product.sectionImages?.pain ? (
+                  <Image
+                    src={activeSectionImages.pain}
+                    alt={`مشهد يوضح التحدي اليومي مع ${product.shortName}`}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                ) : (
+                  <div className="flex h-full flex-col items-center justify-center p-8">
+                    <div className="text-7xl mb-4">🥺</div>
+                    <p className="text-[#4A8B9A] font-bold text-center">[صورة تعبيرية لأم مرهقة أو قلقة]</p>
+                    <p className="text-sm text-[#506A77] mt-2 text-center">نحس بجهدك وتعبك</p>
+                  </div>
+                )}
               </div>
               <div className="absolute -bottom-8 -right-4 bg-white p-5 rounded-2xl shadow-xl border border-[#D6E4E8] max-w-[200px] z-10">
                 <p className="text-sm font-bold text-[#142B3B] mb-1">&ldquo;{product.painHeading}&rdquo;</p>
@@ -382,22 +394,34 @@ export function ProductPageClient({ product }: Props) {
             {/* Image Right */}
             <div className="relative">
               <div className="absolute inset-0 bg-blue-100/50 rounded-[3rem] -rotate-6 scale-105 transform origin-center" />
-              <div className="relative aspect-square bg-white rounded-[2.5rem] flex flex-col items-center justify-center shadow-xl border border-blue-50 p-8 overflow-hidden">
-                <div className="text-7xl mb-4">🔬</div>
-                <p className="text-blue-800 font-bold text-center text-sm">
-                  [صورة مقربة (Macro) للمادة أو النسيج الطبي]
-                </p>
-                <p className="text-xs text-[#506A77] mt-2 text-center">تفاصيل جودة المواد الطبية</p>
-                <div className="mt-6 grid grid-cols-2 gap-3 w-full">
-                  <div className="bg-green-50 rounded-xl p-3 text-center">
-                    <p className="text-green-700 font-extrabold text-xl">100%</p>
-                    <p className="text-green-600 text-xs font-semibold">BPA-Free</p>
+              <div className="relative aspect-square bg-white rounded-[2.5rem] shadow-xl border border-blue-50 overflow-hidden">
+                {product.sectionImages?.materials ? (
+                  <Image
+                    src={activeSectionImages.materials}
+                    alt={`تفاصيل المواد والجودة لمنتج ${product.shortName}`}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                ) : (
+                  <div className="flex h-full flex-col items-center justify-center p-8">
+                    <div className="text-7xl mb-4">🔬</div>
+                    <p className="text-blue-800 font-bold text-center text-sm">
+                      [صورة مقربة (Macro) للمادة أو النسيج الطبي]
+                    </p>
+                    <p className="text-xs text-[#506A77] mt-2 text-center">تفاصيل جودة المواد الطبية</p>
+                    <div className="mt-6 grid grid-cols-2 gap-3 w-full">
+                      <div className="bg-green-50 rounded-xl p-3 text-center">
+                        <p className="text-green-700 font-extrabold text-xl">100%</p>
+                        <p className="text-green-600 text-xs font-semibold">BPA-Free</p>
+                      </div>
+                      <div className="bg-blue-50 rounded-xl p-3 text-center">
+                        <p className="text-blue-700 font-extrabold text-xl">12+</p>
+                        <p className="text-blue-600 text-xs font-semibold">اختبار جودة</p>
+                      </div>
+                    </div>
                   </div>
-                  <div className="bg-blue-50 rounded-xl p-3 text-center">
-                    <p className="text-blue-700 font-extrabold text-xl">12+</p>
-                    <p className="text-blue-600 text-xs font-semibold">اختبار جودة</p>
-                  </div>
-                </div>
+                )}
               </div>
             </div>
           </div>
@@ -413,26 +437,37 @@ export function ProductPageClient({ product }: Props) {
             {/* Image Left */}
             <div className="relative order-2 md:order-1">
               <div className="absolute inset-0 bg-white/5 rounded-[3rem] rotate-3 scale-105 transform origin-center" />
-              <div className="relative aspect-square bg-gradient-to-br from-[#1A384D] to-[#214358] rounded-[2.5rem] flex flex-col items-center justify-center shadow-2xl border border-[#29536C] p-8 overflow-hidden">
-                <Shield className="w-20 h-20 text-[#D4AF37] mb-5" />
-                <p className="text-white/90 font-bold text-base text-center leading-snug">
-                  [صورة شهادة اعتماد SFDA أو شهادة مطابقة الجودة الدولية]
-                </p>
-                <div className="mt-8 bg-white/10 px-6 py-3 rounded-full flex items-center gap-3 border border-white/20">
-                  <CheckCircle className="w-5 h-5 text-green-400" />
-                  <span className="font-bold text-sm">اجتاز أكثر من 12 اختبار جودة</span>
-                </div>
-                {/* Stats row */}
-                <div className="mt-5 grid grid-cols-2 gap-3 w-full">
-                  <div className="bg-white/10 rounded-xl p-3 text-center border border-white/10">
-                    <p className="text-[#D4AF37] font-extrabold text-lg">SFDA</p>
-                    <p className="text-white/60 text-xs">معتمد رسمياً</p>
+              <div className="relative aspect-square bg-gradient-to-br from-[#1A384D] to-[#214358] rounded-[2.5rem] shadow-2xl border border-[#29536C] overflow-hidden">
+                {product.sectionImages?.authority ? (
+                  <Image
+                    src={activeSectionImages.authority}
+                    alt={`مشهد الثقة وفحص الجودة لمنتج ${product.shortName}`}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                ) : (
+                  <div className="flex h-full flex-col items-center justify-center p-8">
+                    <Shield className="w-20 h-20 text-[#D4AF37] mb-5" />
+                    <p className="text-white/90 font-bold text-base text-center leading-snug">
+                      [صورة شهادة اعتماد SFDA أو شهادة مطابقة الجودة الدولية]
+                    </p>
+                    <div className="mt-8 bg-white/10 px-6 py-3 rounded-full flex items-center gap-3 border border-white/20">
+                      <CheckCircle className="w-5 h-5 text-green-400" />
+                      <span className="font-bold text-sm">اجتاز أكثر من 12 اختبار جودة</span>
+                    </div>
+                    <div className="mt-5 grid grid-cols-2 gap-3 w-full">
+                      <div className="bg-white/10 rounded-xl p-3 text-center border border-white/10">
+                        <p className="text-[#D4AF37] font-extrabold text-lg">SFDA</p>
+                        <p className="text-white/60 text-xs">معتمد رسمياً</p>
+                      </div>
+                      <div className="bg-white/10 rounded-xl p-3 text-center border border-white/10">
+                        <p className="text-green-400 font-extrabold text-lg">30</p>
+                        <p className="text-white/60 text-xs">يوم ضمان</p>
+                      </div>
+                    </div>
                   </div>
-                  <div className="bg-white/10 rounded-xl p-3 text-center border border-white/10">
-                    <p className="text-green-400 font-extrabold text-lg">30</p>
-                    <p className="text-white/60 text-xs">يوم ضمان</p>
-                  </div>
-                </div>
+                )}
               </div>
             </div>
 
@@ -545,19 +580,31 @@ export function ProductPageClient({ product }: Props) {
             {/* Image Right */}
             <div className="relative">
               <div className="absolute inset-0 bg-[#4A8B9A]/10 rounded-[3rem] rotate-6 scale-105 transform origin-center" />
-              <div className="relative aspect-square bg-white rounded-[2.5rem] flex flex-col items-center justify-center shadow-xl border border-[#D6E4E8] p-8 overflow-hidden">
-                <div className="text-7xl mb-4">✨</div>
-                <p className="text-[#4A8B9A] font-bold text-center text-sm">
-                  [صورة أم سعيدة ومرتاحة مع طفلها بعد الاستخدام]
-                </p>
-                <p className="text-xs text-[#506A77] mt-2 text-center">الطمأنينة لها شكل</p>
-                <div className="mt-6 bg-[#EBF2F5] rounded-2xl p-4 w-full text-center">
-                  <p className="text-[#142B3B] font-extrabold text-base">&ldquo;غيرت حياتي كلياً&rdquo;</p>
-                  <p className="text-[#506A77] text-xs mt-1">— أم ريم، الرياض</p>
-                  <div className="flex justify-center mt-2">
-                    {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-[#D4AF37] fill-[#D4AF37]" />)}
+              <div className="relative aspect-square bg-white rounded-[2.5rem] shadow-xl border border-[#D6E4E8] overflow-hidden">
+                {product.sectionImages?.beforeAfter ? (
+                  <Image
+                    src={activeSectionImages.beforeAfter}
+                    alt={`قبل وبعد استخدام ${product.shortName}`}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                ) : (
+                  <div className="flex h-full flex-col items-center justify-center p-8">
+                    <div className="text-7xl mb-4">✨</div>
+                    <p className="text-[#4A8B9A] font-bold text-center text-sm">
+                      [صورة أم سعيدة ومرتاحة مع طفلها بعد الاستخدام]
+                    </p>
+                    <p className="text-xs text-[#506A77] mt-2 text-center">الطمأنينة لها شكل</p>
+                    <div className="mt-6 bg-[#EBF2F5] rounded-2xl p-4 w-full text-center">
+                      <p className="text-[#142B3B] font-extrabold text-base">&ldquo;غيرت حياتي كلياً&rdquo;</p>
+                      <p className="text-[#506A77] text-xs mt-1">— أم ريم، الرياض</p>
+                      <div className="flex justify-center mt-2">
+                        {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-[#D4AF37] fill-[#D4AF37]" />)}
+                      </div>
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
           </div>
