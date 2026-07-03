@@ -230,6 +230,12 @@ export const PRODUCTS: Product[] = [
       week2: 'ما عاد تفكرين فيها — صارت جزء طبيعي من يومك ✨',
     },
     image: '/images/products/bottle-warmer.webp',
+    sectionImages: {
+      pain: '/images/products/bottle-warmer/pain-empathy.webp',
+      materials: '/images/products/bottle-warmer/materials.webp',
+      authority: '/images/products/bottle-warmer/authority-quality.webp',
+      beforeAfter: '/images/products/bottle-warmer/before-after.webp',
+    },
   },
   {
     id: 'wearable_electric_breast_pump',
