@@ -288,6 +288,7 @@ export function ProductPageClient({ product }: Props) {
                       fill
                       className="object-cover"
                       sizes="(max-width: 768px) 100vw, 50vw"
+                      priority
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#142B3B]/70 via-[#142B3B]/25 to-white/5" />
                     <div className="absolute bottom-5 inset-x-5 z-20 rounded-2xl bg-[#142B3B]/88 backdrop-blur-md px-4 py-3 border border-white/10 shadow-2xl">
@@ -411,6 +412,7 @@ export function ProductPageClient({ product }: Props) {
                       fill
                       className="object-cover"
                       sizes="(max-width: 768px) 100vw, 50vw"
+                      priority
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#142B3B]/55 via-transparent to-white/10" />
                     <div className="absolute top-5 left-5 z-20 rounded-2xl bg-[#142B3B]/88 backdrop-blur-md px-4 py-2 border border-white/10 shadow-2xl max-w-[220px]">
@@ -460,6 +462,7 @@ export function ProductPageClient({ product }: Props) {
                       fill
                       className="object-cover"
                       sizes="(max-width: 768px) 100vw, 50vw"
+                      priority
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#142B3B]/75 via-[#142B3B]/25 to-transparent" />
                     <div className="absolute top-5 left-5 z-20 rounded-2xl bg-[#142B3B]/85 px-4 py-2 border border-white/10 shadow-2xl backdrop-blur-md">
@@ -610,6 +613,7 @@ export function ProductPageClient({ product }: Props) {
                       fill
                       className="object-cover"
                       sizes="(max-width: 768px) 100vw, 50vw"
+                      priority
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#142B3B]/60 via-transparent to-white/5" />
                     <div className="absolute top-5 left-5 z-20 rounded-2xl bg-[#142B3B]/88 backdrop-blur-md px-4 py-2 border border-white/10 shadow-2xl">
