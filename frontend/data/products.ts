@@ -14,12 +14,9 @@ export interface ProductColor {
   label: string
   hex: string
   image?: string
-  cardImage?: string
-  sectionImages?: ProductSectionImages
 }
 
 export interface ProductSectionImages {
-  hero?: string
   pain?: string
   materials?: string
   authority?: string
@@ -51,6 +48,7 @@ export interface Product {
     week2: string
   }
   image: string
+  heroImage?: string
   cardImage?: string
   sectionImages?: ProductSectionImages
   filterTags: string[]
@@ -87,26 +85,8 @@ export const PRODUCTS: Product[] = [
       'مناسب للاستخدام تحت إشراف الأم داخل المنزل.',
     ],
     colors: [
-      {
-        id: 'gray-forest',
-        label: 'رمادي',
-        hex: '#C2C9D1',
-        image: '/images/products/head-protection-gray.png',
-        cardImage: '/images/products/head-protection/card.png',
-        sectionImages: {
-          hero: '/images/products/head-protection/hero.png',
-          pain: '/images/products/head-protection/pain-empathy.png',
-          materials: '/images/products/head-protection/materials-science.png',
-          authority: '/images/products/head-protection/authority-trust.png',
-          beforeAfter: '/images/products/head-protection/before-after.png',
-        },
-      },
-      {
-        id: 'pink-forest',
-        label: 'وردي',
-        hex: '#FFB6C1',
-        image: '/images/products/head-protection-pink.png',
-      }
+      { id: 'gray-forest', label: 'رمادي', hex: '#C2C9D1', image: '/images/products/head-protection-gray.png' },
+      { id: 'pink-forest', label: 'وردي', hex: '#FFB6C1', image: '/images/products/head-protection-pink.png' }
     ],
     reviews: [
       {
@@ -150,9 +130,9 @@ export const PRODUCTS: Product[] = [
       week2: 'صار جزء من النظام اليومي، وتشوفين الفرق كل يوم ✨',
     },
     image: '/images/products/head-protection.webp',
+    heroImage: '/images/products/head-protection/hero.png',
     cardImage: '/images/products/head-protection/card.png',
     sectionImages: {
-      hero: '/images/products/head-protection/hero.png',
       pain: '/images/products/head-protection/pain-empathy.png',
       materials: '/images/products/head-protection/materials-science.png',
       authority: '/images/products/head-protection/authority-trust.png',
@@ -230,11 +210,13 @@ export const PRODUCTS: Product[] = [
       week2: 'ما عاد تفكرين فيها — صارت جزء طبيعي من يومك ✨',
     },
     image: '/images/products/bottle-warmer.webp',
+    heroImage: '/images/products/bottle-warmer/1.png',
+    cardImage: '/images/products/bottle-warmer/6.png',
     sectionImages: {
-      pain: '/images/products/bottle-warmer/pain-empathy.webp',
-      materials: '/images/products/bottle-warmer/materials.webp',
-      authority: '/images/products/bottle-warmer/authority-quality.webp',
-      beforeAfter: '/images/products/bottle-warmer/before-after.webp',
+      pain: '/images/products/bottle-warmer/2.png',
+      materials: '/images/products/bottle-warmer/3.png',
+      authority: '/images/products/bottle-warmer/4.png',
+      beforeAfter: '/images/products/bottle-warmer/5.png',
     },
   },
   {
