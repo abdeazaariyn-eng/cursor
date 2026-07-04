@@ -123,20 +123,21 @@ export function ProductPageClient({ product }: Props) {
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 priority
               />
+              <div className="absolute inset-0 bg-gradient-to-tr from-white/15 via-transparent to-[#142B3B]/10" />
               {/* Badge */}
-              <div className="absolute top-6 end-6">
+              <div className="absolute top-6 end-6 z-20">
                 <Badge variant="primary" className="shadow-lg text-sm px-5 py-2 font-bold">
                   {product.badge}
                 </Badge>
               </div>
               {/* SFDA floating label */}
-              <div className="absolute bottom-6 start-6 bg-white/95 backdrop-blur-sm px-4 py-3 rounded-2xl shadow-xl flex items-center gap-3 border border-white/50">
-                <div className="bg-green-100 p-2 rounded-full">
-                  <Shield className="w-5 h-5 text-green-600" />
+              <div className="absolute bottom-6 start-6 z-20 bg-[#142B3B]/88 backdrop-blur-md px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-3 border border-white/10 max-w-[260px]">
+                <div className="bg-[#D4AF37]/15 p-2 rounded-full border border-[#D4AF37]/30">
+                  <Shield className="w-5 h-5 text-[#D4AF37]" />
                 </div>
                 <div>
-                  <span className="block text-sm font-extrabold text-gray-900">معتمد SFDA</span>
-                  <span className="block text-xs font-medium text-gray-600">آمن تماماً لطفلك</span>
+                  <span className="block text-sm font-extrabold text-white">معتمد SFDA</span>
+                  <span className="block text-xs font-medium text-white/80">آمن تماماً لطفلك</span>
                 </div>
               </div>
             </div>
@@ -288,17 +289,17 @@ export function ProductPageClient({ product }: Props) {
                       className="object-cover"
                       sizes="(max-width: 768px) 100vw, 50vw"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#142B3B]/50 via-[#142B3B]/10 to-white/10" />
-                    <div className="absolute bottom-5 inset-x-5 rounded-2xl bg-white/90 backdrop-blur-sm px-4 py-3 border border-white/60 shadow-lg">
-                      <p className="text-sm font-bold text-[#142B3B] text-center">نحس بجهدك وتعبك</p>
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#142B3B]/70 via-[#142B3B]/25 to-white/5" />
+                    <div className="absolute bottom-5 inset-x-5 z-20 rounded-2xl bg-[#142B3B]/88 backdrop-blur-md px-4 py-3 border border-white/10 shadow-2xl">
+                      <p className="text-sm font-bold text-white text-center">نحس بجهدك وتعبك</p>
                     </div>
                   </>
                 ) : (
-                  <>
+                  <div className="flex h-full flex-col items-center justify-center w-full">
                     <div className="text-7xl mb-4">🥺</div>
                     <p className="text-[#4A8B9A] font-bold text-center">[صورة تعبيرية لأم مرهقة أو قلقة]</p>
                     <p className="text-sm text-[#506A77] mt-2 text-center">نحس بجهدك وتعبك</p>
-                  </>
+                  </div>
                 )}
               </div>
               <div className="absolute -bottom-8 -right-4 bg-white p-5 rounded-2xl shadow-xl border border-[#D6E4E8] max-w-[200px] z-10">
@@ -411,30 +412,30 @@ export function ProductPageClient({ product }: Props) {
                       className="object-cover"
                       sizes="(max-width: 768px) 100vw, 50vw"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#142B3B]/45 via-transparent to-white/15" />
-                    <div className="absolute top-5 left-5 rounded-2xl bg-white/90 backdrop-blur-sm px-4 py-2 border border-white/60 shadow-lg">
-                      <p className="text-xs font-bold text-[#142B3B]">تفاصيل جودة المواد الطبية</p>
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#142B3B]/55 via-transparent to-white/10" />
+                    <div className="absolute top-5 left-5 z-20 rounded-2xl bg-[#142B3B]/88 backdrop-blur-md px-4 py-2 border border-white/10 shadow-2xl max-w-[220px]">
+                      <p className="text-xs font-bold text-white">تفاصيل جودة المواد الطبية</p>
                     </div>
                   </>
                 ) : (
-                  <>
+                  <div className="flex h-full flex-col items-center justify-center w-full">
                     <div className="text-7xl mb-4">🔬</div>
                     <p className="text-blue-800 font-bold text-center text-sm">
                       [صورة مقربة (Macro) للمادة أو النسيج الطبي]
                     </p>
                     <p className="text-xs text-[#506A77] mt-2 text-center">تفاصيل جودة المواد الطبية</p>
-                  </>
+                    <div className="mt-6 grid grid-cols-2 gap-3 w-full">
+                      <div className="bg-green-50 rounded-xl p-3 text-center">
+                        <p className="text-green-700 font-extrabold text-xl">100%</p>
+                        <p className="text-green-600 text-xs font-semibold">BPA-Free</p>
+                      </div>
+                      <div className="bg-blue-50 rounded-xl p-3 text-center">
+                        <p className="text-blue-700 font-extrabold text-xl">12+</p>
+                        <p className="text-blue-600 text-xs font-semibold">اختبار جودة</p>
+                      </div>
+                    </div>
+                  </div>
                 )}
-                <div className="mt-6 grid grid-cols-2 gap-3 w-full relative z-10 self-stretch">
-                  <div className="bg-green-50 rounded-xl p-3 text-center">
-                    <p className="text-green-700 font-extrabold text-xl">100%</p>
-                    <p className="text-green-600 text-xs font-semibold">BPA-Free</p>
-                  </div>
-                  <div className="bg-blue-50 rounded-xl p-3 text-center">
-                    <p className="text-blue-700 font-extrabold text-xl">12+</p>
-                    <p className="text-blue-600 text-xs font-semibold">اختبار جودة</p>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -460,8 +461,8 @@ export function ProductPageClient({ product }: Props) {
                       className="object-cover"
                       sizes="(max-width: 768px) 100vw, 50vw"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#142B3B]/65 via-[#142B3B]/20 to-transparent" />
-                    <div className="absolute top-5 left-5 rounded-2xl bg-[#142B3B]/75 px-4 py-2 border border-white/10 shadow-lg backdrop-blur-sm">
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#142B3B]/75 via-[#142B3B]/25 to-transparent" />
+                    <div className="absolute top-5 left-5 z-20 rounded-2xl bg-[#142B3B]/85 px-4 py-2 border border-white/10 shadow-2xl backdrop-blur-md">
                       <p className="text-xs font-bold text-white">اختيار مدروس ومعايير موثوقة</p>
                     </div>
                   </>
@@ -610,9 +611,9 @@ export function ProductPageClient({ product }: Props) {
                       className="object-cover"
                       sizes="(max-width: 768px) 100vw, 50vw"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#142B3B]/45 via-transparent to-white/10" />
-                    <div className="absolute top-5 left-5 rounded-2xl bg-white/90 backdrop-blur-sm px-4 py-2 border border-white/60 shadow-lg">
-                      <p className="text-xs font-bold text-[#142B3B]">الطمأنينة لها شكل</p>
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#142B3B]/60 via-transparent to-white/5" />
+                    <div className="absolute top-5 left-5 z-20 rounded-2xl bg-[#142B3B]/88 backdrop-blur-md px-4 py-2 border border-white/10 shadow-2xl">
+                      <p className="text-xs font-bold text-white">الطمأنينة لها شكل</p>
                     </div>
                   </>
                 ) : (
