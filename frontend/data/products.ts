@@ -291,7 +291,7 @@ export const PRODUCTS: Product[] = [
     },
     image: '/images/products/breast-pump/1.png',
     heroImage: '/images/products/breast-pump/1.png',
-    cardImage: '/images/products/breast-pump/1.png',
+    cardImage: '/images/products/breast-pump/6.png',
     sectionImages: {
       pain: '/images/products/breast-pump/2.png',
       materials: '/images/products/breast-pump/3.png',
