@@ -290,10 +290,6 @@ export function ProductPageClient({ product }: Props) {
                       sizes="(max-width: 768px) 100vw, 50vw"
                       priority
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#142B3B]/70 via-[#142B3B]/25 to-white/5" />
-                    <div className="absolute bottom-5 inset-x-5 z-20 rounded-2xl bg-[#142B3B]/88 backdrop-blur-md px-4 py-3 border border-white/10 shadow-2xl">
-                      <p className="text-sm font-bold text-white text-center">نحس بجهدك وتعبك</p>
-                    </div>
                   </>
                 ) : (
                   <div className="flex h-full flex-col items-center justify-center w-full">
@@ -414,10 +410,6 @@ export function ProductPageClient({ product }: Props) {
                       sizes="(max-width: 768px) 100vw, 50vw"
                       priority
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#142B3B]/55 via-transparent to-white/10" />
-                    <div className="absolute top-5 left-5 z-20 rounded-2xl bg-[#142B3B]/88 backdrop-blur-md px-4 py-2 border border-white/10 shadow-2xl max-w-[220px]">
-                      <p className="text-xs font-bold text-white">تفاصيل جودة المواد الطبية</p>
-                    </div>
                   </>
                 ) : (
                   <div className="flex h-full flex-col items-center justify-center w-full">
@@ -464,10 +456,6 @@ export function ProductPageClient({ product }: Props) {
                       sizes="(max-width: 768px) 100vw, 50vw"
                       priority
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#142B3B]/75 via-[#142B3B]/25 to-transparent" />
-                    <div className="absolute top-5 left-5 z-20 rounded-2xl bg-[#142B3B]/85 px-4 py-2 border border-white/10 shadow-2xl backdrop-blur-md">
-                      <p className="text-xs font-bold text-white">اختيار مدروس ومعايير موثوقة</p>
-                    </div>
                   </>
                 ) : (
                   <>
@@ -477,21 +465,6 @@ export function ProductPageClient({ product }: Props) {
                     </p>
                   </>
                 )}
-                <div className="mt-8 bg-white/10 px-6 py-3 rounded-full flex items-center gap-3 border border-white/20">
-                  <CheckCircle className="w-5 h-5 text-green-400" />
-                  <span className="font-bold text-sm">اجتاز أكثر من 12 اختبار جودة</span>
-                </div>
-                {/* Stats row */}
-                <div className="mt-5 grid grid-cols-2 gap-3 w-full">
-                  <div className="bg-white/10 rounded-xl p-3 text-center border border-white/10">
-                    <p className="text-[#D4AF37] font-extrabold text-lg">SFDA</p>
-                    <p className="text-white/60 text-xs">معتمد رسمياً</p>
-                  </div>
-                  <div className="bg-white/10 rounded-xl p-3 text-center border border-white/10">
-                    <p className="text-green-400 font-extrabold text-lg">30</p>
-                    <p className="text-white/60 text-xs">يوم ضمان</p>
-                  </div>
-                </div>
               </div>
             </div>
 
@@ -615,10 +588,6 @@ export function ProductPageClient({ product }: Props) {
                       sizes="(max-width: 768px) 100vw, 50vw"
                       priority
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#142B3B]/60 via-transparent to-white/5" />
-                    <div className="absolute top-5 left-5 z-20 rounded-2xl bg-[#142B3B]/88 backdrop-blur-md px-4 py-2 border border-white/10 shadow-2xl">
-                      <p className="text-xs font-bold text-white">الطمأنينة لها شكل</p>
-                    </div>
                   </>
                 ) : (
                   <>
@@ -629,13 +598,6 @@ export function ProductPageClient({ product }: Props) {
                     <p className="text-xs text-[#506A77] mt-2 text-center">الطمأنينة لها شكل</p>
                   </>
                 )}
-                <div className="mt-6 bg-[#EBF2F5] rounded-2xl p-4 w-full text-center relative z-10">
-                  <p className="text-[#142B3B] font-extrabold text-base">&ldquo;غيرت حياتي كلياً&rdquo;</p>
-                  <p className="text-[#506A77] text-xs mt-1">— أم ريم، الرياض</p>
-                  <div className="flex justify-center mt-2">
-                    {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-[#D4AF37] fill-[#D4AF37]" />)}
-                  </div>
-                </div>
               </div>
             </div>
           </div>
