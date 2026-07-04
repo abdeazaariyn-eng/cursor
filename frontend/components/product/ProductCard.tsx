@@ -32,6 +32,7 @@ export function ProductCard({ product, className, onAddToCart }: ProductCardProp
           alt={product.shortName}
           fill
           className="object-cover"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
         {/* Badge overlay */}
         <div className="absolute top-3 end-3">

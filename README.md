@@ -46,9 +46,15 @@ cp docker-compose.example.yml docker-compose.yml
 docker compose up --build
 ```
 
-- Frontend: http://localhost:3000
+- Proxy (recommended entrypoint): http://localhost:8080
+- Frontend container: http://localhost:3000
 - Backend: http://localhost:8000
 - Health check: http://localhost:8000/health
+
+The proxy forwards store pages to the frontend and `/api/*` to the backend, with:
+- micro-caching for storefront GET traffic
+- cached optimized images and static assets
+- per-IP rate limiting in front of pages and API routes
 
 ### 3. Or run locally without Docker
 
@@ -75,6 +81,14 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 cd frontend
 npm install
 npm run dev
+```
+
+### Load Test
+
+Use the bundled script to measure burst handling locally:
+
+```bash
+python load_test.py http://127.0.0.1:3010/products/wearable-electric-breast-pump --total 1000 --concurrency 100
 ```
 
 ---
