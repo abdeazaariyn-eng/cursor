@@ -98,6 +98,9 @@ npm run dev
 | Variable | Description |
 |----------|-------------|
 | `DATABASE_URL` | PostgreSQL async URL (asyncpg) |
+| `API_WORKERS` | Number of Gunicorn/Uvicorn API workers in production |
+| `DB_POOL_SIZE` | SQLAlchemy pool size per API worker |
+| `DB_MAX_OVERFLOW` | Extra DB connections allowed per API worker during bursts |
 | `RUN_MIGRATIONS_ON_START` | Auto-run Alembic on startup |
 | `CORS_ORIGINS` | Comma-separated allowed origins |
 | `GOOGLE_SHEETS_WEBHOOK_URL` | Apps Script Web App URL |
@@ -191,12 +194,14 @@ Server CAPI (fired on finalize):
 - Build from `./frontend`
 - Port: 3000
 - Set env variables from `frontend/.env.example`
+- Optional scale knob: `WEB_CONCURRENCY=2` (or higher if CPU allows)
 
 ### Backend Service
 - Build from `./backend`
 - Port: 8000
 - Set env variables from `backend/.env.example`
 - Database URL: `postgresql+asyncpg://mahdbaby:mahdbaby%40@mahdbaby_database:5432/mahdbaby`
+- Optional scale knobs: `API_WORKERS=2`, `DB_POOL_SIZE=10`, `DB_MAX_OVERFLOW=20`
 
 ### Database
 - PostgreSQL 16

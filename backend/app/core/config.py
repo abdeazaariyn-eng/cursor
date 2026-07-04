@@ -43,6 +43,8 @@ class Settings(BaseSettings):
     FRONTEND_URL: str = "http://localhost:3000"
 
     DATABASE_URL: str = "postgresql+asyncpg://mahdbaby:mahdbaby%40@localhost:5432/mahdbaby"
+    DB_POOL_SIZE: int = 10
+    DB_MAX_OVERFLOW: int = 20
     RUN_MIGRATIONS_ON_START: bool = True
 
     # IMPORTANT: read CORS_ORIGINS as a plain string to bypass
