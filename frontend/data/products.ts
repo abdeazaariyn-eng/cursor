@@ -290,6 +290,14 @@ export const PRODUCTS: Product[] = [
       week2: 'ما تتخيلين نفسكم بدونها — تغيرت طريقتك في كل شيء ✨',
     },
     image: '/images/products/breast-pump.webp',
+    heroImage: '/images/products/breast-pump/1.png',
+    cardImage: '/images/products/breast-pump/6.png',
+    sectionImages: {
+      pain: '/images/products/breast-pump/2.png',
+      materials: '/images/products/breast-pump/3.png',
+      authority: '/images/products/breast-pump/4.png',
+      beforeAfter: '/images/products/breast-pump/5.png',
+    },
   },
 ]
 
