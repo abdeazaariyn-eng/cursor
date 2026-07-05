@@ -288,6 +288,7 @@ export function ProductPageClient({ product }: Props) {
                       fill
                       className="object-cover"
                       sizes="(max-width: 768px) 100vw, 50vw"
+                      priority
                     />
                   </>
                 ) : (
@@ -407,6 +408,7 @@ export function ProductPageClient({ product }: Props) {
                       fill
                       className="object-cover"
                       sizes="(max-width: 768px) 100vw, 50vw"
+                      priority
                     />
                   </>
                 ) : (
@@ -452,6 +454,7 @@ export function ProductPageClient({ product }: Props) {
                       fill
                       className="object-cover"
                       sizes="(max-width: 768px) 100vw, 50vw"
+                      priority
                     />
                   </>
                 ) : (
@@ -583,6 +586,7 @@ export function ProductPageClient({ product }: Props) {
                       fill
                       className="object-cover"
                       sizes="(max-width: 768px) 100vw, 50vw"
+                      priority
                     />
                   </>
                 ) : (
