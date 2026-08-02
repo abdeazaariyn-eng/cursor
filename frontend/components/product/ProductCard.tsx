@@ -13,9 +13,10 @@ interface ProductCardProps {
   product: Product
   className?: string
   onAddToCart?: (product: Product) => void
+  priority?: boolean
 }
 
-export function ProductCard({ product, className, onAddToCart }: ProductCardProps) {
+export function ProductCard({ product, className, onAddToCart, priority = false }: ProductCardProps) {
   const cardImage = product.cardImage || product.image
 
   return (
@@ -32,7 +33,11 @@ export function ProductCard({ product, className, onAddToCart }: ProductCardProp
           alt={product.shortName}
           fill
           className="object-cover"
+          loading={priority ? "eager" : "lazy"}
+          priority={priority}
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          placeholder="empty"
+          quality={75}
         />
         {/* Badge overlay */}
         <div className="absolute top-3 end-3">
