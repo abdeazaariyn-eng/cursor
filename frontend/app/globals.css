@@ -18,12 +18,19 @@
     scroll-behavior: smooth;
   }
 
+  @supports (font-size-adjust: ex-height 0.5) {
+    body {
+      font-size-adjust: 0.5;
+    }
+  }
+
   body {
     font-family: var(--font-arabic), 'IBM Plex Sans Arabic', Arial, sans-serif;
     background-color: #F5F8FA;
     color: #142B3B;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    contain: layout style paint;
   }
 
   * {
@@ -38,6 +45,23 @@
 
   button {
     font-family: var(--font-arabic), 'IBM Plex Sans Arabic', Arial, sans-serif;
+  }
+
+  /* Mobile optimizations */
+  @media (max-width: 640px) {
+    html {
+      font-size: 15px;
+    }
+    
+    body {
+      -webkit-text-size-adjust: 100%;
+      text-rendering: optimizeSpeed;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
   }
 }
 

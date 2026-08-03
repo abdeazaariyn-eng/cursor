@@ -1,20 +1,41 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
+import dynamic from 'next/dynamic'
 import { IBM_Plex_Sans_Arabic } from 'next/font/google'
 import './globals.css'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { TrustStrip } from '@/components/layout/TrustStrip'
-import { CartDrawer } from '@/components/cart/CartDrawer'
-import { CheckoutModal } from '@/components/checkout/CheckoutModal'
-import { UpsellModal } from '@/components/checkout/UpsellModal'
 import { PixelScripts } from '@/components/tracking/PixelScripts'
+
+// Dynamic imports for heavy components
+const CartDrawer = dynamic(() => import('@/components/cart/CartDrawer').then(mod => ({ default: mod.CartDrawer })), {
+  loading: () => null,
+})
+const CheckoutModal = dynamic(() => import('@/components/checkout/CheckoutModal').then(mod => ({ default: mod.CheckoutModal })), {
+  loading: () => null,
+})
+const UpsellModal = dynamic(() => import('@/components/checkout/UpsellModal').then(mod => ({ default: mod.UpsellModal })), {
+  loading: () => null,
+})
 
 const ibmPlexArabic = IBM_Plex_Sans_Arabic({
   subsets: ['arabic'],
-  weight: ['300', '400', '500', '600', '700'],
+  weight: ['400', '500', '600', '700'],
   variable: '--font-arabic',
   display: 'swap',
+  fallback: ['sans-serif'],
 })
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#F5F8FA' },
+    { media: '(prefers-color-scheme: dark)', color: '#142B3B' },
+  ],
+}
 
 export const metadata: Metadata = {
   title: {
