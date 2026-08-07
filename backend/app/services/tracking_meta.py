@@ -68,6 +68,21 @@ async def send_purchase_event(order: Order, items: list[OrderItem]) -> bool:
         f"/{settings.META_PIXEL_ID}/events"
     )
 
+    logger.info(
+        "meta_capi_request",
+        order_id=str(order.id),
+        event_name="Purchase",
+        event_id=event["event_id"],
+        action_source=event["action_source"],
+        has_phone=bool(user_data.get("ph")),
+        has_fbp=bool(user_data.get("fbp")),
+        has_fbc=bool(user_data.get("fbc")),
+        has_ip=bool(user_data.get("client_ip_address")),
+        value=event["custom_data"]["value"],
+        currency=event["custom_data"]["currency"],
+        test_mode=bool(settings.TRACKING_TEST_MODE),
+    )
+
     try:
         async with httpx.AsyncClient(timeout=10.0) as client:
             resp = await client.post(
@@ -75,14 +90,26 @@ async def send_purchase_event(order: Order, items: list[OrderItem]) -> bool:
                 json=payload,
                 params={"access_token": settings.META_ACCESS_TOKEN},
             )
+            try:
+                body = resp.json()
+            except Exception:
+                body = resp.text
+
+            logger.info(
+                "meta_capi_response",
+                order_id=str(order.id),
+                http_status=resp.status_code,
+                response=str(body)[:400],
+            )
+
             if resp.status_code == 200:
                 logger.info("meta_capi_sent", order_id=str(order.id))
                 return True
             logger.error(
                 "meta_capi_error",
-                status=resp.status_code,
-                body=resp.text[:300],
                 order_id=str(order.id),
+                status=resp.status_code,
+                response=str(body)[:400],
             )
             return False
     except Exception as e:

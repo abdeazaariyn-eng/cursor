@@ -12,6 +12,7 @@ interface CheckoutStore {
   pendingOrderId: string | null
   pendingOrderNumber: string | null
   pendingOrderTotal: number
+  customerPhone: string | null
   isUpsellShown: boolean
   upsellProduct: UpsellProductData | null
   openCheckout: () => void
@@ -21,6 +22,7 @@ interface CheckoutStore {
     orderNumber: string,
     totalKwd: number,
     upsellData: UpsellProductData | null,
+    phone?: string,
   ) => void
   showUpsell: () => void
   hideUpsell: () => void
@@ -32,15 +34,17 @@ export const useCheckoutStore = create<CheckoutStore>((set) => ({
   pendingOrderId: null,
   pendingOrderNumber: null,
   pendingOrderTotal: 0,
+  customerPhone: null,
   isUpsellShown: false,
   upsellProduct: null,
   openCheckout: () => set({ isCheckoutOpen: true }),
   closeCheckout: () => set({ isCheckoutOpen: false }),
-  setPendingOrder: (id, orderNumber, totalKwd, upsellData) =>
+  setPendingOrder: (id, orderNumber, totalKwd, upsellData, phone) =>
     set({
       pendingOrderId: id,
       pendingOrderNumber: orderNumber,
       pendingOrderTotal: totalKwd,
+      customerPhone: phone ?? null,
       upsellProduct: upsellData,
     }),
   showUpsell: () => set({ isUpsellShown: true, isCheckoutOpen: false }),
@@ -51,6 +55,7 @@ export const useCheckoutStore = create<CheckoutStore>((set) => ({
       pendingOrderId: null,
       pendingOrderNumber: null,
       pendingOrderTotal: 0,
+      customerPhone: null,
       isUpsellShown: false,
       upsellProduct: null,
     }),

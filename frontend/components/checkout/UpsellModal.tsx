@@ -14,7 +14,7 @@ const UPSELL_DURATION = 12
 
 export function UpsellModal() {
   const router = useRouter()
-  const { isUpsellShown, pendingOrderId, pendingOrderTotal, upsellProduct, hideUpsell, reset } =
+  const { isUpsellShown, pendingOrderId, pendingOrderTotal, upsellProduct, customerPhone, hideUpsell, reset } =
     useCheckoutStore()
   const { clearCart } = useCartStore()
 
@@ -49,6 +49,7 @@ export function UpsellModal() {
           value: finalTotal,
           eventId: purchaseEventId,
           orderId: finalResponse.orderNumber,
+          phone: customerPhone ?? undefined,
         })
 
         clearCart()

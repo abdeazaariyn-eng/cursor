@@ -27,7 +27,7 @@ export function PixelScripts() {
         <>
           <Script
             id="meta-pixel"
-            strategy="afterInteractive"
+            strategy="lazyOnload"
             dangerouslySetInnerHTML={{
               __html: `
                 !function(f,b,e,v,n,t,s)
@@ -59,7 +59,7 @@ export function PixelScripts() {
       {TIKTOK_PIXEL_ID && (
         <Script
           id="tiktok-pixel"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
               !function (w, d, t) {
@@ -85,7 +85,7 @@ export function PixelScripts() {
       {SNAP_PIXEL_ID && (
         <Script
           id="snap-pixel"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
               (function(e,t,n){if(e.snaptr)return;var a=e.snaptr=function()
@@ -94,7 +94,7 @@ export function PixelScripts() {
               r.src=n;var u=t.getElementsByTagName(s)[0];
               u.parentNode.insertBefore(r,u);})(window,document,
               'https://sc-static.net/scevent.min.js');
-              snaptr('init', '${SNAP_PIXEL_ID}', {'user_email': ''});
+              snaptr('init', '${SNAP_PIXEL_ID}');
               snaptr('track', 'PAGE_VIEW');
             `,
           }}

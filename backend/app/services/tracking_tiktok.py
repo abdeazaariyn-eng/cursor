@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import time
+from datetime import datetime, timezone
 from typing import Any
 
 import httpx
@@ -11,7 +12,9 @@ from app.db.models import Order, OrderItem
 
 logger = get_logger(__name__)
 
-TIKTOK_EVENTS_API_URL = "https://business-api.tiktok.com/open_api/v1.3/event/track/"
+# TikTok Events API v1.3 — single event endpoint
+# Docs: https://business-api.tiktok.com/portal/docs?id=1771101130043393
+TIKTOK_EVENTS_API_URL = "https://business-api.tiktok.com/open_api/v1.3/pixel/track/"
 
 
 async def send_purchase_event(order: Order, items: list[OrderItem]) -> bool:
@@ -19,6 +22,7 @@ async def send_purchase_event(order: Order, items: list[OrderItem]) -> bool:
         logger.info("tiktok_capi_disabled")
         return False
 
+    # contents: each item as a product object
     contents = [
         {
             "content_id": item.product_id,
@@ -29,36 +33,57 @@ async def send_purchase_event(order: Order, items: list[OrderItem]) -> bool:
         for item in items
     ]
 
-    user_data: dict[str, Any] = {}
+    # user object inside context (all hashed per TikTok requirements)
+    user: dict[str, Any] = {}
     if order.phone_hash_tiktok:
-        user_data["phone_number"] = order.phone_hash_tiktok
+        user["phone_number"] = order.phone_hash_tiktok
     if order.ttp:
-        user_data["ttp"] = order.ttp
-    if order.ttclid:
-        user_data["ttclid"] = order.ttclid
-    if order.client_ip:
-        user_data["ip"] = order.client_ip
-    if order.user_agent:
-        user_data["user_agent"] = order.user_agent
+        user["ttp"] = order.ttp
 
-    event: dict[str, Any] = {
+    # context object: ad, page, user, ip, user_agent
+    context: dict[str, Any] = {
+        "page": {"url": f"{settings.FRONTEND_URL}/thank-you"},
+        "user": user,
+    }
+    if order.ttclid:
+        # TikTok Click ID goes in context.ad.callback
+        context["ad"] = {"callback": order.ttclid}
+    if order.client_ip:
+        context["ip"] = order.client_ip  # non-hashed for TikTok CAPI
+    if order.user_agent:
+        context["user_agent"] = order.user_agent
+
+    # ISO 8601 timestamp required by v1.3
+    ts = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    event_id = order.event_id_purchase or str(order.id)
+
+    payload: dict[str, Any] = {
+        "pixel_code": settings.TIKTOK_PIXEL_CODE,
+        # Must match browser pixel event name exactly for deduplication
         "event": "CompletePayment",
-        "event_time": int(time.time()),
-        "event_id": order.event_id_purchase or str(order.id),
-        "user": user_data,
+        "event_id": event_id,
+        "timestamp": ts,
+        "context": context,
         "properties": {
             "currency": "KWD",
             "value": float(order.total_kwd),
-            "order_id": order.order_number,
+            "content_type": "product",
             "contents": contents,
         },
     }
 
-    payload: dict[str, Any] = {
-        "event_source": "web",
-        "event_source_id": settings.TIKTOK_PIXEL_CODE,
-        "data": [event],
-    }
+    logger.info(
+        "tiktok_capi_request",
+        order_id=str(order.id),
+        event="CompletePayment",
+        event_id=event_id,
+        timestamp=ts,
+        has_phone=bool(order.phone_hash_tiktok),
+        has_ttclid=bool(order.ttclid),
+        has_ttp=bool(order.ttp),
+        has_ip=bool(order.client_ip),
+        contents_count=len(contents),
+    )
 
     try:
         async with httpx.AsyncClient(timeout=10.0) as client:
@@ -71,14 +96,24 @@ async def send_purchase_event(order: Order, items: list[OrderItem]) -> bool:
                 },
             )
             data = resp.json()
+            logger.info(
+                "tiktok_capi_response",
+                order_id=str(order.id),
+                http_status=resp.status_code,
+                code=data.get("code"),
+                message=data.get("message"),
+                request_id=data.get("request_id"),
+            )
             if resp.status_code == 200 and data.get("code") == 0:
                 logger.info("tiktok_capi_sent", order_id=str(order.id))
                 return True
             logger.error(
                 "tiktok_capi_error",
-                status=resp.status_code,
-                body=str(data)[:300],
                 order_id=str(order.id),
+                http_status=resp.status_code,
+                code=data.get("code"),
+                message=data.get("message"),
+                request_id=data.get("request_id"),
             )
             return False
     except Exception as e:

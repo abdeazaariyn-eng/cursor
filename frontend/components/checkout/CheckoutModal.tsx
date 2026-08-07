@@ -94,7 +94,8 @@ export function CheckoutModal() {
               priceKwd: 9,
               image: upsellProductData.image,
             }
-          : null
+          : null,
+        values.phone.trim(),
       )
 
       reset()
