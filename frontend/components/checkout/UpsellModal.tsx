@@ -11,6 +11,7 @@ import { formatKwd } from '@/lib/prices'
 import { firePurchase, generateEventId } from '@/lib/events'
 
 const UPSELL_DURATION = 12
+const PURCHASE_EVENT_KEY = 'mahdbaby_purchase_event_id'
 
 export function UpsellModal() {
   const router = useRouter()
@@ -51,6 +52,9 @@ export function UpsellModal() {
           orderId: finalResponse.orderNumber,
           phone: customerPhone ?? undefined,
         })
+
+        // Store purchase event ID for deduplication tracking on thank-you page
+        sessionStorage.setItem(PURCHASE_EVENT_KEY, purchaseEventId)
 
         clearCart()
         reset()

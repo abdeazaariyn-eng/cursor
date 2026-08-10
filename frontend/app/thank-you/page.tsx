@@ -30,6 +30,9 @@ const CONFIRMATION_REVIEWS = [
   { name: 'أم عبدالله', text: 'المنتج وصل مغلف بشكل حلو وولدي حبه من أول يوم. خدمتهم ممتازة.', stars: 5 },
 ]
 
+// Store for tracking purchase event deduplication
+const PURCHASE_EVENT_KEY = 'mahdbaby_purchase_event_id'
+
 function ThankYouContent() {
   const searchParams = useSearchParams()
   const orderId = searchParams?.get('order_id') ?? null
@@ -50,6 +53,11 @@ function ThankYouContent() {
     }
     api.getOrder(orderId).then((data) => {
       setOrder(data)
+      // Log purchase event ID for debugging (already fired from UpsellModal)
+      const purchaseEventId = sessionStorage.getItem(PURCHASE_EVENT_KEY)
+      if (purchaseEventId && typeof window !== 'undefined') {
+        console.log('[Thank You] Purchase event already tracked:', purchaseEventId)
+      }
       setLoading(false)
     }).catch(() => {
       setLoading(false)

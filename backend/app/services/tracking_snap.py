@@ -30,7 +30,7 @@ async def send_purchase_event(order: Order, items: list[OrderItem]) -> bool:
 
     # Snap CAPI v2 uses a flat JSON body (NOT a nested events array like Meta)
     # Required: pixel_id, timestamp, event_type, event_conversion_type
-    # Required for ROAS: price, currency, transaction_id
+    # Required for ROAS: price (number), currency, transaction_id
     # Dedup: client_dedup_id (48h window) + transaction_id (30d window)
     payload: dict[str, Any] = {
         "pixel_id": settings.SNAP_PIXEL_ID,
@@ -38,11 +38,11 @@ async def send_purchase_event(order: Order, items: list[OrderItem]) -> bool:
         "event_type": "PURCHASE",
         "event_conversion_type": "WEB",
         "page_url": f"{settings.FRONTEND_URL}/thank-you",
-        "price": str(float(order.total_kwd)),
+        "price": float(order.total_kwd),  # number, not string
         "currency": "KWD",
         "transaction_id": order.order_number,
         "item_ids": item_ids,
-        "number_items": str(sum(i.quantity for i in items)),
+        "number_items": sum(i.quantity for i in items),  # number, not string
         # Deduplication: same client_dedup_id used in browser pixel
         "client_dedup_id": order.event_id_purchase or str(order.id),
     }

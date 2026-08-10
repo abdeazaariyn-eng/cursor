@@ -27,6 +27,7 @@ async def send_purchase_event(order: Order, items: list[OrderItem]) -> bool:
             "item_price": float(item.price_kwd),
         }
         for item in items
+        if not item.is_upsell  # Exclude upsells from contents for accurate ROAS
     ]
 
     user_data: dict[str, Any] = {

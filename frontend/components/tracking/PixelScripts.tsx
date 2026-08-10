@@ -27,7 +27,7 @@ export function PixelScripts() {
         <>
           <Script
             id="meta-pixel"
-            strategy="lazyOnload"
+            strategy="afterInteractive"
             dangerouslySetInnerHTML={{
               __html: `
                 !function(f,b,e,v,n,t,s)
@@ -59,7 +59,7 @@ export function PixelScripts() {
       {TIKTOK_PIXEL_ID && (
         <Script
           id="tiktok-pixel"
-          strategy="lazyOnload"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               !function (w, d, t) {
@@ -85,7 +85,7 @@ export function PixelScripts() {
       {SNAP_PIXEL_ID && (
         <Script
           id="snap-pixel"
-          strategy="lazyOnload"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               (function(e,t,n){if(e.snaptr)return;var a=e.snaptr=function()

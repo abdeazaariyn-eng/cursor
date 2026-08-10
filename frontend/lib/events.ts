@@ -132,11 +132,18 @@ export function fireSnapEvent(
     // client_dedup_id: same ID used in Snap CAPI for deduplication (48h window)
     if (eventId) eventData.client_dedup_id = eventId
 
-    // Advanced matching: re-init with phone before track — Snap SDK auto-hashes
+    // Advanced matching: update with phone before track — Snap SDK auto-hashes
+    // Use setUser() instead of re-init for better performance with existing pixel
     if (phone && SNAP_PIXEL_ID) {
       const normalized = normalizePhoneForPixel(phone)
       if (normalized) {
-        window.snaptr('init', SNAP_PIXEL_ID, { user_phone_number: normalized })
+        // If snaptr supports setUser method, use it; otherwise re-init
+        try {
+          (window.snaptr as any)('setUser', { phone_number: normalized })
+        } catch {
+          // Fallback to re-init if setUser is not available
+          window.snaptr('init', SNAP_PIXEL_ID, { user_phone_number: normalized })
+        }
       }
     }
 
