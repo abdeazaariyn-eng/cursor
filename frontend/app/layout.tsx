@@ -7,15 +7,18 @@ import { Footer } from '@/components/layout/Footer'
 import { TrustStrip } from '@/components/layout/TrustStrip'
 import { PixelScripts } from '@/components/tracking/PixelScripts'
 
-// Dynamic imports for heavy components
+// Dynamic imports for client-only drawer and modals
 const CartDrawer = dynamic(() => import('@/components/cart/CartDrawer').then(mod => ({ default: mod.CartDrawer })), {
   loading: () => null,
+  ssr: false,
 })
 const CheckoutModal = dynamic(() => import('@/components/checkout/CheckoutModal').then(mod => ({ default: mod.CheckoutModal })), {
   loading: () => null,
+  ssr: false,
 })
 const UpsellModal = dynamic(() => import('@/components/checkout/UpsellModal').then(mod => ({ default: mod.UpsellModal })), {
   loading: () => null,
+  ssr: false,
 })
 
 const ibmPlexArabic = IBM_Plex_Sans_Arabic({

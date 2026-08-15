@@ -75,6 +75,10 @@ export function UpsellModal() {
 
   useEffect(() => {
     if (!isUpsellShown) return
+    if (!upsellProduct) {
+      finalize('skipped')
+      return
+    }
     setTimeLeft(UPSELL_DURATION)
 
     const interval = setInterval(() => {
@@ -89,7 +93,7 @@ export function UpsellModal() {
     }, 1000)
 
     return () => clearInterval(interval)
-  }, [isUpsellShown, finalize])
+  }, [isUpsellShown, upsellProduct, finalize])
 
   const circumference = 2 * Math.PI * 45
   const strokeDashoffset = circumference * (1 - timeLeft / UPSELL_DURATION)
