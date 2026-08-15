@@ -60,19 +60,19 @@ export function CartDrawer() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 bg-black/40 z-50"
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50"
             onClick={closeCart}
             aria-hidden="true"
           />
 
-          {/* Drawer - slides from left in RTL */}
+          {/* Drawer - slides from right in RTL */}
           <motion.div
             key="drawer"
-            initial={{ x: '-100%' }}
+            initial={{ x: '100%' }}
             animate={{ x: 0 }}
-            exit={{ x: '-100%' }}
-            transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-            className="fixed inset-y-0 start-0 w-full max-w-sm bg-[#F5F8FA] z-50 flex flex-col shadow-2xl"
+            exit={{ x: '100%' }}
+            transition={{ type: 'spring', damping: 28, stiffness: 250 }}
+            className="fixed inset-y-0 right-0 w-full max-w-sm bg-white z-50 flex flex-col shadow-2xl border-s border-[#D6E4E8]"
             role="dialog"
             aria-modal="true"
             aria-label="سلة المشتريات"

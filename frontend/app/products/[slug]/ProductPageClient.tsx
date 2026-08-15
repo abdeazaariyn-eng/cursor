@@ -16,6 +16,7 @@ import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
 import { StarRating } from '@/components/ui/StarRating'
 import { useCartStore } from '@/store/cart-store'
+import { useCheckoutStore } from '@/store/checkout-store'
 import { fireAddToCart, generateEventId } from '@/lib/events'
 import { formatKwd, OFFER_CONFIG, type OfferId } from '@/lib/prices'
 import { getCrossSells, type Product } from '@/data/products'
@@ -30,7 +31,8 @@ export function ProductPageClient({ product }: Props) {
   const [selectedColor, setSelectedColor] = useState<string>(product.colors?.[0]?.id || '')
   const [added, setAdded] = useState(false)
   const [isSticky, setIsSticky] = useState(false)
-  const { addItem, openCart } = useCartStore()
+  const { addItem } = useCartStore()
+  const { openCheckout } = useCheckoutStore()
 
   const crossSells = getCrossSells(product.id).slice(0, 2)
   const avgRating =
@@ -80,8 +82,8 @@ export function ProductPageClient({ product }: Props) {
     setAdded(true)
     setTimeout(() => {
       setAdded(false)
-      openCart()
-    }, 700)
+      openCheckout()
+    }, 400)
   }
 
   return (
