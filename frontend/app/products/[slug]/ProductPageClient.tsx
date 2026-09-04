@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import {
@@ -34,9 +34,11 @@ export function ProductPageClient({ product }: Props) {
   const { addItem } = useCartStore()
   const { openCheckout } = useCheckoutStore()
 
-  const crossSells = getCrossSells(product.id).slice(0, 2)
-  const avgRating =
-    product.reviews.reduce((s, r) => s + r.stars, 0) / product.reviews.length || 4.9
+  const crossSells = useMemo(() => getCrossSells(product.id).slice(0, 2), [product.id])
+  const avgRating = useMemo(
+    () => product.reviews.reduce((s, r) => s + r.stars, 0) / product.reviews.length || 4.9,
+    [product.reviews]
+  )
   const offer = OFFER_CONFIG[selectedOffer]
   const sectionImages = product.sectionImages
 
@@ -45,13 +47,19 @@ export function ProductPageClient({ product }: Props) {
   const displayImage = activeColorObj?.image || product.heroImage || product.image
 
   useEffect(() => {
+    let ticking = false
     const handleScroll = () => {
-      const buyBox = document.getElementById('buy-box')
-      if (buyBox) {
-        setIsSticky(buyBox.getBoundingClientRect().bottom < 100)
-      } else {
-        setIsSticky(window.scrollY > 500)
-      }
+      if (ticking) return
+      ticking = true
+      requestAnimationFrame(() => {
+        const buyBox = document.getElementById('buy-box')
+        if (buyBox) {
+          setIsSticky(buyBox.getBoundingClientRect().bottom < 100)
+        } else {
+          setIsSticky(window.scrollY > 500)
+        }
+        ticking = false
+      })
     }
     window.addEventListener('scroll', handleScroll, { passive: true })
     handleScroll()
@@ -693,7 +701,7 @@ export function ProductPageClient({ product }: Props) {
             <Button
               variant="primary"
               size="lg"
-              onClick={() => document.getElementById('buy-box')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={handleAddToCart}
               className="px-10 py-4 shadow-xl text-lg font-bold"
             >
               انضمي لهن واطلبي الحين
@@ -864,9 +872,7 @@ export function ProductPageClient({ product }: Props) {
           <Button
             variant="primary"
             size="md"
-            onClick={() => {
-              document.getElementById('buy-box')?.scrollIntoView({ behavior: 'smooth' })
-            }}
+            onClick={handleAddToCart}
             className="flex-shrink-0 px-8 py-4 md:py-6 text-lg font-black shadow-xl"
           >
             اطلبي الآن

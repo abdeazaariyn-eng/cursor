@@ -9,6 +9,7 @@ from sqlalchemy import (
     Boolean,
     DateTime,
     ForeignKey,
+    Index,
     Integer,
     JSON,
     Numeric,
@@ -146,6 +147,9 @@ class OrderItem(Base):
 
 class TrackingEvent(Base):
     __tablename__ = "tracking_events"
+    __table_args__ = (
+        Index("ix_tracking_events_event_name_created_at", "event_name", "created_at"),
+    )
 
     id: Mapped[uuid.UUID] = mapped_column(
         GUIDType(),

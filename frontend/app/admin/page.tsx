@@ -26,6 +26,8 @@ export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState<'metrics'|'orders'|'profit'>('metrics')
   const [metrics, setMetrics] = useState({ orders: 0, revenue: 0, clicks: 0, conversion_rate: 0 })
   const [orders, setOrders] = useState<any[]>([])
+  const [ordersPage, setOrdersPage] = useState(1)
+  const [hasMoreOrders, setHasMoreOrders] = useState(false)
   const [selectedOrder, setSelectedOrder] = useState<any>(null)
   
   const [startDate, setStartDate] = useState('')
@@ -57,18 +59,26 @@ export default function AdminDashboard() {
     }
   }
 
-  const fetchOrders = async () => {
+  const ORDERS_PAGE_SIZE = 20
+  const [loadingMore, setLoadingMore] = useState(false)
+
+  const fetchOrders = async (page: number = 1) => {
     try {
-      setLoading(true)
-      const res = await fetch(`${API_BASE}/admin/orders?limit=100`, { headers: { 'Authorization': authHeader } })
+      if (page === 1) setLoading(true)
+      else setLoadingMore(true)
+      const res = await fetch(`${API_BASE}/admin/orders?limit=${ORDERS_PAGE_SIZE}&page=${page}`, { headers: { 'Authorization': authHeader } })
       if (!res.ok) throw new Error('Unauthorized')
       const data = await res.json()
-      setOrders(data.orders || [])
+      const newOrders = data.orders || []
+      setOrders(prev => (page === 1 ? newOrders : [...prev, ...newOrders]))
+      setHasMoreOrders(newOrders.length === ORDERS_PAGE_SIZE)
+      setOrdersPage(page)
       setError('')
     } catch (e: any) {
       setError(e.message)
     } finally {
       setLoading(false)
+      setLoadingMore(false)
     }
   }
   
@@ -89,7 +99,7 @@ export default function AdminDashboard() {
   useEffect(() => {
     if (credentials) {
       if (activeTab === 'metrics') fetchMetrics()
-      if (activeTab === 'orders') fetchOrders()
+      if (activeTab === 'orders') fetchOrders(1)
     }
   }, [credentials, activeTab, startDate, endDate])
 
@@ -234,6 +244,17 @@ export default function AdminDashboard() {
               </tbody>
             </table>
           </div>
+          {hasMoreOrders && (
+            <div className="p-4 text-center border-t border-[#D6E4E8]">
+              <button
+                onClick={() => fetchOrders(ordersPage + 1)}
+                disabled={loadingMore}
+                className="px-6 py-2 rounded-lg bg-[#EBF2F5] text-[#142B3B] font-bold hover:bg-[#D6E4E8] disabled:opacity-50"
+              >
+                {loadingMore ? '...جاري التحميل' : 'تحميل المزيد'}
+              </button>
+            </div>
+          )}
         </div>
       )}
 

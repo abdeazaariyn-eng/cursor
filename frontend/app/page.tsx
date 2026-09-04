@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import {
   ArrowLeft, Star, Shield, Award, CheckCircle, HeartPulse,
   Microscope, Leaf, Baby, Truck, Phone, Package, Clock,
@@ -70,7 +71,15 @@ export default function HomePage() {
             <div className="order-1 md:order-2 flex items-center justify-center relative">
               <div className="absolute inset-0 bg-[#4A8B9A]/10 rounded-[3rem] rotate-3 scale-105 transform origin-center" />
               <div className="w-full max-w-md aspect-square bg-white rounded-3xl flex items-center justify-center shadow-2xl relative z-10 border border-[#D6E4E8] overflow-hidden">
-                <img src="/images/home/hero.webp" alt="أم هادئة مع طفلها" className="w-full h-full object-cover" />
+                <Image
+                  src="/images/home/hero.webp"
+                  alt="أم هادئة مع طفلها"
+                  fill
+                  priority
+                  sizes="(max-width: 768px) 90vw, 448px"
+                  quality={75}
+                  className="object-cover"
+                />
                 <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-[#E8F0EC]/90 backdrop-blur-md rounded-2xl px-4 py-3 inline-flex items-center gap-2 border border-[#3B8263]/20 shadow-lg whitespace-nowrap">
                   <Shield className="w-5 h-5 text-[#3B8263]" />
                   <span className="text-[#142B3B] text-xs font-bold">مطابق لمعايير SFDA</span>
@@ -168,7 +177,15 @@ export default function HomePage() {
             <div className="relative order-2 md:order-2">
               <div className="absolute inset-0 bg-[#4A8B9A]/10 rounded-[3rem] rotate-3 scale-105 transform origin-center" />
               <div className="relative aspect-square rounded-[2.5rem] shadow-lg border border-white/80 overflow-hidden z-10">
-                <img src="/images/home/mother-baby.webp" alt="أم هادئة مع طفلها" className="w-full h-full object-cover" />
+                <Image
+                  src="/images/home/mother-baby.webp"
+                  alt="أم هادئة مع طفلها"
+                  fill
+                  loading="lazy"
+                  sizes="(max-width: 768px) 90vw, 500px"
+                  quality={75}
+                  className="object-cover"
+                />
               </div>
               {/* Floating quote */}
               <div className="absolute -bottom-6 -right-4 bg-white p-4 rounded-2xl shadow-xl border border-[#D6E4E8] max-w-[220px] z-10">
@@ -278,7 +295,15 @@ export default function HomePage() {
             <div className="relative">
               <div className="absolute inset-0 bg-blue-100/60 rounded-[3rem] -rotate-6 scale-105 transform origin-center" />
               <div className="relative aspect-square rounded-[2.5rem] shadow-xl border border-blue-100 overflow-hidden z-10">
-                <img src="/images/home/quality-fabric.webp" alt="جودة المادة الطبية" className="w-full h-full object-cover" />
+                <Image
+                  src="/images/home/quality-fabric.webp"
+                  alt="جودة المادة الطبية"
+                  fill
+                  loading="lazy"
+                  sizes="(max-width: 768px) 90vw, 500px"
+                  quality={75}
+                  className="object-cover"
+                />
               </div>
             </div>
           </div>
@@ -297,7 +322,15 @@ export default function HomePage() {
             <div className="relative order-2 md:order-1">
               <div className="absolute inset-0 bg-white/5 rounded-[3rem] rotate-3 scale-105 transform origin-center" />
               <div className="relative aspect-square rounded-[2.5rem] shadow-2xl border border-[#29536C] overflow-hidden z-10">
-                <img src="/images/home/sfda-guarantee.webp" alt="شهادات الضمان والجودة" className="w-full h-full object-cover" />
+                <Image
+                  src="/images/home/sfda-guarantee.webp"
+                  alt="شهادات الضمان والجودة"
+                  fill
+                  loading="lazy"
+                  sizes="(max-width: 768px) 90vw, 500px"
+                  quality={75}
+                  className="object-cover"
+                />
               </div>
               {/* Floating badge */}
               <div className="absolute -bottom-6 -left-4 bg-white rounded-2xl p-4 shadow-xl flex items-center gap-3 border border-[#D6E4E8] z-10">

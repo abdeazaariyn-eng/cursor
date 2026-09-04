@@ -1,11 +1,39 @@
 import httpx
 import re
+import time
 from typing import Optional
 
 from app.core.config import settings
 from app.core.logging import get_logger
 
 logger = get_logger(__name__)
+
+# Every order request blocks on this check, so repeated lookups for the same
+# IP (common: retries, same customer, office/shared IPs) are cached briefly
+# to avoid paying the MaxMind/ProxyCheck network round-trip every time.
+_IP_CACHE_TTL = 300  # seconds
+_IP_CACHE_MAX_ENTRIES = 2000
+_ip_cache: dict[str, tuple[float, bool]] = {}
+
+
+def _get_cached_ip_result(ip: str) -> Optional[bool]:
+    cached = _ip_cache.get(ip)
+    if cached and (time.monotonic() - cached[0]) < _IP_CACHE_TTL:
+        return cached[1]
+    return None
+
+
+def _set_cached_ip_result(ip: str, allowed: bool) -> None:
+    now = time.monotonic()
+    if len(_ip_cache) >= _IP_CACHE_MAX_ENTRIES:
+        expired = [k for k, (ts, _) in _ip_cache.items() if (now - ts) >= _IP_CACHE_TTL]
+        for k in expired:
+            _ip_cache.pop(k, None)
+        if len(_ip_cache) >= _IP_CACHE_MAX_ENTRIES:
+            # Still full after sweeping expired entries: drop oldest.
+            for k in list(_ip_cache.keys())[: len(_ip_cache) - _IP_CACHE_MAX_ENTRIES + 1]:
+                _ip_cache.pop(k, None)
+    _ip_cache[ip] = (now, allowed)
 
 
 async def check_ip_allowed(ip: Optional[str], phone: str) -> bool:
@@ -46,6 +74,11 @@ async def check_ip_allowed(ip: Optional[str], phone: str) -> bool:
     except Exception:
         pass
 
+    cached_result = _get_cached_ip_result(ip)
+    if cached_result is not None:
+        logger.info("maxmind_cache_hit", ip=ip, allowed=cached_result)
+        return cached_result
+
     # Require MaxMind to be configured for geo-enforcement; block if missing
     if not settings.MAXMIND_ACCOUNT_ID or not settings.MAXMIND_LICENSE_KEY:
         logger.warning("maxmind_not_configured_blocking", ip=ip)
@@ -62,6 +95,7 @@ async def check_ip_allowed(ip: Optional[str], phone: str) -> bool:
             if response.status_code != 200:
                 logger.error("maxmind_api_error", status=response.status_code, body=response.text)
                 # Strict: block if MaxMind API fails
+                _set_cached_ip_result(ip, False)
                 return False
 
             data = response.json()
@@ -75,6 +109,7 @@ async def check_ip_allowed(ip: Optional[str], phone: str) -> bool:
                     country=country_iso,
                     expected=settings.ALLOWED_COUNTRY,
                 )
+                _set_cached_ip_result(ip, False)
                 return False
 
             # Check VPN/proxy traits if available
@@ -91,6 +126,7 @@ async def check_ip_allowed(ip: Optional[str], phone: str) -> bool:
                     is_proxy=is_proxy,
                     is_tor=is_tor,
                 )
+                _set_cached_ip_result(ip, False)
                 return False
 
             # Additional platform check (ProxyCheck) if configured
@@ -107,11 +143,13 @@ async def check_ip_allowed(ip: Optional[str], phone: str) -> bool:
                                 ip_data = pc_data.get(ip, {})
                                 if ip_data.get("proxy") == "yes":
                                     logger.warning("proxycheck_rejected_vpn", ip=ip)
+                                    _set_cached_ip_result(ip, False)
                                     return False
                 except Exception as e:
                     logger.error("proxycheck_api_exception", error=str(e))
 
             logger.info("maxmind_allowed", ip=ip, country=country_iso)
+            _set_cached_ip_result(ip, True)
             return True
 
     except Exception as e:

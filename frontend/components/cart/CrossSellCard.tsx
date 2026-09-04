@@ -1,6 +1,8 @@
 'use client'
 
 import { Plus } from 'lucide-react'
+import Image from 'next/image'
+import { memo } from 'react'
 import { useCartStore } from '@/store/cart-store'
 import type { Product } from '@/data/products'
 import { OFFER_CONFIG } from '@/lib/prices'
@@ -17,7 +19,7 @@ const CROSS_SELL_REASONS: Record<string, string> = {
   wearable_electric_breast_pump: 'راحة أكثر في يومك كأم مرضعة',
 }
 
-export function CrossSellCard({ product }: CrossSellCardProps) {
+export const CrossSellCard = memo(function CrossSellCard({ product }: CrossSellCardProps) {
   const { addItem, openCart } = useCartStore()
   const offer = OFFER_CONFIG['one_piece']
 
@@ -46,7 +48,7 @@ export function CrossSellCard({ product }: CrossSellCardProps) {
     <div className="flex items-center gap-3 bg-[#EBF2F5] rounded-xl p-3 border border-[#C9DADD]">
       {/* Image */}
       <div className="relative w-12 h-12 bg-white rounded-lg flex-shrink-0 flex items-center justify-center overflow-hidden">
-        <img src={product.image} alt={product.shortName} className="w-full h-full object-cover" />
+        <Image src={product.image} alt={product.shortName} fill sizes="48px" className="object-cover" />
       </div>
 
       {/* Info */}
@@ -73,4 +75,4 @@ export function CrossSellCard({ product }: CrossSellCardProps) {
       </button>
     </div>
   )
-}
+})

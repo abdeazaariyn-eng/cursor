@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 import { useCartStore } from '@/store/cart-store'
 import { useCheckoutStore } from '@/store/checkout-store'
 import { Button } from '@/components/ui/Button'
@@ -75,10 +76,6 @@ export function UpsellModal() {
 
   useEffect(() => {
     if (!isUpsellShown) return
-    if (!upsellProduct) {
-      finalize('skipped')
-      return
-    }
     setTimeLeft(UPSELL_DURATION)
 
     const interval = setInterval(() => {
@@ -93,7 +90,7 @@ export function UpsellModal() {
     }, 1000)
 
     return () => clearInterval(interval)
-  }, [isUpsellShown, upsellProduct, finalize])
+  }, [isUpsellShown, finalize])
 
   const circumference = 2 * Math.PI * 45
   const strokeDashoffset = circumference * (1 - timeLeft / UPSELL_DURATION)
@@ -159,7 +156,7 @@ export function UpsellModal() {
               {/* Product */}
               <div className="bg-[#EBF2F5] rounded-2xl p-4 mb-4 text-center">
                 <div className="relative w-24 h-24 mx-auto mb-3 rounded-xl overflow-hidden bg-white">
-                  <img src={upsellProduct.image} alt={upsellProduct.productName} className="w-full h-full object-cover" />
+                  <Image src={upsellProduct.image} alt={upsellProduct.productName} fill sizes="96px" className="object-cover" />
                 </div>
                 <p className="font-bold text-[#142B3B] text-sm mb-1">
                   {upsellProduct.productName}

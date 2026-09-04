@@ -8,7 +8,7 @@ from typing import Any, AsyncGenerator
 from fastapi import FastAPI, Request, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, Response
 from fastapi.exceptions import RequestValidationError
 from pydantic import ValidationError
 
@@ -78,8 +78,24 @@ app.add_middleware(
 )
 
 
-_cache: dict[str, tuple[float, Any]] = {}
+# Small bounded in-process cache for cheap, frequently-hit GET responses.
+# Stores rendered bytes (not the Response object) so cache hits can't reuse an
+# already-consumed body_iterator, and entries are capped + swept so this can't
+# grow unbounded under sustained traffic.
+_cache: dict[str, tuple[float, bytes, dict]] = {}
 CACHE_TTL = 30  # seconds
+CACHE_MAX_ENTRIES = 500
+
+
+def _evict_expired_cache_entries(now: float) -> None:
+    expired = [key for key, (ts, _, _) in _cache.items() if (now - ts) >= CACHE_TTL]
+    for key in expired:
+        _cache.pop(key, None)
+    if len(_cache) > CACHE_MAX_ENTRIES:
+        # Drop the oldest entries first (insertion order approximates recency).
+        for key in list(_cache.keys())[: len(_cache) - CACHE_MAX_ENTRIES]:
+            _cache.pop(key, None)
+
 
 @app.middleware("http")
 async def cache_middleware(request: Request, call_next: Any) -> Any:
@@ -88,10 +104,16 @@ async def cache_middleware(request: Request, call_next: Any) -> Any:
         now = time.time()
         cached = _cache.get(cache_key)
         if cached and (now - cached[0]) < CACHE_TTL:
-            return cached[1]
+            _, cached_body, cached_headers = cached
+            return Response(content=cached_body, status_code=200, headers=cached_headers)
+
         response = await call_next(request)
         if response.status_code == 200:
-            _cache[cache_key] = (now, response)
+            body = b"".join([chunk async for chunk in response.body_iterator])
+            headers = dict(response.headers)
+            _evict_expired_cache_entries(now)
+            _cache[cache_key] = (now, body, headers)
+            return Response(content=body, status_code=response.status_code, headers=headers)
         return response
     return await call_next(request)
 

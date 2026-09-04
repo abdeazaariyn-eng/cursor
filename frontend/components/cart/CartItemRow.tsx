@@ -1,6 +1,8 @@
 'use client'
 
 import { Trash2 } from 'lucide-react'
+import Image from 'next/image'
+import { memo } from 'react'
 import { useCartStore, type CartItem } from '@/store/cart-store'
 import { formatKwd } from '@/lib/prices'
 import { cn } from '@/lib/utils'
@@ -17,7 +19,7 @@ const OFFER_LABELS: Record<string, string> = {
   upsell_9kwd: 'عرض خاص - 9 KWD',
 }
 
-export function CartItemRow({ item, className }: CartItemRowProps) {
+export const CartItemRow = memo(function CartItemRow({ item, className }: CartItemRowProps) {
   const { removeItem } = useCartStore()
 
   return (
@@ -29,7 +31,7 @@ export function CartItemRow({ item, className }: CartItemRowProps) {
     >
       {/* Image */}
       <div className="relative w-14 h-14 bg-[#EBF2F5] rounded-xl flex-shrink-0 flex items-center justify-center overflow-hidden">
-        <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+        <Image src={item.image} alt={item.name} fill sizes="56px" className="object-cover" />
       </div>
 
       {/* Info */}
@@ -60,4 +62,4 @@ export function CartItemRow({ item, className }: CartItemRowProps) {
       </button>
     </div>
   )
-}
+})

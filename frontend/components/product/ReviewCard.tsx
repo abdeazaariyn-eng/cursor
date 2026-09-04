@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { StarRating } from '@/components/ui/StarRating'
 import { cn } from '@/lib/utils'
 
@@ -8,7 +9,7 @@ interface ReviewCardProps {
   className?: string
 }
 
-export function ReviewCard({ name, text, stars = 5, className }: ReviewCardProps) {
+export const ReviewCard = memo(function ReviewCard({ name, text, stars = 5, className }: ReviewCardProps) {
   return (
     <div
       className={cn(
@@ -27,4 +28,4 @@ export function ReviewCard({ name, text, stars = 5, className }: ReviewCardProps
       </div>
     </div>
   )
-}
+})

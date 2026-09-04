@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
+import { memo } from 'react'
 import { Star } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { Badge } from '@/components/ui/Badge'
@@ -16,7 +17,7 @@ interface ProductCardProps {
   priority?: boolean
 }
 
-export function ProductCard({ product, className, onAddToCart, priority = false }: ProductCardProps) {
+export const ProductCard = memo(function ProductCard({ product, className, onAddToCart, priority = false }: ProductCardProps) {
   const cardImage = product.cardImage || product.image
 
   return (
@@ -87,4 +88,4 @@ export function ProductCard({ product, className, onAddToCart, priority = false 
       </div>
     </div>
   )
-}
+})
