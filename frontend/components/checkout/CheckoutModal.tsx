@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { X, Package, ShieldCheck } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useForm } from 'react-hook-form'
@@ -18,7 +18,7 @@ import { getProductById } from '@/data/products'
 
 const schema = z.object({
   name: z.string().trim().min(2, 'اكتبي اسمك عشان نأكد الطلب'),
-  phone: z.string().refine(validatePhone, 'اكتبي رقم جوال صحيح (مثال: 5XXXXXXXX أو 05XXXXXXXX)'),
+  phone: z.string().refine(validatePhone, 'اكتبي رقم جوال صحيح'),
 })
 
 type FormValues = z.infer<typeof schema>
@@ -28,6 +28,8 @@ export function CheckoutModal() {
   const { items, getTotal } = useCartStore()
   const [serverError, setServerError] = useState<string | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const scrollContainerRef = useRef<HTMLDivElement>(null)
+  const formRef = useRef<HTMLFormElement>(null)
 
   const total = getTotal()
 
@@ -43,6 +45,31 @@ export function CheckoutModal() {
     setServerError(null)
     reset()
   }
+
+  // Auto-scroll to form when modal opens
+  useEffect(() => {
+    if (isCheckoutOpen && formRef.current && scrollContainerRef.current) {
+      // Delay scroll slightly to allow animation to complete
+      const timer = setTimeout(() => {
+        const scrollContainer = scrollContainerRef.current
+        const form = formRef.current
+        if (scrollContainer && form) {
+          // Calculate the scroll position to make the form visible
+          const formTop = form.offsetTop
+          const scrollContainerHeight = scrollContainer.clientHeight
+          const formHeight = form.offsetHeight
+          
+          // Scroll so form is near the bottom of the container
+          const scrollPosition = Math.max(0, formTop - scrollContainerHeight + formHeight + 20)
+          scrollContainer.scrollTo({
+            top: scrollPosition,
+            behavior: 'smooth'
+          })
+        }
+      }, 300)
+      return () => clearTimeout(timer)
+    }
+  }, [isCheckoutOpen])
 
   const onSubmit = async (values: FormValues) => {
     if (items.length === 0) return
@@ -120,16 +147,18 @@ export function CheckoutModal() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4"
+            className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
+            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}
             onClick={handleClose}
           >
             <motion.div
               key="checkout-modal"
-              initial={{ y: '100%', opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: '100%', opacity: 0 }}
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
               transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-              className="bg-white w-full sm:max-w-md rounded-t-3xl sm:rounded-3xl overflow-hidden shadow-2xl max-h-[92vh] flex flex-col"
+              className="bg-white w-full sm:max-w-md rounded-3xl shadow-2xl max-h-[calc(100vh-32px)] overflow-y-auto flex flex-col"
+              style={{ maxHeight: 'calc(100vh - 32px)', overflowY: 'auto' }}
               onClick={(e) => e.stopPropagation()}
               role="dialog"
               aria-modal="true"
@@ -153,7 +182,7 @@ export function CheckoutModal() {
                 </button>
               </div>
 
-              <div className="p-5 overflow-y-auto flex-1">
+              <div className="p-5 overflow-y-auto flex-1" ref={scrollContainerRef}>
                 {items.length === 0 ? (
                   <div className="flex flex-col items-center justify-center py-8 text-center">
                     <Package className="w-12 h-12 text-[#8CA4B0] mb-3" />
@@ -189,7 +218,7 @@ export function CheckoutModal() {
                     </div>
 
                     {/* Form */}
-                    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4" noValidate>
+                    <form ref={formRef} onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4" noValidate>
                       {/* Name */}
                       <div>
                         <label
@@ -230,7 +259,7 @@ export function CheckoutModal() {
                           type="tel"
                           inputMode="numeric"
                           autoComplete="tel"
-                          placeholder="5XXXXXXXX أو 05XXXXXXXX"
+                          placeholder="05XXXXXXXX"
                           dir="ltr"
                           className={`w-full border rounded-xl px-4 py-3 text-[#142B3B] placeholder:text-[#8CA4B0] focus:outline-none focus:ring-1 transition-colors text-base text-right ${
                             errors.phone

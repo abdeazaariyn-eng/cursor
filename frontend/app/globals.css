@@ -30,7 +30,9 @@
     color: #142B3B;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    contain: layout style paint;
+    /* layout/paint containment here would make body the containing block for
+       position: fixed modals, breaking their viewport centering */
+    contain: style;
   }
 
   * {
