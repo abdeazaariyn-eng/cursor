@@ -96,6 +96,24 @@ class Order(Base):
     event_id_purchase: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
     event_id_lead: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
 
+    # Customer location information
+    country: Mapped[Optional[str]] = mapped_column(String(50), nullable=True)
+    city: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
+    area: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
+    address: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    notes: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+
+    # Order fulfillment status
+    order_status: Mapped[str] = mapped_column(String(30), nullable=False, default="new")
+    
+    # COD (Cash on Delivery) integration
+    cod_sync_status: Mapped[str] = mapped_column(String(30), nullable=False, default="pending")
+    cod_order_id: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
+    cod_tracking_number: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
+    cod_last_sync: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
+    cod_sync_error: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+
+    # Google Sheets integration
     sheet_sync_status: Mapped[str] = mapped_column(String(20), nullable=False, default="pending")
     sheet_sync_error: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
 
@@ -131,6 +149,7 @@ class OrderItem(Base):
     product_id: Mapped[str] = mapped_column(String(100), nullable=False)
     product_slug: Mapped[str] = mapped_column(String(200), nullable=False)
     product_name_ar: Mapped[str] = mapped_column(String(500), nullable=False)
+    sku: Mapped[Optional[str]] = mapped_column(String(50), nullable=True)
     product_color: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
     offer_id: Mapped[str] = mapped_column(String(50), nullable=False)
     quantity: Mapped[int] = mapped_column(Integer, nullable=False)

@@ -38,10 +38,11 @@ async def send_order_to_sheets(
             color_display = item.product_color.split("(")[0].strip()
         colors.append(color_display)
         
-        sku = PRODUCT_CATALOG.get(item.product_id, {}).get("sku", "")
+        # Use item.sku if available, otherwise fall back to product catalog
+        sku = item.sku or PRODUCT_CATALOG.get(item.product_id, {}).get("sku", "")
         skus.append(sku)
         quantities.append(str(item.quantity))
-        logger.info("sheet_item_debug", product_id=item.product_id, product_color=item.product_color, color_display=color_display)
+        logger.info("sheet_item_debug", product_id=item.product_id, sku=sku, product_color=item.product_color, color_display=color_display)
 
     # Format date as DD/MM/YYYY
     formatted_date = ""
@@ -57,7 +58,7 @@ async def send_order_to_sheets(
     payload = {
         "date": formatted_date,
         "orderid": order.order_number,
-        "country": "Kwt",
+        "country": order.country or "Kwt",
         "name": order.customer_name,
         "phone": phone,
         "product": "/".join(product_names),
@@ -65,7 +66,7 @@ async def send_order_to_sheets(
         "quantity": "/".join(quantities),
         "total_price": float(order.total_kwd),
         "currency": "KWD",
-        "status": "",
+        "status": order.order_status or "",
         "color": "/".join(colors)
     }
 

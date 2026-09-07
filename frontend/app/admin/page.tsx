@@ -85,7 +85,7 @@ export default function AdminDashboard() {
   const fetchOrderDetails = async (id: string) => {
     try {
       setLoading(true)
-      const res = await fetch(`${API_BASE}/orders/${id}`, { headers: { 'Authorization': authHeader } })
+      const res = await fetch(`${API_BASE}/admin/orders/${id}`, { headers: { 'Authorization': authHeader } })
       if (!res.ok) throw new Error('Failed to fetch details')
       const data = await res.json()
       setSelectedOrder(data)
@@ -202,14 +202,14 @@ export default function AdminDashboard() {
       {activeTab === 'orders' && !loading && (
         <div className="bg-white rounded-2xl shadow-sm border border-[#D6E4E8] overflow-hidden">
           <div className="overflow-x-auto">
-            <table className="w-full text-right">
+            <table className="w-full text-right text-sm">
               <thead className="bg-gray-50 border-b border-[#D6E4E8]">
                 <tr>
                   <th className="p-4 font-bold text-[#142B3B]">رقم الطلب</th>
                   <th className="p-4 font-bold text-[#142B3B]">العميل</th>
-                  <th className="p-4 font-bold text-[#142B3B]">رقم الهاتف</th>
                   <th className="p-4 font-bold text-[#142B3B]">المبلغ</th>
-                  <th className="p-4 font-bold text-[#142B3B]">الحالة</th>
+                  <th className="p-4 font-bold text-[#142B3B]">حالة الطلب</th>
+                  <th className="p-4 font-bold text-[#142B3B]">حالة COD</th>
                   <th className="p-4 font-bold text-[#142B3B]">التاريخ</th>
                   <th className="p-4 font-bold text-[#142B3B]"></th>
                 </tr>
@@ -217,18 +217,29 @@ export default function AdminDashboard() {
               <tbody>
                 {orders.map(o => (
                   <tr key={o.id} className="border-b border-[#D6E4E8] hover:bg-gray-50">
-                    <td className="p-4 text-sm font-medium">{o.order_number}</td>
-                    <td className="p-4 text-sm">{o.customer_name}</td>
-                    <td className="p-4 text-sm" dir="ltr">{o.phone}</td>
-                    <td className="p-4 text-sm font-bold text-[#D4AF37]">{o.total_kwd.toFixed(3)} د.ك</td>
+                    <td className="p-4 font-medium">{o.order_number}</td>
+                    <td className="p-4">{o.customer_name}</td>
+                    <td className="p-4 font-bold text-[#D4AF37]">{o.total_kwd.toFixed(3)} د.ك</td>
                     <td className="p-4">
                       <span className={`px-2 py-1 rounded text-xs font-bold ${
-                        o.status === 'completed' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
+                        o.order_status === 'delivered' ? 'bg-green-100 text-green-800' : 
+                        o.order_status === 'cancelled' ? 'bg-red-100 text-red-800' :
+                        o.order_status === 'sent' ? 'bg-blue-100 text-blue-800' :
+                        'bg-yellow-100 text-yellow-800'
                       }`}>
-                        {o.status}
+                        {o.order_status}
                       </span>
                     </td>
-                    <td className="p-4 text-sm text-gray-500">{new Date(o.created_at).toLocaleString('ar-KW')}</td>
+                    <td className="p-4">
+                      <span className={`px-2 py-1 rounded text-xs font-bold ${
+                        o.cod_sync_status === 'sent' ? 'bg-green-100 text-green-800' : 
+                        o.cod_sync_status === 'failed' ? 'bg-red-100 text-red-800' :
+                        'bg-gray-100 text-gray-800'
+                      }`}>
+                        {o.cod_sync_status}
+                      </span>
+                    </td>
+                    <td className="p-4 text-gray-500 text-xs">{new Date(o.created_at).toLocaleString('ar-KW')}</td>
                     <td className="p-4">
                       <button onClick={() => fetchOrderDetails(o.id)} className="text-[#4A8B9A] hover:text-[#142B3B] p-2 bg-[#EBF2F5] rounded-lg">
                         <Eye className="w-4 h-4" />
@@ -276,35 +287,105 @@ export default function AdminDashboard() {
               </button>
             </div>
             
-            <div className="p-6">
-              <div className="grid grid-cols-2 gap-4 mb-8">
-                <div className="bg-[#F5F8FA] p-4 rounded-xl border border-[#D6E4E8]">
-                  <p className="text-xs text-[#506A77] font-bold mb-1">اسم العميل</p>
-                  <p className="font-bold text-[#142B3B]">{selectedOrder.customerName}</p>
-                </div>
-                <div className="bg-[#F5F8FA] p-4 rounded-xl border border-[#D6E4E8]">
-                  <p className="text-xs text-[#506A77] font-bold mb-1">الحالة</p>
-                  <p className="font-bold text-[#142B3B]">{selectedOrder.status}</p>
+            <div className="p-6 space-y-6">
+              {/* Customer Information */}
+              <div>
+                <h4 className="font-bold text-lg mb-3 text-[#142B3B]">بيانات العميل</h4>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="bg-[#F5F8FA] p-3 rounded-xl border border-[#D6E4E8]">
+                    <p className="text-xs text-[#506A77] font-bold mb-1">الاسم</p>
+                    <p className="font-bold text-[#142B3B]">{selectedOrder.customerName}</p>
+                  </div>
+                  <div className="bg-[#F5F8FA] p-3 rounded-xl border border-[#D6E4E8]">
+                    <p className="text-xs text-[#506A77] font-bold mb-1">الهاتف</p>
+                    <p className="font-bold text-[#142B3B] dir-ltr">{selectedOrder.customerPhone}</p>
+                  </div>
+                  {selectedOrder.country && (
+                    <div className="bg-[#F5F8FA] p-3 rounded-xl border border-[#D6E4E8]">
+                      <p className="text-xs text-[#506A77] font-bold mb-1">الدولة</p>
+                      <p className="font-bold text-[#142B3B]">{selectedOrder.country}</p>
+                    </div>
+                  )}
+                  {selectedOrder.city && (
+                    <div className="bg-[#F5F8FA] p-3 rounded-xl border border-[#D6E4E8]">
+                      <p className="text-xs text-[#506A77] font-bold mb-1">المدينة</p>
+                      <p className="font-bold text-[#142B3B]">{selectedOrder.city}</p>
+                    </div>
+                  )}
+                  {selectedOrder.area && (
+                    <div className="bg-[#F5F8FA] p-3 rounded-xl border border-[#D6E4E8]">
+                      <p className="text-xs text-[#506A77] font-bold mb-1">المنطقة</p>
+                      <p className="font-bold text-[#142B3B]">{selectedOrder.area}</p>
+                    </div>
+                  )}
+                  {selectedOrder.address && (
+                    <div className="bg-[#F5F8FA] p-3 rounded-xl border border-[#D6E4E8] col-span-2">
+                      <p className="text-xs text-[#506A77] font-bold mb-1">العنوان</p>
+                      <p className="font-bold text-[#142B3B] text-sm">{selectedOrder.address}</p>
+                    </div>
+                  )}
                 </div>
               </div>
 
-              <h4 className="font-bold text-lg mb-4 text-[#142B3B]">المنتجات</h4>
-              <div className="space-y-3">
-                {selectedOrder.items.map((item: any, i: number) => (
-                  <div key={i} className="flex justify-between items-center bg-white border border-[#D6E4E8] p-4 rounded-xl shadow-sm">
-                    <div>
-                      <p className="font-bold text-[#142B3B]">{item.productNameAr}</p>
-                      <p className="text-sm text-[#506A77]">الكمية: {item.quantity} {item.isUpsell && <span className="text-xs bg-[#D4AF37]/20 text-[#D4AF37] px-2 py-0.5 rounded mr-2">Upsell</span>}</p>
-                    </div>
-                    <div className="font-extrabold text-lg text-[#142B3B]">
-                      {item.priceKwd.toFixed(3)} د.ك
-                    </div>
+              {/* Order Status */}
+              <div>
+                <h4 className="font-bold text-lg mb-3 text-[#142B3B]">حالة الطلب</h4>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="bg-[#F5F8FA] p-3 rounded-xl border border-[#D6E4E8]">
+                    <p className="text-xs text-[#506A77] font-bold mb-1">حالة التسليم</p>
+                    <p className="font-bold text-[#142B3B]">{selectedOrder.orderStatus}</p>
                   </div>
-                ))}
+                  <div className="bg-[#F5F8FA] p-3 rounded-xl border border-[#D6E4E8]">
+                    <p className="text-xs text-[#506A77] font-bold mb-1">حالة Google Sheets</p>
+                    <p className="font-bold text-[#142B3B]">{selectedOrder.sheetSyncStatus}</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* COD Information */}
+              <div>
+                <h4 className="font-bold text-lg mb-3 text-[#142B3B]">معلومات الدفع الإلكترونية (COD)</h4>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="bg-[#F5F8FA] p-3 rounded-xl border border-[#D6E4E8]">
+                    <p className="text-xs text-[#506A77] font-bold mb-1">حالة التزامن</p>
+                    <p className="font-bold text-[#142B3B]">{selectedOrder.cod.syncStatus}</p>
+                  </div>
+                  {selectedOrder.cod.codOrderId && (
+                    <div className="bg-[#F5F8FA] p-3 rounded-xl border border-[#D6E4E8]">
+                      <p className="text-xs text-[#506A77] font-bold mb-1">رقم طلب COD</p>
+                      <p className="font-bold text-[#142B3B]">{selectedOrder.cod.codOrderId}</p>
+                    </div>
+                  )}
+                  {selectedOrder.cod.trackingNumber && (
+                    <div className="bg-[#F5F8FA] p-3 rounded-xl border border-[#D6E4E8]">
+                      <p className="text-xs text-[#506A77] font-bold mb-1">رقم التتبع</p>
+                      <p className="font-bold text-[#142B3B]">{selectedOrder.cod.trackingNumber}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Products */}
+              <div>
+                <h4 className="font-bold text-lg mb-3 text-[#142B3B]">المنتجات</h4>
+                <div className="space-y-2">
+                  {selectedOrder.items.map((item: any, i: number) => (
+                    <div key={i} className="flex justify-between items-center bg-white border border-[#D6E4E8] p-3 rounded-xl shadow-sm">
+                      <div>
+                        <p className="font-bold text-[#142B3B] text-sm">{item.productNameAr}</p>
+                        <p className="text-xs text-[#506A77]">الكمية: {item.quantity} {item.isUpsell && <span className="text-xs bg-[#D4AF37]/20 text-[#D4AF37] px-2 py-0.5 rounded mr-2">Upsell</span>}</p>
+                      </div>
+                      <div className="font-extrabold text-[#142B3B]">
+                        {item.priceKwd.toFixed(3)} د.ك
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
               
-              <div className="mt-8 pt-6 border-t border-[#D6E4E8] flex justify-between items-center">
-                <p className="font-bold text-xl text-[#142B3B]">الإجمالي</p>
+              {/* Total */}
+              <div className="pt-4 border-t border-[#D6E4E8] flex justify-between items-center">
+                <p className="font-bold text-lg text-[#142B3B]">الإجمالي</p>
                 <p className="font-extrabold text-2xl text-[#D4AF37]">{selectedOrder.totalKwd.toFixed(3)} د.ك</p>
               </div>
             </div>

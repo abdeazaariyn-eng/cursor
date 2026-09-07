@@ -54,6 +54,10 @@ class Settings(BaseSettings):
     GOOGLE_SHEETS_WEBHOOK_URL: str = ""
     GOOGLE_SHEETS_WEBHOOK_SECRET: str = ""
 
+    # COD Network integration
+    COD_API_ENDPOINT: str = ""
+    COD_API_KEY: str = ""
+
     META_PIXEL_ID: str = ""
     META_ACCESS_TOKEN: str = ""
     META_TEST_EVENT_CODE: str = ""
@@ -112,6 +116,10 @@ class Settings(BaseSettings):
     @property
     def sheets_enabled(self) -> bool:
         return bool(self.GOOGLE_SHEETS_WEBHOOK_URL)
+
+    @property
+    def cod_enabled(self) -> bool:
+        return bool(self.COD_API_ENDPOINT) and bool(self.COD_API_KEY)
 
     @property
     def whitelisted_ips(self) -> List[str]:

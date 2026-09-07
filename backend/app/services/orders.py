@@ -101,6 +101,7 @@ async def create_order(
 
     attribution = request.attribution or AttributionIn()
     events = request.events or EventsIn()
+    location = request.location
 
     order = Order(
         order_number=order_number,
@@ -133,6 +134,16 @@ async def create_order(
         event_id_purchase=events.purchaseEventId,
         event_id_lead=events.leadEventId,
         sheet_sync_status="pending",
+        # Location information
+        country=location.country if location else None,
+        city=location.city if location else None,
+        area=location.area if location else None,
+        address=location.address if location else None,
+        notes=location.notes if location else None,
+        # Order status
+        order_status="new",
+        # COD sync status
+        cod_sync_status="pending",
     )
 
     db.add(order)
@@ -155,6 +166,7 @@ async def create_order(
             product_id=item_in.productId,
             product_slug=product["slug"],
             product_name_ar=final_name,
+            sku=product.get("sku"),
             product_color=item_in.color,
             offer_id=item_in.offerId,
             quantity=int(price_rule["quantity"]),
@@ -197,6 +209,7 @@ async def apply_upsell(
             product_id=product_id,
             product_slug=upsell_product["slug"],
             product_name_ar=upsell_product["name_ar"],
+            sku=upsell_product.get("sku"),
             offer_id="upsell_9kwd",
             quantity=1,
             price_kwd=upsell_price,

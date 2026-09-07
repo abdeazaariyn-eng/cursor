@@ -32,6 +32,14 @@ class CustomerIn(BaseModel):
         return stripped
 
 
+class CustomerLocationIn(BaseModel):
+    country: Optional[str] = Field(None, max_length=50)
+    city: Optional[str] = Field(None, max_length=100)
+    area: Optional[str] = Field(None, max_length=100)
+    address: Optional[str] = Field(None, max_length=500)
+    notes: Optional[str] = None
+
+
 class OrderItemIn(BaseModel):
     productId: str
     offerId: str
@@ -75,6 +83,7 @@ class EventsIn(BaseModel):
 
 class CreateOrderRequest(BaseModel):
     customer: CustomerIn
+    location: Optional[CustomerLocationIn] = None
     items: list[OrderItemIn] = Field(..., min_length=1)
     attribution: Optional[AttributionIn] = None
     events: Optional[EventsIn] = None
@@ -150,3 +159,54 @@ class ErrorDetail(BaseModel):
 
 class ErrorResponse(BaseModel):
     error: ErrorDetail
+
+
+# Admin API schemas
+
+class CODSyncInfo(BaseModel):
+    """COD (Cash on Delivery) sync information"""
+    syncStatus: str  # pending, sent, failed
+    codOrderId: Optional[str] = None
+    trackingNumber: Optional[str] = None
+    lastSync: Optional[str] = None
+    syncError: Optional[str] = None
+
+
+class AdminOrderDetail(BaseModel):
+    """Detailed order information for admin panel"""
+    orderId: str
+    orderNumber: str
+    orderStatus: str  # new, confirmed, processing, sent, delivered, cancelled, returned
+    totalKwd: float
+    customerName: str
+    customerPhone: str
+    country: Optional[str] = None
+    city: Optional[str] = None
+    area: Optional[str] = None
+    address: Optional[str] = None
+    notes: Optional[str] = None
+    items: list[OrderItemOut]
+    cod: CODSyncInfo
+    sheetSyncStatus: str  # pending, sent, failed
+    sheetSyncError: Optional[str] = None
+    createdAt: str
+    updatedAt: str
+
+
+class UpdateOrderStatusRequest(BaseModel):
+    """Request to update order status"""
+    orderStatus: Optional[str] = None
+
+
+class UpdateCODStatusRequest(BaseModel):
+    """Request to update COD sync status"""
+    codSyncStatus: Optional[str] = None
+    codOrderId: Optional[str] = None
+    codTrackingNumber: Optional[str] = None
+    syncError: Optional[str] = None
+
+
+class RetrySheetSyncRequest(BaseModel):
+    """Request to retry Google Sheets sync"""
+    pass
+
