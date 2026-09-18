@@ -1,0 +1,23 @@
+
+> mahdbaby-frontend@0.1.0 dev
+> next dev
+
+  ▲ Next.js 14.2.18
+  - Local:        http://localhost:3000
+  - Environments: .env
+
+ ✓ Starting...
+ ✓ Ready in 8.2s
+ ✓ Compiled /middleware in 755ms
+ ✓ Compiled (72 modules)
+ ○ Compiling / ...
+ ✓ Compiled / in 18.3s (1307 modules)
+ GET / 200 in 663ms
+ ✓ Compiled in 2.9s (637 modules)
+ GET / 200 in 333ms
+ ✓ Compiled in 595ms (623 modules)
+ ○ Compiling /products/[slug] ...
+ ✓ Compiled /products/[slug] in 5.4s (1338 modules)
+ GET /products/portable-baby-bottle-warmer 200 in 7618ms
+ GET / 200 in 238ms
+ GET /products/portable-baby-bottle-warmer 200 in 1107ms

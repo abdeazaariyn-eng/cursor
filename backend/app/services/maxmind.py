@@ -43,6 +43,7 @@ async def check_ip_allowed(ip: Optional[str], phone: str) -> bool:
       - phone is whitelisted
       - IP is from allowed country
       - IP is not a VPN/proxy/Tor
+      - In development mode without MaxMind configured, allow by default
     """
     cleaned_phone = re.sub(r"[\s\-().+]", "", phone.strip())
 
@@ -79,10 +80,17 @@ async def check_ip_allowed(ip: Optional[str], phone: str) -> bool:
         logger.info("maxmind_cache_hit", ip=ip, allowed=cached_result)
         return cached_result
 
-    # Require MaxMind to be configured for geo-enforcement; block if missing
+    # Check if MaxMind is configured
     if not settings.MAXMIND_ACCOUNT_ID or not settings.MAXMIND_LICENSE_KEY:
-        logger.warning("maxmind_not_configured_blocking", ip=ip)
-        return False
+        if settings.is_production:
+            # Strict: block if MaxMind not configured in production
+            logger.warning("maxmind_not_configured_blocking_production", ip=ip)
+            return False
+        else:
+            # Development: allow by default when MaxMind not configured
+            logger.info("maxmind_not_configured_allow_development", ip=ip)
+            _set_cached_ip_result(ip, True)
+            return True
 
     try:
         # Use GeoLite2 Country API endpoint to support free tier accounts

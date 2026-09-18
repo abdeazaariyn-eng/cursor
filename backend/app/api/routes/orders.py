@@ -44,23 +44,26 @@ async def create_order(
     request: Request,
     db: AsyncSession = Depends(get_db),
 ) -> CreateOrderResponse:
+    from fastapi.responses import JSONResponse
+    
     client_ip = _get_client_ip(request)
     user_agent = request.headers.get("User-Agent")
 
     is_allowed = await check_ip_allowed(client_ip, payload.customer.phone)
     if not is_allowed:
-        raise HTTPException(
+        return JSONResponse(
             status_code=status.HTTP_403_FORBIDDEN,
-            detail={"error": {"code": "ORDER_NOT_ALLOWED", "message": "عذراً، لا يمكننا قبول طلبك في الوقت الحالي."}},
+            content={"error": {"code": "ORDER_NOT_ALLOWED", "message": "عذراً، لا يمكننا قبول طلبك في الوقت الحالي."}},
         )
 
     try:
         order = await order_service.create_order(db, payload, client_ip, user_agent)
     except ValueError as exc:
-        raise HTTPException(
+        from fastapi.responses import JSONResponse
+        return JSONResponse(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-            detail={"error": {"code": "INVALID_PHONE", "message": str(exc)}},
-        ) from exc
+            content={"error": {"code": "INVALID_PHONE", "message": str(exc)}},
+        )
 
     cart_product_ids = [item.productId for item in payload.items]
     recommended_product_id = order_service.get_upsell_recommendation(cart_product_ids)
@@ -94,20 +97,25 @@ async def handle_upsell(
     payload: UpsellRequest,
     db: AsyncSession = Depends(get_db),
 ) -> UpsellResponse:
+    from fastapi.responses import JSONResponse
+    
     try:
         uuid.UUID(order_id)
     except ValueError:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Order not found")
+        return JSONResponse(
+            status_code=status.HTTP_404_NOT_FOUND,
+            content={"error": {"code": "ORDER_NOT_FOUND", "message": "Order not found"}},
+        )
 
     try:
         order = await order_service.apply_upsell(
             db, order_id, payload.action, payload.productId
         )
     except ValueError as exc:
-        raise HTTPException(
+        return JSONResponse(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-            detail={"error": {"code": "UPSELL_ERROR", "message": str(exc)}},
-        ) from exc
+            content={"error": {"code": "UPSELL_ERROR", "message": str(exc)}},
+        )
 
     return UpsellResponse(
         orderId=str(order.id),
@@ -122,10 +130,15 @@ async def finalize_order(
     payload: FinalizeRequest,
     db: AsyncSession = Depends(get_db),
 ) -> FinalizeResponse:
+    from fastapi.responses import JSONResponse
+    
     try:
         uuid.UUID(order_id)
     except ValueError:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Order not found")
+        return JSONResponse(
+            status_code=status.HTTP_404_NOT_FOUND,
+            content={"error": {"code": "ORDER_NOT_FOUND", "message": "Order not found"}},
+        )
 
     try:
         order = await order_service.finalize_order(
@@ -135,10 +148,10 @@ async def finalize_order(
             payload.browserEventSent,
         )
     except ValueError as exc:
-        raise HTTPException(
+        return JSONResponse(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-            detail={"error": {"code": "FINALIZE_ERROR", "message": str(exc)}},
-        ) from exc
+            content={"error": {"code": "FINALIZE_ERROR", "message": str(exc)}},
+        )
 
     asyncio.create_task(_fire_post_finalize(order))
 
