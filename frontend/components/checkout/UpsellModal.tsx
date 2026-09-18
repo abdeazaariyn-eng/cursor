@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
@@ -18,15 +18,16 @@ export function UpsellModal() {
   const router = useRouter()
   const { isUpsellShown, pendingOrderId, pendingOrderTotal, upsellProduct, customerPhone, hideUpsell, reset } =
     useCheckoutStore()
-  const { clearCart } = useCartStore()
-
+  const { items: cartItems, clearCart } = useCartStore()
   const [timeLeft, setTimeLeft] = useState(UPSELL_DURATION)
+  const hasFinalized = useRef(false)
   const [isProcessing, setIsProcessing] = useState(false)
 
   const finalize = useCallback(
     async (upsellAction: 'accepted' | 'skipped') => {
-      if (!pendingOrderId || isProcessing) return
-      setIsProcessing(true)
+      if (!pendingOrderId || hasFinalized.current) return
+hasFinalized.current = true
+setIsProcessing(true)
 
       try {
         if (upsellAction === 'accepted' && upsellProduct) {
@@ -48,14 +49,15 @@ export function UpsellModal() {
         const finalTotal = finalResponse.orderNumber ? pendingOrderTotal + (upsellAction === 'accepted' && upsellProduct ? 9 : 0) : pendingOrderTotal
 
         firePurchase({
-          value: finalTotal,
-          eventId: purchaseEventId,
-          orderId: finalResponse.orderNumber,
-          phone: customerPhone ?? undefined,
-        })
-
-        // Store purchase event ID for deduplication tracking on thank-you page
-        sessionStorage.setItem(PURCHASE_EVENT_KEY, purchaseEventId)
+  value: finalTotal,
+  eventId: purchaseEventId,
+  orderId: finalResponse.orderNumber,
+  phone: customerPhone ?? undefined,
+  contentIds: [
+    ...cartItems.map(item => item.productId),
+    ...(upsellAction === 'accepted' && upsellProduct ? [upsellProduct.productId] : [])
+  ],
+})
 
         clearCart()
         reset()
@@ -156,7 +158,7 @@ export function UpsellModal() {
               {/* Product */}
               <div className="bg-[#EBF2F5] rounded-2xl p-4 mb-4 text-center">
                 <div className="relative w-24 h-24 mx-auto mb-3 rounded-xl overflow-hidden bg-white">
-                  <Image src={upsellProduct.image} alt={upsellProduct.productName} fill sizes="96px" className="object-cover" />
+                  <img src={upsellProduct.image} alt={upsellProduct.productName} className="w-full h-full object-cover" />
                 </div>
                 <p className="font-bold text-[#142B3B] text-sm mb-1">
                   {upsellProduct.productName}
