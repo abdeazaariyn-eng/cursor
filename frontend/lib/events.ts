@@ -103,10 +103,14 @@ export function fireTikTokEvent(
   if (!window.ttq) return
   try {
     const { eventId, phone: _phone, contentIds, contentName, orderId, ...rest } = params
-    const eventData: Record<string, unknown> = { currency: 'KWD', ...rest }
-    if (contentIds) eventData.content_ids = contentIds
-    if (contentName) eventData.content_name = contentName
-    if (orderId) eventData.order_id = orderId
+const eventData: Record<string, unknown> = { currency: 'KWD', ...rest }
+if (contentIds && contentIds.length > 0) {
+  eventData.content_id = contentIds[0]
+  eventData.contents = contentIds.map(id => ({ content_id: id, quantity: 1 }))
+  eventData.content_type = 'product'
+}
+if (contentName) eventData.content_name = contentName
+if (orderId) eventData.order_id = orderId
 
     // Pass event_id as 3rd arg for deduplication with TikTok CAPI
     const options = eventId ? { event_id: eventId } : undefined
